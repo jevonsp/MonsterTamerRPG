@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Move" load_steps=4 format=3 uid="uid://yba5nj2cbh3b"]
+
+[ext_resource type="Script" uid="uid://coff2nnisn6g2" path="res://resources/Move.gd" id="1_0i4dy"]
+[ext_resource type="Script" uid="uid://dtjkewd51xovn" path="res://classes/battle/MoveEffect.gd" id="1_vbl3h"]
+
+[sub_resource type="Resource" id="Resource_vbl3h"]
+script = ExtResource("1_vbl3h")
+metadata/_custom_type_script = "uid://dtjkewd51xovn"
+
+[resource]
+script = ExtResource("1_0i4dy")
+name = "Slap"
+effects = Array[ExtResource("1_vbl3h")]([SubResource("Resource_vbl3h")])
+metadata/_custom_type_script = "uid://coff2nnisn6g2"

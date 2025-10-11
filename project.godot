@@ -11,10 +11,22 @@ config_version=5
 [application]
 
 config/name="MonsterTamer_v0.3.2(R2)"
+run/main_scene="uid://dbk1ycrlfxc72"
 config/features=PackedStringArray("4.5", "GL Compatibility")
-config/icon="res://icon.svg"
+
+[autoload]
+
+BattleManager="*res://singletons/BattleManager.gd"
+EventBus="*res://singletons/EventBus.gd"
+GameManager="*res://singletons/GameManager.gd"
+PartyManager="*res://singletons/PartyManager.gd"
+
+[display]
+
+window/stretch/mode="viewport"
 
 [rendering]
 
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
+2d/snap/snap_2d_transforms_to_pixel=true

@@ -1,0 +1,15 @@
+class_name Move extends Resource
+
+@export var name: String = ""
+@export var sprite: Texture2D
+@export_range(-7, 7) var priority: int = 0
+
+@export_subgroup("Target Type")
+@export_enum("ENEMY", "SELF") var target_type: String = "ENEMY"
+@export var chooses_targets: bool = false
+
+@export_subgroup("Damage Category")
+@export_enum("PHYSICAL", "SPECIAL") var damage_category: String = "PHYSICAL"
+
+@export_subgroup("Effects")
+@export var effects: Array[Effect] = []
