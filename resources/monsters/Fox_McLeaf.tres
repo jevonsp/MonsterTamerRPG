@@ -7,8 +7,9 @@
 [resource]
 script = ExtResource("2_gautn")
 name = "Fox McLeaf"
-base_hitpoints = 150
+base_hitpoints = 120
 base_defense = 100
+base_special_defense = 80
 moves = Array[ExtResource("1_lxe2k")]([ExtResource("2_cmk2l")])
 levels = Array[int]([1])
 metadata/_custom_type_script = "uid://cf7d81q2bjlj0"

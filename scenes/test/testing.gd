@@ -16,3 +16,7 @@ func _on_button_2_pressed() -> void:
 func _on_button_3_pressed() -> void:
 	BattleManager.start_battle()
 	
+func _on_button_4_pressed() -> void:
+	BattleManager.end_battle()
+	print("Battle hard reset!")
+	

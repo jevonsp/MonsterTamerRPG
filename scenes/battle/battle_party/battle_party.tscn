@@ -1,0 +1,46 @@
+[gd_scene load_steps=2 format=3 uid="uid://s3r4p1cxwkdr"]
+
+[ext_resource type="Script" uid="uid://bhxrbt7grfmc2" path="res://scenes/battle/battle_party/battle_party.gd" id="1_luywm"]
+
+[node name="BattleParty" type="CanvasLayer"]
+script = ExtResource("1_luywm")
+
+[node name="Party" type="HBoxContainer" parent="."]
+unique_name_in_owner = true
+offset_left = 264.0
+offset_top = 48.0
+offset_right = 455.0
+offset_bottom = 79.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Button1" type="Button" parent="Party"]
+layout_mode = 2
+text = "1"
+
+[node name="Button2" type="Button" parent="Party"]
+layout_mode = 2
+text = "2"
+
+[node name="Button3" type="Button" parent="Party"]
+layout_mode = 2
+text = "3"
+
+[node name="Button4" type="Button" parent="Party"]
+layout_mode = 2
+text = "4"
+
+[node name="Button5" type="Button" parent="Party"]
+layout_mode = 2
+text = "5"
+
+[node name="Button6" type="Button" parent="Party"]
+layout_mode = 2
+text = "6"
+
+[connection signal="pressed" from="Party/Button1" to="." method="_on_button_1_pressed"]
+[connection signal="pressed" from="Party/Button2" to="." method="_on_button_2_pressed"]
+[connection signal="pressed" from="Party/Button3" to="." method="_on_button_3_pressed"]
+[connection signal="pressed" from="Party/Button4" to="." method="_on_button_4_pressed"]
+[connection signal="pressed" from="Party/Button5" to="." method="_on_button_5_pressed"]
+[connection signal="pressed" from="Party/Button6" to="." method="_on_button_6_pressed"]

@@ -37,7 +37,9 @@ custom_minimum_size = Vector2(25, 25)
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 4
+text = "Reset"
 
 [connection signal="pressed" from="HBoxContainer/Button1" to="." method="_on_button_1_pressed"]
 [connection signal="pressed" from="HBoxContainer/Button2" to="." method="_on_button_2_pressed"]
 [connection signal="pressed" from="HBoxContainer/Button3" to="." method="_on_button_3_pressed"]
+[connection signal="pressed" from="HBoxContainer/Button4" to="." method="_on_button_4_pressed"]

@@ -20,10 +20,15 @@ BattleManager="*res://singletons/BattleManager.gd"
 EventBus="*res://singletons/EventBus.gd"
 GameManager="*res://singletons/GameManager.gd"
 PartyManager="*res://singletons/PartyManager.gd"
+Settings="*res://singletons/Settings.gd"
 
 [display]
 
 window/stretch/mode="viewport"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/gut/plugin.cfg")
 
 [rendering]
 

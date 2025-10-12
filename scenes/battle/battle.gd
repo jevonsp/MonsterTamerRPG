@@ -38,14 +38,14 @@ func _on_button_4_pressed() -> void:
 	
 func _on_move_selected(move: Move):
 	%Moves.visible = false
-	var action = MoveAction.new(BattleManager.player_actor, [BattleManager.enemy_actor], move)
+	var action = MoveAction.new(BattleManager.player_actor, [0], move)
 	BattleManager.on_action_selected(action)
 	
 func _on_fight_pressed() -> void:
 	%Moves.visible = true
 	
 func _on_party_pressed() -> void:
-	pass # Replace with function body.
+	PartyManager.show_party()
 	
 func _on_item_pressed() -> void:
 	pass # Replace with function body.

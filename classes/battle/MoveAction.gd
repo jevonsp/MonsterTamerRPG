@@ -2,13 +2,26 @@ class_name MoveAction extends BattleAction
 
 var move: Move
 
-func _init(actor_ref: Monster, target_refs: Array[Monster], move_data: Move):
+func _init(actor_ref: Monster, target_refs: Array, move_data: Move):
 	move = move_data
 	priority = move.priority
 	super(actor_ref, target_refs, "MOVE", move_data)
 	
 func execute() -> void:
+	var resolved_targets: Array[Monster]
 	for t in targets:
+		if actor == BattleManager.player_actor:
+			if t == 0:
+				resolved_targets.append(BattleManager.enemy_actor)
+			if t == 1:
+				pass
+		elif actor == BattleManager.enemy_actor:
+			if t == 0:
+				resolved_targets.append(BattleManager.player_actor)
+			if t == 1:
+				pass
+	
+	for t in resolved_targets:
 		if t and t.hitpoints > 0:
 			for effects in data.effects:
 				_execute_effect(t, effects)
@@ -21,6 +34,11 @@ func _execute_effect(target: Monster, effect: Effect):
 			var damage = calculate_damage(target, effect)
 			target.take_damage(damage)
 			print(actor.name, " dealt ", damage, " to ", target.name)
+			print("(actor): ", actor)
+			print("(target): ", target)
+			print("player_actor: ", BattleManager.player_actor)
+			print("enemy_actor: ", BattleManager.enemy_actor)
+			print("health now: ", target.hitpoints)
 			EventBus.effect_ended.emit()
 		"HEAL": pass
 			

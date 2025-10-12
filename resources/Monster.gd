@@ -64,6 +64,8 @@ func set_moves():
 		moves = available_moves.duplicate()
 		
 func take_damage(amount: int):
+	if amount <= 0:
+		return
 	hitpoints -= amount
 	if hitpoints <= 0:
 		is_fainted = true

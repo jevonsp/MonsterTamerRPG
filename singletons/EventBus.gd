@@ -7,4 +7,7 @@ signal battle_started(monster: Monster)
 signal effect_started(effect_type: String, actor: Monster, target: Monster, image: Texture2D)
 signal effect_ended
 
+signal battle_switch
+signal free_switch
+
 @warning_ignore_restore("unused_signal")
