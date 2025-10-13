@@ -4,8 +4,12 @@ var battle = preload("res://scenes/battle/battle.tscn")
 var battle_party_scene = preload("res://scenes/battle/battle_party/battle_party.tscn")
 
 var enemy_party: Array[Monster] = []
-var player_actor: Monster
-var enemy_actor: Monster
+
+var player_actor: Monster # 0
+var enemy_actor: Monster # 1
+
+var player_actor2: Monster # 2
+var enemy_actor2: Monster # 3
 
 var single_battle: bool = true
 
@@ -52,9 +56,57 @@ func on_action_selected(action: BattleAction):
 func get_enemy_action(monster: Monster):
 	var index = randi_range(0, monster.moves.size() - 1)
 	var enemy_move = monster.moves[index]
-	var enemy_action = MoveAction.new(monster, [0], enemy_move)
+	var enemy_target_index: int = -1
+	if single_battle:
+		enemy_target_index = 0
+	elif not single_battle:
+		enemy_target_index = [0, 2].pick_random()
+	var enemy_action = MoveAction.new(monster, [enemy_target_index], enemy_move)
 	turn_actions.append(enemy_action)
 	print("got enemy action")
+	
+func resolve_targets(target_type: String, actor: Monster) -> Array[Monster]:
+	var result: Array[Monster] = []
+	match target_type:
+		"ENEMY": result.append(get_opposing_actor(actor))
+		"ALLY": result.append(get_ally_actor(actor))
+		"SELF": result.append(actor)
+		"ENEMIES": result.append(get_opposing_party(actor))
+		"ALLIES": result.append(get_ally_party(actor))
+		"ALL": result += get_ally_party(actor) + get_opposing_party(actor)
+	return result
+	
+func get_opposing_actor(actor: Monster) -> Monster:
+	var opponents = []
+	if actor in [player_actor, player_actor2]:
+		opponents = [enemy_actor, enemy_actor2]
+	elif actor in [enemy_actor, enemy_actor2]:
+		opponents = [player_actor, player_actor2]
+	return opponents[0] if single_battle else opponents.pick_random()
+	
+func get_ally_actor(actor: Monster) -> Monster:
+	var allies = []
+	if actor in [player_actor, player_actor2]:
+		allies = [player_actor, player_actor2]
+	elif actor in [enemy_actor, enemy_actor2]:
+		allies = [enemy_actor, enemy_actor2]
+	return allies[0] if single_battle else allies.pick_random()
+	
+func get_opposing_party(actor: Monster) -> Array[Monster]:
+	var opponents = []
+	if actor in [player_actor, player_actor2]:
+		opponents = [enemy_actor, enemy_actor2]
+	elif actor in [enemy_actor, enemy_actor2]:
+		opponents = [player_actor, player_actor2]
+	return opponents
+	
+func get_ally_party(actor: Monster) -> Array[Monster]:
+	var allies = []
+	if actor in [player_actor, player_actor2]:
+		allies = [player_actor, player_actor2]
+	elif actor in [enemy_actor, enemy_actor2]:
+		allies = [enemy_actor, enemy_actor2]
+	return allies
 	
 func execute_turn():
 	processing_turn = true

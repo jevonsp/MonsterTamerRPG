@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Item" load_steps=5 format=3 uid="uid://dtmg71j7e8iq8"]
+
+[ext_resource type="Script" uid="uid://dof0vgm6x7x4n" path="res://resources/ItemEffect.gd" id="1_kjwe1"]
+[ext_resource type="Script" uid="uid://br2gl0bftv06o" path="res://resources/Item.gd" id="2_2iv8v"]
+[ext_resource type="Script" uid="uid://ci723n084uql4" path="res://resources/item_effects/ItemHealEffect.gd" id="2_sg47c"]
+
+[sub_resource type="Resource" id="Resource_yfwdx"]
+script = ExtResource("2_sg47c")
+metadata/_custom_type_script = "uid://ci723n084uql4"
+
+[resource]
+script = ExtResource("2_2iv8v")
+name = "Potion"
+effects = Array[ExtResource("1_kjwe1")]([SubResource("Resource_yfwdx")])
+metadata/_custom_type_script = "uid://br2gl0bftv06o"

@@ -3,6 +3,7 @@ class_name Monster extends Resource
 var species: MonsterData
 
 var name: String = ""
+var capture_rate: int = 0
 var level: int = 1
 var experience: int = 0
 
@@ -20,6 +21,7 @@ var moves: Array[Move]
 
 func setup_monster(md: MonsterData, lvl: int) -> void:
 	species = md
+	capture_rate = species.capture_rate
 	level = lvl
 	name = species.name
 	experience = experience_to_level(level)
@@ -27,6 +29,7 @@ func setup_monster(md: MonsterData, lvl: int) -> void:
 	set_stats()
 	set_moves()
 	print("monster created: ", name)
+	print("capture rate: ", capture_rate)
 	print("monster level: ", level)
 	print("monster experience: ", experience)
 	print("hitpoints: ", hitpoints)
@@ -75,3 +78,6 @@ func heal_damage(amount: int):
 	hitpoints += amount
 	if hitpoints >= max_hitpoints:
 		hitpoints = max_hitpoints
+	
+func attempt_capture(value: int):
+	print("capture attempt started")

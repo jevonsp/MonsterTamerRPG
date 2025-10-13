@@ -14,32 +14,47 @@ size_flags_vertical = 4
 [node name="Button1" type="Button" parent="HBoxContainer"]
 custom_minimum_size = Vector2(25, 25)
 layout_mode = 2
-size_flags_horizontal = 6
+size_flags_horizontal = 2
 size_flags_vertical = 4
 text = "Add Monster"
 
 [node name="Button2" type="Button" parent="HBoxContainer"]
 custom_minimum_size = Vector2(25, 25)
 layout_mode = 2
-size_flags_horizontal = 6
+size_flags_horizontal = 2
 size_flags_vertical = 4
 text = "Roll Encounter"
 
 [node name="Button3" type="Button" parent="HBoxContainer"]
 custom_minimum_size = Vector2(25, 25)
 layout_mode = 2
-size_flags_horizontal = 6
+size_flags_horizontal = 2
 size_flags_vertical = 4
 text = "Start Battle"
 
 [node name="Button4" type="Button" parent="HBoxContainer"]
 custom_minimum_size = Vector2(25, 25)
 layout_mode = 2
-size_flags_horizontal = 6
+size_flags_horizontal = 2
 size_flags_vertical = 4
 text = "Reset"
+
+[node name="Button5" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_vertical = 4
+text = "Add Potion"
+
+[node name="Button6" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+text = "Add Ball
+"
 
 [connection signal="pressed" from="HBoxContainer/Button1" to="." method="_on_button_1_pressed"]
 [connection signal="pressed" from="HBoxContainer/Button2" to="." method="_on_button_2_pressed"]
 [connection signal="pressed" from="HBoxContainer/Button3" to="." method="_on_button_3_pressed"]
 [connection signal="pressed" from="HBoxContainer/Button4" to="." method="_on_button_4_pressed"]
+[connection signal="pressed" from="HBoxContainer/Button5" to="." method="_on_button_5_pressed"]
+[connection signal="pressed" from="HBoxContainer/Button6" to="." method="_on_button_6_pressed"]

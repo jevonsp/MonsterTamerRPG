@@ -1,15 +1,15 @@
-[gd_resource type="Resource" script_class="Move" load_steps=4 format=3 uid="uid://yba5nj2cbh3b"]
+[gd_resource type="Resource" script_class="Move" load_steps=5 format=3 uid="uid://yba5nj2cbh3b"]
 
 [ext_resource type="Script" uid="uid://coff2nnisn6g2" path="res://resources/Move.gd" id="1_0i4dy"]
-[ext_resource type="Script" uid="uid://dtjkewd51xovn" path="res://classes/battle/MoveEffect.gd" id="1_vbl3h"]
+[ext_resource type="Script" uid="uid://dtjkewd51xovn" path="res://resources/MoveEffect.gd" id="1_p2iad"]
+[ext_resource type="Script" uid="uid://c7mskybfegrie" path="res://resources/move_effects/DamageEffect.gd" id="2_kpfrt"]
 
-[sub_resource type="Resource" id="Resource_vbl3h"]
-script = ExtResource("1_vbl3h")
-base_power = 100
-metadata/_custom_type_script = "uid://dtjkewd51xovn"
+[sub_resource type="Resource" id="Resource_uhyh3"]
+script = ExtResource("2_kpfrt")
+metadata/_custom_type_script = "uid://c7mskybfegrie"
 
 [resource]
 script = ExtResource("1_0i4dy")
 name = "Slap"
-effects = Array[ExtResource("1_vbl3h")]([SubResource("Resource_vbl3h")])
+effects = Array[ExtResource("1_p2iad")]([SubResource("Resource_uhyh3")])
 metadata/_custom_type_script = "uid://coff2nnisn6g2"

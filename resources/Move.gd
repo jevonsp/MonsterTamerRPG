@@ -12,4 +12,4 @@ class_name Move extends Resource
 @export_enum("PHYSICAL", "SPECIAL") var damage_category: String = "PHYSICAL"
 
 @export_subgroup("Effects")
-@export var effects: Array[Effect] = []
+@export var effects: Array[MoveEffect] = []
