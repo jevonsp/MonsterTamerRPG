@@ -26,7 +26,7 @@ func _apply_heal(actor: Monster, target: Monster, name: String, sprite: Texture2
 		target.revive()
 		print(target.name, " was revived by ", name)
 	elif not target.is_fainted:
-		target.heal(heal_amount)
+		target.heal_damage(heal_amount)
 		print(actor.name, " used ", name, " to heal ", target.name, " for ", heal_amount, " HP")
 	print("(actor): ", actor)
 	print("(target): ", target)

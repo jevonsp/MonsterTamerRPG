@@ -12,5 +12,6 @@ metadata/_custom_type_script = "uid://bqhkoh0houbkt"
 [resource]
 script = ExtResource("2_pqng8")
 name = "Ball"
+target_type = "ENEMY"
 effects = Array[ExtResource("1_ux7sh")]([SubResource("Resource_y18na")])
 metadata/_custom_type_script = "uid://br2gl0bftv06o"

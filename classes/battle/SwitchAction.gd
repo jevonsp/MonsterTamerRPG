@@ -5,10 +5,8 @@ var switch_index: int
 func _init(actor_ref: Monster, target_refs: Array, index: int) -> void:
 	priority = 6
 	switch_index = index
-	super(actor_ref, target_refs, "SWITCH", switch_index)
+	super("SWITCH", switch_index, actor_ref, target_refs)
 	
-# SwitchAction.gd - Replace the entire execute() function
-
 func execute() -> void:
 	print("executing switch")
 	

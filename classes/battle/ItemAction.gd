@@ -5,7 +5,7 @@ var item: Item
 func _init(actor_ref: Monster, target_refs: Array, item_data: Item):
 	item = item_data
 	priority = item.priority
-	super(actor_ref, target_refs, "ITEM", item_data)
+	super("ITEM", item_data, actor_ref, target_refs)
 	
 func execute() -> void:
 	for effect in item.effects:

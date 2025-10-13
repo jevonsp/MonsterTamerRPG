@@ -5,7 +5,7 @@ class_name Move extends Resource
 @export_range(-7, 7) var priority: int = 0
 
 @export_subgroup("Target Type")
-@export_enum("ENEMY", "SELF") var target_type: String = "ENEMY"
+@export_enum("ENEMY", "ALLY") var target_type: String = "ENEMY"
 @export var chooses_targets: bool = false
 
 @export_subgroup("Damage Category")

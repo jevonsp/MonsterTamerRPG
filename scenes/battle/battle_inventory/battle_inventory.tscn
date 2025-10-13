@@ -2,45 +2,51 @@
 
 [ext_resource type="Script" uid="uid://dnlbk7nekqm85" path="res://scenes/battle/battle_inventory/battle_inventory.gd" id="1_roxny"]
 
-[node name="battle_inventory" type="CanvasLayer"]
+[node name="battle_inventory" type="CanvasLayer" node_paths=PackedStringArray("container", "picker")]
 script = ExtResource("1_roxny")
+container = NodePath("ItemContainer")
+picker = NodePath("MonsterPicker")
 
-[node name="Inventory" type="HBoxContainer" parent="."]
+[node name="ItemContainer" type="HBoxContainer" parent="."]
+offset_left = 264.0
+offset_top = 99.0
+offset_right = 304.0
+offset_bottom = 139.0
+
+[node name="MonsterPicker" type="HBoxContainer" parent="."]
 unique_name_in_owner = true
 offset_left = 262.0
-offset_top = 91.0
-offset_right = 364.0
-offset_bottom = 131.0
+offset_top = 140.0
+offset_right = 390.0
+offset_bottom = 180.0
 
-[node name="Button1" type="Button" parent="Inventory"]
+[node name="Button1" type="Button" parent="MonsterPicker"]
 layout_mode = 2
 size_flags_vertical = 4
 text = "1"
 
-[node name="Button2" type="Button" parent="Inventory"]
+[node name="Button2" type="Button" parent="MonsterPicker"]
 layout_mode = 2
 size_flags_vertical = 4
 text = "2"
 
-[node name="Button3" type="Button" parent="Inventory"]
+[node name="Button3" type="Button" parent="MonsterPicker"]
 layout_mode = 2
 size_flags_vertical = 4
 text = "3"
 
-[node name="Button4" type="Button" parent="Inventory"]
+[node name="Button4" type="Button" parent="MonsterPicker"]
 layout_mode = 2
 size_flags_vertical = 4
 text = "4"
 
-[node name="Button5" type="Button" parent="Inventory"]
+[node name="Button5" type="Button" parent="MonsterPicker"]
 layout_mode = 2
 size_flags_vertical = 4
 text = "5"
 
-[node name="Button6" type="Button" parent="Inventory"]
+[node name="Button6" type="Button" parent="MonsterPicker"]
 layout_mode = 2
 size_flags_vertical = 4
 text = "6
 "
-
-[connection signal="pressed" from="Inventory/Button1" to="." method="_on_button_1_pressed"]

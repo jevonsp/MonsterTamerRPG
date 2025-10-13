@@ -5,7 +5,7 @@ var move: Move
 func _init(actor_ref: Monster, target_refs: Array, move_data: Move):
 	move = move_data
 	priority = move.priority
-	super(actor_ref, target_refs, "MOVE", move_data)
+	super("MOVE", move_data, actor_ref, target_refs)
 	
 func execute() -> void:
 	for effect in move.effects:
