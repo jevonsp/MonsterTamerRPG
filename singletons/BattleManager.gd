@@ -20,6 +20,9 @@ var in_battle: bool = false
 var escape_attempts: int = 0
 var escaped: bool = false
 
+func _ready() -> void:
+	pass
+	
 func add_enemies(monster_datas: Array[MonsterData], lvls: Array[int]) -> void:
 	if monster_datas.size() != lvls.size():
 		print("add_enemies: arrays must be the same size")
@@ -41,6 +44,7 @@ func start_battle():
 	in_battle = true
 	print(PartyManager.party)
 	player_actor = PartyManager.get_first_alive()
+	player_actor.getting_exp = true
 	var battle_scene = battle.instantiate()
 	add_child(battle_scene)
 	battle_scene.setup_battle()
@@ -139,7 +143,12 @@ func execute_turn():
 	processing_turn = false
 	
 func give_exp():
-	pass
+	var exp_to_give = enemy_actor.grant_exp()
+	print("exp_to_give: ", exp_to_give)
+	for monster in PartyManager.party:
+		if monster.getting_exp:
+			monster.gain_exp(exp_to_give)
+			await EventBus.exp_done_animating
 	
 func check_victory():
 	var alive: int = 0
@@ -207,6 +216,7 @@ func force_switch():
 	await EventBus.battle_switch
 	await get_tree().create_timer(Settings.game_speed).timeout
 	print("free switch complete")
+	update_battle_actors()
 	
 func force_enemy_switch():
 	var next = get_next_enemy_monster()
@@ -218,6 +228,7 @@ func force_enemy_switch():
 	await EventBus.battle_switch
 	await get_tree().create_timer(Settings.game_speed).timeout
 	print("free enemy switch complete")
+	update_battle_actors()
 	
 func get_next_enemy_monster() -> int:
 	for i in range(enemy_party.size()):
@@ -225,11 +236,36 @@ func get_next_enemy_monster() -> int:
 			return i
 	return -1
 	
+func update_battle_actors() -> void:
+	var p1_temp = player_actor
+	var p2_temp = player_actor2
+	var e1_temp = enemy_actor
+	var e2_temp = enemy_actor2
+	
+	if player_actor: player_actor = PartyManager.party[0]
+	if player_actor2: player_actor2 = PartyManager.party[1]
+	if enemy_actor: enemy_actor = enemy_party[0]
+	if enemy_actor2: enemy_actor2 = enemy_party[1]
+	
+	var old: Monster
+	var new: Monster
+	
+	for monster in [p1_temp, p2_temp, e1_temp, e2_temp]:
+		if monster not in [player_actor, player_actor2, enemy_actor, enemy_actor2]:
+			old = monster
+	for monster in [player_actor, player_actor2, enemy_actor, enemy_actor2]:
+		if monster not in [p1_temp, p2_temp, e1_temp, e2_temp]:
+			new = monster
+	
+	EventBus.switch_animation.emit(old, new)
+	
 func end_battle():
 	in_battle = false
 	escaped = false
 	for child in get_children():
 		child.queue_free()
+	for monster in PartyManager.party:
+		monster.getting_exp = false
 	enemy_party.clear()
 	print("enemy_party: ", enemy_party)
 	player_actor = null

@@ -9,6 +9,7 @@ var experience: int = 0
 
 var is_fainted: bool = false
 var capture_in_progress: bool = false
+var getting_exp: bool = false
 
 var max_hitpoints: int = 0
 var hitpoints: int = 0
@@ -66,8 +67,16 @@ func gain_exp(amount: int) -> void:
 	while experience >= experience_to_level(level + 1):
 		levels_to_gain += 1
 		level += 1
-	EventBus.exp_changed.emit(old_exp, experience, levels_to_gain)
-		
+	EventBus.exp_changed.emit(self, old_exp, experience, levels_to_gain)
+	
+func grant_exp() -> int:
+	var is_getting_exp: int = 0
+	for monster in PartyManager.party:
+		if monster.getting_exp == true:
+			is_getting_exp += 1
+	var exp_yield = roundi((species.exp_value * level) / 7.0) * (1 / float(is_getting_exp))
+	return exp_yield
+	
 func set_moves():
 	var available_moves = species.get_moves_for_lvl(level)
 	print(available_moves)
@@ -75,13 +84,18 @@ func set_moves():
 		moves = available_moves.slice(available_moves.size() - 4, available_moves.size())
 	else:
 		moves = available_moves.duplicate()
-		
+	
+func add_move(move: Move):
+	if moves.size() == 4:
+		print("already have 4 moves, add case")
+	moves.append(move)
+	
 func take_damage(amount: int):
 	var starting = hitpoints
 	if amount <= 0:
 		return
 	hitpoints -= amount
-	EventBus.health_changed.emit(starting, hitpoints)
+	EventBus.health_changed.emit(self, starting, hitpoints)
 	await EventBus.health_done_animating
 	await Engine.get_main_loop().process_frame
 	if hitpoints <= 0:

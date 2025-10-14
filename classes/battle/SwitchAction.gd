@@ -55,6 +55,7 @@ func execute() -> void:
 	# Update the active actor reference
 	if is_player_switch:
 		BattleManager.player_actor = party[0]
+		party[0].getting_exp = true
 	else:
 		BattleManager.enemy_actor = party[0]
 	

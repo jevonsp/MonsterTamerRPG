@@ -3,6 +3,7 @@ class_name MonsterData extends Resource
 @export var name: String = ""
 @export var sprite: Texture2D
 @export_range(0, 255) var capture_rate = 200
+@export var exp_value: int = 50
 @export_subgroup("Base Stats")
 @export var base_hitpoints: int = 50
 @export var base_speed: int = 50

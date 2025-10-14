@@ -5,12 +5,16 @@ var fox_mcleaf = preload("res://resources/monsters/Fox_McLeaf.tres")
 var pyro_badger = preload("res://resources/monsters/Pyro_Badger.tres")
 var potion = preload("res://resources/items/Potion.tres")
 var ball = preload("res://resources/items/Ball.tres")
+var super_slam = preload("res://resources/moves/SuperSlam.tres")
 
 func _ready() -> void:
 	pass
 	
 func _on_button_1_pressed() -> void:
 	PartyManager.make_monster(pistol_shrimp, 5)
+	var monster = PartyManager.party.back()
+	monster.add_move(super_slam)
+	print("added extra move: ", super_slam.name)
 	
 func _on_button_2_pressed() -> void:
 	BattleManager.add_enemies([fox_mcleaf], [5])

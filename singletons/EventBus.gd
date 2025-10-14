@@ -9,6 +9,8 @@ signal effect_ended
 
 signal health_changed(monster: Monster, old: int, new: int)
 signal health_done_animating
+
+signal exp_granted(amount: int)
 signal exp_changed(monster: Monster, old: int, new: int, times: int)
 signal exp_done_animating
 
@@ -20,7 +22,9 @@ signal shake_done_animating
 signal capture_animation(monster: Monster)
 signal capture_done_animating
 
-signal battle_switch
 signal free_switch
+signal battle_switch
+signal switch_animation(out_monster: Monster, in_monster: Monster)
+signal switch_done_animating
 
 @warning_ignore_restore("unused_signal")

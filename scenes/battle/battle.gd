@@ -15,6 +15,8 @@ func _ready() -> void:
 		EventBus.health_changed.connect(_on_health_changed)
 	if not EventBus.exp_changed.is_connected(_on_exp_changed):
 		EventBus.exp_changed.connect(_on_exp_changed)
+	if not EventBus.switch_animation.is_connected(_on_switch_animation):
+		EventBus.switch_animation.connect(_on_switch_animation)
 	if not EventBus.monster_fainted.is_connected(_on_monster_fainted):
 		EventBus.monster_fainted.connect(_on_monster_fainted)
 	if not EventBus.capture_shake.is_connected(_on_capture_shake):
@@ -45,7 +47,9 @@ func _on_button_1_pressed() -> void:
 		_on_move_selected(move)
 	
 func _on_button_2_pressed() -> void:
-	pass # Replace with function body.
+	if not player_actor.moves[0].chooses_targets:
+		var move = player_actor.moves[1]
+		_on_move_selected(move)
 	
 func _on_button_3_pressed() -> void:
 	pass # Replace with function body.
@@ -110,6 +114,11 @@ func _on_health_changed(_monster: Monster, _old: int, _new: int) -> void:
 	print("do health animation here")
 	await get_tree().create_timer(Settings.game_speed).timeout
 	EventBus.health_done_animating.emit()
+	
+func _on_switch_animation(old: Monster, new: Monster) -> void:
+	print("old: ", old, " new: ", new)
+	await get_tree().create_timer(Settings.game_speed).timeout
+	EventBus.switch_done_animating.emit()
 	
 func _on_exp_changed(_monster: Monster, _old: int, _new: int, _times: int) -> void:
 	print("do experience animation here")
