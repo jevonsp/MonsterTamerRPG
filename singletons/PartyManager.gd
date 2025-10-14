@@ -4,13 +4,22 @@ var party: Array[Monster] = []
 
 var party_preload = preload("res://scenes/battle/battle_party/battle_party.tscn")
 
-func add_monster(monster_data: MonsterData, lvl: int) -> void:
+func make_monster(monster_data: MonsterData, lvl: int) -> void:
 	if not party.size() < 6:
 		print("no more room in party!")
 		return
+	
 	var monster = Monster.new()
 	monster.setup_monster(monster_data, lvl)
 	party.append(monster)
+	print("party: ", party)
+	
+func add_monster(monster: Monster) -> void:
+	if not party.size() < 6:
+		print("no more room in party!")
+		return
+	party.append(monster)
+	print("party: ", party)
 	
 func get_first_alive() -> Monster:
 	for monster in party:

@@ -67,17 +67,35 @@ func set_moves():
 		moves = available_moves.duplicate()
 		
 func take_damage(amount: int):
+	var starting = hitpoints
 	if amount <= 0:
 		return
 	hitpoints -= amount
+	EventBus.health_changed.emit(starting, hitpoints)
 	if hitpoints <= 0:
 		is_fainted = true
 		hitpoints = 0
+		EventBus.monster_fainted.emit(self)
 	
 func heal_damage(amount: int):
+	var starting = hitpoints
 	hitpoints += amount
+	EventBus.health_changed.emit(starting, hitpoints)
+	await EventBus.health_done_animating
 	if hitpoints >= max_hitpoints:
 		hitpoints = max_hitpoints
 	
-func attempt_capture(value: int):
-	print("capture attempt started")
+func attempt_capture(success: bool):
+	var target
+
+	if success:
+		if BattleManager.single_battle:
+			target = BattleManager.enemy_actor
+		else:
+			print("No double battle, defaulting to backup")
+			target = BattleManager.enemy_actor
+		PartyManager.add_monster(target)
+		await Engine.get_main_loop().process_frame
+		BattleManager.captured(target)
+	else:
+		print("failure")

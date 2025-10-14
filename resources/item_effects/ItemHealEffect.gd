@@ -3,6 +3,8 @@ class_name ItemHealEffect extends ItemEffect
 @export var heal_amount: int = 20
 @export var revives: bool = false
 
+var name = "ITEM_HEAL"
+
 func apply(actor: Monster, target: Monster, item: Item) -> void:
 	match item.target_type:
 		"SELF":
@@ -20,16 +22,14 @@ func apply(actor: Monster, target: Monster, item: Item) -> void:
 		_:
 			print("Unhandled target_type in ItemHealEffect:", item.target_type)
 			
-func _apply_heal(actor: Monster, target: Monster, name: String, sprite: Texture2D) -> void:
+func _apply_heal(actor: Monster, target: Monster, _name: String, sprite: Texture2D) -> void:
 	EventBus.effect_started.emit("HEAL", actor, target, sprite)
 	if revives and target.is_fainted:
 		target.revive()
-		print(target.name, " was revived by ", name)
+		print(target.name, " was revived by ", _name)
 	elif not target.is_fainted:
 		target.heal_damage(heal_amount)
-		print(actor.name, " used ", name, " to heal ", target.name, " for ", heal_amount, " HP")
-	print("(actor): ", actor)
-	print("(target): ", target)
-	print("player_actor: ", BattleManager.player_actor)
-	print("enemy_actor: ", BattleManager.enemy_actor)
+		print("player used ", _name, " to heal ", target.name, " for ", heal_amount, " HP")
+	print("(actor): ", actor, "(target): ", target)
+	print("player_actor: ", BattleManager.player_actor, "enemy_actor: ", BattleManager.enemy_actor)
 	print("health now: ", target.hitpoints)

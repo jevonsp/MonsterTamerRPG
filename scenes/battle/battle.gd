@@ -3,7 +3,12 @@ extends CanvasLayer
 var player_actor = BattleManager.player_actor
 
 func _ready() -> void:
-	EventBus.effect_started.connect(_on_effect_started)
+	if not EventBus.effect_started.is_connected(_on_effect_started):
+		EventBus.effect_started.connect(_on_effect_started)
+	if not EventBus.health_changed.is_connected(_on_health_changed):
+		EventBus.health_changed.connect(_on_health_changed)
+	if not EventBus.monster_fainted.is_connected(_on_monster_fainted):
+		EventBus.monster_fainted.connect(_on_monster_fainted)
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_cancel"):
@@ -62,5 +67,23 @@ func _on_effect_started(effect_type: String, actor: Monster, _target: Monster, _
 				pass
 			if actor == BattleManager.enemy_actor:
 				pass
-	await get_tree().create_timer(0.3).timeout
+		"HEAL":
+			pass
+		"SWITCH":
+			pass
+		"RUN":
+			pass
+		"CAPTURE":
+			pass
+	await get_tree().create_timer(Settings.game_speed).timeout
 	EventBus.effect_ended.emit()
+	
+func _on_health_changed(_old: int, _new: int) -> void:
+	print("do health animation here")
+	await get_tree().create_timer(Settings.game_speed).timeout
+	EventBus.health_done_animating.emit()
+
+func _on_monster_fainted():
+	print("do fainting animation here")
+	await get_tree().create_timer(Settings.game_speed).timeout
+	EventBus.fainting_done_animating.emit()

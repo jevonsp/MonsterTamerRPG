@@ -2,6 +2,8 @@ class_name DamageEffect extends MoveEffect
 
 @export var base_power: int = 40
 
+var name = "DAMAGE"
+
 func apply(actor: Monster, target: Monster, move: Move) -> void:
 	match move.target_type:
 		"ENEMY":
@@ -9,10 +11,8 @@ func apply(actor: Monster, target: Monster, move: Move) -> void:
 			var damage = calculate_damage(actor, target, move)
 			target.take_damage(damage)
 			print(actor.name, " dealt ", damage, " to ", target.name)
-	print("(actor): ", actor)
-	print("(target): ", target)
-	print("player_actor: ", BattleManager.player_actor)
-	print("enemy_actor: ", BattleManager.enemy_actor)
+	print("(actor): ", actor, "(target): ", target)
+	print("player_actor: ", BattleManager.player_actor, "enemy_actor: ", BattleManager.enemy_actor)
 	print("health now: ", target.hitpoints)
 	
 func calculate_damage(actor: Monster, target: Monster, move: Move) -> int:

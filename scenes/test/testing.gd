@@ -10,7 +10,7 @@ func _ready() -> void:
 	pass
 	
 func _on_button_1_pressed() -> void:
-	PartyManager.add_monster(pistol_shrimp, 5)
+	PartyManager.make_monster(pistol_shrimp, 5)
 	
 func _on_button_2_pressed() -> void:
 	BattleManager.add_enemies([fox_mcleaf], [5])

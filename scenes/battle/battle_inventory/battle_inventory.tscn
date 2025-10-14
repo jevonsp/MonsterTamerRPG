@@ -15,6 +15,7 @@ offset_bottom = 139.0
 
 [node name="MonsterPicker" type="HBoxContainer" parent="."]
 unique_name_in_owner = true
+visible = false
 offset_left = 262.0
 offset_top = 140.0
 offset_right = 390.0

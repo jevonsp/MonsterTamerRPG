@@ -16,7 +16,10 @@ var single_battle: bool = true
 var turn_actions: Array = []
 var processing_turn: bool = false
 var in_battle: bool = false
-	
+
+var escape_attempts: int = 0
+var escaped: bool = false
+
 func add_enemies(monster_datas: Array[MonsterData], lvls: Array[int]) -> void:
 	if monster_datas.size() != lvls.size():
 		print("add_enemies: arrays must be the same size")
@@ -29,8 +32,10 @@ func add_enemies(monster_datas: Array[MonsterData], lvls: Array[int]) -> void:
 		monster.setup_monster(monster_data, lvl)
 		enemy_party.append(monster)
 		print("enemy party added: ", monster.name)
+		print("enemy_party: ", enemy_party)
 		
 	enemy_actor = enemy_party[0]
+	print("enemy_actor: ", enemy_actor)
 	
 func start_battle():
 	in_battle = true
@@ -39,7 +44,7 @@ func start_battle():
 	var battle_scene = battle.instantiate()
 	add_child(battle_scene)
 	battle_scene.setup_battle()
-	print("enemy party size: ", range(enemy_party.size()))
+	print("enemy party size: ", enemy_party.size())
 	
 func on_action_selected(action: BattleAction):
 	if processing_turn:
@@ -111,21 +116,30 @@ func get_ally_party(actor: Monster) -> Array[Monster]:
 func execute_turn():
 	processing_turn = true
 	for action in turn_actions:
-		if action.actor.is_fainted:
+		if not in_battle:
+			return
+		if player_actor.is_fainted:
 			force_switch()
 			turn_actions.clear()
 			return
-		if not in_battle:
-			return
 		print("executing action: ", action.type)
 		await action.execute()
+		if not in_battle:
+			return
 		await get_tree().create_timer(Settings.game_speed).timeout
+		if enemy_actor and enemy_actor.is_fainted:
+			await give_exp()
+		if enemy_actor2 and enemy_actor2.is_fainted:
+			await give_exp()
 		if await check_victory(): 
 			continue
 		if await check_loss(): 
 			continue
 	turn_actions.clear()
 	processing_turn = false
+	
+func give_exp():
+	pass
 	
 func check_victory():
 	var alive: int = 0
@@ -134,6 +148,9 @@ func check_victory():
 			alive += 1
 	if alive == 0:
 		win()
+		return true
+	if escaped == true:
+		escape()
 		return true
 	if enemy_actor.is_fainted:
 		await force_enemy_switch()
@@ -152,15 +169,26 @@ func check_loss():
 	return false
 	
 func win():
-	in_battle = false
 	print("win here")
 	end_battle()
 	
 func lose():
-	in_battle = false
 	print("lose here")
 	end_battle()
 	
+func escape():
+	print("escape here")
+	end_battle()
+	
+func captured(target: Monster) -> void:
+	if single_battle:
+		print("capture success win here")
+		end_battle()
+	else:
+		print("no targeting implemented, target captured:", target)
+		print("capture success win here")
+		end_battle()
+			
 func force_switch():
 	if not in_battle:
 		return
@@ -190,6 +218,10 @@ func get_next_enemy_monster() -> int:
 	return -1
 	
 func end_battle():
+	in_battle = false
+	escaped = false
+	for child in get_children():
+		child.queue_free()
 	enemy_party.clear()
 	print("enemy_party: ", enemy_party)
 	player_actor = null
@@ -197,3 +229,6 @@ func end_battle():
 	enemy_actor = null
 	print("enemy_actor: ", enemy_actor)
 	print("actors/party cleared")
+	escape_attempts = 0
+	turn_actions.clear()
+	

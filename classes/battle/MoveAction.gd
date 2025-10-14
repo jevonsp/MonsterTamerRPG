@@ -10,7 +10,7 @@ func _init(actor_ref: Monster, target_refs: Array, move_data: Move):
 func execute() -> void:
 	for effect in move.effects:
 		var resolved_targets = BattleManager.resolve_targets(effect.target_type, actor)
-		print("Effect:", effect, "Targets:", targets)
+		print("Effect:", effect.name, "Targets:", targets)
 		for t in resolved_targets:
 			if not t or t.is_fainted:
 				continue

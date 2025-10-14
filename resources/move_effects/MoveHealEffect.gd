@@ -3,6 +3,8 @@ class_name MoveHealEffect extends MoveEffect
 @export var heal_amount: int = 20
 @export var revives: bool = false
 
+var name = "MOVE_HEAL"
+
 func apply(actor: Monster, target: Monster, move: Move) -> void:
 	match move.target_type:
 		"SELF":
@@ -28,8 +30,6 @@ func _apply_heal(actor: Monster, target: Monster, name: String, sprite: Texture2
 	elif not target.is_fainted:
 		target.heal(heal_amount)
 		print(actor.name, " healed ", target.name, " for ", heal_amount, " HP")
-	print("(actor): ", actor)
-	print("(target): ", target)
-	print("player_actor: ", BattleManager.player_actor)
-	print("enemy_actor: ", BattleManager.enemy_actor)
+	print("(actor): ", actor, "(target): ", target)
+	print("player_actor: ", BattleManager.player_actor, "enemy_actor: ", BattleManager.enemy_actor)
 	print("health now: ", target.hitpoints)
