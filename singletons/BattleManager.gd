@@ -169,18 +169,26 @@ func check_loss():
 	return false
 	
 func win():
+	if not in_battle:
+		return
 	print("win here")
 	end_battle()
 	
 func lose():
+	if not in_battle:
+		return
 	print("lose here")
 	end_battle()
 	
 func escape():
+	if not in_battle:
+		return
 	print("escape here")
 	end_battle()
 	
 func captured(target: Monster) -> void:
+	if not in_battle:
+		return
 	if single_battle:
 		print("capture success win here")
 		end_battle()

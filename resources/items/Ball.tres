@@ -6,6 +6,7 @@
 
 [sub_resource type="Resource" id="Resource_y18na"]
 script = ExtResource("2_nmxy3")
+capture_bonus = null
 target_type = "ENEMY"
 metadata/_custom_type_script = "uid://bqhkoh0houbkt"
 

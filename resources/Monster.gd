@@ -8,6 +8,7 @@ var level: int = 1
 var experience: int = 0
 
 var is_fainted: bool = false
+var capture_in_progress: bool = false
 
 var max_hitpoints: int = 0
 var hitpoints: int = 0
@@ -58,6 +59,15 @@ func experience_to_level(lvl: int) -> int:
 	var BASE = 50
 	return BASE * (lvl - 1)
 	
+func gain_exp(amount: int) -> void:
+	var levels_to_gain: int = 0
+	var old_exp = experience
+	experience += amount
+	while experience >= experience_to_level(level + 1):
+		levels_to_gain += 1
+		level += 1
+	EventBus.exp_changed.emit(old_exp, experience, levels_to_gain)
+		
 func set_moves():
 	var available_moves = species.get_moves_for_lvl(level)
 	print(available_moves)
@@ -72,30 +82,75 @@ func take_damage(amount: int):
 		return
 	hitpoints -= amount
 	EventBus.health_changed.emit(starting, hitpoints)
+	await EventBus.health_done_animating
+	await Engine.get_main_loop().process_frame
 	if hitpoints <= 0:
 		is_fainted = true
 		hitpoints = 0
 		EventBus.monster_fainted.emit(self)
+		await EventBus.fainting_done_animating
+		await Engine.get_main_loop().process_frame
 	
 func heal_damage(amount: int):
 	var starting = hitpoints
 	hitpoints += amount
 	EventBus.health_changed.emit(starting, hitpoints)
 	await EventBus.health_done_animating
+	await Engine.get_main_loop().process_frame
 	if hitpoints >= max_hitpoints:
 		hitpoints = max_hitpoints
 	
-func attempt_capture(success: bool):
-	var target
-
-	if success:
-		if BattleManager.single_battle:
-			target = BattleManager.enemy_actor
-		else:
-			print("No double battle, defaulting to backup")
-			target = BattleManager.enemy_actor
-		PartyManager.add_monster(target)
+func attempt_capture(capture_value: int, instant: bool):
+	capture_in_progress = true
+	if instant:
+		EventBus.capture_shake.emit(0)
+		await EventBus.shake_done_animating
 		await Engine.get_main_loop().process_frame
-		BattleManager.captured(target)
+		get_captured()
+		return
 	else:
-		print("failure")
+		var a = capture_value
+		var b = calculate_shake_threshold(a)
+		var probability = (a / 1044480.0) ** 0.75
+		print("Capture probability: ", snappedf(probability * 100, 0.01), "%")
+		print("Shake threshold (b): ", b, " / 65536")
+				
+		var is_critical = get_critical_capture()
+		var success = await shake_check(is_critical, b)
+		if success:
+			await get_captured()
+		else:
+			print("Capture failed")
+	capture_in_progress = false
+		
+func calculate_shake_threshold(capture_value: int) -> int:
+	var ratio = capture_value / 1044480.0
+	var fourth_root = pow(ratio, 0.25)
+	return int(floor(65536.0 * fourth_root))
+	
+func shake_check(critical: bool, chance: int) -> bool:
+	if not capture_in_progress:
+		return false
+	var shake_number = 1 if critical else 3
+	for i in range(shake_number):
+		var roll = randi() % 65536
+		print("Shake ", i + 1, ": rolled ", roll, " vs ", chance, " - ", "SUCCESS" if roll < chance else "FAIL")
+		if roll >= chance:
+			EventBus.capture_shake.emit(i)
+			await EventBus.shake_done_animating
+			return false
+	EventBus.capture_shake.emit(shake_number)
+	await EventBus.shake_done_animating
+	await Engine.get_main_loop().process_frame
+	return true
+	
+func get_critical_capture() -> bool:
+	return false
+	
+func get_captured():
+	EventBus.capture_animation.emit()
+	await EventBus.capture_done_animating
+	PartyManager.add_monster(self)
+	await Engine.get_main_loop().process_frame
+	BattleManager.captured(self)
+	
