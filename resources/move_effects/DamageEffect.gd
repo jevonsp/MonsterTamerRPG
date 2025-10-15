@@ -7,7 +7,7 @@ var name = "DAMAGE"
 func apply(actor: Monster, target: Monster, move: Move) -> void:
 	match move.target_type:
 		"ENEMY":
-			EventBus.effect_started.emit("DAMAGE", actor, target, move.sprite)
+			EventBus.effect_started.emit(move.animation_type, actor, target, move.animation)
 			var damage = calculate_damage(actor, target, move)
 			target.take_damage(damage)
 			print(actor.name, " dealt ", damage, " to ", target.name)
@@ -20,11 +20,11 @@ func calculate_damage(actor: Monster, target: Monster, move: Move) -> int:
 	var d: int = 0
 	match move.damage_category:
 		"PHYSICAL":
-			a = actor.attack
-			d = target.defense
+			a = actor.get_stat("attack")
+			d = target.get_stat("defense")
 		"SPECIAL":
-			a = actor.special_attack
-			d = target.special_defense
+			a = actor.get_stat("special_attack")
+			d = target.get_stat("special_defense")
 	var MODIFIERS: float = 1.0
 	var damage = int((((((2 * actor.level) / 5.0) + 2) * base_power * a / float(d)) / 50.0) * MODIFIERS)
 	return damage

@@ -1,12 +1,13 @@
 extends CanvasLayer
 
-@export var player_actor_potrait: TextureRect
-@export var enemy_actor_potrait: TextureRect
-
 var player_actor = BattleManager.player_actor
 var player_actor2 = BattleManager.player_actor2
 var enemy_actor = BattleManager.enemy_actor
 var enemy_actor2 = BattleManager.enemy_actor2
+
+var battle_scene
+var single = preload("res://scenes/battle/single/single_battle_ui.tscn")
+var double = preload("res://scenes/battle/double/double_battle_ui.tscn")
 
 func _ready() -> void:
 	if not EventBus.effect_started.is_connected(_on_effect_started):
@@ -23,7 +24,17 @@ func _ready() -> void:
 		EventBus.capture_shake.connect(_on_capture_shake)
 	if not EventBus.capture_animation.is_connected(_on_capture_animation):
 		EventBus.capture_animation.connect(_on_capture_animation)
-
+	if BattleManager.single_battle:
+		var scene = single.instantiate()
+		scene.setup_battle(BattleManager.player_actor, BattleManager.enemy_actor)
+		add_child(scene)
+		battle_scene = scene
+	elif not BattleManager.single_battle:
+		var scene = double.instantiate()
+		scene.setup_battle(BattleManager.player_actor, BattleManager.enemy_actor)
+		add_child(scene)
+		battle_scene = scene
+		
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_cancel"):
 		if %Moves.visible == true:
@@ -75,40 +86,16 @@ func _on_run_pressed() -> void:
 	var action = RunAction.new(BattleManager.player_actor, [BattleManager.enemy_actor])
 	BattleManager.on_action_selected(action)
 	
-func _on_effect_started(effect_type: String, actor: Monster, _target: Monster, _effect_image: Texture2D):
+func _on_effect_started(effect_type: String, actor: Monster, target: Monster, _effect):
 	print("effect_type: ", effect_type)
 	match effect_type:
-		"DAMAGE":
-			if actor == BattleManager.player_actor:
-				pass
-			if actor == BattleManager.enemy_actor:
-				pass
-		"HEAL":
-			pass
-		"SWITCH":
-			pass
-		"RUN":
-			pass
-		"CAPTURE":
-			pass
+		"ACTOR": print("effect centered on: ", actor)
+		"TARGET": print("effect centered on: ", target)
+		"THROWN": print("effect goes from: ", actor, " to target: ", target)
+		"CENTER": print("effect centered on screen")
+		"RUN": print("animate run")
 	await get_tree().create_timer(Settings.game_speed).timeout
 	EventBus.effect_ended.emit()
-	
-func monster_position(monster: Monster) -> TextureRect:
-	if BattleManager.single_battle:
-		if monster == player_actor:
-			return player_actor_potrait
-		if monster == enemy_actor:
-			return enemy_actor_potrait
-	if monster == player_actor:
-			pass
-	if monster == enemy_actor:
-		pass
-	if monster == player_actor2:
-		pass
-	if monster == enemy_actor2:
-		pass
-	return null
 	
 func _on_health_changed(_monster: Monster, _old: int, _new: int) -> void:
 	print("do health animation here")
@@ -120,9 +107,10 @@ func _on_switch_animation(old: Monster, new: Monster) -> void:
 	await get_tree().create_timer(Settings.game_speed).timeout
 	EventBus.switch_done_animating.emit()
 	
-func _on_exp_changed(_monster: Monster, _old: int, _new: int, _times: int) -> void:
+func _on_exp_changed(_monster: Monster, _old: int, _new: int, times: int) -> void:
 	print("do experience animation here")
-	await get_tree().create_timer(Settings.game_speed).timeout
+	for i in times:
+		await get_tree().create_timer(Settings.game_speed).timeout
 	EventBus.exp_done_animating.emit()
 	
 func _on_monster_fainted(_monster: Monster):

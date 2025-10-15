@@ -119,6 +119,13 @@ func get_ally_party(actor: Monster) -> Array[Monster]:
 	
 func execute_turn():
 	processing_turn = true
+	
+	turn_actions.sort_custom(func(a, b):
+		if a.priority != b.priority:
+			return a.priority > b.priority
+		return a.actor.get_stat("speed") > b.actor.get_stat("speed")
+		)
+	
 	for action in turn_actions:
 		if not in_battle:
 			return
@@ -136,9 +143,9 @@ func execute_turn():
 		if enemy_actor2 and enemy_actor2.is_fainted:
 			await give_exp()
 		if await check_victory(): 
-			continue
+			return
 		if await check_loss(): 
-			continue
+			return
 	turn_actions.clear()
 	processing_turn = false
 	

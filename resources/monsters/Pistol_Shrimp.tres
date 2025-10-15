@@ -1,12 +1,14 @@
-[gd_resource type="Resource" script_class="MonsterData" load_steps=4 format=3 uid="uid://bkcc35o5n7kil"]
+[gd_resource type="Resource" script_class="MonsterData" load_steps=5 format=3 uid="uid://bkcc35o5n7kil"]
 
 [ext_resource type="Script" uid="uid://coff2nnisn6g2" path="res://resources/Move.gd" id="1_3g2kv"]
 [ext_resource type="Resource" uid="uid://yba5nj2cbh3b" path="res://resources/moves/Slap.tres" id="2_05o4f"]
 [ext_resource type="Script" uid="uid://cf7d81q2bjlj0" path="res://resources/MonsterData.gd" id="2_s4koy"]
+[ext_resource type="Texture2D" uid="uid://bblshkejbt64c" path="res://assets/monsters/pistol_shrimp.png" id="4_e6udc"]
 
 [resource]
 script = ExtResource("2_s4koy")
 name = "Pistol Shrimp"
+sprite = ExtResource("4_e6udc")
 base_hitpoints = 80
 base_speed = 100
 base_attack = 120

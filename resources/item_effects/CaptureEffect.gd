@@ -7,7 +7,7 @@ var name = "CAPTURE"
 func apply(actor: Monster, target: Monster, item: Item) -> void:
 	match item.target_type:
 		"ENEMY":
-			EventBus.effect_started.emit("CAPTURE", actor, target, item.sprite)
+			EventBus.effect_started.emit("THROWN", actor, target, item.sprite)
 			var a = capture_chance(target)
 			print("Modified capture rate (a): ", a)
 			if a >= 1044480:

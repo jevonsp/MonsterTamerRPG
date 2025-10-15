@@ -8,22 +8,22 @@ var name = "MOVE_HEAL"
 func apply(actor: Monster, target: Monster, move: Move) -> void:
 	match move.target_type:
 		"SELF":
-			_apply_heal(actor, target, move.name, move.sprite)
+			_apply_heal(actor, target, move)
 		"ALLY":
-			_apply_heal(actor, target, move.name, move.sprite)
+			_apply_heal(actor, target, move)
 		"ENEMY":
 			print(move.name, " has no healing effect on enemy target.")
 		"ENEMIES":
 			print(move.name, " has no healing effect on enemy targets.")
 		"ALLIES":
-			_apply_heal(actor, target, move.name, move.sprite)
+			_apply_heal(actor, target, move)
 		"ALL":
 			print(move.name, " has no healing effect on all targets (if any are enemies).")
 		_:
 			print("Unhandled target_type in MoveHealEffect:", move.target_type)
 			
-func _apply_heal(actor: Monster, target: Monster, name: String, sprite: Texture2D) -> void:
-	EventBus.effect_started.emit("HEAL", actor, target, sprite)
+func _apply_heal(actor: Monster, target: Monster, move: Move) -> void:
+	EventBus.effect_started.emit(move.target_type, actor, target, move.animation)
 	if revives and target.is_fainted:
 		target.revive()
 		print(target.name, " was revived by ", name)

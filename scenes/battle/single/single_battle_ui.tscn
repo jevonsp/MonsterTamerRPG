@@ -1,0 +1,27 @@
+[gd_scene load_steps=2 format=3 uid="uid://ngfwf02dd1u"]
+
+[ext_resource type="Script" uid="uid://bj7aqi4rx3v3b" path="res://scenes/battle/single/single_battle_ui.gd" id="1_fb3iq"]
+
+[node name="single_battle_ui" type="CanvasLayer" node_paths=PackedStringArray("player_portrait", "enemy_portrait")]
+script = ExtResource("1_fb3iq")
+player_portrait = NodePath("Portraits/PlayerPortrait")
+enemy_portrait = NodePath("Portraits/EnemyPortrait")
+
+[node name="Portraits" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 61.0
+offset_top = 197.0
+offset_right = 101.0
+offset_bottom = 237.0
+
+[node name="PlayerPortrait" type="TextureRect" parent="Portraits"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="EnemyPortrait" type="TextureRect" parent="Portraits"]
+layout_mode = 0
+offset_left = 104.0
+offset_right = 144.0
+offset_bottom = 40.0

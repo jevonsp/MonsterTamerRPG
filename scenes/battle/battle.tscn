@@ -2,10 +2,8 @@
 
 [ext_resource type="Script" uid="uid://c8q40e5e8htaj" path="res://scenes/battle/battle.gd" id="1_7gynk"]
 
-[node name="Battle" type="CanvasLayer" node_paths=PackedStringArray("player_actor_potrait", "enemy_actor_potrait")]
+[node name="Battle" type="CanvasLayer"]
 script = ExtResource("1_7gynk")
-player_actor_potrait = NodePath("SinglePortraits/PlayerActor")
-enemy_actor_potrait = NodePath("SinglePortraits/EnemyActor")
 
 [node name="Main" type="HBoxContainer" parent="."]
 unique_name_in_owner = true
@@ -88,28 +86,6 @@ text = "Self"
 layout_mode = 2
 size_flags_vertical = 4
 text = "Enemy"
-
-[node name="SinglePortraits" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 0
-offset_left = 41.0
-offset_top = 176.0
-offset_right = 81.0
-offset_bottom = 216.0
-
-[node name="PlayerActor" type="TextureRect" parent="SinglePortraits"]
-layout_mode = 0
-offset_left = -36.0
-offset_top = 2.0
-offset_right = 4.0
-offset_bottom = 42.0
-
-[node name="EnemyActor" type="TextureRect" parent="SinglePortraits"]
-layout_mode = 0
-offset_left = 34.0
-offset_top = 2.0
-offset_right = 74.0
-offset_bottom = 42.0
 
 [connection signal="pressed" from="Main/Button1" to="." method="_on_fight_pressed"]
 [connection signal="pressed" from="Main/Button2" to="." method="_on_party_pressed"]

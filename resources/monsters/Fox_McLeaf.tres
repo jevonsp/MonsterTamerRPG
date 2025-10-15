@@ -1,12 +1,14 @@
-[gd_resource type="Resource" script_class="MonsterData" load_steps=4 format=3 uid="uid://pxtac13xygko"]
+[gd_resource type="Resource" script_class="MonsterData" load_steps=5 format=3 uid="uid://pxtac13xygko"]
 
 [ext_resource type="Script" uid="uid://coff2nnisn6g2" path="res://resources/Move.gd" id="1_lxe2k"]
 [ext_resource type="Resource" uid="uid://yba5nj2cbh3b" path="res://resources/moves/Slap.tres" id="2_cmk2l"]
 [ext_resource type="Script" uid="uid://cf7d81q2bjlj0" path="res://resources/MonsterData.gd" id="2_gautn"]
+[ext_resource type="Texture2D" uid="uid://ch5o824ebxq1t" path="res://assets/monsters/fox_mcleaf.png" id="4_suhad"]
 
 [resource]
 script = ExtResource("2_gautn")
 name = "Fox McLeaf"
+sprite = ExtResource("4_suhad")
 base_hitpoints = 120
 base_defense = 100
 base_special_defense = 80

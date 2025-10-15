@@ -56,18 +56,38 @@ func set_stats() -> void:
 	special_attack = int((((2 * species.base_special_attack * level) / 100.0) + 5) * 1)
 	special_defense = int((((2 * species.base_special_defense * level) / 100.0) + 5) * 1)
 	
+func get_stat(stat: String) -> int:
+	match stat:
+		"hitpoints": return hitpoints
+		"speed": return speed
+		"attack": return attack
+		"defense": return defense
+		"special_attack": return special_attack
+		"special_defense": return special_defense
+	return 0
+		
+	
 func experience_to_level(lvl: int) -> int:
 	var BASE = 50
 	return BASE * (lvl - 1)
 	
 func gain_exp(amount: int) -> void:
-	var levels_to_gain: int = 0
+	var old_level = level
 	var old_exp = experience
+	
 	experience += amount
-	while experience >= experience_to_level(level + 1):
-		levels_to_gain += 1
-		level += 1
-	EventBus.exp_changed.emit(self, old_exp, experience, levels_to_gain)
+	var new_level = level
+	while experience >= experience_to_level(new_level + 1) and new_level < 100:
+		new_level += 1
+	
+	var levels_gained = new_level - old_level
+	
+	if levels_gained > 0:
+		level = new_level
+		set_stats()
+		
+	EventBus.exp_changed.emit(self, old_exp, experience, levels_gained)
+	print("Gained ", amount, " EXP. Level: ", level, " EXP: ", experience, " Levels gained: ", levels_gained)
 	
 func grant_exp() -> int:
 	var is_getting_exp: int = 0
@@ -105,14 +125,17 @@ func take_damage(amount: int):
 		await EventBus.fainting_done_animating
 		await Engine.get_main_loop().process_frame
 	
-func heal_damage(amount: int):
+func heal(amount: int) -> void:
 	var starting = hitpoints
 	hitpoints += amount
-	EventBus.health_changed.emit(starting, hitpoints)
+	EventBus.health_changed.emit(self, starting, hitpoints)
 	await EventBus.health_done_animating
 	await Engine.get_main_loop().process_frame
 	if hitpoints >= max_hitpoints:
 		hitpoints = max_hitpoints
+	
+func revive() -> void:
+	is_fainted = false
 	
 func attempt_capture(capture_value: int, instant: bool):
 	capture_in_progress = true
