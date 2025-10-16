@@ -8,8 +8,6 @@ func _init(actor_ref: Monster, target_refs: Array, index: int) -> void:
 	super("SWITCH", switch_index, actor_ref, target_refs)
 	
 func execute() -> void:
-	print("executing switch")
-	
 	# Determine which party we're switching from
 	var party: Array[Monster]
 	var is_player_switch = false
@@ -35,14 +33,9 @@ func execute() -> void:
 		push_error("Cannot switch to fainted monster")
 		return
 	
-	print("party before:")
-	for monster in party:
-		print(" - ", monster)
-	
-	if is_player_switch:
-		print("player_actor: ", BattleManager.player_actor)
-	else:
-		print("enemy_actor: ", BattleManager.enemy_actor)
+	# Store names before the swap
+	var old_monster_name = party[0].name
+	var new_monster_name = party[switch_index].name
 	
 	# Perform the switch
 	var _out = 0
@@ -52,6 +45,8 @@ func execute() -> void:
 	party[_out] = party[_in]
 	party[_in] = temp
 	
+	print(old_monster_name, " switched out for ", new_monster_name)
+	
 	# Update the active actor reference
 	if is_player_switch:
 		BattleManager.player_actor = party[0]
@@ -59,13 +54,5 @@ func execute() -> void:
 	else:
 		BattleManager.enemy_actor = party[0]
 	
-	print("party after:")
-	for monster in party:
-		print(" - ", monster)
-	
-	if is_player_switch:
-		print("player_actor: ", BattleManager.player_actor)
-	else:
-		print("enemy_actor: ", BattleManager.enemy_actor)
-	
-	EventBus.battle_switch.emit()
+	EventBus.switch_animation.emit(temp, party[_in])
+	await EventBus.switch_done_animating

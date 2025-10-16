@@ -19,12 +19,10 @@ func execute() -> void:
 			resolved_targets = target
 		else:
 			resolved_targets = BattleManager.resolve_targets(effect.target_type, actor)
+		print("Effect:", effect.name, "Targets:", resolved_targets)
 		for t in resolved_targets:
 			if not t:
 				continue
-			effect.apply(actor, t, item)
-			print("ItemAction applying effect:", effect.name)
-			print("Effect ended, continuing turn")
-			print("ItemEffect: ", effect.name, " Target :", t.name)
-			await EventBus.effect_ended
 			
+			@warning_ignore("redundant_await")
+			await effect.apply(actor, t, item)

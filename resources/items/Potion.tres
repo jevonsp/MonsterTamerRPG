@@ -1,15 +1,17 @@
 [gd_resource type="Resource" script_class="Item" load_steps=5 format=3 uid="uid://dtmg71j7e8iq8"]
 
-[ext_resource type="Script" uid="uid://dof0vgm6x7x4n" path="res://resources/ItemEffect.gd" id="1_kjwe1"]
-[ext_resource type="Script" uid="uid://br2gl0bftv06o" path="res://resources/Item.gd" id="2_2iv8v"]
-[ext_resource type="Script" uid="uid://ci723n084uql4" path="res://resources/item_effects/ItemHealEffect.gd" id="2_sg47c"]
+[ext_resource type="Script" uid="uid://dwops4cp56fq3" path="res://classes/base/BattleEffect.gd" id="1_2iv8v"]
+[ext_resource type="Script" uid="uid://brejhr2k5t01w" path="res://classes/effects/Heal.gd" id="2_sg47c"]
+[ext_resource type="Script" uid="uid://br2gl0bftv06o" path="res://classes/base/Item.gd" id="3_sg47c"]
 
 [sub_resource type="Resource" id="Resource_yfwdx"]
 script = ExtResource("2_sg47c")
-metadata/_custom_type_script = "uid://ci723n084uql4"
+target_type = "ALLY"
+metadata/_custom_type_script = "uid://brejhr2k5t01w"
 
 [resource]
-script = ExtResource("2_2iv8v")
+script = ExtResource("3_sg47c")
 name = "Potion"
-effects = Array[ExtResource("1_kjwe1")]([SubResource("Resource_yfwdx")])
+target_type = "ALLY"
+effects = Array[ExtResource("1_2iv8v")]([SubResource("Resource_yfwdx")])
 metadata/_custom_type_script = "uid://br2gl0bftv06o"

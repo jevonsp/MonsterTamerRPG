@@ -15,5 +15,5 @@ func execute() -> void:
 			if not t or t.is_fainted:
 				continue
 			
-			effect.apply(actor, t, move)
-			await EventBus.effect_ended
+			@warning_ignore("redundant_await")
+			await effect.apply(actor, t, move)

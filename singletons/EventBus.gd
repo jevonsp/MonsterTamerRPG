@@ -27,4 +27,6 @@ signal battle_switch
 signal switch_animation(out_monster: Monster, in_monster: Monster)
 signal switch_done_animating
 
+signal advance_dialogue
+
 @warning_ignore_restore("unused_signal")

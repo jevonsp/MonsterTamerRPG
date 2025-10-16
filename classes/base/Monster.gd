@@ -19,7 +19,19 @@ var defense: int = 0
 var special_attack: int = 0
 var special_defense: int = 0
 
+var stat_stages: Dictionary = {
+	"speed": 0,
+	"attack": 0,
+	"defense": 0,
+	"special_attack": 0,
+	"special_defense": 0,
+	"accuracy": 0,
+	"evasion": 0
+}
+
 var moves: Array[Move]
+
+var status: StatusEffect
 
 func setup_monster(md: MonsterData, lvl: int) -> void:
 	species = md
@@ -57,15 +69,36 @@ func set_stats() -> void:
 	special_defense = int((((2 * species.base_special_defense * level) / 100.0) + 5) * 1)
 	
 func get_stat(stat: String) -> int:
+	var base_value: int = 0
+	
 	match stat:
-		"hitpoints": return hitpoints
-		"speed": return speed
-		"attack": return attack
-		"defense": return defense
-		"special_attack": return special_attack
-		"special_defense": return special_defense
-	return 0
+		"hitpoints": base_value = hitpoints
+		"speed": base_value = speed
+		"attack": base_value = attack
+		"defense": base_value = defense
+		"special_attack": base_value = special_attack
+		"special_defense": base_value = special_defense
+		_: 
+			push_error("Unknown stat param: ", stat)
+			return 0
+	
+	if stat in stat_stages:
+		var stage = stat_stages[stat]
+		base_value = int(base_value * _get_stage_multi(stage))
+	
+	if status:
+		return status.modify_stat(stat, self, base_value)
 		
+	#for effect in statuses:
+		#base_value = effect.modify_stat(stat, self, base_value)
+	
+	return base_value
+	
+func _get_stage_multi(stage: int) -> float:
+	stage = clamp(stage, -6, 6)
+	if stage >= 0:
+		return (2.0 + stage) / 2.0
+	return 2.0 / (2.0 - stage)
 	
 func experience_to_level(lvl: int) -> int:
 	var BASE = 50
@@ -155,6 +188,7 @@ func attempt_capture(capture_value: int, instant: bool):
 		var is_critical = get_critical_capture()
 		var success = await shake_check(is_critical, b)
 		if success:
+			print("get captured here")
 			await get_captured()
 		else:
 			print("Capture failed")
@@ -173,10 +207,10 @@ func shake_check(critical: bool, chance: int) -> bool:
 		var roll = randi() % 65536
 		print("Shake ", i + 1, ": rolled ", roll, " vs ", chance, " - ", "SUCCESS" if roll < chance else "FAIL")
 		if roll >= chance:
-			EventBus.capture_shake.emit(i)
+			EventBus.capture_shake.emit(self, i)
 			await EventBus.shake_done_animating
 			return false
-	EventBus.capture_shake.emit(shake_number)
+	EventBus.capture_shake.emit(self, shake_number)
 	await EventBus.shake_done_animating
 	await Engine.get_main_loop().process_frame
 	return true
@@ -185,7 +219,7 @@ func get_critical_capture() -> bool:
 	return false
 	
 func get_captured():
-	EventBus.capture_animation.emit()
+	EventBus.capture_animation.emit(self)
 	await EventBus.capture_done_animating
 	PartyManager.add_monster(self)
 	await Engine.get_main_loop().process_frame

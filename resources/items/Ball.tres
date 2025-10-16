@@ -1,18 +1,16 @@
 [gd_resource type="Resource" script_class="Item" load_steps=5 format=3 uid="uid://pep8g7geka17"]
 
-[ext_resource type="Script" uid="uid://dof0vgm6x7x4n" path="res://resources/ItemEffect.gd" id="1_ux7sh"]
-[ext_resource type="Script" uid="uid://bqhkoh0houbkt" path="res://resources/item_effects/CaptureEffect.gd" id="2_nmxy3"]
-[ext_resource type="Script" uid="uid://br2gl0bftv06o" path="res://resources/Item.gd" id="2_pqng8"]
+[ext_resource type="Script" uid="uid://dwops4cp56fq3" path="res://classes/base/BattleEffect.gd" id="1_pqng8"]
+[ext_resource type="Script" uid="uid://cas6w68aevhdq" path="res://classes/effects/Capture.gd" id="2_nmxy3"]
+[ext_resource type="Script" uid="uid://br2gl0bftv06o" path="res://classes/base/Item.gd" id="3_y18na"]
 
-[sub_resource type="Resource" id="Resource_y18na"]
+[sub_resource type="Resource" id="Resource_0o8rl"]
 script = ExtResource("2_nmxy3")
-capture_bonus = null
-target_type = "ENEMY"
-metadata/_custom_type_script = "uid://bqhkoh0houbkt"
+animation_type = "THROWN"
+metadata/_custom_type_script = "uid://cas6w68aevhdq"
 
 [resource]
-script = ExtResource("2_pqng8")
+script = ExtResource("3_y18na")
 name = "Ball"
-target_type = "ENEMY"
-effects = Array[ExtResource("1_ux7sh")]([SubResource("Resource_y18na")])
+effects = Array[ExtResource("1_pqng8")]([SubResource("Resource_0o8rl")])
 metadata/_custom_type_script = "uid://br2gl0bftv06o"

@@ -111,6 +111,8 @@ func _on_exp_changed(_monster: Monster, _old: int, _new: int, times: int) -> voi
 	print("do experience animation here")
 	for i in times:
 		await get_tree().create_timer(Settings.game_speed).timeout
+	if times == 0:
+		await get_tree().create_timer(Settings.game_speed).timeout
 	EventBus.exp_done_animating.emit()
 	
 func _on_monster_fainted(_monster: Monster):

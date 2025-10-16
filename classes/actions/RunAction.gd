@@ -8,16 +8,15 @@ func _init(actor_ref: Monster, target_refs: Array) -> void:
 	super("RUN", null, actor_ref)
 	
 func execute() -> void:
-	print("run attempt here")
 	if calculate_escape_chance():
-		# effect_type: String, actor: Monster, _target: Monster, _effect_image: Texture2D
 		EventBus.effect_started.emit("RUN", actor, null, null)
-		print("run succeeded")
+		await EventBus.effect_ended
 		BattleManager.escaped = true
+		print(actor.name, " escaped!")
 	else:
-		print("run failed")
+		print(actor.name, " couldn't escape!")
 	
-func calculate_escape_chance():
+func calculate_escape_chance() -> bool:
 	var actor_speed = actor.speed
 	var enemy_speed
 	if not BattleManager.single_battle:
