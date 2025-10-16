@@ -12,5 +12,7 @@ metadata/_custom_type_script = "uid://cas6w68aevhdq"
 [resource]
 script = ExtResource("3_y18na")
 name = "Ball"
+animation_type = "THROWN"
+still = true
 effects = Array[ExtResource("1_pqng8")]([SubResource("Resource_0o8rl")])
 metadata/_custom_type_script = "uid://br2gl0bftv06o"

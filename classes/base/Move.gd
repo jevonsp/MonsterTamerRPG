@@ -5,7 +5,9 @@ class_name Move extends Resource
 
 @export_subgroup("Animation")
 @export_enum("ACTOR", "TARGET", "THROWN", "CENTER") var animation_type = "CENTER"
+@export var still: bool = false
 @export var animation: PackedScene
+@export var sprite: Texture2D
 
 @export_subgroup("Target Type")
 @export_enum("ENEMY", "ALLY") var target_type: String = "ENEMY"

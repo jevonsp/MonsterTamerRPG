@@ -10,7 +10,10 @@ func apply(actor_ref: Monster, target_ref: Monster, item_ref) -> void:
 	match target_type:
 		"ENEMY":
 			DialogueManager.show_dialogue("Used %s on %s" % [data.name, target.name], true)
-			EventBus.effect_started.emit(target_type, actor, target, sprite)
+			var anim
+			if data.still: anim = sprite
+			else: anim = animation
+			EventBus.effect_started.emit(animation_type, actor, target, anim)
 			await EventBus.effect_ended
 			
 			var a = capture_chance()

@@ -1,11 +1,22 @@
-[gd_scene load_steps=2 format=3 uid="uid://ngfwf02dd1u"]
+[gd_scene load_steps=9 format=3 uid="uid://ngfwf02dd1u"]
 
 [ext_resource type="Script" uid="uid://bj7aqi4rx3v3b" path="res://scenes/battle/single/single_battle_ui.gd" id="1_fb3iq"]
+[ext_resource type="Texture2D" uid="uid://di2wg8wxikato" path="res://assets/monsters/pyro_badger.png" id="2_1fke8"]
+[ext_resource type="Texture2D" uid="uid://dbxs3k3s3shrd" path="res://assets/ui/hp_back_mockup.png" id="3_4hqht"]
+[ext_resource type="Texture2D" uid="uid://b2ctlluobpc6f" path="res://assets/ui/hp_outline_mockup.png" id="4_5dbht"]
+[ext_resource type="Texture2D" uid="uid://d3e8ad8fp174n" path="res://assets/ui/hp_fill_mockup.png" id="5_ymupi"]
+[ext_resource type="Texture2D" uid="uid://b43sk6yw1smka" path="res://assets/ui/exp_under.png" id="6_ymupi"]
+[ext_resource type="Texture2D" uid="uid://biw0cyyuqvb7e" path="res://assets/ui/exp_over.png" id="7_i4g7f"]
+[ext_resource type="Texture2D" uid="uid://ikvubcm5myxt" path="res://assets/ui/exp_prog.png" id="8_nqfn3"]
 
-[node name="single_battle_ui" type="CanvasLayer" node_paths=PackedStringArray("player_portrait", "enemy_portrait")]
+[node name="single_battle_ui" type="CanvasLayer" node_paths=PackedStringArray("player_portrait", "enemy_portrait", "player_hp_bar", "enemy_hp_bar", "player_exp_bar", "center_marker")]
 script = ExtResource("1_fb3iq")
 player_portrait = NodePath("Portraits/PlayerPortrait")
 enemy_portrait = NodePath("Portraits/EnemyPortrait")
+player_hp_bar = NodePath("HealthBars/PlayerHP")
+enemy_hp_bar = NodePath("HealthBars/EnemyHP")
+player_exp_bar = NodePath("ExperienceBars/PlayerEXP")
+center_marker = NodePath("Marker2D")
 
 [node name="Portraits" type="Control" parent="."]
 layout_mode = 3
@@ -19,9 +30,59 @@ offset_bottom = 237.0
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
+texture = ExtResource("2_1fke8")
 
 [node name="EnemyPortrait" type="TextureRect" parent="Portraits"]
+layout_mode = 0
+offset_left = 160.0
+offset_right = 200.0
+offset_bottom = 40.0
+texture = ExtResource("2_1fke8")
+
+[node name="HealthBars" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 65.0
+offset_top = 247.0
+offset_right = 105.0
+offset_bottom = 287.0
+
+[node name="PlayerHP" type="TextureProgressBar" parent="HealthBars"]
+layout_mode = 0
+offset_left = -59.0
+offset_right = 101.0
+offset_bottom = 40.0
+value = 75.0
+texture_under = ExtResource("3_4hqht")
+texture_over = ExtResource("4_5dbht")
+texture_progress = ExtResource("5_ymupi")
+
+[node name="EnemyHP" type="TextureProgressBar" parent="HealthBars"]
 layout_mode = 0
 offset_left = 104.0
 offset_right = 144.0
 offset_bottom = 40.0
+value = 75.0
+texture_under = ExtResource("3_4hqht")
+texture_over = ExtResource("4_5dbht")
+texture_progress = ExtResource("5_ymupi")
+
+[node name="ExperienceBars" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 6.0
+offset_top = 268.0
+offset_right = 16.0
+offset_bottom = 276.0
+
+[node name="PlayerEXP" type="TextureProgressBar" parent="ExperienceBars"]
+layout_mode = 0
+offset_right = 160.0
+offset_bottom = 20.0
+value = 70.0
+texture_under = ExtResource("6_ymupi")
+texture_over = ExtResource("7_i4g7f")
+texture_progress = ExtResource("8_nqfn3")
+
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(167.54362, 217.82236)
