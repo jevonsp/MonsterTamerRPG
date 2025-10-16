@@ -107,10 +107,13 @@ func _on_switch_animation(old: Monster, new: Monster) -> void:
 	await get_tree().create_timer(Settings.game_speed).timeout
 	EventBus.switch_done_animating.emit()
 	
-func _on_exp_changed(_monster: Monster, _old: int, _new: int, times: int) -> void:
+func _on_exp_changed(monster: Monster, old_level: int, _new_experience: int, times: int) -> void:
 	print("do experience animation here")
+	var old_lvl = old_level
 	for i in times:
+		old_lvl += 1
 		await get_tree().create_timer(Settings.game_speed).timeout
+		DialogueManager.show_dialogue("%s leveled up to %s" % [monster.name, old_lvl], true)
 	if times == 0:
 		await get_tree().create_timer(Settings.game_speed).timeout
 	EventBus.exp_done_animating.emit()

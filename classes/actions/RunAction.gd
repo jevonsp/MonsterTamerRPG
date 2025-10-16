@@ -11,11 +11,11 @@ func execute() -> void:
 	if calculate_escape_chance():
 		EventBus.effect_started.emit("RUN", actor, null, null)
 		await EventBus.effect_ended
+		DialogueManager.show_dialogue("%s managed to escape" % actor.name)
 		BattleManager.escaped = true
-		print(actor.name, " escaped!")
 	else:
-		print(actor.name, " couldn't escape!")
-	
+		DialogueManager.show_dialogue("%s failed to escape" % actor.name)
+		await DialogueManager.dialogue_closed
 func calculate_escape_chance() -> bool:
 	var actor_speed = actor.speed
 	var enemy_speed

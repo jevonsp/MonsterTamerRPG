@@ -1,5 +1,8 @@
 extends CanvasLayer
 
+func _ready() -> void:
+	print("Dialogue Manager waiting for continue")
+
 func display_text(text: String) -> void:
 	print(text)
 

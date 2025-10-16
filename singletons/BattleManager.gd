@@ -187,19 +187,22 @@ func check_loss():
 func win():
 	if not in_battle:
 		return
-	print("win here")
+	DialogueManager.show_dialogue("You win!")
+	await DialogueManager.dialogue_closed
 	end_battle()
 	
 func lose():
 	if not in_battle:
 		return
-	print("lose here")
+	DialogueManager.show_dialogue("You lose!")
+	await DialogueManager.dialogue_closed
 	end_battle()
 	
 func escape():
 	if not in_battle:
 		return
-	print("escape here")
+	DialogueManager.show_dialogue("Escaped safely")
+	await DialogueManager.dialogue_closed
 	end_battle()
 	
 func captured(target: Monster) -> void:
@@ -267,6 +270,7 @@ func update_battle_actors() -> void:
 	EventBus.switch_animation.emit(old, new)
 	
 func end_battle():
+	await get_tree().create_timer(Settings.game_speed).timeout
 	in_battle = false
 	escaped = false
 	for child in get_children():

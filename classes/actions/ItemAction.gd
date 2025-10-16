@@ -19,7 +19,6 @@ func execute() -> void:
 			resolved_targets = target
 		else:
 			resolved_targets = BattleManager.resolve_targets(effect.target_type, actor)
-		print("Effect:", effect.name, "Targets:", resolved_targets)
 		for t in resolved_targets:
 			if not t:
 				continue

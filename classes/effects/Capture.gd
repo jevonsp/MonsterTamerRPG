@@ -9,6 +9,7 @@ func apply(actor_ref: Monster, target_ref: Monster, item_ref) -> void:
 	
 	match target_type:
 		"ENEMY":
+			DialogueManager.show_dialogue("Used %s on %s" % [data.name, target.name], true)
 			EventBus.effect_started.emit(target_type, actor, target, sprite)
 			await EventBus.effect_ended
 			
@@ -21,9 +22,6 @@ func apply(actor_ref: Monster, target_ref: Monster, item_ref) -> void:
 			print(actor_ref.name, " attempted to capture ", target_ref.name, " with ", item_ref.name)
 		_:
 			print("Unsupported target_type in Capture: ", target_type)
-	
-	print("(actor_ref): ", actor_ref, "(target_ref): ", target_ref)
-	print("player_actor: ", BattleManager.player_actor, "enemy_actor: ", BattleManager.enemy_actor)
 			
 func capture_chance() -> int:
 	var max_hp = target.max_hitpoints

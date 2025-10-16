@@ -11,16 +11,13 @@ func apply(actor_ref: Monster, target_ref: Monster, move_ref) -> void:
 	super(actor_ref, target_ref, move_ref)
 	match target_type:
 		"ENEMY":
-			DialogueManager.show_dialogue("%s used %s!" % [actor.name, move_ref.name])
+			DialogueManager.show_dialogue("%s used %s!" % [actor.name, move_ref.name], true)
 			EventBus.effect_started.emit(animation_type, actor_ref, target_ref, animation)
 			await EventBus.effect_ended
 			var damage = calculate_damage()
 			await target_ref.take_damage(damage)
-			DialogueManager.show_dialogue("It dealt %s to %s!" % [damage, target.name])
+			DialogueManager.show_dialogue("It dealt %s to %s!" % [damage, target.name], false)
 			await DialogueManager.dialogue_closed
-	print("(actor_ref): ", actor_ref, "(target_ref): ", target_ref)
-	print("player_actor: ", BattleManager.player_actor, "enemy_actor: ", BattleManager.enemy_actor)
-	print("health now: ", target_ref.hitpoints)
 	
 func calculate_damage() -> int:
 	var atk: int = 0

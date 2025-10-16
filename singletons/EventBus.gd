@@ -11,7 +11,7 @@ signal health_changed(monster: Monster, old: int, new: int)
 signal health_done_animating
 
 signal exp_granted(amount: int)
-signal exp_changed(monster: Monster, old: int, new: int, times: int)
+signal exp_changed(monster: Monster, old_level: int, new_experience: int, times: int)
 signal exp_done_animating
 
 signal monster_fainted(monster: Monster)
@@ -23,7 +23,6 @@ signal capture_animation(monster: Monster)
 signal capture_done_animating
 
 signal free_switch
-signal battle_switch
 signal switch_animation(out_monster: Monster, in_monster: Monster)
 signal switch_done_animating
 

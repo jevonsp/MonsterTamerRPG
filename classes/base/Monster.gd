@@ -106,7 +106,6 @@ func experience_to_level(lvl: int) -> int:
 	
 func gain_exp(amount: int) -> void:
 	var old_level = level
-	var old_exp = experience
 	
 	experience += amount
 	var new_level = level
@@ -118,9 +117,9 @@ func gain_exp(amount: int) -> void:
 	if levels_gained > 0:
 		level = new_level
 		set_stats()
-		
-	EventBus.exp_changed.emit(self, old_exp, experience, levels_gained)
-	print("Gained ", amount, " EXP. Level: ", level, " EXP: ", experience, " Levels gained: ", levels_gained)
+
+	EventBus.exp_changed.emit(self, old_level, experience, levels_gained)
+	
 	
 func grant_exp() -> int:
 	var is_getting_exp: int = 0
@@ -188,10 +187,12 @@ func attempt_capture(capture_value: int, instant: bool):
 		var is_critical = get_critical_capture()
 		var success = await shake_check(is_critical, b)
 		if success:
-			print("get captured here")
+			DialogueManager.show_dialogue("Success! %s was caught" % name, false)
+			await DialogueManager.dialogue_closed
 			await get_captured()
 		else:
-			print("Capture failed")
+			DialogueManager.show_dialogue("%s failed to be caught" % name, false)
+			await DialogueManager.dialogue_closed
 	capture_in_progress = false
 		
 func calculate_shake_threshold(capture_value: int) -> int:

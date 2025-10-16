@@ -45,8 +45,6 @@ func execute() -> void:
 	party[_out] = party[_in]
 	party[_in] = temp
 	
-	print(old_monster_name, " switched out for ", new_monster_name)
-	
 	# Update the active actor reference
 	if is_player_switch:
 		BattleManager.player_actor = party[0]
@@ -54,5 +52,9 @@ func execute() -> void:
 	else:
 		BattleManager.enemy_actor = party[0]
 	
+	DialogueManager.show_dialogue("Thats enough, %s" % old_monster_name)
+	
 	EventBus.switch_animation.emit(temp, party[_in])
 	await EventBus.switch_done_animating
+	DialogueManager.show_dialogue("Your turn, %s" % new_monster_name, false)
+	await DialogueManager.dialogue_closed
