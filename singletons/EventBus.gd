@@ -3,8 +3,8 @@ extends Node
 @warning_ignore_start("unused_signal")
 
 signal step_completed(position: Vector2)
+signal toggle_player
 
-signal battle_started(monster: Monster)
 signal battle_reference(node: Node)
 
 signal effect_started(effect_type: String, actor: Monster, target: Monster, image: Texture2D)

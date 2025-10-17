@@ -3,7 +3,7 @@ extends CharacterBody2D
 @export var anim_tree: AnimationTree
 @export var ray2d: RayCast2D
 
-enum PlayerState {IDLE, TURNING, WALKING}
+enum PlayerState {IDLE, TURN, WALK}
 var state = PlayerState.IDLE
 
 enum FacingDirection {UP, DOWN, LEFT, RIGHT}
@@ -15,38 +15,45 @@ var walk_speed = 5.0
 var start_position: Vector2 = Vector2.ZERO
 var move_direction: Vector2 = Vector2.ZERO
 var input_direction: Vector2 = Vector2.ZERO
+var direction_keys: Array = []
 var is_moving: bool = false
 var percent_moved: float = 0.0
 
-# Direction key storage
-var direction_keys: Array = []
+var processing: bool = true
+var animating: bool = false
 
 @onready var anim_state = anim_tree.get("parameters/playback")
+
 func _ready() -> void:
 	add_to_group("player")
 	start_position = position
-		
-func _on_animation_finished(anim_name: String):
-	if anim_name == "Turn":
-		finished_turning()
-		
+	EventBus.toggle_player.connect(_on_toggle_player)
+	
 func _process(_delta: float) -> void:
 	direction_storage()
-
+		
 func _physics_process(delta: float) -> void:
-	if state == PlayerState.TURNING:
+	if not processing:
+		return
+	if state == PlayerState.TURN:
 		var current_state = anim_state.get_current_node()
-		if current_state == "Idle" or "Walk":
+		if current_state == "Idle":
 			finished_turning()
+			animating = false
 		return
 	elif not is_moving:
 		process_player_input()
 		anim_state.travel("Idle")
-	if is_moving:
-		anim_state.travel("Walk")
+		animating = false
+	elif is_moving:
+		if not animating:
+			anim_state.travel("Walk")
+			animating = true
 		move(delta)
 		
 func _input(event: InputEvent) -> void:
+	if not processing:
+		return
 	if event.is_action_pressed("yes"):
 		if ray2d.is_colliding():
 			var collider = ray2d.get_collider()
@@ -56,6 +63,22 @@ func _input(event: InputEvent) -> void:
 				print(collider.get_parent())
 				collider.interact()
 				
+func _on_toggle_player():
+	processing = !processing
+	clear_inputs()
+	
+func set_anim_tree() -> void:
+	anim_tree.set("parameters/Idle/blend_position", input_direction)
+	anim_tree.set("parameters/Walk/blend_position", input_direction)
+	anim_tree.set("parameters/Turn/blend_position", input_direction)
+	
+func _on_animation_finished(anim_name: String):
+	if anim_name == "Turn":
+		finished_turning()
+		
+func is_state_playing(anim: String) -> bool:
+	return anim_state.get_current_node() == anim
+		
 # Handles key press/release tracking
 func direction_storage():
 	var directions = ["up", "down", "right", "left"]
@@ -76,6 +99,7 @@ func clear_inputs() -> void:
 	is_moving = false
 	move_direction = Vector2.ZERO
 	state = PlayerState.IDLE
+	anim_state.travel("Idle")
 	percent_moved = 0.0
 	
 # Converts stored keys into a movement direction
@@ -85,7 +109,7 @@ func process_player_input():
 		"down": Vector2(0, 1),
 		"left": Vector2(-1, 0),
 		"right": Vector2(1, 0)}
-		
+	
 	if direction_keys.size() > 0:
 		var key = direction_keys.back()
 		input_direction = direction_map.get(key, Vector2.ZERO)
@@ -94,19 +118,24 @@ func process_player_input():
 		
 	# Only start moving if a direction is pressed
 	if input_direction != Vector2.ZERO:
-		anim_tree.set("parameters/Idle/blend_position", input_direction)
-		anim_tree.set("parameters/Walk/blend_position", input_direction)
-		anim_tree.set("parameters/Turn/blend_position", input_direction)
-		
 		if need_to_turn():
-			state = PlayerState.TURNING
+			# Set blend positions when turning
+			anim_tree.set("parameters/Idle/blend_position", input_direction)
+			anim_tree.set("parameters/Walk/blend_position", input_direction)
+			anim_tree.set("parameters/Turn/blend_position", input_direction)
+			state = PlayerState.TURN
 			anim_state.travel("Turn")
 		else:
+			# Set blend positions only when starting a new walk
+			anim_tree.set("parameters/Idle/blend_position", input_direction)
+			anim_tree.set("parameters/Walk/blend_position", input_direction)
+			anim_tree.set("parameters/Turn/blend_position", input_direction)
 			start_position = position
 			move_direction = input_direction
 			is_moving = true
-			state = PlayerState.WALKING
+			state = PlayerState.WALK
 	else:
+		state = PlayerState.IDLE
 		anim_state.travel("Idle")
 		
 # Handles turning based on new input

@@ -1,5 +1,7 @@
 extends CanvasLayer
 
+@export var label: Label
+
 func _ready() -> void:
 	print("Dialogue Manager waiting for continue")
 	
@@ -8,7 +10,5 @@ func _input(event: InputEvent) -> void:
 		EventBus.advance_dialogue.emit()
 	
 func display_text(text: String) -> void:
+	label.text = text
 	print(text)
-	
-func _on_temp_button_pressed() -> void:
-	EventBus.advance_dialogue.emit()

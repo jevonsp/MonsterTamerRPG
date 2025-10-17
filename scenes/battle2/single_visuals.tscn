@@ -1,0 +1,131 @@
+[gd_scene load_steps=9 format=3 uid="uid://b8dvbvfhtrf3k"]
+
+[ext_resource type="Script" uid="uid://d1sv3dnpbn43u" path="res://scenes/battle2/single_visuals.gd" id="1_2cvb8"]
+[ext_resource type="Texture2D" uid="uid://di2wg8wxikato" path="res://assets/monsters/pyro_badger.png" id="1_oovar"]
+[ext_resource type="Texture2D" uid="uid://dbxs3k3s3shrd" path="res://assets/ui/hp_back_mockup.png" id="2_2cvb8"]
+[ext_resource type="Texture2D" uid="uid://b2ctlluobpc6f" path="res://assets/ui/hp_outline_mockup.png" id="3_bxh6m"]
+[ext_resource type="Texture2D" uid="uid://d3e8ad8fp174n" path="res://assets/ui/hp_fill_mockup.png" id="4_sgbc3"]
+[ext_resource type="Texture2D" uid="uid://b43sk6yw1smka" path="res://assets/ui/exp_under.png" id="5_op21n"]
+[ext_resource type="Texture2D" uid="uid://biw0cyyuqvb7e" path="res://assets/ui/exp_over.png" id="6_6mxm5"]
+[ext_resource type="Texture2D" uid="uid://ikvubcm5myxt" path="res://assets/ui/exp_prog.png" id="7_cqo6n"]
+
+[node name="SingleVisuals" type="CanvasLayer" node_paths=PackedStringArray("player_portrait", "enemy_portrait", "player_hp_bar", "enemy_hp_bar", "player_exp_bar", "player_name", "enemy_name", "player_level", "enemy_level", "center_marker")]
+script = ExtResource("1_2cvb8")
+player_portrait = NodePath("Portraits/PlayerPortrait")
+enemy_portrait = NodePath("Portraits/EnemyPortrait")
+player_hp_bar = NodePath("HealthBars/PlayerHP")
+enemy_hp_bar = NodePath("HealthBars/EnemyHP")
+player_exp_bar = NodePath("ExperienceBars/PlayerEXP")
+player_name = NodePath("Control/PlayerName")
+enemy_name = NodePath("Control/EnemyName")
+player_level = NodePath("Control/PlayerLevel")
+enemy_level = NodePath("Control/EnemyLevel")
+center_marker = NodePath("Marker2D")
+
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(304, 123)
+
+[node name="Portraits" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 61.0
+offset_top = 123.0
+offset_right = 101.0
+offset_bottom = 163.0
+
+[node name="PlayerPortrait" type="TextureRect" parent="Portraits"]
+layout_mode = 0
+offset_top = -48.0
+offset_right = 40.0
+offset_bottom = -8.0
+scale = Vector2(2, 2)
+texture = ExtResource("1_oovar")
+
+[node name="EnemyPortrait" type="TextureRect" parent="Portraits"]
+layout_mode = 0
+offset_left = 441.0
+offset_top = -48.0
+offset_right = 481.0
+offset_bottom = -8.0
+scale = Vector2(2, 2)
+texture = ExtResource("1_oovar")
+
+[node name="HealthBars" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 65.0
+offset_top = 173.0
+offset_right = 105.0
+offset_bottom = 213.0
+
+[node name="PlayerHP" type="TextureProgressBar" parent="HealthBars"]
+layout_mode = 0
+offset_left = -59.0
+offset_right = 101.0
+offset_bottom = 40.0
+value = 75.0
+texture_under = ExtResource("2_2cvb8")
+texture_over = ExtResource("3_bxh6m")
+texture_progress = ExtResource("4_sgbc3")
+
+[node name="EnemyHP" type="TextureProgressBar" parent="HealthBars"]
+layout_mode = 0
+offset_left = 385.0
+offset_right = 545.0
+offset_bottom = 40.0
+value = 75.0
+texture_under = ExtResource("2_2cvb8")
+texture_over = ExtResource("3_bxh6m")
+texture_progress = ExtResource("4_sgbc3")
+
+[node name="ExperienceBars" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 6.0
+offset_top = 194.0
+offset_right = 16.0
+offset_bottom = 202.0
+
+[node name="PlayerEXP" type="TextureProgressBar" parent="ExperienceBars"]
+layout_mode = 0
+offset_right = 160.0
+offset_bottom = 20.0
+value = 70.0
+texture_under = ExtResource("5_op21n")
+texture_over = ExtResource("6_6mxm5")
+texture_progress = ExtResource("7_cqo6n")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 72.0
+offset_top = 7.0
+offset_right = 112.0
+offset_bottom = 47.0
+
+[node name="PlayerName" type="Label" parent="Control"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Name"
+
+[node name="EnemyName" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = 434.0
+offset_right = 481.0
+offset_bottom = 23.0
+text = "Name"
+
+[node name="PlayerLevel" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = -56.0
+offset_right = -3.0
+offset_bottom = 23.0
+text = "Lvl. ???"
+
+[node name="EnemyLevel" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = 375.0
+offset_right = 428.0
+offset_bottom = 23.0
+text = "Lvl. ???"

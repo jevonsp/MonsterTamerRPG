@@ -1,6 +1,6 @@
 extends Node
 
-var battle = preload("res://scenes/battle/battle.tscn")
+var battle = preload("res://scenes/battle2/single_battle.tscn")
 var battle_party_scene = preload("res://scenes/battle/battle_party/battle_party.tscn")
 
 var enemy_party: Array[Monster] = []
@@ -294,4 +294,5 @@ func end_battle():
 	print("actors/party cleared")
 	escape_attempts = 0
 	turn_actions.clear()
+	EventBus.toggle_player.emit()
 	
