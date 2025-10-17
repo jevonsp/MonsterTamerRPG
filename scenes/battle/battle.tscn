@@ -17,21 +17,25 @@ size_flags_vertical = 4
 [node name="Button1" type="Button" parent="Main"]
 layout_mode = 2
 size_flags_vertical = 4
+focus_mode = 0
 text = "Fight"
 
 [node name="Button2" type="Button" parent="Main"]
 layout_mode = 2
 size_flags_vertical = 4
+focus_mode = 0
 text = "Party"
 
 [node name="Button3" type="Button" parent="Main"]
 layout_mode = 2
 size_flags_vertical = 4
+focus_mode = 0
 text = "Item"
 
 [node name="Button4" type="Button" parent="Main"]
 layout_mode = 2
 size_flags_vertical = 4
+focus_mode = 0
 text = "Run"
 
 [node name="Moves" type="HBoxContainer" parent="."]
@@ -48,6 +52,7 @@ custom_minimum_size = Vector2(25, 25)
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 4
+focus_mode = 0
 text = "Move 1"
 
 [node name="Button2" type="Button" parent="Moves"]
@@ -55,6 +60,7 @@ custom_minimum_size = Vector2(25, 25)
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 4
+focus_mode = 0
 text = "Move 2"
 
 [node name="Button3" type="Button" parent="Moves"]
@@ -62,6 +68,7 @@ custom_minimum_size = Vector2(25, 25)
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 4
+focus_mode = 0
 text = "Move 3"
 
 [node name="Button4" type="Button" parent="Moves"]
@@ -69,6 +76,7 @@ custom_minimum_size = Vector2(25, 25)
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 4
+focus_mode = 0
 text = "Move 4"
 
 [node name="Targets" type="HBoxContainer" parent="."]
@@ -80,11 +88,13 @@ offset_bottom = 170.0
 [node name="Button1" type="Button" parent="Targets"]
 layout_mode = 2
 size_flags_vertical = 4
+focus_mode = 0
 text = "Self"
 
 [node name="Button2" type="Button" parent="Targets"]
 layout_mode = 2
 size_flags_vertical = 4
+focus_mode = 0
 text = "Enemy"
 
 [connection signal="pressed" from="Main/Button1" to="." method="_on_fight_pressed"]

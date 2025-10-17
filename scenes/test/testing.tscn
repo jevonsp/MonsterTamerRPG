@@ -16,6 +16,7 @@ custom_minimum_size = Vector2(25, 25)
 layout_mode = 2
 size_flags_horizontal = 2
 size_flags_vertical = 4
+focus_mode = 0
 text = "Add Monster"
 
 [node name="Button2" type="Button" parent="HBoxContainer"]
@@ -23,6 +24,7 @@ custom_minimum_size = Vector2(25, 25)
 layout_mode = 2
 size_flags_horizontal = 2
 size_flags_vertical = 4
+focus_mode = 0
 text = "Roll Encounter"
 
 [node name="Button3" type="Button" parent="HBoxContainer"]
@@ -30,6 +32,7 @@ custom_minimum_size = Vector2(25, 25)
 layout_mode = 2
 size_flags_horizontal = 2
 size_flags_vertical = 4
+focus_mode = 0
 text = "Start Battle"
 
 [node name="Button4" type="Button" parent="HBoxContainer"]
@@ -37,18 +40,21 @@ custom_minimum_size = Vector2(25, 25)
 layout_mode = 2
 size_flags_horizontal = 2
 size_flags_vertical = 4
+focus_mode = 0
 text = "Reset"
 
 [node name="Button5" type="Button" parent="HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 2
 size_flags_vertical = 4
+focus_mode = 0
 text = "Add Potion"
 
 [node name="Button6" type="Button" parent="HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 4
+focus_mode = 0
 text = "Add Ball
 "
 

@@ -54,11 +54,13 @@ func add_actor():
 	pass
 	
 func _on_button_1_pressed() -> void:
+	print("pressed")
 	if not player_actor.moves[0].chooses_targets:
 		var move = player_actor.moves[0]
 		_on_move_selected(move)
 	
 func _on_button_2_pressed() -> void:
+	print("pressed")
 	if not player_actor.moves[0].chooses_targets:
 		var move = player_actor.moves[1]
 		_on_move_selected(move)
@@ -70,6 +72,7 @@ func _on_button_4_pressed() -> void:
 	pass # Replace with function body.
 	
 func _on_move_selected(move: Move):
+	print("move selected: ", move.name)
 	%Moves.visible = false
 	var action = MoveAction.new(BattleManager.player_actor, [1], move)
 	BattleManager.on_action_selected(action)

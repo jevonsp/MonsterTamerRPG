@@ -16,12 +16,13 @@ var single_battle: bool = true
 var turn_actions: Array = []
 var processing_turn: bool = false
 var in_battle: bool = false
+var battle_reference: Node = null
 
 var escape_attempts: int = 0
 var escaped: bool = false
 
 func _ready() -> void:
-	pass
+	EventBus.battle_reference.connect(_on_battle_reference)
 	
 func add_enemies(monster_datas: Array[MonsterData], lvls: Array[int]) -> void:
 	if monster_datas.size() != lvls.size():
@@ -42,6 +43,7 @@ func add_enemies(monster_datas: Array[MonsterData], lvls: Array[int]) -> void:
 	
 func start_battle():
 	in_battle = true
+	processing_turn = false
 	print(PartyManager.party)
 	player_actor = PartyManager.get_first_alive()
 	player_actor.getting_exp = true
@@ -49,6 +51,9 @@ func start_battle():
 	add_child(battle_scene)
 	battle_scene.setup_battle()
 	print("enemy party size: ", enemy_party.size())
+	
+func _on_battle_reference(node: Node):
+	battle_reference = node
 	
 func on_action_selected(action: BattleAction):
 	if processing_turn:
@@ -273,6 +278,9 @@ func end_battle():
 	await get_tree().create_timer(Settings.game_speed).timeout
 	in_battle = false
 	escaped = false
+	battle_reference.clear_maps()
+	battle_reference.queue_free()
+	battle_reference = null
 	for child in get_children():
 		child.queue_free()
 	for monster in PartyManager.party:

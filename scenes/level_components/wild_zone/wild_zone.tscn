@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://dx1h5hc75ct73"]
+
+[ext_resource type="Script" uid="uid://cr75b2b7w5xms" path="res://scenes/level_components/wild_zone/wild_zone.gd" id="1_bwirk"]
+
+[node name="WildZone" type="Area2D"]
+script = ExtResource("1_bwirk")
+metadata/_custom_type_script = "uid://b4iga57vuw36y"

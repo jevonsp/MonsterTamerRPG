@@ -13,6 +13,9 @@ var portrait_map: Dictionary = {}
 var hp_map: Dictionary = {}
 var exp_map: Dictionary = {}
 
+func _ready() -> void:
+	EventBus.battle_reference.emit(self)
+
 func setup_battle(player: Monster, enemy: Monster):
 	map_portraits(player, enemy)
 	map_hp_bars(player, enemy)
@@ -64,6 +67,11 @@ func update_maps(old_monster: Monster, new_monster: Monster) -> void:
 		exp_map.erase(old_monster)
 		exp_map[new_monster] = exp_bar
 	
+func clear_maps():
+	portrait_map.clear()
+	hp_map.clear()
+	exp_map.clear()
+	
 func _on_effect_started(animation_type: String, actor: Monster, target: Monster, effect_anim):
 	print("animation_type: ", animation_type)
 	animate_effect(animation_type, actor, target, effect_anim)
@@ -99,7 +107,7 @@ func _on_health_changed(monster: Monster, _old: int, new: int) -> void:
 	print("do health animation here")
 	var tween = get_tree().create_tween()
 	tween.tween_property(hp_map[monster], "value", new * HP_SCALE, Settings.game_speed)
-	await get_tree().create_timer(Settings.game_speed).timeout
+	await tween.finished
 	EventBus.health_done_animating.emit()
 	
 func _on_switch_animation(old: Monster, new: Monster) -> void:
@@ -116,13 +124,15 @@ func _on_exp_changed(monster: Monster, old_level: int, new_experience: int, time
 		var level_end = monster.experience_to_level(old_lvl + 1)
 		var full_tween = get_tree().create_tween()
 		full_tween.tween_property(exp_map[monster], "value", level_end - _level_start, Settings.game_speed)
-		await get_tree().create_timer(Settings.game_speed).timeout
+		await full_tween.finished
+		exp_map[monster].value = 0
+		await get_tree().process_frame
 		DialogueManager.show_dialogue("%s leveled up to %s" % [monster.name, old_lvl + 1], true)
 		old_lvl += 1
 	var level_start = monster.experience_to_level(old_lvl)
 	var tween = get_tree().create_tween()
 	tween.tween_property(exp_map[monster], "value", new_experience - level_start, Settings.game_speed)
-	await get_tree().create_timer(Settings.game_speed).timeout
+	await tween.finished
 	EventBus.exp_done_animating.emit()
 	
 func _on_monster_fainted(_monster: Monster):
