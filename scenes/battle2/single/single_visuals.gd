@@ -141,7 +141,20 @@ func _on_health_changed(monster: Monster, _old: int, new: int) -> void:
 	EventBus.health_done_animating.emit()
 	
 func _on_switch_animation(old: Monster, new: Monster) -> void:
+	var direction
+	if old == BattleManager.player_actor:
+		direction = Vector2(-200,0)
+	elif old == BattleManager.enemy_actor:
+		direction = Vector2(200,0)
+	var texture = portrait_map[old]
+	var start_pos = texture.position
+	var tween_pos = get_tree().create_tween()
+	tween_pos.tween_property(texture, "position", start_pos + direction, Settings.game_speed)
+	await tween_pos.finished
 	update_maps(old, new)
+	var tween_back = get_tree().create_tween()
+	tween_back.tween_property(texture, "position", start_pos, Settings.game_speed)
+	await tween_pos.finished
 	print("old: ", old, " new: ", new)
 	await get_tree().create_timer(Settings.game_speed).timeout
 	EventBus.switch_done_animating.emit()
@@ -165,9 +178,20 @@ func _on_exp_changed(monster: Monster, old_level: int, new_experience: int, time
 	await tween.finished
 	EventBus.exp_done_animating.emit()
 	
-func _on_monster_fainted(_monster: Monster):
+func _on_monster_fainted(monster: Monster):
+	var texture = portrait_map[monster]
+	var start_pos = texture.position
+	var start_size = texture.size
 	print("do fainting animation here")
-	await get_tree().create_timer(Settings.game_speed).timeout
+	
+	var tween_size = get_tree().create_tween()
+	tween_size.tween_property(texture, "size", Vector2(0,0), Settings.game_speed)
+	var tween_pos = get_tree().create_tween()
+	tween_pos.tween_property(texture, "position", start_pos + Vector2(0, 200), Settings.game_speed)
+	await tween_pos.finished
+	texture.texture = null
+	texture.position = start_pos
+	texture.size = start_size
 	EventBus.fainting_done_animating.emit()
 	
 func _on_capture_shake(_monster: Monster, shake_number: int):
@@ -181,3 +205,6 @@ func _on_capture_animation(_monster: Monster):
 	print("do capture animation here")
 	await get_tree().create_timer(Settings.game_speed).timeout
 	EventBus.capture_done_animating.emit()
+
+func _on_button_pressed() -> void:
+	pass # Test button for animations

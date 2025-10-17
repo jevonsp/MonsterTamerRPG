@@ -28,6 +28,7 @@ func _ready() -> void:
 	add_to_group("player")
 	start_position = position
 	EventBus.toggle_player.connect(_on_toggle_player)
+	GameManager.input_state_changed.connect(_on_input_state_changed)
 	
 func _process(_delta: float) -> void:
 	direction_storage()
@@ -62,6 +63,18 @@ func _input(event: InputEvent) -> void:
 				print("tried to interact")
 				print(collider.get_parent())
 				collider.interact()
+				
+func _on_input_state_changed(new_state):
+	match new_state:
+		GameManager.InputState.OVERWORLD:
+			_on_toggle_player()
+		GameManager.InputState.BATTLE:
+			_on_toggle_player()
+		GameManager.InputState.DIALOGUE:
+			_on_toggle_player()
+		GameManager.InputState.MENU:
+			_on_toggle_player()
+		GameManager.InputState.INACTIVE: pass
 				
 func _on_toggle_player():
 	processing = !processing

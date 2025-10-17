@@ -1,0 +1,35 @@
+[gd_scene load_steps=3 format=3 uid="uid://cof2sqvd0rb0a"]
+
+[ext_resource type="Texture2D" uid="uid://dujoyv2fb471r" path="res://assets/ui/button_mockup.png" id="1_klgdb"]
+[ext_resource type="Script" uid="uid://nu2352wxmdog" path="res://scenes/menu/menu.gd" id="1_mcvr8"]
+
+[node name="Menu" type="CanvasLayer"]
+script = ExtResource("1_mcvr8")
+
+[node name="Slot0" type="Node2D" parent="."]
+position = Vector2(558, 32)
+
+[node name="Background" type="Sprite2D" parent="Slot0"]
+texture = ExtResource("1_klgdb")
+hframes = 3
+
+[node name="Slot1" type="Node2D" parent="."]
+position = Vector2(558, 94)
+
+[node name="Background" type="Sprite2D" parent="Slot1"]
+texture = ExtResource("1_klgdb")
+hframes = 3
+
+[node name="Slot2" type="Node2D" parent="."]
+position = Vector2(558, 156)
+
+[node name="Background" type="Sprite2D" parent="Slot2"]
+texture = ExtResource("1_klgdb")
+hframes = 3
+
+[node name="Slot3" type="Node2D" parent="."]
+position = Vector2(558, 218)
+
+[node name="Background" type="Sprite2D" parent="Slot3"]
+texture = ExtResource("1_klgdb")
+hframes = 3

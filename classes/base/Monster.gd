@@ -3,6 +3,7 @@ class_name Monster extends Resource
 var species: MonsterData
 
 var name: String = ""
+var type: String = ""
 var capture_rate: int = 0
 var level: int = 1
 var experience: int = 0
@@ -38,6 +39,7 @@ func setup_monster(md: MonsterData, lvl: int) -> void:
 	capture_rate = species.capture_rate
 	level = lvl
 	name = species.name
+	type = species.type
 	experience = experience_to_level(level)
 	decide_nature()
 	set_stats()

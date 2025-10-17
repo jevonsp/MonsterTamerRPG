@@ -23,7 +23,7 @@ var v2_to_slot: Dictionary = {
 	MoveSlot.MOVE3: $Slot3/Background }
 	
 func _ready() -> void:
-	pass
+	GameManager.input_state_changed.connect(_on_input_state_changed)
 	set_active_slot()
 	
 func _input(event: InputEvent) -> void:
@@ -48,10 +48,27 @@ func _input(event: InputEvent) -> void:
 	
 func _move(direction: Vector2):
 	unset_active_slot()
-	selected_slot += direction
-	selected_slot.x = clamp(selected_slot.x, 0, 1)
-	selected_slot.y = clamp(selected_slot.y, 0, 1)
+	var allowed = get_allowed_moves()
+	var new_slot = selected_slot + direction
+	new_slot.x = clamp(new_slot.x, 0, 1)
+	new_slot.y = clamp(new_slot.y, 0, 1)
+	if new_slot in allowed:
+		selected_slot = new_slot
 	set_active_slot()
+	
+func get_allowed_moves() -> Array:
+	if not BattleManager.in_battle:
+		return [Vector2(0,0), Vector2(1,0), Vector2(0,1), Vector2(1,1)]
+	var moves = PartyManager.get_first_alive().moves
+	var move_count = moves.size()
+	var allowed = []
+	
+	var pos_order = [Vector2(0,0), Vector2(1,0), Vector2(0,1), Vector2(1,1)]
+	
+	for i in range(move_count):
+		allowed.append(pos_order[i])
+	print("allowed: ", allowed)
+	return allowed
 	
 func _input_move():
 	if not processing:
@@ -69,6 +86,16 @@ func _input_move():
 	var action = MoveAction.new(BattleManager.player_actor, [BattleManager.enemy_actor], move_data)
 	BattleManager.on_action_selected(action)
 	
+func _on_input_state_changed(new_state):
+	match new_state:
+		GameManager.InputState.OVERWORLD: pass
+		GameManager.InputState.BATTLE:
+			if not BattleManager.processing_turn:
+				processing = true
+		GameManager.InputState.DIALOGUE:
+			processing = false
+		GameManager.InputState.INACTIVE: pass
+	
 func get_curr_slot():
 	return v2_to_slot[selected_slot]
 	
@@ -80,7 +107,4 @@ func set_active_slot():
 	
 func set_moving_slot():
 	slot[get_curr_slot()].frame = 2
-	
-func update_moves() -> void:
-	pass
 	

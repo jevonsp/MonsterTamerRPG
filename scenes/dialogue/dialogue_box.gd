@@ -10,5 +10,6 @@ func _input(event: InputEvent) -> void:
 		EventBus.advance_dialogue.emit()
 	
 func display_text(text: String) -> void:
+	print("display_text called")
 	label.text = text
 	print(text)

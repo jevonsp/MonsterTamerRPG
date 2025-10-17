@@ -1,6 +1,6 @@
-[gd_scene load_steps=9 format=3 uid="uid://b8dvbvfhtrf3k"]
+[gd_scene load_steps=10 format=3 uid="uid://b8dvbvfhtrf3k"]
 
-[ext_resource type="Script" uid="uid://d1sv3dnpbn43u" path="res://scenes/battle2/single_visuals.gd" id="1_2cvb8"]
+[ext_resource type="Script" uid="uid://d1sv3dnpbn43u" path="res://scenes/battle2/single/single_visuals.gd" id="1_2cvb8"]
 [ext_resource type="Texture2D" uid="uid://di2wg8wxikato" path="res://assets/monsters/pyro_badger.png" id="1_oovar"]
 [ext_resource type="Texture2D" uid="uid://dbxs3k3s3shrd" path="res://assets/ui/hp_back_mockup.png" id="2_2cvb8"]
 [ext_resource type="Texture2D" uid="uid://b2ctlluobpc6f" path="res://assets/ui/hp_outline_mockup.png" id="3_bxh6m"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://b43sk6yw1smka" path="res://assets/ui/exp_under.png" id="5_op21n"]
 [ext_resource type="Texture2D" uid="uid://biw0cyyuqvb7e" path="res://assets/ui/exp_over.png" id="6_6mxm5"]
 [ext_resource type="Texture2D" uid="uid://ikvubcm5myxt" path="res://assets/ui/exp_prog.png" id="7_cqo6n"]
+[ext_resource type="FontFile" uid="uid://jbbx5lupeleb" path="res://assets/m5x7.ttf" id="9_bxh6m"]
 
 [node name="SingleVisuals" type="CanvasLayer" node_paths=PackedStringArray("player_portrait", "enemy_portrait", "player_hp_bar", "enemy_hp_bar", "player_exp_bar", "player_name", "enemy_name", "player_level", "enemy_level", "center_marker")]
 script = ExtResource("1_2cvb8")
@@ -34,6 +35,7 @@ offset_right = 101.0
 offset_bottom = 163.0
 
 [node name="PlayerPortrait" type="TextureRect" parent="Portraits"]
+z_index = -1
 layout_mode = 0
 offset_top = -48.0
 offset_right = 40.0
@@ -42,6 +44,7 @@ scale = Vector2(2, 2)
 texture = ExtResource("1_oovar")
 
 [node name="EnemyPortrait" type="TextureRect" parent="Portraits"]
+z_index = -1
 layout_mode = 0
 offset_left = 441.0
 offset_top = -48.0
@@ -105,27 +108,52 @@ offset_bottom = 47.0
 
 [node name="PlayerName" type="Label" parent="Control"]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
+offset_left = 40.0
+offset_right = 92.0
+offset_bottom = 26.0
+theme_override_fonts/font = ExtResource("9_bxh6m")
+theme_override_font_sizes/font_size = 32
 text = "Name"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="EnemyName" type="Label" parent="Control"]
 layout_mode = 0
-offset_left = 434.0
-offset_right = 481.0
-offset_bottom = 23.0
+offset_left = 413.0
+offset_top = 3.0
+offset_right = 465.0
+offset_bottom = 29.0
+theme_override_fonts/font = ExtResource("9_bxh6m")
+theme_override_font_sizes/font_size = 32
 text = "Name"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="PlayerLevel" type="Label" parent="Control"]
 layout_mode = 0
 offset_left = -56.0
 offset_right = -3.0
 offset_bottom = 23.0
+theme_override_fonts/font = ExtResource("9_bxh6m")
+theme_override_font_sizes/font_size = 32
 text = "Lvl. ???"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="EnemyLevel" type="Label" parent="Control"]
 layout_mode = 0
-offset_left = 375.0
-offset_right = 428.0
-offset_bottom = 23.0
+offset_left = 314.0
+offset_top = 3.0
+offset_right = 394.0
+offset_bottom = 29.0
+theme_override_fonts/font = ExtResource("9_bxh6m")
+theme_override_font_sizes/font_size = 32
 text = "Lvl. ???"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="."]
+offset_right = 8.0
+offset_bottom = 8.0
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

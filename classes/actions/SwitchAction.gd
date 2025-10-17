@@ -53,7 +53,6 @@ func execute() -> void:
 		BattleManager.enemy_actor = party[0]
 	
 	DialogueManager.show_dialogue("Thats enough, %s" % old_monster_name)
-	
 	EventBus.switch_animation.emit(temp, party[_in])
 	await EventBus.switch_done_animating
 	DialogueManager.show_dialogue("Your turn, %s" % new_monster_name, false)

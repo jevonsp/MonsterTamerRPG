@@ -1,18 +1,19 @@
-[gd_scene load_steps=4 format=3 uid="uid://bvd84nab3ilbu"]
+[gd_scene load_steps=5 format=3 uid="uid://cxnbs7a10pll7"]
 
-[ext_resource type="Script" uid="uid://dv68oxyicg6ne" path="res://scenes/battle2/single_moves.gd" id="1_hul3g"]
-[ext_resource type="Texture2D" uid="uid://dujoyv2fb471r" path="res://assets/ui/button_mockup.png" id="2_ek5cb"]
-[ext_resource type="FontFile" uid="uid://jbbx5lupeleb" path="res://assets/m5x7.ttf" id="3_8qk3b"]
+[ext_resource type="Script" uid="uid://dvyid1rge4nti" path="res://scenes/battle2/single/single_options.gd" id="1_21auc"]
+[ext_resource type="Texture2D" uid="uid://dujoyv2fb471r" path="res://assets/ui/button_mockup.png" id="2_u3lx8"]
+[ext_resource type="FontFile" uid="uid://jbbx5lupeleb" path="res://assets/m5x7.ttf" id="3_d83b1"]
+[ext_resource type="Texture2D" uid="uid://brk63t2v0krpi" path="res://assets/ui/text_box_mockup.png" id="4_u3lx8"]
 
-[node name="MoveControls" type="CanvasLayer"]
-script = ExtResource("1_hul3g")
+[node name="OptionControls" type="CanvasLayer"]
+script = ExtResource("1_21auc")
 processing = true
 
 [node name="Slot0" type="Node2D" parent="."]
 position = Vector2(396, 266)
 
 [node name="Background" type="Sprite2D" parent="Slot0"]
-texture = ExtResource("2_ek5cb")
+texture = ExtResource("2_u3lx8")
 hframes = 3
 
 [node name="Label" type="Label" parent="Slot0/Background"]
@@ -27,16 +28,16 @@ offset_right = -60.0
 offset_bottom = -18.5
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_fonts/font = ExtResource("3_8qk3b")
+theme_override_fonts/font = ExtResource("3_d83b1")
 theme_override_font_sizes/font_size = 48
-text = "Button"
+text = "FIGHT"
 metadata/_edit_use_anchors_ = true
 
 [node name="Slot1" type="Node2D" parent="."]
 position = Vector2(558, 266)
 
 [node name="Background" type="Sprite2D" parent="Slot1"]
-texture = ExtResource("2_ek5cb")
+texture = ExtResource("2_u3lx8")
 hframes = 3
 
 [node name="Label" type="Label" parent="Slot1/Background"]
@@ -51,16 +52,16 @@ offset_right = -60.0
 offset_bottom = -18.5
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_fonts/font = ExtResource("3_8qk3b")
+theme_override_fonts/font = ExtResource("3_d83b1")
 theme_override_font_sizes/font_size = 48
-text = "Button"
+text = "PARTY"
 metadata/_edit_use_anchors_ = true
 
 [node name="Slot2" type="Node2D" parent="."]
 position = Vector2(396, 328)
 
 [node name="Background" type="Sprite2D" parent="Slot2"]
-texture = ExtResource("2_ek5cb")
+texture = ExtResource("2_u3lx8")
 hframes = 3
 
 [node name="Label" type="Label" parent="Slot2/Background"]
@@ -75,16 +76,16 @@ offset_right = -60.0
 offset_bottom = -18.5
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_fonts/font = ExtResource("3_8qk3b")
+theme_override_fonts/font = ExtResource("3_d83b1")
 theme_override_font_sizes/font_size = 48
-text = "Button"
+text = "ITEM"
 metadata/_edit_use_anchors_ = true
 
 [node name="Slot3" type="Node2D" parent="."]
 position = Vector2(558, 328)
 
 [node name="Background" type="Sprite2D" parent="Slot3"]
-texture = ExtResource("2_ek5cb")
+texture = ExtResource("2_u3lx8")
 hframes = 3
 
 [node name="Label" type="Label" parent="Slot3/Background"]
@@ -99,7 +100,12 @@ offset_right = -60.0
 offset_bottom = -18.5
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_fonts/font = ExtResource("3_8qk3b")
+theme_override_fonts/font = ExtResource("3_d83b1")
 theme_override_font_sizes/font_size = 48
-text = "Button"
+text = "RUN"
 metadata/_edit_use_anchors_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(157, 297)
+scale = Vector2(0.96875, 1.0166667)
+texture = ExtResource("4_u3lx8")

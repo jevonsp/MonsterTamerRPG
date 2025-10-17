@@ -9,6 +9,7 @@
 script = ExtResource("2_gautn")
 name = "Fox McLeaf"
 sprite = ExtResource("4_suhad")
+type = "GRASS"
 base_hitpoints = 120
 base_defense = 100
 base_special_defense = 80

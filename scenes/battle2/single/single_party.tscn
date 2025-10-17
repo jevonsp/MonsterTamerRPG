@@ -1,0 +1,62 @@
+[gd_scene load_steps=3 format=3 uid="uid://6xk50gaxuaq6"]
+
+[ext_resource type="Script" uid="uid://ch776uta1o5dn" path="res://scenes/battle2/single/single_party.gd" id="1_8aiy4"]
+[ext_resource type="Texture2D" uid="uid://6a2ajdsvtuo1" path="res://assets/ui/highlighted_tile.png" id="1_niok2"]
+
+[node name="Party" type="CanvasLayer"]
+script = ExtResource("1_8aiy4")
+testing_size = 5
+
+[node name="Slot0" type="Node2D" parent="."]
+position = Vector2(0, 22)
+
+[node name="Background" type="Sprite2D" parent="Slot0"]
+position = Vector2(161, 154)
+scale = Vector2(0.9934114, 1)
+texture = ExtResource("1_niok2")
+hframes = 3
+
+[node name="Slot1" type="Node2D" parent="."]
+position = Vector2(319, -121)
+
+[node name="Background" type="Sprite2D" parent="Slot1"]
+position = Vector2(161, 154)
+scale = Vector2(0.98025745, 1)
+texture = ExtResource("1_niok2")
+hframes = 3
+
+[node name="Slot2" type="Node2D" parent="."]
+position = Vector2(319, -49)
+
+[node name="Background" type="Sprite2D" parent="Slot2"]
+position = Vector2(161, 154)
+scale = Vector2(0.98025745, 1)
+texture = ExtResource("1_niok2")
+hframes = 3
+
+[node name="Slot3" type="Node2D" parent="."]
+position = Vector2(319, 22)
+
+[node name="Background" type="Sprite2D" parent="Slot3"]
+position = Vector2(161, 154)
+scale = Vector2(0.98025745, 1)
+texture = ExtResource("1_niok2")
+hframes = 3
+
+[node name="Slot4" type="Node2D" parent="."]
+position = Vector2(319, 90)
+
+[node name="Background" type="Sprite2D" parent="Slot4"]
+position = Vector2(161, 154)
+scale = Vector2(0.98025745, 1)
+texture = ExtResource("1_niok2")
+hframes = 3
+
+[node name="Slot5" type="Node2D" parent="."]
+position = Vector2(319, 162)
+
+[node name="Background" type="Sprite2D" parent="Slot5"]
+position = Vector2(161, 154)
+scale = Vector2(0.98025745, 1)
+texture = ExtResource("1_niok2")
+hframes = 3

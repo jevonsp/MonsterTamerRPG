@@ -33,3 +33,6 @@ probabilities = Array[float]([0.33, 0.33, 0.34])
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WildZone"]
 shape = SubResource("RectangleShape2D_lfrn8")
+
+[node name="Ball2" parent="." instance=ExtResource("3_0sr1o")]
+position = Vector2(8, 24)
