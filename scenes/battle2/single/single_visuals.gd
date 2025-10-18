@@ -57,14 +57,14 @@ func map_exp_bars(player: Monster):
 func map_names(player: Monster, enemy: Monster):
 	player_name.text = player.name
 	enemy_name.text = enemy.name
-	name_map[player] = player
-	name_map[enemy] = enemy
+	name_map[player] = player_name
+	name_map[enemy] = enemy_name
 	
 func map_levels(player: Monster, enemy: Monster):
 	player_level.text = "Lvl. " + str(player.level)
 	enemy_level.text = "Lvl. " + str(enemy.level)
-	level_map[player] = player
-	level_map[enemy] = enemy
+	level_map[player] = player_level
+	level_map[enemy] = enemy_level
 	
 func update_maps(old_monster: Monster, new_monster: Monster) -> void:
 	var portrait = portrait_map.get(old_monster)
@@ -142,19 +142,24 @@ func _on_health_changed(monster: Monster, _old: int, new: int) -> void:
 	
 func _on_switch_animation(old: Monster, new: Monster) -> void:
 	var direction
-	if old == BattleManager.player_actor:
+	print("old: ", old)
+	print("BattleManager.player_actor: ", BattleManager.player_actor)
+	print("new: ", new)
+	if old or new == BattleManager.player_actor:
 		direction = Vector2(-200,0)
-	elif old == BattleManager.enemy_actor:
+	elif old or new == BattleManager.enemy_actor:
 		direction = Vector2(200,0)
 	var texture = portrait_map[old]
 	var start_pos = texture.position
+	print("start_pos: ", start_pos)
+	print("direction: ", direction)
 	var tween_pos = get_tree().create_tween()
 	tween_pos.tween_property(texture, "position", start_pos + direction, Settings.game_speed)
 	await tween_pos.finished
 	update_maps(old, new)
 	var tween_back = get_tree().create_tween()
 	tween_back.tween_property(texture, "position", start_pos, Settings.game_speed)
-	await tween_pos.finished
+	await tween_back.finished
 	print("old: ", old, " new: ", new)
 	await get_tree().create_timer(Settings.game_speed).timeout
 	EventBus.switch_done_animating.emit()

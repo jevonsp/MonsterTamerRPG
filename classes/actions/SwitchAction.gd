@@ -51,9 +51,11 @@ func execute() -> void:
 		party[0].getting_exp = true
 	else:
 		BattleManager.enemy_actor = party[0]
-	
+		
+	EventBus.switch_animation.emit(temp, party[_out])
 	DialogueManager.show_dialogue("Thats enough, %s" % old_monster_name)
-	EventBus.switch_animation.emit(temp, party[_in])
 	await EventBus.switch_done_animating
+	print("got switch_done_animating")
 	DialogueManager.show_dialogue("Your turn, %s" % new_monster_name, false)
 	await DialogueManager.dialogue_closed
+	print("got dialogue_closed")

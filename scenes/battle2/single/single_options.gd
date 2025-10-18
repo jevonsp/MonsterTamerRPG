@@ -21,10 +21,11 @@ var v2_to_slot: Dictionary = {
 	
 func _ready() -> void:
 	GameManager.input_state_changed.connect(_on_input_state_changed)
+	EventBus.party_closed.connect(_on_party_closed)
 	set_active_slot()
 	
 func _input(event: InputEvent) -> void:
-	if not processing:
+	if not processing or BattleManager.processing_turn:
 		return
 	if event.is_action_pressed("yes"):
 		_input_selection()
@@ -47,20 +48,26 @@ func _move(direction: Vector2):
 	set_active_slot()
 	
 func _input_selection():
-	if not processing:
+	if not processing or BattleManager.processing_turn:
 		return
 	match get_curr_slot():
 		MoveSlot.FIGHT:
 			print("FIGHT")
 			fight_selected.emit()
-		MoveSlot.PARTY: print("PARTY")
+		MoveSlot.PARTY:
+			print("PARTY")
+			processing = false
+			PartyManager.show_party()
 		MoveSlot.ITEM: print("ITEM")
 		MoveSlot.RUN: print("RUN")
 	
 func _on_input_state_changed(new_state):
+	print("single main battle got new_state: ", new_state)
+	print("BattleManager.processing_turn: ", BattleManager.processing_turn)
 	match new_state:
 		GameManager.InputState.OVERWORLD: pass
 		GameManager.InputState.BATTLE:
+			print("BattleManager.processing_turn: ", BattleManager.processing_turn)
 			if not BattleManager.processing_turn:
 				processing = true
 		GameManager.InputState.DIALOGUE:
@@ -76,3 +83,5 @@ func unset_active_slot():
 func set_active_slot():
 	slot[get_curr_slot()].frame = 1
 	
+func _on_party_closed():
+	processing = true

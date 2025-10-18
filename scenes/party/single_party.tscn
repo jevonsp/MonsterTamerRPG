@@ -1,6 +1,6 @@
 [gd_scene load_steps=12 format=3 uid="uid://6xk50gaxuaq6"]
 
-[ext_resource type="Script" uid="uid://ch776uta1o5dn" path="res://scenes/battle2/single/single_party.gd" id="1_8aiy4"]
+[ext_resource type="Script" uid="uid://ch776uta1o5dn" path="res://scenes/party/single_party.gd" id="1_8aiy4"]
 [ext_resource type="Texture2D" uid="uid://6a2ajdsvtuo1" path="res://assets/ui/highlighted_tile.png" id="1_niok2"]
 [ext_resource type="Texture2D" uid="uid://dbxs3k3s3shrd" path="res://assets/ui/hp_back_mockup.png" id="3_1k73m"]
 [ext_resource type="Texture2D" uid="uid://bblshkejbt64c" path="res://assets/monsters/pistol_shrimp.png" id="3_h55ks"]
@@ -13,7 +13,9 @@
 [ext_resource type="FontFile" uid="uid://jbbx5lupeleb" path="res://assets/m5x7.ttf" id="10_bkuid"]
 
 [node name="Party" type="CanvasLayer"]
+layer = 2
 script = ExtResource("1_8aiy4")
+testing = true
 
 [node name="ColorRect" type="ColorRect" parent="."]
 offset_left = -12.0

@@ -2,7 +2,7 @@ extends Node
 
 var party: Array[Monster] = []
 
-var party_preload = preload("res://scenes/battle2/single/single_party.tscn")
+var party_preload = preload("res://scenes/party/single_party.tscn")
 
 func make_monster(monster_data: MonsterData, lvl: int) -> void:
 	if not party.size() < 6:

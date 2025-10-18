@@ -27,7 +27,6 @@ var animating: bool = false
 func _ready() -> void:
 	add_to_group("player")
 	start_position = position
-	EventBus.toggle_player.connect(_on_toggle_player)
 	GameManager.input_state_changed.connect(_on_input_state_changed)
 	
 func _process(_delta: float) -> void:
@@ -67,19 +66,16 @@ func _input(event: InputEvent) -> void:
 func _on_input_state_changed(new_state):
 	match new_state:
 		GameManager.InputState.OVERWORLD:
-			_on_toggle_player()
+			processing = true
 		GameManager.InputState.BATTLE:
-			_on_toggle_player()
+			processing = false
 		GameManager.InputState.DIALOGUE:
-			_on_toggle_player()
+			processing = false
 		GameManager.InputState.MENU:
-			_on_toggle_player()
+			processing = false
 		GameManager.InputState.INACTIVE: pass
 				
-func _on_toggle_player():
-	processing = !processing
-	clear_inputs()
-	
+				
 func set_anim_tree() -> void:
 	anim_tree.set("parameters/Idle/blend_position", input_direction)
 	anim_tree.set("parameters/Walk/blend_position", input_direction)

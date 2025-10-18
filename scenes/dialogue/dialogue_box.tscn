@@ -5,6 +5,7 @@
 [ext_resource type="FontFile" uid="uid://jbbx5lupeleb" path="res://assets/m5x7.ttf" id="3_eprfq"]
 
 [node name="DialgoueBox" type="CanvasLayer" node_paths=PackedStringArray("label")]
+layer = 5
 script = ExtResource("1_6uen5")
 label = NodePath("Sprite2D/Label")
 

@@ -1,6 +1,10 @@
 extends CanvasLayer
 
 @export var processing: bool = false
+@export var testing: bool = false
+
+var reordering: bool = false
+var swap_index: int = -1
 
 #region Slot
 enum PartySlot {SLOT0, SLOT1, SLOT2, SLOT3, SLOT4, SLOT5}
@@ -80,6 +84,8 @@ var role_map: Dictionary = {}
 @onready var slot5_role = $Slot5/Background/RoleLabel
 #endregion
 
+var party_options_scene = preload("res://scenes/party/options.tscn")
+
 func _ready() -> void:
 	EventBus.party_open.emit()
 	processing = true
@@ -88,12 +94,25 @@ func _ready() -> void:
 	
 #region Movement and Inputs
 func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("yes") \
+	or event.is_action_pressed("no") or \
+	event.is_action_pressed("up") or \
+	event.is_action_pressed("down"):
+		get_viewport().set_input_as_handled()
+	
 	if not processing:
 		return
 	if event.is_action_pressed("yes"):
-		_input_selection()
+		if not reordering:
+			_open_options()
+		else:
+			swap_monsters(swap_index, v2_to_slot[selected_slot])
 	if event.is_action_pressed("no"):
-		close()
+		if not reordering:
+			close()
+		else:
+			cancel_swap()
+			
 	if event.is_action_pressed("up"):
 		_move(Vector2.UP)
 	if event.is_action_pressed("down"):
@@ -130,20 +149,39 @@ func _move(direction: Vector2):
 			new_slot.y = ys[index]
 	if new_slot in allowed:
 		selected_slot = new_slot
-	set_active_slot()
+	if not reordering:
+		set_active_slot()
+	else:
+		set_moving_slot()
 	
 func get_allowed_slots() -> Array:
 	var left = [Vector2(0, 0)]
 	var right: Array = []
-	var party_size = PartyManager.party.size()
+	var party_size = 6 if testing else PartyManager.party.size()
 	var right_slots = party_size - 1
 	for i in range(right_slots):
 		right.append(Vector2(1, i))
 		
 	return left + right
 	
-func _input_selection():
-	pass
+func _open_options():
+	processing = false
+	print("processing: ", processing)
+	print("input called")
+	var options = party_options_scene.instantiate()
+	add_child(options)
+	print("Options scene instantiated, connecting signal...")
+	var connect_result = options.option_chosen.connect(_on_option_chosen)
+	print("Connection result: ", connect_result)  # Should print 0 (OK))
+	
+func _on_option_chosen(slot_enum) -> void:
+	print("option chosen")
+	match slot_enum:
+		0: print("summary")
+		1: initiate_swap(v2_to_slot[selected_slot])
+		2: print("item")
+		3: print("options closed")
+	processing = true
 	
 func _on_input_state_changed(new_state):
 	match new_state:
@@ -173,6 +211,7 @@ func close():
 	queue_free()
 #endregion
 
+#region Mapping
 func update_maps():
 	clear_maps()
 	
@@ -193,10 +232,23 @@ func update_maps():
 			clear_slot_ui(slot_enum)
 	
 func clear_maps():
-	pass
+	portrait_map.clear()
+	hp_map.clear()
+	exp_map.clear()
+	name_map.clear()
+	level_map.clear()
+	type_map.clear()
+	role_map.clear()
 	
-func update_slot(_monster: Monster, _slot_enum: int) -> void:
-	pass
+func update_slot(monster: Monster, slot_enum: int) -> void:
+	print("updating slot: ", slot_enum, " with monster: ", monster)
+	map_portrait(monster, slot_enum)
+	map_hp(monster, slot_enum)
+	map_exp(monster, slot_enum)
+	map_name(monster, slot_enum)
+	map_level(monster, slot_enum)
+	map_type(monster, slot_enum)
+	map_role(monster, slot_enum)
 	
 func clear_slot_ui(slot_enum: int) -> void:
 	var slot_node = slot[slot_enum]
@@ -213,18 +265,90 @@ func clear_slot_ui(slot_enum: int) -> void:
 		var label = slot_node.get_node_or_null(label_name)
 		if label:
 			label.text = ""
+#endregion
 	
 #region Mapping Helpers
-func map_portrait(_monster: Monster, _slot_enum: int):
-	pass
-func map_hp(_monster: Monster, _slot_enum: int):
-	pass
-func map_exp(_monster: Monster, _slot_enum: int):
-	pass
-func map_level(_monster: Monster, _slot_enum: int):
-	pass
-func map_type(_monster: Monster, _slot_enum: int):
-	pass
-func map_role(_monster: Monster, _slot_enum: int):
-	pass
+func map_portrait(monster: Monster, slot_enum: int):
+	var portrait_node = slot[slot_enum].get_node_or_null("Portrait")
+	if portrait_node:
+		portrait_node.texture = monster.species.sprite
+		portrait_map[monster] = portrait_node
+func map_hp(monster: Monster, slot_enum: int):
+	var hp_node = slot[slot_enum].get_node_or_null("PlayerHP")
+	if hp_node:
+		hp_node.max_value = monster.max_hitpoints
+		hp_node.value = monster.hitpoints
+		hp_map[monster] = hp_node
+func map_name(monster: Monster, slot_enum: int):
+	var name_node = slot[slot_enum].get_node_or_null("NameLabel")
+	if name_node:
+		name_node.text = monster.name
+		name_map[monster] = name_node
+func map_exp(monster: Monster, slot_enum: int):
+	var exp_node = slot[slot_enum].get_node_or_null("PlayerEXP")
+	if exp_node:
+		var next_level_req = monster.experience_to_level(monster.level + 1)
+		var current = monster.experience - monster.experience_to_level(monster.level)
+		exp_node.max_value = next_level_req
+		exp_node.value = current
+		exp_map[monster] = exp_node
+func map_level(monster: Monster, slot_enum: int):
+	var level_node = slot[slot_enum].get_node_or_null("LevelLabel")
+	if level_node:
+		level_node.text = "Lvl. " + str(monster.level)
+		level_map[monster] = level_node
+func map_type(monster: Monster, slot_enum: int):
+	var type_node = slot[slot_enum].get_node_or_null("TypeLabel")
+	if type_node:
+		type_node.text = "Type: " + monster.type
+		type_map[monster] = type_node
+func map_role(_monster: Monster, slot_enum: int):
+	var role_node = slot[slot_enum].get_node_or_null("RoleLabel")
+	if role_node:
+		pass
 #endregion
+
+func initiate_swap(party_index):
+	if BattleManager.in_battle:
+		if party_index == 0:
+			cancel_swap()
+			DialogueManager.show_dialogue("You cant swap in a monster already fighting")
+			return
+		print("initiating battle swap")
+		swap_monsters(party_index, 0)
+	else:
+		print("initiating swap")
+		reordering = true
+		swap_index = v2_to_slot[selected_slot]
+		set_moving_slot()
+	
+func cancel_swap():
+	print("cancelling swap")
+	reordering = false
+	swap_index = -1
+	set_active_slot()
+	
+func swap_monsters(from_index: int, to_index: int):
+	print("from_index: ", from_index, ", to_index: ", to_index)
+	if from_index == to_index:
+		cancel_swap()
+		return
+	if not BattleManager.in_battle:
+		var temp = PartyManager.party[from_index]
+		PartyManager.party[from_index] = PartyManager.party[to_index]
+		PartyManager.party[to_index] = temp
+		update_maps()
+		reordering = false
+		swap_index = -1
+		set_active_slot()
+		return
+	else:
+		var monster = PartyManager.party[from_index]
+		if monster.is_fainted:
+			print("monster cannot fight")
+			return
+		else:
+			print("creating switch action")
+			var switch = SwitchAction.new(BattleManager.player_actor, [BattleManager.enemy_actor], from_index)
+			BattleManager.on_action_selected(switch)
+			close()

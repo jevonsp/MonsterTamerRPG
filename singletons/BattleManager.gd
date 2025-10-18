@@ -43,9 +43,11 @@ func add_enemies(monster_datas: Array[MonsterData], lvls: Array[int]) -> void:
 	
 func start_battle():
 	in_battle = true
+	GameManager.input_state = GameManager.InputState.BATTLE
 	processing_turn = false
 	print(PartyManager.party)
 	player_actor = PartyManager.get_first_alive()
+	print("player_actor: ", player_actor)
 	player_actor.getting_exp = true
 	var battle_scene = battle.instantiate()
 	add_child(battle_scene)
@@ -60,7 +62,7 @@ func on_action_selected(action: BattleAction):
 		return
 	match action.type:
 		"MOVE": print("action selected: MOVE. Move name: ", action.move.name)
-		"SWITCH": print("action selected: SWITCH. Switch target: ")
+		"SWITCH": print("action selected: SWITCH.")
 		"ITEM": print("action selected: ITEM. Item name: ")
 		"RUN": print("action selected: RUN")
 	turn_actions.append(action)
@@ -123,6 +125,7 @@ func get_ally_party(actor: Monster) -> Array[Monster]:
 	return allies
 	
 func execute_turn():
+	print("turn_actions: ", turn_actions)
 	processing_turn = true
 	
 	turn_actions.sort_custom(func(a, b):
@@ -295,5 +298,5 @@ func end_battle():
 	print("actors/party cleared")
 	escape_attempts = 0
 	turn_actions.clear()
-	EventBus.toggle_player.emit()
+	GameManager.input_state = GameManager.InputState.OVERWORLD
 	
