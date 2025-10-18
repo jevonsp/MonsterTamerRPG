@@ -1,0 +1,55 @@
+[gd_scene load_steps=3 format=3 uid="uid://d2i6k8nsp0ms0"]
+
+[ext_resource type="Script" uid="uid://d1gvocg7numtb" path="res://scenes/inventory/inventory.gd" id="1_msrby"]
+[ext_resource type="Texture2D" uid="uid://6a2ajdsvtuo1" path="res://assets/ui/highlighted_tile.png" id="2_4axmw"]
+
+[node name="Inventory" type="CanvasLayer"]
+script = ExtResource("1_msrby")
+
+[node name="Slot0" type="Node2D" parent="."]
+position = Vector2(320, 30)
+
+[node name="Background" type="Sprite2D" parent="Slot0"]
+scale = Vector2(1, 0.98)
+texture = ExtResource("2_4axmw")
+hframes = 3
+
+[node name="Slot1" type="Node2D" parent="."]
+position = Vector2(320, 90)
+
+[node name="Background" type="Sprite2D" parent="Slot1"]
+scale = Vector2(1, 0.98)
+texture = ExtResource("2_4axmw")
+hframes = 3
+
+[node name="Slot2" type="Node2D" parent="."]
+position = Vector2(320, 150)
+
+[node name="Background" type="Sprite2D" parent="Slot2"]
+scale = Vector2(1, 0.98)
+texture = ExtResource("2_4axmw")
+hframes = 3
+
+[node name="Slot3" type="Node2D" parent="."]
+position = Vector2(320, 210)
+
+[node name="Background" type="Sprite2D" parent="Slot3"]
+scale = Vector2(1, 0.98)
+texture = ExtResource("2_4axmw")
+hframes = 3
+
+[node name="Slot4" type="Node2D" parent="."]
+position = Vector2(320, 270)
+
+[node name="Background" type="Sprite2D" parent="Slot4"]
+scale = Vector2(1, 0.98)
+texture = ExtResource("2_4axmw")
+hframes = 3
+
+[node name="Slot5" type="Node2D" parent="."]
+position = Vector2(320, 330)
+
+[node name="Background" type="Sprite2D" parent="Slot5"]
+scale = Vector2(1, 0.98)
+texture = ExtResource("2_4axmw")
+hframes = 3
