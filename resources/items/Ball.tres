@@ -1,8 +1,10 @@
-[gd_resource type="Resource" script_class="Item" load_steps=5 format=3 uid="uid://pep8g7geka17"]
+[gd_resource type="Resource" script_class="Item" load_steps=7 format=3 uid="uid://pep8g7geka17"]
 
 [ext_resource type="Script" uid="uid://dwops4cp56fq3" path="res://classes/base/BattleEffect.gd" id="1_pqng8"]
 [ext_resource type="Script" uid="uid://cas6w68aevhdq" path="res://classes/effects/Capture.gd" id="2_nmxy3"]
+[ext_resource type="Texture2D" uid="uid://k4g86uqyycw0" path="res://assets/packed_scenes/item/ball2.png" id="3_0o8rl"]
 [ext_resource type="Script" uid="uid://br2gl0bftv06o" path="res://classes/base/Item.gd" id="3_y18na"]
+[ext_resource type="PackedScene" uid="uid://bk6ikp3cercxw" path="res://assets/packed_scenes/item/ball.tscn" id="4_nmxy3"]
 
 [sub_resource type="Resource" id="Resource_0o8rl"]
 script = ExtResource("2_nmxy3")
@@ -12,7 +14,11 @@ metadata/_custom_type_script = "uid://cas6w68aevhdq"
 [resource]
 script = ExtResource("3_y18na")
 name = "Ball"
+icon = ExtResource("3_0o8rl")
 animation_type = "THROWN"
 still = true
+sprite = ExtResource("4_nmxy3")
 effects = Array[ExtResource("1_pqng8")]([SubResource("Resource_0o8rl")])
+short_description = "A device for catching monsters"
+long_description = "The lowest level ball. It offers no bonuses."
 metadata/_custom_type_script = "uid://br2gl0bftv06o"

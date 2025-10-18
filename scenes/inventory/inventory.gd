@@ -30,9 +30,12 @@ var ball_resource = preload("res://resources/items/Ball.tres")
 func _ready() -> void:
 	set_active_slot()
 	processing = true
+	InventoryManager.add_items(potion_resource, 5)
+	InventoryManager.add_items(ball_resource, 10)
 	for item in InventoryManager.inventory:
 		items.append(item)
-	
+	print(items)
+	update_display()
 	
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("yes") \
@@ -58,17 +61,23 @@ func _input(event: InputEvent) -> void:
 		_move(1)
 	
 func _move(direction: int):
+	print("direction: ", direction)
 	unset_active_slot()
 	var old_cursor = cursor_index
 	var old_viewport = viewport_start
 	const TESTING_SIZE: int = 7
 	cursor_index = clamp(cursor_index + direction, 0, TESTING_SIZE - 1)
 	print("cursor_index: ", cursor_index)
+	if cursor_index == items.size():
+		cursor_index = old_cursor
+		print("returning to old cursor_index: ", cursor_index)
+		set_active_slot()
+		return
 	if cursor_index == old_cursor:
 		set_active_slot()
 		return
 	var relative_cursor_pos = cursor_index - viewport_start
-	print("viewport_start", viewport_start)
+	print("viewport_start: ", viewport_start)
 	if relative_cursor_pos >= VISIBLE_SLOTS:
 		viewport_start = cursor_index - VISIBLE_SLOTS + 1
 	elif relative_cursor_pos < 0:
@@ -105,9 +114,57 @@ func set_moving_slot():
 	
 func close():
 	pass
-
+	
+func swap_items(_from_index: int, _to_index: int) -> void:
+	update_display()
+	
 func cancel_swap():
 	pass
 	
 func update_display():
 	print("update displays here")
+	for i in range(VISIBLE_SLOTS):
+		var slot_enum = Slot.values()[i]
+		var data_index = viewport_start + i
+		if data_index < items.size():
+			var item_index = items[data_index]
+			print("item_index: ", item_index)
+			var item = item_index["item"]
+			var quant = item_index["quantity"]
+			print("item: ", item)
+			update_slot(item, quant, slot_enum)
+		else:
+			clear_slot_ui(slot_enum)
+	
+func update_slot(item: Item, quant: int, slot_enum: int) -> void:
+	var slot_node = slot[slot_enum]
+	slot_node.modulate = Color(1, 1, 1, 1)
+	var icon = slot_node.get_node_or_null("Icon")
+	if icon:
+		icon.texture = item.icon
+	var name_label = slot_node.get_node_or_null("NameLabel")
+	if name_label:
+		name_label.text = item.name
+	var quant_label = slot_node.get_node_or_null("QuantityLabel")
+	if quant_label:
+		quant_label.text = "x: " + str(quant)
+	var desc_label = slot_node.get_node_or_null("DescriptionLabel")
+	if desc_label:
+		desc_label.text = item.short_description
+	
+func clear_slot_ui(slot_enum: int) -> void:
+	var slot_node = slot[slot_enum]
+	slot_node.modulate = Color(0.5, 0.5, 0.5, 0.6)
+	var icon = slot_node.get_node_or_null("Icon")
+	if icon:
+		icon.texture = null
+	var name_label = slot_node.get_node_or_null("NameLabel")
+	if name_label:
+		name_label.text = ""
+	var quant_label = slot_node.get_node_or_null("QuantityLabel")
+	if quant_label:
+		quant_label.text = ""
+	var desc_label = slot_node.get_node_or_null("DescriptionLabel")
+	if desc_label:
+		desc_label.text = ""
+	

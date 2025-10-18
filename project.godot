@@ -44,6 +44,10 @@ folder_colors={
 "res://tests/": "gray"
 }
 
+[gui]
+
+theme/custom="uid://bqshp7x0tkycx"
+
 [input]
 
 yes={

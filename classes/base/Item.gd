@@ -1,6 +1,7 @@
 class_name Item extends Resource
 
 @export var name: String = ""
+@export var icon: Texture2D
 @export_range(-7, 7) var priority: int = 0
 
 @export_subgroup("Animation")
@@ -15,3 +16,7 @@ class_name Item extends Resource
 
 @export_subgroup("Effects")
 @export var effects: Array[BattleEffect] = []
+
+@export_subgroup("Descriptions")
+@export var short_description: String = ""
+@export var long_description: String = ""
