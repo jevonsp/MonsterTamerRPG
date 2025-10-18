@@ -8,6 +8,8 @@ func _ready() -> void:
 	GameManager.input_state_changed.connect(_on_input_state_changed)
 	
 func _input(event: InputEvent) -> void:
+	if not processing:
+		return
 	if event.is_action_pressed("menu"):
 		if get_tree().get_first_node_in_group("player").is_moving:
 			return

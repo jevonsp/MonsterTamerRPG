@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://cof2sqvd0rb0a"]
+[gd_scene load_steps=4 format=3 uid="uid://cof2sqvd0rb0a"]
 
 [ext_resource type="Texture2D" uid="uid://dujoyv2fb471r" path="res://assets/ui/button_mockup.png" id="1_klgdb"]
 [ext_resource type="Script" uid="uid://nu2352wxmdog" path="res://scenes/menu/menu.gd" id="1_mcvr8"]
+[ext_resource type="FontFile" uid="uid://jbbx5lupeleb" path="res://assets/m5x7.ttf" id="3_e0arn"]
 
 [node name="Menu" type="CanvasLayer"]
 script = ExtResource("1_mcvr8")
@@ -13,12 +14,48 @@ position = Vector2(558, 32)
 texture = ExtResource("1_klgdb")
 hframes = 3
 
+[node name="Label" type="Label" parent="Slot0/Background"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -41.5
+offset_right = -60.0
+offset_bottom = -18.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 1
+theme_override_fonts/font = ExtResource("3_e0arn")
+theme_override_font_sizes/font_size = 32
+text = "P A R T Y"
+
 [node name="Slot1" type="Node2D" parent="."]
 position = Vector2(558, 94)
 
 [node name="Background" type="Sprite2D" parent="Slot1"]
 texture = ExtResource("1_klgdb")
 hframes = 3
+
+[node name="Label" type="Label" parent="Slot1/Background"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -41.5
+offset_right = -60.0
+offset_bottom = -18.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 1
+theme_override_fonts/font = ExtResource("3_e0arn")
+theme_override_font_sizes/font_size = 32
+text = "I T E M S"
 
 [node name="Slot2" type="Node2D" parent="."]
 position = Vector2(558, 156)
@@ -27,9 +64,70 @@ position = Vector2(558, 156)
 texture = ExtResource("1_klgdb")
 hframes = 3
 
+[node name="Label" type="Label" parent="Slot2/Background"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -41.5
+offset_right = -60.0
+offset_bottom = -18.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 1
+theme_override_fonts/font = ExtResource("3_e0arn")
+theme_override_font_sizes/font_size = 32
+text = "C A U G H T"
+
 [node name="Slot3" type="Node2D" parent="."]
 position = Vector2(558, 218)
 
 [node name="Background" type="Sprite2D" parent="Slot3"]
 texture = ExtResource("1_klgdb")
 hframes = 3
+
+[node name="Label" type="Label" parent="Slot3/Background"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -41.5
+offset_right = -60.0
+offset_bottom = -18.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 1
+theme_override_fonts/font = ExtResource("3_e0arn")
+theme_override_font_sizes/font_size = 32
+text = "S A V E"
+
+[node name="Slot4" type="Node2D" parent="."]
+position = Vector2(558, 281)
+
+[node name="Background" type="Sprite2D" parent="Slot4"]
+texture = ExtResource("1_klgdb")
+hframes = 3
+
+[node name="Label" type="Label" parent="Slot4/Background"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -41.5
+offset_right = -60.0
+offset_bottom = -18.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 1
+theme_override_fonts/font = ExtResource("3_e0arn")
+theme_override_font_sizes/font_size = 32
+text = "O P T I O N S"
