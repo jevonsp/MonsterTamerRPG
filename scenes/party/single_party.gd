@@ -5,6 +5,7 @@ extends CanvasLayer
 
 var reordering: bool = false
 var swap_index: int = -1
+var free_switch: bool = false
 
 #region Slot
 enum PartySlot {SLOT0, SLOT1, SLOT2, SLOT3, SLOT4, SLOT5}
@@ -88,7 +89,10 @@ var party_options_scene = preload("res://scenes/party/options.tscn")
 
 func _ready() -> void:
 	EventBus.party_open.emit()
+	EventBus.free_switch.connect(_on_free_switch)
 	processing = true
+	if not BattleManager.in_battle:
+		free_switch = true
 	set_active_slot()
 	update_maps()
 	
@@ -168,8 +172,7 @@ func _open_options():
 	processing = false
 	print("processing: ", processing)
 	print("input called")
-	var options = party_options_scene.instantiate()
-	add_child(options)
+	var options = UiManager.show_party_options()
 	print("Options scene instantiated, connecting signal...")
 	var connect_result = options.option_chosen.connect(_on_option_chosen)
 	print("Connection result: ", connect_result)  # Should print 0 (OK))
@@ -328,15 +331,16 @@ func cancel_swap():
 	swap_index = -1
 	set_active_slot()
 	
+func _on_free_switch() -> void: free_switch = true
+	
 func swap_monsters(from_index: int, to_index: int):
 	print("from_index: ", from_index, ", to_index: ", to_index)
 	if from_index == to_index:
 		cancel_swap()
 		return
 	if not BattleManager.in_battle:
-		var temp = PartyManager.party[from_index]
-		PartyManager.party[from_index] = PartyManager.party[to_index]
-		PartyManager.party[to_index] = temp
+		PartyManager.swap_party(from_index, to_index, free_switch)
+		free_switch = false
 		update_maps()
 		reordering = false
 		swap_index = -1
@@ -349,6 +353,6 @@ func swap_monsters(from_index: int, to_index: int):
 			return
 		else:
 			print("creating switch action")
-			var switch = SwitchAction.new(BattleManager.player_actor, [BattleManager.enemy_actor], from_index)
-			BattleManager.on_action_selected(switch)
+			PartyManager.swap_party(from_index, to_index, free_switch)
+			
 			close()

@@ -26,6 +26,7 @@ signal capture_animation(monster: Monster)
 signal capture_done_animating
 
 signal free_switch
+signal free_switch_chosen
 signal switch_animation(out_monster: Monster, in_monster: Monster)
 signal switch_done_animating
 

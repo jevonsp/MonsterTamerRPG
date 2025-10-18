@@ -1,8 +1,5 @@
 extends Node
 
-var battle = preload("res://scenes/battle2/single/single_battle.tscn")
-var battle_party_scene = preload("res://scenes/battle/battle_party/battle_party.tscn")
-
 var enemy_party: Array[Monster] = []
 
 var player_actor: Monster # 0
@@ -49,8 +46,7 @@ func start_battle():
 	player_actor = PartyManager.get_first_alive()
 	print("player_actor: ", player_actor)
 	player_actor.getting_exp = true
-	var battle_scene = battle.instantiate()
-	add_child(battle_scene)
+	var battle_scene = UiManager.show_battle()
 	battle_scene.setup_battle()
 	print("enemy party size: ", enemy_party.size())
 	
@@ -229,10 +225,10 @@ func force_switch():
 	if not in_battle:
 		return
 	print("force_switch here")
-	var battle_party = battle_party_scene.instantiate()
+	var battle_party = UiManager.show_party()
 	add_child(battle_party)
 	EventBus.free_switch.emit()
-	await EventBus.battle_switch
+	await EventBus.free_switch_chosen
 	await get_tree().create_timer(Settings.game_speed).timeout
 	print("free switch complete")
 	update_battle_actors()

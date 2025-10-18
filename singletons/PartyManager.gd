@@ -31,3 +31,12 @@ func show_party():
 	var party_scene = party_preload.instantiate()
 	add_child(party_scene)
 	
+func swap_party(from_index: int, to_index: int, free_switch: bool = true) -> void:
+	if free_switch:
+		var temp = party[from_index]
+		party[from_index] = party[to_index]
+		party[to_index] = temp
+	else :
+		var switch = SwitchAction.new(BattleManager.player_actor, [BattleManager.enemy_actor], from_index)
+		EventBus.free_switch_chosen.emit()
+		BattleManager.on_action_selected(switch)

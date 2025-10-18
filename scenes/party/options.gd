@@ -60,8 +60,3 @@ func close():
 	get_parent().remove_child(self)
 	queue_free()
 	
-func _on_party_options_open():
-	processing = false
-	
-func _on_party_options_closed():
-	processing = true

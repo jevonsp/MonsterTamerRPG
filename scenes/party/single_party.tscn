@@ -15,7 +15,6 @@
 [node name="Party" type="CanvasLayer"]
 layer = 2
 script = ExtResource("1_8aiy4")
-testing = true
 
 [node name="ColorRect" type="ColorRect" parent="."]
 offset_left = -12.0
