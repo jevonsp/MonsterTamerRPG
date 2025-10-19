@@ -3,9 +3,9 @@ extends Interactable
 @export var frame: int = 0
 @export var sprite: Sprite2D
 
-var pyro_badger = preload("res://resources/monsters/Pyro_Badger.tres")
-var pistol_shrimp = preload("res://resources/monsters/Pistol_Shrimp.tres")
-var fox_mcleaf = preload("res://resources/monsters/Fox_McLeaf.tres")
+var pyro_badger = preload("res://objects/monsters/pyro_badger/Pyro_Badger.tres")
+var pistol_shrimp = preload("res://objects/monsters/pistol_shrimp/Pistol_Shrimp.tres")
+var fox_mcleaf = preload("res://objects/monsters/fox_mcleaf/Fox_McLeaf.tres")
 
 func setup():
 	sprite.frame = frame

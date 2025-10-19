@@ -39,16 +39,16 @@ func _physics_process(delta: float) -> void:
 		var current_state = anim_state.get_current_node()
 		if current_state == "Idle":
 			finished_turning()
-			animating = false
 		return
 	elif not is_moving:
 		process_player_input()
 		anim_state.travel("Idle")
-		animating = false
+		state = PlayerState.IDLE
 	elif is_moving:
-		if not animating:
+		if state != PlayerState.WALK:
+			print(state)
 			anim_state.travel("Walk")
-			animating = true
+			state = PlayerState.WALK
 		move(delta)
 		
 func _input(event: InputEvent) -> void:
@@ -165,8 +165,7 @@ func need_to_turn() -> bool:
 		return true
 	return false
 	
-func finished_turning() -> void:
-	state = PlayerState.IDLE
+func finished_turning() -> void: pass
 	
 # Moves the player one tile at a time
 func move(delta: float):
@@ -181,7 +180,7 @@ func move(delta: float):
 			percent_moved = 0.0
 			is_moving = false
 			move_direction = Vector2.ZERO
-			state = PlayerState.IDLE
+			#state = PlayerState.IDLE
 			EventBus.step_completed.emit(global_position)
 		else:
 			position = start_position + move_direction * TILE_SIZE * percent_moved

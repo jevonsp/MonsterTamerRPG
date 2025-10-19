@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://b8dvbvfhtrf3k"]
 
 [ext_resource type="Script" uid="uid://d1sv3dnpbn43u" path="res://scenes/battle2/single/single_visuals.gd" id="1_2cvb8"]
-[ext_resource type="Texture2D" uid="uid://di2wg8wxikato" path="res://assets/monsters/pyro_badger.png" id="1_oovar"]
+[ext_resource type="Texture2D" uid="uid://di2wg8wxikato" path="res://objects/monsters/pyro_badger/pyro_badger.png" id="1_oovar"]
 [ext_resource type="Texture2D" uid="uid://dbxs3k3s3shrd" path="res://assets/ui/hp_back_mockup.png" id="2_2cvb8"]
 [ext_resource type="Texture2D" uid="uid://b2ctlluobpc6f" path="res://assets/ui/hp_outline_mockup.png" id="3_bxh6m"]
 [ext_resource type="Texture2D" uid="uid://d3e8ad8fp174n" path="res://assets/ui/hp_fill_mockup.png" id="4_sgbc3"]

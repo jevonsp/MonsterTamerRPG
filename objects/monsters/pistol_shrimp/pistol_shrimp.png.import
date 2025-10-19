@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://k4g86uqyycw0"
-path="res://.godot/imported/ball2.png-a679dea638be25f42418f9e02493382e.ctex"
+uid="uid://bblshkejbt64c"
+path="res://.godot/imported/pistol_shrimp.png-335daa9591a4ec910e298783a9297aee.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/packed_scenes/item/ball2.png"
-dest_files=["res://.godot/imported/ball2.png-a679dea638be25f42418f9e02493382e.ctex"]
+source_file="res://objects/monsters/pistol_shrimp/pistol_shrimp.png"
+dest_files=["res://.godot/imported/pistol_shrimp.png-335daa9591a4ec910e298783a9297aee.ctex"]
 
 [params]
 

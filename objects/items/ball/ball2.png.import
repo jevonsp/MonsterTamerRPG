@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ch5o824ebxq1t"
-path="res://.godot/imported/fox_mcleaf.png-74bde5490d6296865c1aee1033bd3771.ctex"
+uid="uid://k4g86uqyycw0"
+path="res://.godot/imported/ball2.png-1e47fcfb864b9a46580d5f0e739786cb.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/monsters/fox_mcleaf.png"
-dest_files=["res://.godot/imported/fox_mcleaf.png-74bde5490d6296865c1aee1033bd3771.ctex"]
+source_file="res://objects/items/ball/ball2.png"
+dest_files=["res://.godot/imported/ball2.png-1e47fcfb864b9a46580d5f0e739786cb.ctex"]
 
 [params]
 

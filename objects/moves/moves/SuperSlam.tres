@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dwops4cp56fq3" path="res://classes/base/BattleEffect.gd" id="1_uk7pf"]
 [ext_resource type="Script" uid="uid://cg2gwmc5eufqa" path="res://classes/effects/Damage.gd" id="2_fvt1j"]
-[ext_resource type="Script" uid="uid://coff2nnisn6g2" path="res://classes/base/Move.gd" id="3_wggri"]
+[ext_resource type="Script" uid="uid://coff2nnisn6g2" path="res://objects/moves/Move.gd" id="3_wggri"]
 
 [sub_resource type="Resource" id="Resource_0ldct"]
 script = ExtResource("2_fvt1j")

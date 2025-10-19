@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bblshkejbt64c"
-path="res://.godot/imported/pistol_shrimp.png-49748422d6ef67b8ea1550102f5b1b49.ctex"
+uid="uid://ch5o824ebxq1t"
+path="res://.godot/imported/fox_mcleaf.png-49367ee006ac93915c126d60f58a90ba.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/monsters/pistol_shrimp.png"
-dest_files=["res://.godot/imported/pistol_shrimp.png-49748422d6ef67b8ea1550102f5b1b49.ctex"]
+source_file="res://objects/monsters/fox_mcleaf/fox_mcleaf.png"
+dest_files=["res://.godot/imported/fox_mcleaf.png-49367ee006ac93915c126d60f58a90ba.ctex"]
 
 [params]
 
