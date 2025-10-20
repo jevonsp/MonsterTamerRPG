@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://ic1qvm7vrf1x"]
+
+[ext_resource type="Script" uid="uid://c0wro7ul3roq1" path="res://scenes/battle/single/battle_3.gd" id="1_bn126"]
+
+[node name="Battle3" type="CanvasLayer"]
+script = ExtResource("1_bn126")

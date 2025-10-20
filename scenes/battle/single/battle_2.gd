@@ -3,11 +3,16 @@ extends CanvasLayer
 @export var visuals: CanvasLayer
 
 func _ready() -> void:
+	if not visuals:
+		return
 	connect_signals()
-			
+	
 func setup_battle():
-	visuals.setup_battle(BattleManager.player_actor, BattleManager.enemy_actor)
 	UiManager.push_ui(UiManager.battle_options_scene)
+	if not visuals:
+		return
+	visuals.setup_battle(BattleManager.player_actor, BattleManager.enemy_actor)
+	
 	
 func connect_signals():
 	if not EventBus.effect_started.is_connected(visuals._on_effect_started):

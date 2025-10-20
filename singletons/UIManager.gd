@@ -4,7 +4,8 @@ var ui_stack: Array[Node] = []
 
 #region Scenes
 var dialogue_scene := preload("res://scenes/ui/dialogue/dialogue_box.tscn")
-var battle_scene2 := preload("res://scenes/battle/single/battle2.tscn")
+var battle_old := preload("res://scenes/battle/single/battle2.tscn")
+var battle_scene := preload("res://scenes/battle/single/battle_3.tscn")
 var battle_options_scene := preload("res://scenes/battle/single/single_options.tscn")
 var battle_moves_scene := preload("res://scenes/battle/single/single_moves.tscn")
 var menu_scene := preload("res://scenes/ui/menu/menu.tscn")
@@ -15,14 +16,14 @@ var inventory_options_scene := preload("res://scenes/ui/inventory/options.tscn")
 #endregion
 
 func _ready() -> void:
-	print("battle_scene2: ", battle_scene2)
-	print("battle_scene2.resource_path:  ", battle_scene2.resource_path)
+	pass
 	
 func push_ui(scene: PackedScene):
+	if scene == null:
+		push_error("PackedScene is null! Scene not loaded correctly.")
+		return null
 	print("scene: ", scene)
 	var ui = scene.instantiate()
-	if ui == null:
-		print("Error path invalid: ", scene.resource_path)
 	add_child(ui)
 	ui_stack.append(ui)
 	print("stack added: ", ui)
