@@ -21,7 +21,7 @@ script = ExtResource("1_bg86c")
 offset_left = 8.0
 offset_top = 8.0
 offset_right = 1492.0
-offset_bottom = 751.0
+offset_bottom = 748.0
 alignment = 1
 
 [node name="MakeRoomForLogo" type="CenterContainer" parent="HBox"]

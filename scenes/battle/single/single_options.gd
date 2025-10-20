@@ -1,7 +1,5 @@
 extends CanvasLayer
 
-signal fight_selected
-
 @export var processing: bool = false
 
 enum MoveSlot {FIGHT, PARTY, ITEM, RUN}
@@ -51,10 +49,9 @@ func _input_selection():
 	match get_curr_slot():
 		MoveSlot.FIGHT:
 			print("FIGHT")
-			fight_selected.emit()
+			UiManager.push_ui(UiManager.battle_moves_scene)
 		MoveSlot.PARTY:
 			print("PARTY")
-			processing = false
 			PartyManager.show_party()
 		MoveSlot.ITEM: print("ITEM")
 		MoveSlot.RUN: print("RUN")

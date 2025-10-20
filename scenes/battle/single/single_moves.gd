@@ -4,6 +4,7 @@ signal move_cancelled
 
 @export var processing: bool = false
 
+#region Move Slots
 enum MoveSlot {MOVE0, MOVE1, MOVE2, MOVE3}
 enum MoveState {PICKING, REORDERING}
 
@@ -22,18 +23,28 @@ var v2_to_slot: Dictionary = {
 	MoveSlot.MOVE2: $Slot2/Background,
 	MoveSlot.MOVE3: $Slot3/Background }
 	
+@onready var move0_label = $Slot0/Background/Label
+@onready var move1_label = $Slot1/Background/Label
+@onready var move2_label = $Slot2/Background/Label
+@onready var move3_label = $Slot3/Background/Label
+#endregion
+
 func _ready() -> void:
+	if UiManager.ui_stack.is_empty():
+		UiManager.ui_stack.append(self)
 	set_active_slot()
+	update_moves()
 	
 func _input(event: InputEvent) -> void:
-	if not processing:
+	if self != UiManager.ui_stack.back():
 		return
 	if event.is_action_pressed("yes"):
 		_input_move()
 	if event.is_action_pressed("no"):
+		print("no pressed")
 		match state:
 			MoveState.PICKING:
-				move_cancelled.emit()
+				close()
 			MoveState.REORDERING:
 				pass
 	if event.is_action_pressed("up"):
@@ -96,4 +107,10 @@ func set_active_slot():
 	
 func set_moving_slot():
 	slot[get_curr_slot()].frame = 2
+	
+func close() -> void:
+	UiManager.pop_ui(self)
+	
+func update_moves():
+	pass
 	

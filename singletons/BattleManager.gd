@@ -45,7 +45,7 @@ func start_battle():
 	player_actor = PartyManager.get_first_alive()
 	print("player_actor: ", player_actor)
 	player_actor.getting_exp = true
-	var battle_scene = UiManager.push_ui(UiManager.battle_scene)
+	var battle_scene = UiManager.push_ui(UiManager.battle_scene2)
 	battle_scene.setup_battle()
 	print("enemy party size: ", enemy_party.size())
 	
