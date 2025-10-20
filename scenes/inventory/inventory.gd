@@ -1,5 +1,7 @@
 extends CanvasLayer
 
+signal inventory_closed
+
 const VISIBLE_SLOTS = 6
 var processing: bool = false
 var reordering: bool = false
@@ -24,17 +26,28 @@ var items: Array[Dictionary] = []
 	4: Slot.SLOT4,
 	5: Slot.SLOT5 }
 	
-var potion_resource = preload("res://resources/items/Potion.tres")
-var ball_resource = preload("res://resources/items/Ball.tres")
+var potion_resource = preload("res://objects/items/potion/Potion.tres")
+var super_potion_resource = preload("res://objects/items/potion/SuperPotion.tres")
+var giga_potion_resource = preload("res://objects/items/potion/GigaPotion.tres")
+var mega_potion_resource = preload("res://objects/items/potion/MegaPotion.tres")
+var ball_resource = preload("res://objects/items/ball/Ball.tres")
+var super_ball_resource = preload("res://objects/items/ball/SuperBall.tres")
+var giga_ball_resource = preload("res://objects/items/ball/GigaBall.tres")
+var mega_ball_resource = preload("res://objects/items/ball/MegaBall.tres")
 	
 func _ready() -> void:
 	set_active_slot()
 	processing = true
-	InventoryManager.add_items(potion_resource, 5)
+	InventoryManager.add_items(potion_resource, 12)
+	InventoryManager.add_items(super_potion_resource, 7)
+	InventoryManager.add_items(giga_potion_resource, 4)
+	InventoryManager.add_items(mega_potion_resource, 2)
 	InventoryManager.add_items(ball_resource, 10)
+	InventoryManager.add_items(super_ball_resource, 6)
+	InventoryManager.add_items(giga_ball_resource, 3)
+	InventoryManager.add_items(mega_ball_resource, 1)
 	for item in InventoryManager.inventory:
 		items.append(item)
-	print(items)
 	update_display()
 	
 func _input(event: InputEvent) -> void:
@@ -48,7 +61,9 @@ func _input(event: InputEvent) -> void:
 		return
 	if event.is_action_pressed("yes"):
 		if not reordering:
-			pass
+			processing = false
+			var options = show_inventory_options()
+			options.inventory_options_closed.connect(on_options_closed)
 	if event.is_action_pressed("no"):
 		if not reordering:
 			close()
@@ -65,8 +80,7 @@ func _move(direction: int):
 	unset_active_slot()
 	var old_cursor = cursor_index
 	var old_viewport = viewport_start
-	const TESTING_SIZE: int = 7
-	cursor_index = clamp(cursor_index + direction, 0, TESTING_SIZE - 1)
+	cursor_index = clamp(cursor_index + direction, 0, InventoryManager.inventory.size() - 1)
 	print("cursor_index: ", cursor_index)
 	if cursor_index == items.size():
 		cursor_index = old_cursor
@@ -84,7 +98,7 @@ func _move(direction: int):
 		viewport_start = cursor_index
 	print("cursor_index after: ", cursor_index)
 	
-	var max_viewport = max(0, TESTING_SIZE - VISIBLE_SLOTS)
+	var max_viewport = max(0, InventoryManager.inventory.size() - VISIBLE_SLOTS)
 	viewport_start = clamp(viewport_start, 0, max_viewport)
 	print("viewport_start after: ", viewport_start)
 	
@@ -113,7 +127,9 @@ func set_moving_slot():
 	slot[get_ui_slot()].frame = 2
 	
 func close():
-	pass
+	inventory_closed.emit()
+	get_parent().remove_child(self)
+	queue_free()
 	
 func swap_items(_from_index: int, _to_index: int) -> void:
 	update_display()
@@ -131,7 +147,7 @@ func update_display():
 			print("item_index: ", item_index)
 			var item = item_index["item"]
 			var quant = item_index["quantity"]
-			print("item: ", item)
+			print("item: ", item.name)
 			update_slot(item, quant, slot_enum)
 		else:
 			clear_slot_ui(slot_enum)
@@ -168,3 +184,13 @@ func clear_slot_ui(slot_enum: int) -> void:
 	if desc_label:
 		desc_label.text = ""
 	
+func show_inventory_options():
+	var inventory_options = UiManager.show_inventory_options()
+	print("Options added to scene tree: ", inventory_options.is_inside_tree())
+	print("Options visibility: ", inventory_options.visible)
+	print("Options CanvasLayer layer: ", inventory_options.layer)
+	print("Options process mode: ", inventory_options.get_process_mode())
+	return inventory_options
+	
+func on_options_closed() -> void:
+	processing = true

@@ -6,6 +6,8 @@ var battle_scene = preload("res://scenes/battle2/single/single_battle.tscn")
 var menu_scene = preload("res://scenes/menu/menu.tscn")
 var party_scene = preload("res://scenes/party/single_party.tscn")
 var party_options_scene = preload("res://scenes/party/options.tscn")
+var inventory_scene = preload("res://scenes/inventory/inventory.tscn")
+var inventory_options_scene = preload("res://scenes/inventory/options.tscn")
 
 func _ready() -> void:
 	GameManager.input_state_changed.connect(_on_input_state_changed)
@@ -51,3 +53,14 @@ func show_party_options():
 	var party_options = party_options_scene.instantiate()
 	add_child(party_options)
 	return party_options
+	
+func show_inventory():
+	var inventory = inventory_scene.instantiate()
+	add_child(inventory)
+	return inventory
+	
+func show_inventory_options():
+	var inventory_options = inventory_options_scene.instantiate()
+	add_child(inventory_options)
+	return inventory_options
+	

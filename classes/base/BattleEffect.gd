@@ -1,3 +1,4 @@
+@abstract
 class_name BattleEffect extends Resource
 
 @export_subgroup("Target Type")

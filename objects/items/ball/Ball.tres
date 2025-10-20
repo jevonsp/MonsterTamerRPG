@@ -1,24 +1,23 @@
 [gd_resource type="Resource" script_class="Item" load_steps=7 format=3 uid="uid://pep8g7geka17"]
 
-[ext_resource type="Script" uid="uid://dwops4cp56fq3" path="res://classes/base/BattleEffect.gd" id="1_pqng8"]
-[ext_resource type="Script" uid="uid://cas6w68aevhdq" path="res://classes/effects/Capture.gd" id="2_nmxy3"]
-[ext_resource type="Texture2D" uid="uid://k4g86uqyycw0" path="res://objects/items/ball/ball2.png" id="3_0o8rl"]
-[ext_resource type="Script" uid="uid://br2gl0bftv06o" path="res://objects/items/Item.gd" id="3_y18na"]
-[ext_resource type="PackedScene" uid="uid://bk6ikp3cercxw" path="res://objects/items/ball/ball.tscn" id="5_016u2"]
+[ext_resource type="Script" uid="uid://dwops4cp56fq3" path="res://classes/base/BattleEffect.gd" id="1_cmd7b"]
+[ext_resource type="Script" uid="uid://cas6w68aevhdq" path="res://objects/effects/Capture.gd" id="2_cmd7b"]
+[ext_resource type="Texture2D" uid="uid://k4g86uqyycw0" path="res://objects/items/ball/ball2.png" id="3_ohyut"]
+[ext_resource type="Script" uid="uid://br2gl0bftv06o" path="res://objects/items/Item.gd" id="4_2dr07"]
+[ext_resource type="PackedScene" uid="uid://bk6ikp3cercxw" path="res://objects/items/ball/ball.tscn" id="5_3r47q"]
 
 [sub_resource type="Resource" id="Resource_0o8rl"]
-script = ExtResource("2_nmxy3")
+script = ExtResource("2_cmd7b")
 animation_type = "THROWN"
 metadata/_custom_type_script = "uid://cas6w68aevhdq"
 
 [resource]
-script = ExtResource("3_y18na")
+script = ExtResource("4_2dr07")
 name = "Ball"
-icon = ExtResource("3_0o8rl")
+icon = ExtResource("3_ohyut")
 animation_type = "THROWN"
 still = true
-sprite = ExtResource("5_016u2")
-effects = Array[ExtResource("1_pqng8")]([SubResource("Resource_0o8rl")])
-short_description = "A device for catching monsters"
-long_description = "The lowest level ball. It offers no bonuses."
+sprite = ExtResource("5_3r47q")
+effects = Array[ExtResource("1_cmd7b")]([SubResource("Resource_0o8rl")])
+short_description = "Low level ball"
 metadata/_custom_type_script = "uid://br2gl0bftv06o"

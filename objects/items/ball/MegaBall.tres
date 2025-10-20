@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="Item" load_steps=6 format=3 uid="uid://csb2yxrimixlk"]
+
+[ext_resource type="Script" uid="uid://dwops4cp56fq3" path="res://classes/base/BattleEffect.gd" id="1_lggb8"]
+[ext_resource type="Script" uid="uid://cas6w68aevhdq" path="res://objects/effects/Capture.gd" id="2_h44eo"]
+[ext_resource type="Texture2D" uid="uid://cdtkpxq6irgu8" path="res://objects/items/ball/mega_ball.png" id="2_lggb8"]
+[ext_resource type="Script" uid="uid://br2gl0bftv06o" path="res://objects/items/Item.gd" id="3_rr2sb"]
+
+[sub_resource type="Resource" id="Resource_rr2sb"]
+script = ExtResource("2_h44eo")
+capture_bonus = 2.5
+metadata/_custom_type_script = "uid://cas6w68aevhdq"
+
+[resource]
+script = ExtResource("3_rr2sb")
+name = "Mega Ball"
+icon = ExtResource("2_lggb8")
+animation_type = "THROWN"
+still = true
+effects = Array[ExtResource("1_lggb8")]([SubResource("Resource_rr2sb")])
+short_description = "High level ball"
+metadata/_custom_type_script = "uid://br2gl0bftv06o"

@@ -1,12 +1,13 @@
 [gd_resource type="Resource" script_class="Item" load_steps=6 format=3 uid="uid://b8bmni02h3sqc"]
 
 [ext_resource type="Script" uid="uid://dwops4cp56fq3" path="res://classes/base/BattleEffect.gd" id="1_ulnb5"]
-[ext_resource type="Script" uid="uid://brejhr2k5t01w" path="res://classes/effects/Heal.gd" id="2_mjl4k"]
+[ext_resource type="Script" uid="uid://brejhr2k5t01w" path="res://objects/effects/Heal.gd" id="2_nxhxv"]
 [ext_resource type="Texture2D" uid="uid://km2jsnl7drg0" path="res://objects/items/potion/potion.png" id="3_xhiv6"]
 [ext_resource type="Script" uid="uid://br2gl0bftv06o" path="res://objects/items/Item.gd" id="4_wat4q"]
 
 [sub_resource type="Resource" id="Resource_yfwdx"]
-script = ExtResource("2_mjl4k")
+script = ExtResource("2_nxhxv")
+heal_amount = 60
 target_type = "ALLY"
 metadata/_custom_type_script = "uid://brejhr2k5t01w"
 
@@ -16,6 +17,6 @@ name = "Super Potion"
 icon = ExtResource("3_xhiv6")
 target_type = "ALLY"
 effects = Array[ExtResource("1_ulnb5")]([SubResource("Resource_yfwdx")])
-short_description = "A healing potion for low level monsters"
+short_description = "Heals 60 Points"
 long_description = "A potion. This heals for 20 hitpoints. "
 metadata/_custom_type_script = "uid://br2gl0bftv06o"

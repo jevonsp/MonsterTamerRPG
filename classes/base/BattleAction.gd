@@ -1,3 +1,4 @@
+@abstract
 class_name BattleAction extends RefCounted
 
 var actor: Monster = null

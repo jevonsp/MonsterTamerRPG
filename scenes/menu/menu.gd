@@ -47,12 +47,17 @@ func _input_selection():
 	if selected_slot == 0:
 		PartyManager.show_party()
 	elif selected_slot == 1:
-		print(selected_slot)
+		processing = false
+		var inventory = UiManager.show_inventory()
+		inventory.inventory_closed.connect(_on_inventory_closed)
 	elif selected_slot == 2:
+		print("caught pressed")
 		print(selected_slot)
 	elif selected_slot == 3:
+		print("save pressed")
 		print(selected_slot)
 	elif selected_slot == 4:
+		print("options pressed")
 		print(selected_slot)
 	else:
 		print("somehow got out of bounds")
@@ -72,4 +77,7 @@ func _on_party_open():
 	processing = false
 	
 func _on_party_closed():
+	processing = true
+	
+func _on_inventory_closed():
 	processing = true

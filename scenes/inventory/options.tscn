@@ -1,0 +1,117 @@
+[gd_scene load_steps=4 format=3 uid="uid://lyrkgljdaxf3"]
+
+[ext_resource type="Texture2D" uid="uid://dujoyv2fb471r" path="res://assets/ui/button_mockup.png" id="1_d1hts"]
+[ext_resource type="Script" uid="uid://cjggraxjj6i38" path="res://scenes/inventory/options.gd" id="1_tqccg"]
+[ext_resource type="FontFile" uid="uid://jbbx5lupeleb" path="res://assets/m5x7.ttf" id="2_tqccg"]
+
+[node name="Options" type="CanvasLayer"]
+layer = 3
+script = ExtResource("1_tqccg")
+
+[node name="Slot0" type="Node2D" parent="."]
+position = Vector2(79, 221)
+
+[node name="Background" type="Sprite2D" parent="Slot0"]
+scale = Vector2(0.96, 0.6)
+texture = ExtResource("1_d1hts")
+hframes = 3
+
+[node name="Label" type="Label" parent="Slot0/Background"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -41.5
+offset_right = -60.0
+offset_bottom = -18.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_tqccg")
+theme_override_font_sizes/font_size = 32
+text = "USE"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Slot1" type="Node2D" parent="."]
+position = Vector2(79, 260)
+
+[node name="Background" type="Sprite2D" parent="Slot1"]
+scale = Vector2(0.96, 0.6)
+texture = ExtResource("1_d1hts")
+hframes = 3
+
+[node name="Label" type="Label" parent="Slot1/Background"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -41.5
+offset_right = -60.0
+offset_bottom = -18.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_tqccg")
+theme_override_font_sizes/font_size = 32
+text = "GIVE"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Slot2" type="Node2D" parent="."]
+position = Vector2(79, 300)
+
+[node name="Background" type="Sprite2D" parent="Slot2"]
+scale = Vector2(0.96, 0.6)
+texture = ExtResource("1_d1hts")
+hframes = 3
+
+[node name="Label" type="Label" parent="Slot2/Background"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -41.5
+offset_right = -60.0
+offset_bottom = -18.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_tqccg")
+theme_override_font_sizes/font_size = 32
+text = "MOVE"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Slot3" type="Node2D" parent="."]
+position = Vector2(79, 339)
+
+[node name="Background" type="Sprite2D" parent="Slot3"]
+scale = Vector2(0.96, 0.6)
+texture = ExtResource("1_d1hts")
+hframes = 3
+
+[node name="Label" type="Label" parent="Slot3/Background"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -41.5
+offset_right = -60.0
+offset_bottom = -18.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_tqccg")
+theme_override_font_sizes/font_size = 32
+text = "CANCEL"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true

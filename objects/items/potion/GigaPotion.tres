@@ -1,12 +1,13 @@
 [gd_resource type="Resource" script_class="Item" load_steps=6 format=3 uid="uid://bd67hinibk5ji"]
 
 [ext_resource type="Script" uid="uid://dwops4cp56fq3" path="res://classes/base/BattleEffect.gd" id="1_i63i2"]
-[ext_resource type="Script" uid="uid://brejhr2k5t01w" path="res://classes/effects/Heal.gd" id="2_sfpdy"]
+[ext_resource type="Script" uid="uid://brejhr2k5t01w" path="res://objects/effects/Heal.gd" id="2_swnum"]
 [ext_resource type="Texture2D" uid="uid://08d0j0j2mbmq" path="res://objects/items/potion/giga_potion.png" id="3_i63i2"]
 [ext_resource type="Script" uid="uid://br2gl0bftv06o" path="res://objects/items/Item.gd" id="4_u1rfk"]
 
 [sub_resource type="Resource" id="Resource_yfwdx"]
-script = ExtResource("2_sfpdy")
+script = ExtResource("2_swnum")
+heal_amount = 200
 target_type = "ALLY"
 metadata/_custom_type_script = "uid://brejhr2k5t01w"
 
@@ -16,6 +17,5 @@ name = "Giga Potion"
 icon = ExtResource("3_i63i2")
 target_type = "ALLY"
 effects = Array[ExtResource("1_i63i2")]([SubResource("Resource_yfwdx")])
-short_description = "A healing potion for low level monsters"
-long_description = "A potion. This heals for 20 hitpoints. "
+short_description = "Heals 200 points"
 metadata/_custom_type_script = "uid://br2gl0bftv06o"
