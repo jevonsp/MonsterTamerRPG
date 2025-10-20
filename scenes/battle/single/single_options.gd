@@ -20,8 +20,6 @@ var v2_to_slot: Dictionary = {
 	MoveSlot.RUN: $Slot3/Background }
 	
 func _ready() -> void:
-	GameManager.input_state_changed.connect(_on_input_state_changed)
-	EventBus.party_closed.connect(_on_party_closed)
 	set_active_slot()
 	
 func _input(event: InputEvent) -> void:
@@ -60,19 +58,6 @@ func _input_selection():
 			PartyManager.show_party()
 		MoveSlot.ITEM: print("ITEM")
 		MoveSlot.RUN: print("RUN")
-	
-func _on_input_state_changed(new_state):
-	print("single main battle got new_state: ", new_state)
-	print("BattleManager.processing_turn: ", BattleManager.processing_turn)
-	match new_state:
-		GameManager.InputState.OVERWORLD: pass
-		GameManager.InputState.BATTLE:
-			print("BattleManager.processing_turn: ", BattleManager.processing_turn)
-			if not BattleManager.processing_turn:
-				processing = true
-		GameManager.InputState.DIALOGUE:
-			processing = false
-		GameManager.InputState.INACTIVE: pass
 	
 func get_curr_slot():
 	return v2_to_slot[selected_slot]

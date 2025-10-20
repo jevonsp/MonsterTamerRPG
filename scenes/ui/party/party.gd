@@ -181,15 +181,6 @@ func _on_option_chosen(slot_enum) -> void:
 		3: print("options closed")
 	processing = true
 	
-func _on_input_state_changed(new_state):
-	match new_state:
-		GameManager.InputState.OVERWORLD: pass
-		GameManager.InputState.BATTLE:
-			processing = true
-		GameManager.InputState.DIALOGUE:
-			processing = false
-		GameManager.InputState.INACTIVE: pass
-	
 func get_curr_slot():
 	return v2_to_slot[selected_slot]
 	

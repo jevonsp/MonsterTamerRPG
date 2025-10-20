@@ -40,7 +40,6 @@ func add_enemies(monster_datas: Array[MonsterData], lvls: Array[int]) -> void:
 	
 func start_battle():
 	in_battle = true
-	GameManager.input_state = GameManager.InputState.BATTLE
 	processing_turn = false
 	print(PartyManager.party)
 	player_actor = PartyManager.get_first_alive()
@@ -152,7 +151,6 @@ func execute_turn():
 			return
 	turn_actions.clear()
 	processing_turn = false
-	GameManager.input_state = GameManager.InputState.BATTLE
 	
 func give_exp():
 	var exp_to_give = enemy_actor.grant_exp()
@@ -294,5 +292,4 @@ func end_battle():
 	print("actors/party cleared")
 	escape_attempts = 0
 	turn_actions.clear()
-	GameManager.input_state = GameManager.InputState.OVERWORLD
 	

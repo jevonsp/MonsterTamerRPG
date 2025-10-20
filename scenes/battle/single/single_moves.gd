@@ -23,7 +23,6 @@ var v2_to_slot: Dictionary = {
 	MoveSlot.MOVE3: $Slot3/Background }
 	
 func _ready() -> void:
-	GameManager.input_state_changed.connect(_on_input_state_changed)
 	set_active_slot()
 	
 func _input(event: InputEvent) -> void:
@@ -85,16 +84,6 @@ func _input_move():
 	print("Selected move: ", move_data.name)
 	var action = MoveAction.new(BattleManager.player_actor, [BattleManager.enemy_actor], move_data)
 	BattleManager.on_action_selected(action)
-	
-func _on_input_state_changed(new_state):
-	match new_state:
-		GameManager.InputState.OVERWORLD: pass
-		GameManager.InputState.BATTLE:
-			if not BattleManager.processing_turn:
-				processing = true
-		GameManager.InputState.DIALOGUE:
-			processing = false
-		GameManager.InputState.INACTIVE: pass
 	
 func get_curr_slot():
 	return v2_to_slot[selected_slot]

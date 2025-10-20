@@ -4,7 +4,7 @@ var ui_stack: Array[Node] = []
 
 #region Scenes
 var dialogue_scene := preload("res://scenes/ui/dialogue/dialogue_box.tscn")
-var battle_scene := preload("res://scenes/battle/single/single_battle.tscn")
+var battle_scene := preload("res://scenes/battle/single/battle.tscn")
 var menu_scene := preload("res://scenes/ui/menu/menu.tscn")
 var party_scene := preload("res://scenes/ui/party/party.tscn")
 var party_options_scene := preload("res://scenes/ui/party/options.tscn")

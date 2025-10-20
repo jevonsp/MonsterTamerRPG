@@ -40,5 +40,3 @@ func _on_move_cancelled():
 	options.processing = true
 	moves.processing = false
 	moves.visible = false
-	
-	
