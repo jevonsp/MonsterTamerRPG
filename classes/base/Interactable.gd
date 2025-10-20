@@ -11,3 +11,6 @@ func setup():
 	
 func interact():
 	pass
+
+func dialogue():
+	pass

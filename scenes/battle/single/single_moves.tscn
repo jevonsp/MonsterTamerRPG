@@ -17,11 +17,11 @@ texture = ExtResource("2_ek5cb")
 hframes = 3
 
 [node name="Label" type="Label" parent="Slot0/Background"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
+anchors_preset = -1
+anchor_left = 0.1375
+anchor_top = 0.225
+anchor_right = 0.8625
+anchor_bottom = 0.775
 offset_left = -100.0
 offset_top = -41.5
 offset_right = -60.0
@@ -29,8 +29,11 @@ offset_bottom = -18.5
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("3_8qk3b")
-theme_override_font_sizes/font_size = 48
+theme_override_font_sizes/font_size = 32
 text = "Button"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
 metadata/_edit_use_anchors_ = true
 
 [node name="Slot1" type="Node2D" parent="."]
@@ -41,11 +44,11 @@ texture = ExtResource("2_ek5cb")
 hframes = 3
 
 [node name="Label" type="Label" parent="Slot1/Background"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
+anchors_preset = -1
+anchor_left = 0.1375
+anchor_top = 0.225
+anchor_right = 0.8625
+anchor_bottom = 0.775
 offset_left = -100.0
 offset_top = -41.5
 offset_right = -60.0
@@ -53,8 +56,11 @@ offset_bottom = -18.5
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("3_8qk3b")
-theme_override_font_sizes/font_size = 48
+theme_override_font_sizes/font_size = 32
 text = "Button"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
 metadata/_edit_use_anchors_ = true
 
 [node name="Slot2" type="Node2D" parent="."]
@@ -65,11 +71,11 @@ texture = ExtResource("2_ek5cb")
 hframes = 3
 
 [node name="Label" type="Label" parent="Slot2/Background"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
+anchors_preset = -1
+anchor_left = 0.1375
+anchor_top = 0.225
+anchor_right = 0.8625
+anchor_bottom = 0.775
 offset_left = -100.0
 offset_top = -41.5
 offset_right = -60.0
@@ -77,8 +83,11 @@ offset_bottom = -18.5
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("3_8qk3b")
-theme_override_font_sizes/font_size = 48
+theme_override_font_sizes/font_size = 32
 text = "Button"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
 metadata/_edit_use_anchors_ = true
 
 [node name="Slot3" type="Node2D" parent="."]
@@ -89,11 +98,11 @@ texture = ExtResource("2_ek5cb")
 hframes = 3
 
 [node name="Label" type="Label" parent="Slot3/Background"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
+anchors_preset = -1
+anchor_left = 0.1375
+anchor_top = 0.225
+anchor_right = 0.8625
+anchor_bottom = 0.775
 offset_left = -100.0
 offset_top = -41.5
 offset_right = -60.0
@@ -101,6 +110,9 @@ offset_bottom = -18.5
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("3_8qk3b")
-theme_override_font_sizes/font_size = 48
+theme_override_font_sizes/font_size = 32
 text = "Button"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
 metadata/_edit_use_anchors_ = true

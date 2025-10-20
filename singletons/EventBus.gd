@@ -2,10 +2,15 @@ extends Node
 
 @warning_ignore_start("unused_signal")
 
+signal battle_manager_ready
+
 signal step_completed(position: Vector2)
 signal toggle_player
 
 signal battle_reference(node: Node)
+signal request_battle_actors
+signal player_battle_actor_sent(monster: Monster)
+signal enemy_battle_actor_sent(monster: Monster)
 
 signal effect_started(effect_type: String, actor: Monster, target: Monster, image: Texture2D)
 signal effect_ended

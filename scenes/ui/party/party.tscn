@@ -79,21 +79,23 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="TypeLabel" type="Label" parent="Slot0/Background"]
-offset_left = 14.09285
+offset_left = -17.112747
 offset_top = 5.0
-offset_right = 74.09285
+offset_right = 102.88725
 offset_bottom = 34.0
 theme_override_fonts/font = ExtResource("11_s7rw0")
+theme_override_font_sizes/font_size = 16
 text = "TYPE: Grass"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="RoleLabel" type="Label" parent="Slot0/Background"]
-offset_left = 90.59691
+offset_left = 87.57701
 offset_top = 5.0
-offset_right = 144.59691
+offset_right = 141.57701
 offset_bottom = 34.0
 theme_override_fonts/font = ExtResource("11_s7rw0")
+theme_override_font_sizes/font_size = 16
 text = "ROLE: Tank"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -155,21 +157,23 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="TypeLabel" type="Label" parent="Slot1/Background"]
-offset_left = 14.092865
+offset_left = -17.531471
 offset_top = 5.0
-offset_right = 74.092865
+offset_right = 102.46853
 offset_bottom = 34.0
 theme_override_fonts/font = ExtResource("11_s7rw0")
+theme_override_font_sizes/font_size = 16
 text = "TYPE: Grass"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="RoleLabel" type="Label" parent="Slot1/Background"]
-offset_left = 90.59686
+offset_left = 87.536446
 offset_top = 5.0
-offset_right = 144.59686
+offset_right = 141.53644
 offset_bottom = 34.0
 theme_override_fonts/font = ExtResource("11_s7rw0")
+theme_override_font_sizes/font_size = 16
 text = "ROLE: Tank"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -231,21 +235,23 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="TypeLabel" type="Label" parent="Slot2/Background"]
-offset_left = 14.092865
+offset_left = -17.531471
 offset_top = 5.0
-offset_right = 74.092865
+offset_right = 102.46853
 offset_bottom = 34.0
 theme_override_fonts/font = ExtResource("11_s7rw0")
+theme_override_font_sizes/font_size = 16
 text = "TYPE: Grass"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="RoleLabel" type="Label" parent="Slot2/Background"]
-offset_left = 90.59686
+offset_left = 87.536446
 offset_top = 5.0
-offset_right = 144.59686
+offset_right = 141.53644
 offset_bottom = 34.0
 theme_override_fonts/font = ExtResource("11_s7rw0")
+theme_override_font_sizes/font_size = 16
 text = "ROLE: Tank"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -307,21 +313,23 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="TypeLabel" type="Label" parent="Slot3/Background"]
-offset_left = 14.092865
+offset_left = -17.531471
 offset_top = 5.0
-offset_right = 74.092865
+offset_right = 102.46853
 offset_bottom = 34.0
 theme_override_fonts/font = ExtResource("11_s7rw0")
+theme_override_font_sizes/font_size = 16
 text = "TYPE: Grass"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="RoleLabel" type="Label" parent="Slot3/Background"]
-offset_left = 90.59686
+offset_left = 87.536446
 offset_top = 5.0
-offset_right = 144.59686
+offset_right = 141.53644
 offset_bottom = 34.0
 theme_override_fonts/font = ExtResource("11_s7rw0")
+theme_override_font_sizes/font_size = 16
 text = "ROLE: Tank"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -383,21 +391,23 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="TypeLabel" type="Label" parent="Slot4/Background"]
-offset_left = 14.092865
+offset_left = -17.531471
 offset_top = 5.0
-offset_right = 74.092865
+offset_right = 102.46853
 offset_bottom = 34.0
 theme_override_fonts/font = ExtResource("11_s7rw0")
+theme_override_font_sizes/font_size = 16
 text = "TYPE: Grass"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="RoleLabel" type="Label" parent="Slot4/Background"]
-offset_left = 90.59686
+offset_left = 87.536446
 offset_top = 5.0
-offset_right = 144.59686
+offset_right = 141.53644
 offset_bottom = 34.0
 theme_override_fonts/font = ExtResource("11_s7rw0")
+theme_override_font_sizes/font_size = 16
 text = "ROLE: Tank"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -459,21 +469,23 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="TypeLabel" type="Label" parent="Slot5/Background"]
-offset_left = 14.092865
+offset_left = -17.531471
 offset_top = 5.0
-offset_right = 74.092865
+offset_right = 102.46853
 offset_bottom = 34.0
 theme_override_fonts/font = ExtResource("11_s7rw0")
+theme_override_font_sizes/font_size = 16
 text = "TYPE: Grass"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="RoleLabel" type="Label" parent="Slot5/Background"]
-offset_left = 90.59686
+offset_left = 87.536446
 offset_top = 5.0
-offset_right = 144.59686
+offset_right = 141.53644
 offset_bottom = 34.0
 theme_override_fonts/font = ExtResource("11_s7rw0")
+theme_override_font_sizes/font_size = 16
 text = "ROLE: Tank"
 horizontal_alignment = 1
 vertical_alignment = 1

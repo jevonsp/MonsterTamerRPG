@@ -1,5 +1,7 @@
 extends CanvasLayer
 
+const HP_SCALE: float = 10.0
+
 @export var player_portrait: TextureRect
 @export var enemy_portrait: TextureRect
 @export var player_hp_bar: TextureProgressBar
@@ -11,67 +13,73 @@ extends CanvasLayer
 @export var enemy_level: Label
 @export var center_marker: Marker2D
 
-const HP_SCALE: float = 10.0
-
-var portrait_map: Dictionary = {}
 var hp_map: Dictionary = {}
 var exp_map: Dictionary = {}
+var portrait_map: Dictionary = {}
 var name_map: Dictionary = {}
 var level_map: Dictionary = {}
 
 func _ready() -> void:
+	EventBus.player_battle_actor_sent.connect(_on_player_battle_actor_sent)
+	EventBus.enemy_battle_actor_sent.connect(_on_enemy_battle_actor_sent)
+	print("single visuals 3 _ready called")
+	EventBus.request_battle_actors.emit()
+	print("request_battle_actors sent")
+	connect_signals()
 	EventBus.battle_reference.emit(self)
-
-func setup_battle(player: Monster, enemy: Monster):
-	map_portraits(player, enemy)
-	map_hp_bars(player, enemy)
-	map_exp_bars(player)
-	map_names(player, enemy)
-	map_levels(player, enemy)
-	for map in [portrait_map, hp_map, exp_map]:
-		print("map:\n")
-		print(map)
-		
-func map_portraits(player: Monster, enemy: Monster):
-	player_portrait.texture = player.species.sprite
-	enemy_portrait.texture = enemy.species.sprite
-	portrait_map[player] = player_portrait
-	portrait_map[enemy] = enemy_portrait
 	
-func map_hp_bars(player: Monster, enemy: Monster):
-	player_hp_bar.max_value = player.max_hitpoints * HP_SCALE
-	player_hp_bar.value = player.hitpoints * HP_SCALE
-	enemy_hp_bar.max_value = enemy.max_hitpoints * HP_SCALE
-	enemy_hp_bar.value = enemy.hitpoints * HP_SCALE
-	hp_map[player] = player_hp_bar
-	hp_map[enemy] = enemy_hp_bar
+func connect_signals():
+	if not EventBus.effect_started.is_connected(_on_effect_started):
+		EventBus.effect_started.connect(_on_effect_started)
+	if not EventBus.health_changed.is_connected(_on_health_changed):
+		EventBus.health_changed.connect(_on_health_changed)
+	if not EventBus.exp_changed.is_connected(_on_exp_changed):
+		EventBus.exp_changed.connect(_on_exp_changed)
+	if not EventBus.switch_animation.is_connected(_on_switch_animation):
+		EventBus.switch_animation.connect(_on_switch_animation)
+	if not EventBus.monster_fainted.is_connected(_on_monster_fainted):
+		EventBus.monster_fainted.connect(_on_monster_fainted)
+	if not EventBus.capture_shake.is_connected(_on_capture_shake):
+		EventBus.capture_shake.connect(_on_capture_shake)
+	if not EventBus.capture_animation.is_connected(_on_capture_animation):
+		EventBus.capture_animation.connect(_on_capture_animation)
+	print("connected signals")
 	
-func map_exp_bars(player: Monster):
-	var level_start = player.experience_to_level(player.level)
-	var level_end = player.experience_to_level(player.level + 1)
-	player_exp_bar.max_value = level_end - level_start
-	player_exp_bar.value = player.experience - level_start
-	player_exp_bar.min_value = 0
-	exp_map[player] = player_exp_bar
+func _on_player_battle_actor_sent(monster: Monster):
+	print("player_battle_actor recieved: ", monster)
+	map_actor(monster)
 	
-func map_names(player: Monster, enemy: Monster):
-	player_name.text = player.name
-	enemy_name.text = enemy.name
-	name_map[player] = player_name
-	name_map[enemy] = enemy_name
+func _on_enemy_battle_actor_sent(monster: Monster):
+	print("enemy_battle_actor recieved: ", monster)
+	map_actor(monster)
 	
-func map_levels(player: Monster, enemy: Monster):
-	player_level.text = "Lvl. " + str(player.level)
-	enemy_level.text = "Lvl. " + str(enemy.level)
-	level_map[player] = player_level
-	level_map[enemy] = enemy_level
+func map_actor(monster: Monster) -> void:
+	var is_player = (monster == BattleManager.player_actor)
+	
+	var hp_bar = player_hp_bar if is_player else enemy_hp_bar
+	hp_bar.max_value = monster.max_hitpoints * HP_SCALE
+	hp_bar.value = monster.hitpoints * HP_SCALE
+	hp_map[monster] = hp_bar
+	
+	if is_player:
+		var level_start = monster.experience_to_level(monster.level)
+		var level_end = monster.experience_to_level(monster.level + 1)
+		player_exp_bar.max_value = level_end - level_start
+		player_exp_bar.value = monster.experience - level_start
+		player_exp_bar.min_value = 0
+		exp_map[monster] = player_exp_bar
+	
+	var portrait = player_portrait if is_player else enemy_portrait
+	portrait.texture = monster.species.sprite
+	portrait_map[monster] = portrait
+	
+	var name_label = player_name if is_player else enemy_name
+	name_label.text = monster.species.name
+	
+	var level_label = player_level if is_player else enemy_level
+	level_label.text = "Lvl. " + str(monster.level)
 	
 func update_maps(old_monster: Monster, new_monster: Monster) -> void:
-	var portrait = portrait_map.get(old_monster)
-	if portrait:
-		portrait.texture = new_monster.species.sprite
-		portrait_map.erase(old_monster)
-		portrait_map[new_monster] = portrait
 	var hp_bar = hp_map.get(old_monster)
 	if hp_bar:
 		hp_bar.max_value = new_monster.max_hitpoints * HP_SCALE
@@ -86,6 +94,11 @@ func update_maps(old_monster: Monster, new_monster: Monster) -> void:
 		exp_bar.value = new_monster.experience - level_start
 		exp_map.erase(old_monster)
 		exp_map[new_monster] = exp_bar
+	var portrait = portrait_map.get(old_monster)
+	if portrait:
+		portrait.texture = new_monster.species.sprite
+		portrait_map.erase(old_monster)
+		portrait_map[new_monster] = portrait
 	var name_label = name_map.get(old_monster)
 	if name_label:
 		name_label.text = new_monster.name
@@ -96,7 +109,6 @@ func update_maps(old_monster: Monster, new_monster: Monster) -> void:
 		level_label.text = "Lvl. " + str(new_monster.level)
 		level_map.erase(old_monster)
 		level_map[new_monster] = level_label
-		
 func clear_maps():
 	portrait_map.clear()
 	hp_map.clear()

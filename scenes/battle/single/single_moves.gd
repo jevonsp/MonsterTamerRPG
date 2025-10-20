@@ -1,7 +1,5 @@
 extends CanvasLayer
 
-signal move_cancelled
-
 @export var processing: bool = false
 
 #region Move Slots
@@ -112,5 +110,11 @@ func close() -> void:
 	UiManager.pop_ui(self)
 	
 func update_moves():
-	pass
-	
+	move0_label.text = BattleManager.player_actor.moves[0].name \
+	if BattleManager.player_actor.moves.size() > 0 else ""
+	move1_label.text = BattleManager.player_actor.moves[1].name if \
+	BattleManager.player_actor.moves.size() > 1 else ""
+	move2_label.text = BattleManager.player_actor.moves[2].name if \
+	BattleManager.player_actor.moves.size() > 2 else ""
+	move3_label.text = BattleManager.player_actor.moves[3].name if \
+	BattleManager.player_actor.moves.size() > 3 else ""

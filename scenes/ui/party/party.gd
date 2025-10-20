@@ -88,6 +88,9 @@ var role_map: Dictionary = {}
 func _ready() -> void:
 	print("Party scene _ready() called")
 	print("PartyManager exists: ", PartyManager != null)
+	if UiManager.ui_stack.is_empty():
+		UiManager.ui_stack.append(self)
+
 	EventBus.free_switch.connect(_on_free_switch)
 	processing = true
 	if not BattleManager.in_battle:
@@ -97,8 +100,8 @@ func _ready() -> void:
 	
 #region Movement and Inputs
 func _input(event: InputEvent) -> void:
-	#if self != UiManager.ui_stack.back():
-		#return
+	if self != UiManager.ui_stack.back():
+		return
 		
 	if event.is_action_pressed("yes") \
 	or event.is_action_pressed("no") or \

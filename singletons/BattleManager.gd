@@ -20,6 +20,7 @@ var escaped: bool = false
 
 func _ready() -> void:
 	EventBus.battle_reference.connect(_on_battle_reference)
+	EventBus.request_battle_actors.connect(_on_battle_actors_requested)
 	
 func add_enemies(monster_datas: Array[MonsterData], lvls: Array[int]) -> void:
 	if monster_datas.size() != lvls.size():
@@ -45,11 +46,17 @@ func start_battle():
 	player_actor = PartyManager.get_first_alive()
 	print("player_actor: ", player_actor)
 	player_actor.getting_exp = true
-	UiManager.push_ui(UiManager.battle_scene)
+	await get_tree().process_frame
 	print("enemy party size: ", enemy_party.size())
+	EventBus.battle_manager_ready.emit()
 	
 func _on_battle_reference(node: Node):
 	battle_reference = node
+	
+func _on_battle_actors_requested():
+	print("_on_battle_actors_requested recieved, battle actors sent")
+	EventBus.player_battle_actor_sent.emit(player_actor)
+	EventBus.enemy_battle_actor_sent.emit(enemy_actor)
 	
 func on_action_selected(action: BattleAction):
 	if processing_turn:
@@ -276,10 +283,8 @@ func end_battle():
 	in_battle = false
 	escaped = false
 	battle_reference.clear_maps()
-	battle_reference.queue_free()
+	UiManager.clear_ui()
 	battle_reference = null
-	for child in get_children():
-		child.queue_free()
 	for monster in PartyManager.party:
 		monster.getting_exp = false
 	enemy_party.clear()

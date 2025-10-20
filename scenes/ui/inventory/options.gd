@@ -1,7 +1,8 @@
 extends CanvasLayer
 
 func _ready():
-	pass
+	if UiManager.ui_stack.is_empty():
+		UiManager.ui_stack.append(self)
 
 func _input(event: InputEvent) -> void:
 	if self != UiManager.ui_stack.back():

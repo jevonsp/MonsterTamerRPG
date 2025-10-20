@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://b1yah1hhi0u3c"]
+[gd_scene load_steps=12 format=3 uid="uid://b1yah1hhi0u3c"]
 
 [ext_resource type="PackedScene" uid="uid://c32838kx1ass2" path="res://scenes/world/maps/test_map.tscn" id="1_7h61r"]
 [ext_resource type="PackedScene" uid="uid://bvky3u2b5xv0x" path="res://scenes/world/player/player.tscn" id="2_0sr1o"]
@@ -8,6 +8,8 @@
 [ext_resource type="Resource" uid="uid://pxtac13xygko" path="res://objects/monsters/fox_mcleaf/Fox_McLeaf.tres" id="6_2a8rs"]
 [ext_resource type="Resource" uid="uid://drqip02v341yq" path="res://objects/monsters/pyro_badger/Pyro_Badger.tres" id="7_4j704"]
 [ext_resource type="Resource" uid="uid://bkcc35o5n7kil" path="res://objects/monsters/pistol_shrimp/Pistol_Shrimp.tres" id="8_kp23o"]
+[ext_resource type="PackedScene" uid="uid://c53i0nmmfx7q0" path="res://scenes/world/level_components/ground_item/ground_item.tscn" id="9_4j704"]
+[ext_resource type="Resource" uid="uid://pep8g7geka17" path="res://objects/items/ball/Ball.tres" id="10_kp23o"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lfrn8"]
 size = Vector2(32, 32)
@@ -36,3 +38,7 @@ position = Vector2(8, 24)
 frame = 1
 
 [node name="Player" parent="." instance=ExtResource("2_0sr1o")]
+
+[node name="GroundItem" parent="." instance=ExtResource("9_4j704")]
+position = Vector2(24, 8)
+item = ExtResource("10_kp23o")

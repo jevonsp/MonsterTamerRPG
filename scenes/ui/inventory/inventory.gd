@@ -34,6 +34,8 @@ var giga_ball_resource = preload("res://objects/items/ball/GigaBall.tres")
 var mega_ball_resource = preload("res://objects/items/ball/MegaBall.tres")
 	
 func _ready() -> void:
+	if UiManager.ui_stack.is_empty():
+		UiManager.ui_stack.append(self)
 	set_active_slot()
 	processing = true
 	for item in InventoryManager.inventory:
@@ -47,8 +49,9 @@ func _input(event: InputEvent) -> void:
 	event.is_action_pressed("down"):
 		get_viewport().set_input_as_handled()
 	
-	if not processing:
+	if self != UiManager.ui_stack.back():
 		return
+	
 	if event.is_action_pressed("yes"):
 		if not reordering:
 			UiManager.push_ui(UiManager.inventory_options_scene)
@@ -64,6 +67,8 @@ func _input(event: InputEvent) -> void:
 		_move(1)
 	
 func _move(direction: int):
+	if InventoryManager.inventory.size() == 0:
+		return
 	print("direction: ", direction)
 	unset_active_slot()
 	var old_cursor = cursor_index

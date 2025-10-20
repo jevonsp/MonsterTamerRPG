@@ -4,9 +4,8 @@ var ui_stack: Array[Node] = []
 
 #region Scenes
 var dialogue_scene := preload("res://scenes/ui/dialogue/dialogue_box.tscn")
-var battle_old := preload("res://scenes/battle/single/battle2.tscn")
 var battle_scene := preload("res://scenes/battle/single/battle_3.tscn")
-var battle_options_scene := preload("res://scenes/battle/single/single_options.tscn")
+var battle_options_scene := preload("res://scenes/battle/single/options_3.tscn")
 var battle_moves_scene := preload("res://scenes/battle/single/single_moves.tscn")
 var menu_scene := preload("res://scenes/ui/menu/menu.tscn")
 var party_scene := preload("res://scenes/ui/party/party.tscn")
@@ -16,7 +15,7 @@ var inventory_options_scene := preload("res://scenes/ui/inventory/options.tscn")
 #endregion
 
 func _ready() -> void:
-	pass
+	EventBus.battle_manager_ready.connect(on_battle_ready)
 	
 func push_ui(scene: PackedScene):
 	if scene == null:
@@ -40,3 +39,22 @@ func pop_ui(target: Node = null):
 	print("stack removed: ", ui)
 	
 	return ui
+	
+func clear_ui():
+	print("clear_ui called")
+	while ui_stack.size() > 0:
+		pop_ui()
+		print("ui_stack:", ui_stack)
+	print("final ui_stack:", ui_stack)
+	
+func on_battle_ready():
+	push_ui(battle_scene)
+	
+func fight_selected():
+	push_ui(battle_moves_scene)
+	
+func party_selected():
+	push_ui(party_scene)
+	
+func item_selected():
+	push_ui(inventory_scene)
