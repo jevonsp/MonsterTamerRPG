@@ -15,6 +15,7 @@ metadata/_custom_type_script = "uid://brejhr2k5t01w"
 script = ExtResource("4_u1rfk")
 name = "Giga Potion"
 icon = ExtResource("3_i63i2")
+in_battle_only = false
 target_type = "ALLY"
 effects = Array[ExtResource("1_i63i2")]([SubResource("Resource_yfwdx")])
 short_description = "Heals 200 points"

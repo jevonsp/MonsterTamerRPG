@@ -2,7 +2,6 @@ extends CanvasLayer
 
 signal option_chosen(slot_enum)
 
-@export var processing: bool = false
 
 enum Slot {SLOT0, SLOT1, SLOT2, SLOT3}
 var selected_slot: Slot = Slot.SLOT0
@@ -20,7 +19,6 @@ var selected_slot: Slot = Slot.SLOT0
 
 func _ready() -> void:
 	set_active_slot()
-	processing = true
 	
 func _input(event: InputEvent) -> void:
 	if self != UiManager.ui_stack.back():
@@ -60,6 +58,5 @@ func set_active_slot():
 	slot[selected_slot].frame = 1
 	
 func close():
-	get_parent().remove_child(self)
-	queue_free()
+	UiManager.pop_ui(self)
 	

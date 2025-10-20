@@ -3,6 +3,7 @@ class_name Item extends Resource
 @export var name: String = ""
 @export var icon: Texture2D
 @export_range(-7, 7) var priority: int = 0
+@export var in_battle_only: bool = true
 
 @export_subgroup("Animation")
 @export_enum("ACTOR", "TARGET", "THROWN", "CENTER") var animation_type = "CENTER"

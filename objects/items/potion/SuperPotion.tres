@@ -15,6 +15,7 @@ metadata/_custom_type_script = "uid://brejhr2k5t01w"
 script = ExtResource("4_wat4q")
 name = "Super Potion"
 icon = ExtResource("3_xhiv6")
+in_battle_only = false
 target_type = "ALLY"
 effects = Array[ExtResource("1_ulnb5")]([SubResource("Resource_yfwdx")])
 short_description = "Heals 60 Points"

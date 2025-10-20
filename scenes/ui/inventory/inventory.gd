@@ -54,7 +54,9 @@ func _input(event: InputEvent) -> void:
 	
 	if event.is_action_pressed("yes"):
 		if not reordering:
-			UiManager.push_ui(UiManager.inventory_options_scene)
+			if cursor_index < InventoryManager.inventory.size():
+				_open_options()
+			
 	if event.is_action_pressed("no"):
 		if not reordering:
 			close()
@@ -174,4 +176,35 @@ func clear_slot_ui(slot_enum: int) -> void:
 	var desc_label = slot_node.get_node_or_null("DescriptionLabel")
 	if desc_label:
 		desc_label.text = ""
+		
+func _open_options():
+	var options = UiManager.push_ui(UiManager.inventory_options_scene)
+	if not options.option_chosen.is_connected(_on_option_chosen):
+		options.option_chosen.connect(_on_option_chosen)
 	
+func _on_option_chosen(slot_enum: int):
+	print("got slot_enum: " , slot_enum)
+	match slot_enum:
+		0: 
+			print("use")
+			var item = InventoryManager.inventory[cursor_index]["item"]
+			if BattleManager.in_battle:
+				use_item_in_battle(item)
+			else:
+				use_item_out_of_battle(item)
+		1: 
+			print("give")
+		2: 
+			print("move")
+		3: pass
+	
+func use_item_in_battle(item: Item):
+	print("(in battle) use item: %s here" % item.name)
+	
+	
+func use_item_out_of_battle(item: Item):
+	print("use item: %s here" % item.name)
+	if item.in_battle_only:
+		DialogueManager.show_dialogue("Thats a battle item!", false)
+	else:
+		print("can use item")

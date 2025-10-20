@@ -1,9 +1,12 @@
 extends CanvasLayer
 
-@export var processing: bool = false
-@export var testing: bool = false
+enum State {DEFAULT, REORDER, USING, GIVING}
+var state = State.DEFAULT
 
-var reordering: bool = false
+@export var testing: bool = true
+
+var using_item: bool = false
+var giving_item: bool = false
 var swap_index: int = -1
 var free_switch: bool = false
 
@@ -27,64 +30,6 @@ var v2_to_slot: Dictionary = {
 	PartySlot.SLOT5: $Slot5/Background }
 #endregion
 
-#region Slot Maps
-var portrait_map: Dictionary = {}
-var hp_map: Dictionary = {}
-var exp_map: Dictionary = {}
-var name_map: Dictionary = {}
-var level_map: Dictionary = {}
-var type_map: Dictionary = {}
-var role_map: Dictionary = {}
-
-@onready var slot0_portrait = $Slot0/Background/Portrait
-@onready var slot0_hp = $Slot0/Background/PlayerHP
-@onready var slot0_exp = $Slot0/Background/PlayerEXP
-@onready var slot0_name = $Slot0/Background/NameLabel
-@onready var slot0_level = $Slot0/Background/LevelLabel
-@onready var slot0_type = $Slot0/Background/TypeLabel
-@onready var slot0_role = $Slot0/Background/RoleLabel
-
-@onready var slot1_portrait = $Slot1/Background/Portrait
-@onready var slot1_hp = $Slot1/Background/PlayerHP
-@onready var slot1_exp = $Slot1/Background/PlayerEXP
-@onready var slot1_name = $Slot1/Background/NameLabel
-@onready var slot1_level = $Slot1/Background/LevelLabel
-@onready var slot1_type = $Slot1/Background/TypeLabel
-@onready var slot1_role = $Slot1/Background/RoleLabel
-
-@onready var slot2_portrait = $Slot2/Background/Portrait
-@onready var slot2_hp = $Slot2/Background/PlayerHP
-@onready var slot2_exp = $Slot2/Background/PlayerEXP
-@onready var slot2_name = $Slot2/Background/NameLabel
-@onready var slot2_level = $Slot2/Background/LevelLabel
-@onready var slot2_type = $Slot2/Background/TypeLabel
-@onready var slot2_role = $Slot2/Background/RoleLabel
-
-@onready var slot3_portrait = $Slot3/Background/Portrait
-@onready var slot3_hp = $Slot3/Background/PlayerHP
-@onready var slot3_exp = $Slot3/Background/PlayerEXP
-@onready var slot3_name = $Slot3/Background/NameLabel
-@onready var slot3_level = $Slot3/Background/LevelLabel
-@onready var slot3_type = $Slot3/Background/TypeLabel
-@onready var slot3_role = $Slot3/Background/RoleLabel
-
-@onready var slot4_portrait = $Slot4/Background/Portrait
-@onready var slot4_hp = $Slot4/Background/PlayerHP
-@onready var slot4_exp = $Slot4/Background/PlayerEXP
-@onready var slot4_name = $Slot4/Background/NameLabel
-@onready var slot4_level = $Slot4/Background/LevelLabel
-@onready var slot4_type = $Slot4/Background/TypeLabel
-@onready var slot4_role = $Slot4/Background/RoleLabel
-
-@onready var slot5_portrait = $Slot5/Background/Portrait
-@onready var slot5_hp = $Slot5/Background/PlayerHP
-@onready var slot5_exp = $Slot5/Background/PlayerEXP
-@onready var slot5_name = $Slot5/Background/NameLabel
-@onready var slot5_level = $Slot5/Background/LevelLabel
-@onready var slot5_type = $Slot5/Background/TypeLabel
-@onready var slot5_role = $Slot5/Background/RoleLabel
-#endregion
-
 func _ready() -> void:
 	print("Party scene _ready() called")
 	print("PartyManager exists: ", PartyManager != null)
@@ -92,7 +37,6 @@ func _ready() -> void:
 		UiManager.ui_stack.append(self)
 
 	EventBus.free_switch.connect(_on_free_switch)
-	processing = true
 	if not BattleManager.in_battle:
 		free_switch = true
 	set_active_slot()
@@ -102,23 +46,20 @@ func _ready() -> void:
 func _input(event: InputEvent) -> void:
 	if self != UiManager.ui_stack.back():
 		return
-		
-	if event.is_action_pressed("yes") \
-	or event.is_action_pressed("no") or \
-	event.is_action_pressed("up") or \
-	event.is_action_pressed("down"):
-		get_viewport().set_input_as_handled()
 	
 	if event.is_action_pressed("yes"):
-		if not reordering:
-			_open_options()
-		else:
-			swap_monsters(swap_index, v2_to_slot[selected_slot])
+		match state:
+			State.DEFAULT:
+				if v2_to_slot[selected_slot] < PartyManager.party.size():
+					_open_options()
+			State.REORDER:
+				swap_monsters(swap_index, v2_to_slot[selected_slot])
 	if event.is_action_pressed("no"):
-		if not reordering:
-			close()
-		else:
-			cancel_swap()
+		match state:
+			State.DEFAULT:
+				close()
+			State.REORDER:
+				cancel_swap()
 			
 	if event.is_action_pressed("up"):
 		_move(Vector2.UP)
@@ -130,8 +71,12 @@ func _input(event: InputEvent) -> void:
 		_move(Vector2.RIGHT)
 	
 func _move(direction: Vector2):
+	print("State: ", state)
+	print("Current slot: ", selected_slot)
+	print("Direction: ", direction)
 	unset_active_slot()
 	var allowed = get_allowed_slots()
+	print("allowed: ", allowed)
 	var new_slot = selected_slot + direction
 	
 	if direction.x != 0:
@@ -156,7 +101,7 @@ func _move(direction: Vector2):
 			new_slot.y = ys[index]
 	if new_slot in allowed:
 		selected_slot = new_slot
-	if not reordering:
+	if not state == State.REORDER:
 		set_active_slot()
 	else:
 		set_moving_slot()
@@ -173,7 +118,8 @@ func get_allowed_slots() -> Array:
 	
 func _open_options():
 	var options = UiManager.push_ui(UiManager.party_options_scene)
-	options.option_chosen.connect(_on_option_chosen)
+	if not options.option_chosen.is_connected(_on_option_chosen):
+		options.option_chosen.connect(_on_option_chosen)
 	
 func _on_option_chosen(slot_enum) -> void:
 	print("option chosen")
@@ -182,7 +128,6 @@ func _on_option_chosen(slot_enum) -> void:
 		1: initiate_swap(v2_to_slot[selected_slot])
 		2: print("item")
 		3: print("options closed")
-	processing = true
 	
 func get_curr_slot():
 	return v2_to_slot[selected_slot]
@@ -197,13 +142,11 @@ func set_moving_slot():
 	slot[get_curr_slot()].frame = 2
 	
 func close():
-	clear_maps()
 	UiManager.pop_ui(self)
 #endregion
 
 #region Mapping
 func update_maps():
-	clear_maps()
 	
 	var party = PartyManager.party
 	var party_size = party.size()
@@ -220,15 +163,6 @@ func update_maps():
 		else:
 			slot_node.modulate = Color(0.5, 0.5, 0.5, 0.6)
 			clear_slot_ui(slot_enum)
-	
-func clear_maps():
-	portrait_map.clear()
-	hp_map.clear()
-	exp_map.clear()
-	name_map.clear()
-	level_map.clear()
-	type_map.clear()
-	role_map.clear()
 	
 func update_slot(monster: Monster, slot_enum: int) -> void:
 	print("updating slot: ", slot_enum, " with monster: ", monster)
@@ -262,18 +196,15 @@ func map_portrait(monster: Monster, slot_enum: int):
 	var portrait_node = slot[slot_enum].get_node_or_null("Portrait")
 	if portrait_node:
 		portrait_node.texture = monster.species.sprite
-		portrait_map[monster] = portrait_node
 func map_hp(monster: Monster, slot_enum: int):
 	var hp_node = slot[slot_enum].get_node_or_null("PlayerHP")
 	if hp_node:
 		hp_node.max_value = monster.max_hitpoints
 		hp_node.value = monster.hitpoints
-		hp_map[monster] = hp_node
 func map_name(monster: Monster, slot_enum: int):
 	var name_node = slot[slot_enum].get_node_or_null("NameLabel")
 	if name_node:
 		name_node.text = monster.name
-		name_map[monster] = name_node
 func map_exp(monster: Monster, slot_enum: int):
 	var exp_node = slot[slot_enum].get_node_or_null("PlayerEXP")
 	if exp_node:
@@ -281,17 +212,14 @@ func map_exp(monster: Monster, slot_enum: int):
 		var current = monster.experience - monster.experience_to_level(monster.level)
 		exp_node.max_value = next_level_req
 		exp_node.value = current
-		exp_map[monster] = exp_node
 func map_level(monster: Monster, slot_enum: int):
 	var level_node = slot[slot_enum].get_node_or_null("LevelLabel")
 	if level_node:
 		level_node.text = "Lvl. " + str(monster.level)
-		level_map[monster] = level_node
 func map_type(monster: Monster, slot_enum: int):
 	var type_node = slot[slot_enum].get_node_or_null("TypeLabel")
 	if type_node:
 		type_node.text = "Type: " + monster.type
-		type_map[monster] = type_node
 func map_role(_monster: Monster, slot_enum: int):
 	var role_node = slot[slot_enum].get_node_or_null("RoleLabel")
 	if role_node:
@@ -308,13 +236,13 @@ func initiate_swap(party_index):
 		swap_monsters(party_index, 0)
 	else:
 		print("initiating swap")
-		reordering = true
+		state = State.REORDER
 		swap_index = v2_to_slot[selected_slot]
 		set_moving_slot()
 	
 func cancel_swap():
 	print("cancelling swap")
-	reordering = false
+	state = State.DEFAULT
 	swap_index = -1
 	set_active_slot()
 	
@@ -327,9 +255,8 @@ func swap_monsters(from_index: int, to_index: int):
 		return
 	if not BattleManager.in_battle:
 		PartyManager.swap_party(from_index, to_index, free_switch)
-		free_switch = false
 		update_maps()
-		reordering = false
+		state = State.DEFAULT
 		swap_index = -1
 		set_active_slot()
 		return
@@ -341,5 +268,5 @@ func swap_monsters(from_index: int, to_index: int):
 		else:
 			print("creating switch action")
 			PartyManager.swap_party(from_index, to_index, free_switch)
-			
+			free_switch = false
 			close()

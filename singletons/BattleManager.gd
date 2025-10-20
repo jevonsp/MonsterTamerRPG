@@ -71,6 +71,8 @@ func on_action_selected(action: BattleAction):
 	execute_turn()
 	
 func get_enemy_action(monster: Monster):
+	if not in_battle:
+		return
 	var index = randi_range(0, monster.moves.size() - 1)
 	var enemy_move = monster.moves[index]
 	var enemy_target_index: int = -1
