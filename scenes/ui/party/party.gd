@@ -7,6 +7,7 @@ var state = State.DEFAULT
 
 var using_item: bool = false
 var giving_item: bool = false
+var item: Item = null
 var swap_index: int = -1
 var free_switch: bool = false
 
@@ -30,6 +31,14 @@ var v2_to_slot: Dictionary = {
 	PartySlot.SLOT5: $Slot5/Background }
 #endregion
 
+var portrait_map: Dictionary = {}
+var hp_map: Dictionary = {}
+var exp_map: Dictionary = {}
+var name_map: Dictionary = {}
+var level_map: Dictionary = {}
+var type_map: Dictionary = {}
+var role_map: Dictionary = {}
+
 func _ready() -> void:
 	print("Party scene _ready() called")
 	print("PartyManager exists: ", PartyManager != null)
@@ -37,13 +46,20 @@ func _ready() -> void:
 		UiManager.ui_stack.append(self)
 
 	EventBus.free_switch.connect(_on_free_switch)
+	EventBus.using_item.connect(_on_using_item)
 	if not BattleManager.in_battle:
 		free_switch = true
 	set_active_slot()
-	update_maps()
+	update_slots()
 	
 #region Movement and Inputs
 func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("yes") \
+	or event.is_action_pressed("no") or \
+	event.is_action_pressed("up") or \
+	event.is_action_pressed("down"):
+		get_viewport().set_input_as_handled()
+		
 	if self != UiManager.ui_stack.back():
 		return
 	
@@ -54,13 +70,34 @@ func _input(event: InputEvent) -> void:
 					_open_options()
 			State.REORDER:
 				swap_monsters(swap_index, v2_to_slot[selected_slot])
+			State.USING:
+				print("use item here")
+				print("item: ", item.name)
+				use_item(v2_to_slot[selected_slot])
+				state = State.DEFAULT
+				if BattleManager.in_battle:
+					close()
+			State.GIVING:
+				print("give item here")
+				print("item: ", item.name)
+				give_item(v2_to_slot[selected_slot])
+				state = State.DEFAULT
+				if BattleManager.in_battle:
+					close()
 	if event.is_action_pressed("no"):
 		match state:
 			State.DEFAULT:
 				close()
 			State.REORDER:
 				cancel_swap()
-			
+			State.USING:
+				print("cancelled item use/give")
+				item = null
+				state = State.DEFAULT
+			State.GIVING:
+				print("cancelled item use/give")
+				item = null
+				state = State.DEFAULT
 	if event.is_action_pressed("up"):
 		_move(Vector2.UP)
 	if event.is_action_pressed("down"):
@@ -142,12 +179,14 @@ func set_moving_slot():
 	slot[get_curr_slot()].frame = 2
 	
 func close():
+	clear_maps()
+	item = null
 	UiManager.pop_ui(self)
 #endregion
 
 #region Mapping
-func update_maps():
-	
+func update_slots():
+	clear_maps()
 	var party = PartyManager.party
 	var party_size = party.size()
 	var total_slots = PartySlot.values().size()
@@ -159,12 +198,12 @@ func update_maps():
 		if i < party_size:
 			var monster = party[i]
 			slot_node.modulate = Color(1, 1, 1, 1)
-			update_slot(monster, slot_enum)
+			update_maps(monster, slot_enum)
 		else:
 			slot_node.modulate = Color(0.5, 0.5, 0.5, 0.6)
 			clear_slot_ui(slot_enum)
 	
-func update_slot(monster: Monster, slot_enum: int) -> void:
+func update_maps(monster: Monster, slot_enum: int) -> void:
 	print("updating slot: ", slot_enum, " with monster: ", monster)
 	map_portrait(monster, slot_enum)
 	map_hp(monster, slot_enum)
@@ -189,6 +228,10 @@ func clear_slot_ui(slot_enum: int) -> void:
 		var label = slot_node.get_node_or_null(label_name)
 		if label:
 			label.text = ""
+			
+func clear_maps():
+	for map in [portrait_map, hp_map, exp_map, name_map, level_map, type_map, role_map]:
+		map.clear()
 #endregion
 	
 #region Mapping Helpers
@@ -196,15 +239,18 @@ func map_portrait(monster: Monster, slot_enum: int):
 	var portrait_node = slot[slot_enum].get_node_or_null("Portrait")
 	if portrait_node:
 		portrait_node.texture = monster.species.sprite
+		portrait_map[monster] = portrait_node
 func map_hp(monster: Monster, slot_enum: int):
 	var hp_node = slot[slot_enum].get_node_or_null("PlayerHP")
 	if hp_node:
 		hp_node.max_value = monster.max_hitpoints
 		hp_node.value = monster.hitpoints
+		hp_map[monster] = hp_node
 func map_name(monster: Monster, slot_enum: int):
 	var name_node = slot[slot_enum].get_node_or_null("NameLabel")
 	if name_node:
 		name_node.text = monster.name
+		name_map[monster] = name_node
 func map_exp(monster: Monster, slot_enum: int):
 	var exp_node = slot[slot_enum].get_node_or_null("PlayerEXP")
 	if exp_node:
@@ -212,18 +258,22 @@ func map_exp(monster: Monster, slot_enum: int):
 		var current = monster.experience - monster.experience_to_level(monster.level)
 		exp_node.max_value = next_level_req
 		exp_node.value = current
+		exp_map[monster] = exp_node
 func map_level(monster: Monster, slot_enum: int):
 	var level_node = slot[slot_enum].get_node_or_null("LevelLabel")
 	if level_node:
 		level_node.text = "Lvl. " + str(monster.level)
+		level_map[monster] = level_node
 func map_type(monster: Monster, slot_enum: int):
 	var type_node = slot[slot_enum].get_node_or_null("TypeLabel")
 	if type_node:
 		type_node.text = "Type: " + monster.type
-func map_role(_monster: Monster, slot_enum: int):
+		type_map[monster] = type_node
+func map_role(monster: Monster, slot_enum: int):
 	var role_node = slot[slot_enum].get_node_or_null("RoleLabel")
 	if role_node:
-		pass
+		role_node.text = "Role: " + monster.role
+		role_map[monster] = role_node
 #endregion
 
 func initiate_swap(party_index):
@@ -247,6 +297,14 @@ func cancel_swap():
 	set_active_slot()
 	
 func _on_free_switch() -> void: free_switch = true
+
+func _on_using_item(item_using) -> void:
+	item = item_using
+	state = State.USING
+
+func _on_giving_item(item_giving) -> void:
+	item = item_giving
+	state = State.GIVING
 	
 func swap_monsters(from_index: int, to_index: int):
 	print("from_index: ", from_index, ", to_index: ", to_index)
@@ -255,7 +313,7 @@ func swap_monsters(from_index: int, to_index: int):
 		return
 	if not BattleManager.in_battle:
 		PartyManager.swap_party(from_index, to_index, free_switch)
-		update_maps()
+		update_slots()
 		state = State.DEFAULT
 		swap_index = -1
 		set_active_slot()
@@ -270,3 +328,15 @@ func swap_monsters(from_index: int, to_index: int):
 			PartyManager.swap_party(from_index, to_index, free_switch)
 			free_switch = false
 			close()
+			
+func use_item(slot_enum) -> void:
+	print("would use item on: ", slot_enum)
+	for effect in item.effects:
+		effect.apply(PartyManager.party[slot_enum], PartyManager.party[slot_enum], item)
+		print("effect: ", effect)
+	item = null
+	
+func give_item(slot_enum) -> void:
+	print("would give item to: ", slot_enum)
+	
+	item = null

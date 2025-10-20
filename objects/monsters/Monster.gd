@@ -4,6 +4,7 @@ var species: MonsterData
 
 var name: String = ""
 var type: String = ""
+var role: String = ""
 var capture_rate: int = 0
 var level: int = 1
 var experience: int = 0
@@ -40,6 +41,7 @@ func setup_monster(md: MonsterData, lvl: int) -> void:
 	level = lvl
 	name = species.name
 	type = species.type
+	role = species.role
 	experience = experience_to_level(level)
 	decide_nature()
 	set_stats()

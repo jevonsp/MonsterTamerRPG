@@ -194,17 +194,51 @@ func _on_option_chosen(slot_enum: int):
 				use_item_out_of_battle(item)
 		1: 
 			print("give")
+			var item = InventoryManager.inventory[cursor_index]["item"]
+			if BattleManager.in_battle:
+				give_item_in_battle(item)
+			else:
+				give_item_out_of_battle(item)
 		2: 
 			print("move")
 		3: pass
 	
 func use_item_in_battle(item: Item):
 	print("(in battle) use item: %s here" % item.name)
+	if item.in_battle_only:
+		pass
+	else:
+		UiManager.push_ui(UiManager.party_scene)
+		EventBus.using_item.emit(item)
 	
 	
 func use_item_out_of_battle(item: Item):
 	print("use item: %s here" % item.name)
 	if item.in_battle_only:
-		DialogueManager.show_dialogue("Thats a battle item!", false)
+		DialogueManager.show_dialogue("Thats a battle item!", true)
+		await DialogueManager.dialogue_closed
 	else:
 		print("can use item")
+		UiManager.push_ui(UiManager.party_scene)
+		EventBus.using_item.emit(item)
+		
+func give_item_in_battle(item: Item):
+	print("(in battle) give item: %s here" % item.name)
+	if not item.is_held:
+		DialogueManager.show_dialogue("Thats not a held item!", true)
+		await DialogueManager.dialogue_closed
+		return
+	else:
+		UiManager.push_ui(UiManager.party_scene)
+		EventBus.giving_item.emit(item)
+	
+func give_item_out_of_battle(item: Item):
+	print("give item: %s here" % item.name)
+	if not item.is_held:
+		DialogueManager.show_dialogue("Thats not a held item!", true)
+		await DialogueManager.dialogue_closed
+		return
+	else:
+		print("can use item")
+		UiManager.push_ui(UiManager.party_scene)
+		EventBus.giving_item.emit(item)

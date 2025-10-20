@@ -23,10 +23,10 @@ func push_ui(scene: PackedScene):
 		return null
 	print("scene: ", scene)
 	var ui = scene.instantiate()
+	ui.layer = ui_stack.size() + 1
 	add_child(ui)
 	ui_stack.append(ui)
 	print("stack added: ", ui)
-		
 	return ui
 	
 func pop_ui(target: Node = null):
