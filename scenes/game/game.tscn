@@ -1,9 +1,9 @@
 [gd_scene load_steps=10 format=3 uid="uid://b1yah1hhi0u3c"]
 
-[ext_resource type="PackedScene" uid="uid://c32838kx1ass2" path="res://scenes/maps/test_map.tscn" id="1_7h61r"]
-[ext_resource type="PackedScene" uid="uid://bvky3u2b5xv0x" path="res://scenes/player/player.tscn" id="2_0sr1o"]
-[ext_resource type="PackedScene" uid="uid://dqs3upsifk31c" path="res://scenes/level_components/ball/ball.tscn" id="3_0sr1o"]
-[ext_resource type="PackedScene" uid="uid://dx1h5hc75ct73" path="res://scenes/level_components/wild_zone/wild_zone.tscn" id="4_kelw5"]
+[ext_resource type="PackedScene" uid="uid://c32838kx1ass2" path="res://scenes/world/maps/test_map.tscn" id="1_7h61r"]
+[ext_resource type="PackedScene" uid="uid://bvky3u2b5xv0x" path="res://scenes/world/player/player.tscn" id="2_0sr1o"]
+[ext_resource type="PackedScene" uid="uid://dqs3upsifk31c" path="res://scenes/world/level_components/ball/ball.tscn" id="3_0sr1o"]
+[ext_resource type="PackedScene" uid="uid://dx1h5hc75ct73" path="res://scenes/world/level_components/wild_zone/wild_zone.tscn" id="4_kelw5"]
 [ext_resource type="Script" uid="uid://cf7d81q2bjlj0" path="res://objects/monsters/MonsterData.gd" id="5_87uf6"]
 [ext_resource type="Resource" uid="uid://pxtac13xygko" path="res://objects/monsters/fox_mcleaf/Fox_McLeaf.tres" id="6_2a8rs"]
 [ext_resource type="Resource" uid="uid://drqip02v341yq" path="res://objects/monsters/pyro_badger/Pyro_Badger.tres" id="7_4j704"]

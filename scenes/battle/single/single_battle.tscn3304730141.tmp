@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://dxcxscdr6b7d3"]
+
+[ext_resource type="PackedScene" uid="uid://bvd84nab3ilbu" path="res://scenes/battle/single/single_moves.tscn" id="1_arb0v"]
+[ext_resource type="Script" uid="uid://dsflj3fvgf22" path="res://scenes/battle/single/single_battle.gd" id="1_uqks7"]
+[ext_resource type="PackedScene" uid="uid://cxnbs7a10pll7" path="res://scenes/battle/single/single_options.tscn" id="2_uqks7"]
+[ext_resource type="PackedScene" uid="uid://b8dvbvfhtrf3k" path="res://scenes/battle/single/single_visuals.tscn" id="3_lw4ds"]
+
+[node name="SingleBattle" type="CanvasLayer" node_paths=PackedStringArray("options", "moves", "visuals")]
+script = ExtResource("1_uqks7")
+options = NodePath("OptionControls")
+moves = NodePath("MoveControls")
+visuals = NodePath("SingleVisuals")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -6.0
+offset_top = -11.0
+offset_right = 647.0
+offset_bottom = 367.0
+color = Color(0.11372549, 0.14117648, 0.16470589, 1)
+
+[node name="OptionControls" parent="." instance=ExtResource("2_uqks7")]
+
+[node name="MoveControls" parent="." instance=ExtResource("1_arb0v")]
+
+[node name="SingleVisuals" parent="." instance=ExtResource("3_lw4ds")]

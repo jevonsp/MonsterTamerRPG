@@ -2,7 +2,7 @@ extends Node
 
 signal dialogue_closed
 
-var dialogue_scene = preload("res://scenes/dialogue/dialogue_box.tscn")
+var dialogue_scene = preload("res://scenes/ui/dialogue/dialogue_box.tscn")
 var current_dialogue: Node = null
 
 func show_dialogue(text: String, auto_close: bool = false) -> void:

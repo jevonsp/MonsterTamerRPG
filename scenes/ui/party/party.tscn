@@ -1,0 +1,479 @@
+[gd_scene load_steps=12 format=3 uid="uid://col3cx8k80bok"]
+
+[ext_resource type="Script" uid="uid://bhxrbt7grfmc2" path="res://scenes/ui/party/party.gd" id="1_87bek"]
+[ext_resource type="Texture2D" uid="uid://6a2ajdsvtuo1" path="res://assets/ui/highlighted_tile.png" id="2_1cnri"]
+[ext_resource type="Texture2D" uid="uid://bblshkejbt64c" path="res://objects/monsters/pistol_shrimp/pistol_shrimp.png" id="3_cwriw"]
+[ext_resource type="Texture2D" uid="uid://dbxs3k3s3shrd" path="res://assets/ui/hp_back_mockup.png" id="4_t7kgq"]
+[ext_resource type="Texture2D" uid="uid://b2ctlluobpc6f" path="res://assets/ui/hp_outline_mockup.png" id="5_2duhb"]
+[ext_resource type="Texture2D" uid="uid://d3e8ad8fp174n" path="res://assets/ui/hp_fill_mockup.png" id="6_g2yc7"]
+[ext_resource type="Texture2D" uid="uid://b43sk6yw1smka" path="res://assets/ui/exp_under.png" id="7_puwjx"]
+[ext_resource type="Texture2D" uid="uid://biw0cyyuqvb7e" path="res://assets/ui/exp_over.png" id="8_f7cvw"]
+[ext_resource type="Texture2D" uid="uid://ikvubcm5myxt" path="res://assets/ui/exp_prog.png" id="9_5wkqd"]
+[ext_resource type="FontFile" uid="uid://dnq6mej4gi63b" path="res://assets/m3x6.ttf" id="10_frkrj"]
+[ext_resource type="FontFile" uid="uid://jbbx5lupeleb" path="res://assets/m5x7.ttf" id="11_s7rw0"]
+
+[node name="Party" type="CanvasLayer"]
+script = ExtResource("1_87bek")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -12.0
+offset_top = -8.0
+offset_right = 647.0
+offset_bottom = 372.0
+
+[node name="Slot0" type="Node2D" parent="."]
+position = Vector2(0, 22)
+
+[node name="Background" type="Sprite2D" parent="Slot0"]
+position = Vector2(161, 154)
+scale = Vector2(0.9934114, 1)
+texture = ExtResource("2_1cnri")
+hframes = 3
+
+[node name="Portrait" type="TextureRect" parent="Slot0/Background"]
+offset_left = -158.04128
+offset_top = -12.0
+offset_right = -118.041275
+offset_bottom = 28.0
+texture = ExtResource("3_cwriw")
+flip_h = true
+
+[node name="PlayerHP" type="TextureProgressBar" parent="Slot0/Background"]
+offset_left = -2.0132751
+offset_top = -28.0
+offset_right = 157.98672
+offset_bottom = -8.0
+value = 75.0
+texture_under = ExtResource("4_t7kgq")
+texture_over = ExtResource("5_2duhb")
+texture_progress = ExtResource("6_g2yc7")
+
+[node name="PlayerEXP" type="TextureProgressBar" parent="Slot0/Background"]
+offset_left = -2.0132751
+offset_top = -7.0
+offset_right = 157.98672
+offset_bottom = 13.0
+value = 70.0
+texture_under = ExtResource("7_puwjx")
+texture_over = ExtResource("8_f7cvw")
+texture_progress = ExtResource("9_5wkqd")
+
+[node name="NameLabel" type="Label" parent="Slot0/Background"]
+offset_left = -144.95506
+offset_top = -36.0
+offset_right = -14.955063
+offset_bottom = -10.0
+theme_override_fonts/font = ExtResource("10_frkrj")
+theme_override_font_sizes/font_size = 32
+text = "NAMEY NAMINGTON"
+
+[node name="LevelLabel" type="Label" parent="Slot0/Background"]
+offset_left = -115.762726
+offset_top = -6.0
+offset_right = -55.762726
+offset_bottom = 20.0
+theme_override_fonts/font = ExtResource("10_frkrj")
+theme_override_font_sizes/font_size = 32
+text = "Lvl. 100"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TypeLabel" type="Label" parent="Slot0/Background"]
+offset_left = 14.09285
+offset_top = 5.0
+offset_right = 74.09285
+offset_bottom = 34.0
+theme_override_fonts/font = ExtResource("11_s7rw0")
+text = "TYPE: Grass"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RoleLabel" type="Label" parent="Slot0/Background"]
+offset_left = 90.59691
+offset_top = 5.0
+offset_right = 144.59691
+offset_bottom = 34.0
+theme_override_fonts/font = ExtResource("11_s7rw0")
+text = "ROLE: Tank"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Slot1" type="Node2D" parent="."]
+position = Vector2(319, -121)
+
+[node name="Background" type="Sprite2D" parent="Slot1"]
+position = Vector2(161, 154)
+scale = Vector2(0.98025745, 1)
+texture = ExtResource("2_1cnri")
+hframes = 3
+
+[node name="Portrait" type="TextureRect" parent="Slot1/Background"]
+offset_left = -157.98724
+offset_top = -12.0
+offset_right = -117.98724
+offset_bottom = 28.0
+texture = ExtResource("3_cwriw")
+
+[node name="PlayerHP" type="TextureProgressBar" parent="Slot1/Background"]
+offset_left = -2.0132751
+offset_top = -28.0
+offset_right = 157.98672
+offset_bottom = -8.0
+value = 75.0
+texture_under = ExtResource("4_t7kgq")
+texture_over = ExtResource("5_2duhb")
+texture_progress = ExtResource("6_g2yc7")
+
+[node name="PlayerEXP" type="TextureProgressBar" parent="Slot1/Background"]
+offset_left = -2.0132751
+offset_top = -7.0
+offset_right = 157.98672
+offset_bottom = 13.0
+value = 70.0
+texture_under = ExtResource("7_puwjx")
+texture_over = ExtResource("8_f7cvw")
+texture_progress = ExtResource("9_5wkqd")
+
+[node name="NameLabel" type="Label" parent="Slot1/Background"]
+offset_left = -144.95505
+offset_top = -36.0
+offset_right = -14.955048
+offset_bottom = -10.0
+theme_override_fonts/font = ExtResource("10_frkrj")
+theme_override_font_sizes/font_size = 32
+text = "NAMEY NAMINGTON"
+
+[node name="LevelLabel" type="Label" parent="Slot1/Background"]
+offset_left = -115.73572
+offset_top = -6.0
+offset_right = -55.735718
+offset_bottom = 20.0
+theme_override_fonts/font = ExtResource("10_frkrj")
+theme_override_font_sizes/font_size = 32
+text = "Lvl. 100"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TypeLabel" type="Label" parent="Slot1/Background"]
+offset_left = 14.092865
+offset_top = 5.0
+offset_right = 74.092865
+offset_bottom = 34.0
+theme_override_fonts/font = ExtResource("11_s7rw0")
+text = "TYPE: Grass"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RoleLabel" type="Label" parent="Slot1/Background"]
+offset_left = 90.59686
+offset_top = 5.0
+offset_right = 144.59686
+offset_bottom = 34.0
+theme_override_fonts/font = ExtResource("11_s7rw0")
+text = "ROLE: Tank"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Slot2" type="Node2D" parent="."]
+position = Vector2(319, -49)
+
+[node name="Background" type="Sprite2D" parent="Slot2"]
+position = Vector2(161, 154)
+scale = Vector2(0.98025745, 1)
+texture = ExtResource("2_1cnri")
+hframes = 3
+
+[node name="Portrait" type="TextureRect" parent="Slot2/Background"]
+offset_left = -157.98724
+offset_top = -12.0
+offset_right = -117.98724
+offset_bottom = 28.0
+texture = ExtResource("3_cwriw")
+
+[node name="PlayerHP" type="TextureProgressBar" parent="Slot2/Background"]
+offset_left = -2.0132751
+offset_top = -28.0
+offset_right = 157.98672
+offset_bottom = -8.0
+value = 75.0
+texture_under = ExtResource("4_t7kgq")
+texture_over = ExtResource("5_2duhb")
+texture_progress = ExtResource("6_g2yc7")
+
+[node name="PlayerEXP" type="TextureProgressBar" parent="Slot2/Background"]
+offset_left = -2.0132751
+offset_top = -7.0
+offset_right = 157.98672
+offset_bottom = 13.0
+value = 70.0
+texture_under = ExtResource("7_puwjx")
+texture_over = ExtResource("8_f7cvw")
+texture_progress = ExtResource("9_5wkqd")
+
+[node name="NameLabel" type="Label" parent="Slot2/Background"]
+offset_left = -144.95505
+offset_top = -36.0
+offset_right = -14.955048
+offset_bottom = -10.0
+theme_override_fonts/font = ExtResource("10_frkrj")
+theme_override_font_sizes/font_size = 32
+text = "NAMEY NAMINGTON"
+
+[node name="LevelLabel" type="Label" parent="Slot2/Background"]
+offset_left = -115.73572
+offset_top = -6.0
+offset_right = -55.735718
+offset_bottom = 20.0
+theme_override_fonts/font = ExtResource("10_frkrj")
+theme_override_font_sizes/font_size = 32
+text = "Lvl. 100"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TypeLabel" type="Label" parent="Slot2/Background"]
+offset_left = 14.092865
+offset_top = 5.0
+offset_right = 74.092865
+offset_bottom = 34.0
+theme_override_fonts/font = ExtResource("11_s7rw0")
+text = "TYPE: Grass"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RoleLabel" type="Label" parent="Slot2/Background"]
+offset_left = 90.59686
+offset_top = 5.0
+offset_right = 144.59686
+offset_bottom = 34.0
+theme_override_fonts/font = ExtResource("11_s7rw0")
+text = "ROLE: Tank"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Slot3" type="Node2D" parent="."]
+position = Vector2(319, 22)
+
+[node name="Background" type="Sprite2D" parent="Slot3"]
+position = Vector2(161, 154)
+scale = Vector2(0.98025745, 1)
+texture = ExtResource("2_1cnri")
+hframes = 3
+
+[node name="Portrait" type="TextureRect" parent="Slot3/Background"]
+offset_left = -157.98724
+offset_top = -12.0
+offset_right = -117.98724
+offset_bottom = 28.0
+texture = ExtResource("3_cwriw")
+
+[node name="PlayerHP" type="TextureProgressBar" parent="Slot3/Background"]
+offset_left = -2.0132751
+offset_top = -28.0
+offset_right = 157.98672
+offset_bottom = -8.0
+value = 75.0
+texture_under = ExtResource("4_t7kgq")
+texture_over = ExtResource("5_2duhb")
+texture_progress = ExtResource("6_g2yc7")
+
+[node name="PlayerEXP" type="TextureProgressBar" parent="Slot3/Background"]
+offset_left = -2.0132751
+offset_top = -7.0
+offset_right = 157.98672
+offset_bottom = 13.0
+value = 70.0
+texture_under = ExtResource("7_puwjx")
+texture_over = ExtResource("8_f7cvw")
+texture_progress = ExtResource("9_5wkqd")
+
+[node name="NameLabel" type="Label" parent="Slot3/Background"]
+offset_left = -144.95505
+offset_top = -36.0
+offset_right = -14.955048
+offset_bottom = -10.0
+theme_override_fonts/font = ExtResource("10_frkrj")
+theme_override_font_sizes/font_size = 32
+text = "NAMEY NAMINGTON"
+
+[node name="LevelLabel" type="Label" parent="Slot3/Background"]
+offset_left = -115.73572
+offset_top = -6.0
+offset_right = -55.735718
+offset_bottom = 20.0
+theme_override_fonts/font = ExtResource("10_frkrj")
+theme_override_font_sizes/font_size = 32
+text = "Lvl. 100"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TypeLabel" type="Label" parent="Slot3/Background"]
+offset_left = 14.092865
+offset_top = 5.0
+offset_right = 74.092865
+offset_bottom = 34.0
+theme_override_fonts/font = ExtResource("11_s7rw0")
+text = "TYPE: Grass"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RoleLabel" type="Label" parent="Slot3/Background"]
+offset_left = 90.59686
+offset_top = 5.0
+offset_right = 144.59686
+offset_bottom = 34.0
+theme_override_fonts/font = ExtResource("11_s7rw0")
+text = "ROLE: Tank"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Slot4" type="Node2D" parent="."]
+position = Vector2(319, 90)
+
+[node name="Background" type="Sprite2D" parent="Slot4"]
+position = Vector2(161, 154)
+scale = Vector2(0.98025745, 1)
+texture = ExtResource("2_1cnri")
+hframes = 3
+
+[node name="Portrait" type="TextureRect" parent="Slot4/Background"]
+offset_left = -157.98724
+offset_top = -12.0
+offset_right = -117.98724
+offset_bottom = 28.0
+texture = ExtResource("3_cwriw")
+
+[node name="PlayerHP" type="TextureProgressBar" parent="Slot4/Background"]
+offset_left = -2.0132751
+offset_top = -28.0
+offset_right = 157.98672
+offset_bottom = -8.0
+value = 75.0
+texture_under = ExtResource("4_t7kgq")
+texture_over = ExtResource("5_2duhb")
+texture_progress = ExtResource("6_g2yc7")
+
+[node name="PlayerEXP" type="TextureProgressBar" parent="Slot4/Background"]
+offset_left = -2.0132751
+offset_top = -7.0
+offset_right = 157.98672
+offset_bottom = 13.0
+value = 70.0
+texture_under = ExtResource("7_puwjx")
+texture_over = ExtResource("8_f7cvw")
+texture_progress = ExtResource("9_5wkqd")
+
+[node name="NameLabel" type="Label" parent="Slot4/Background"]
+offset_left = -144.95505
+offset_top = -36.0
+offset_right = -14.955048
+offset_bottom = -10.0
+theme_override_fonts/font = ExtResource("10_frkrj")
+theme_override_font_sizes/font_size = 32
+text = "NAMEY NAMINGTON"
+
+[node name="LevelLabel" type="Label" parent="Slot4/Background"]
+offset_left = -115.73572
+offset_top = -6.0
+offset_right = -55.735718
+offset_bottom = 20.0
+theme_override_fonts/font = ExtResource("10_frkrj")
+theme_override_font_sizes/font_size = 32
+text = "Lvl. 100"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TypeLabel" type="Label" parent="Slot4/Background"]
+offset_left = 14.092865
+offset_top = 5.0
+offset_right = 74.092865
+offset_bottom = 34.0
+theme_override_fonts/font = ExtResource("11_s7rw0")
+text = "TYPE: Grass"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RoleLabel" type="Label" parent="Slot4/Background"]
+offset_left = 90.59686
+offset_top = 5.0
+offset_right = 144.59686
+offset_bottom = 34.0
+theme_override_fonts/font = ExtResource("11_s7rw0")
+text = "ROLE: Tank"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Slot5" type="Node2D" parent="."]
+position = Vector2(319, 162)
+
+[node name="Background" type="Sprite2D" parent="Slot5"]
+position = Vector2(161, 154)
+scale = Vector2(0.98025745, 1)
+texture = ExtResource("2_1cnri")
+hframes = 3
+
+[node name="Portrait" type="TextureRect" parent="Slot5/Background"]
+offset_left = -157.98724
+offset_top = -12.0
+offset_right = -117.98724
+offset_bottom = 28.0
+texture = ExtResource("3_cwriw")
+
+[node name="PlayerHP" type="TextureProgressBar" parent="Slot5/Background"]
+offset_left = -2.0132751
+offset_top = -28.0
+offset_right = 157.98672
+offset_bottom = -8.0
+value = 75.0
+texture_under = ExtResource("4_t7kgq")
+texture_over = ExtResource("5_2duhb")
+texture_progress = ExtResource("6_g2yc7")
+
+[node name="PlayerEXP" type="TextureProgressBar" parent="Slot5/Background"]
+offset_left = -2.0132751
+offset_top = -7.0
+offset_right = 157.98672
+offset_bottom = 13.0
+value = 70.0
+texture_under = ExtResource("7_puwjx")
+texture_over = ExtResource("8_f7cvw")
+texture_progress = ExtResource("9_5wkqd")
+
+[node name="NameLabel" type="Label" parent="Slot5/Background"]
+offset_left = -144.95505
+offset_top = -36.0
+offset_right = -14.955048
+offset_bottom = -10.0
+theme_override_fonts/font = ExtResource("10_frkrj")
+theme_override_font_sizes/font_size = 32
+text = "NAMEY NAMINGTON"
+
+[node name="LevelLabel" type="Label" parent="Slot5/Background"]
+offset_left = -115.73572
+offset_top = -6.0
+offset_right = -55.735718
+offset_bottom = 20.0
+theme_override_fonts/font = ExtResource("10_frkrj")
+theme_override_font_sizes/font_size = 32
+text = "Lvl. 100"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TypeLabel" type="Label" parent="Slot5/Background"]
+offset_left = 14.092865
+offset_top = 5.0
+offset_right = 74.092865
+offset_bottom = 34.0
+theme_override_fonts/font = ExtResource("11_s7rw0")
+text = "TYPE: Grass"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RoleLabel" type="Label" parent="Slot5/Background"]
+offset_left = 90.59686
+offset_top = 5.0
+offset_right = 144.59686
+offset_bottom = 34.0
+theme_override_fonts/font = ExtResource("11_s7rw0")
+text = "ROLE: Tank"
+horizontal_alignment = 1
+vertical_alignment = 1
