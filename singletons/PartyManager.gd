@@ -2,8 +2,6 @@ extends Node
 
 var party: Array[Monster] = []
 
-var party_preload = preload("res://scenes/party/single_party.tscn")
-
 func make_monster(monster_data: MonsterData, lvl: int) -> void:
 	if not party.size() < 6:
 		print("no more room in party!")
@@ -28,8 +26,7 @@ func get_first_alive() -> Monster:
 	return null
 	
 func show_party():
-	var party_scene = party_preload.instantiate()
-	add_child(party_scene)
+	UiManager.push_ui(UiManager.party_scene2)
 	
 func swap_party(from_index: int, to_index: int, free_switch: bool = true) -> void:
 	if free_switch:

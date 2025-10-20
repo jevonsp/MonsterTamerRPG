@@ -8,12 +8,9 @@ var current_dialogue: Node = null
 func show_dialogue(text: String, auto_close: bool = false) -> void:
 	print("show dialogue called")
 	if current_dialogue:
-		current_dialogue.queue_free()
+		UiManager.pop_ui(current_dialogue)
 		
-	GameManager.input_state = GameManager.InputState.DIALOGUE
-		
-	current_dialogue = dialogue_scene.instantiate()
-	add_child(current_dialogue)
+	current_dialogue = UiManager.push_ui(UiManager.dialogue_scene)
 	await get_tree().process_frame
 	current_dialogue.display_text(text)
 	if auto_close:
@@ -23,13 +20,8 @@ func show_dialogue(text: String, auto_close: bool = false) -> void:
 		await EventBus.advance_dialogue
 		close_dialogue()
 		
-	if BattleManager.in_battle:
-		GameManager.input_state = GameManager.InputState.BATTLE
-	elif not BattleManager.in_battle:
-		GameManager.input_state = GameManager.InputState.OVERWORLD
-		
 func close_dialogue() -> void:
 	if current_dialogue:
-		current_dialogue.queue_free()
+		UiManager.pop_ui(current_dialogue)
 		current_dialogue = null
 	dialogue_closed.emit()

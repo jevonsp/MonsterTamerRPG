@@ -85,10 +85,9 @@ var role_map: Dictionary = {}
 @onready var slot5_role = $Slot5/Background/RoleLabel
 #endregion
 
-var party_options_scene = preload("res://scenes/party/options.tscn")
-
 func _ready() -> void:
-	EventBus.party_open.emit()
+	print("Party scene _ready() called")
+	print("PartyManager exists: ", PartyManager != null)
 	EventBus.free_switch.connect(_on_free_switch)
 	processing = true
 	if not BattleManager.in_battle:
@@ -98,14 +97,15 @@ func _ready() -> void:
 	
 #region Movement and Inputs
 func _input(event: InputEvent) -> void:
+	#if self != UiManager.ui_stack.back():
+		#return
+		
 	if event.is_action_pressed("yes") \
 	or event.is_action_pressed("no") or \
 	event.is_action_pressed("up") or \
 	event.is_action_pressed("down"):
 		get_viewport().set_input_as_handled()
 	
-	if not processing:
-		return
 	if event.is_action_pressed("yes"):
 		if not reordering:
 			_open_options()
@@ -169,13 +169,8 @@ func get_allowed_slots() -> Array:
 	return left + right
 	
 func _open_options():
-	processing = false
-	print("processing: ", processing)
-	print("input called")
-	var options = UiManager.show_party_options()
-	print("Options scene instantiated, connecting signal...")
-	var connect_result = options.option_chosen.connect(_on_option_chosen)
-	print("Connection result: ", connect_result)  # Should print 0 (OK))
+	var options = UiManager.push_ui(UiManager.party_options_scene)
+	options.option_chosen.connect(_on_option_chosen)
 	
 func _on_option_chosen(slot_enum) -> void:
 	print("option chosen")
@@ -208,10 +203,8 @@ func set_moving_slot():
 	slot[get_curr_slot()].frame = 2
 	
 func close():
-	EventBus.party_closed.emit()
 	clear_maps()
-	get_parent().remove_child(self)
-	queue_free()
+	UiManager.pop_ui(self)
 #endregion
 
 #region Mapping

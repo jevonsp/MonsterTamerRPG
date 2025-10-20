@@ -1,11 +1,12 @@
 extends CanvasLayer
 
-signal inventory_options_closed
-
 func _ready():
 	pass
 
 func _input(event: InputEvent) -> void:
+	if self != UiManager.ui_stack.back():
+		return
+	
 	print("Options _input received: ", event)
 	if event.is_action_pressed("yes") \
 	or event.is_action_pressed("no") or \
@@ -18,6 +19,4 @@ func _input(event: InputEvent) -> void:
 		close()
 		
 func close():
-	inventory_options_closed.emit()
-	get_parent().remove_child(self)
-	queue_free()
+	UiManager.pop_ui(self)

@@ -61,9 +61,7 @@ func _input(event: InputEvent) -> void:
 		return
 	if event.is_action_pressed("yes"):
 		if not reordering:
-			processing = false
-			var options = show_inventory_options()
-			options.inventory_options_closed.connect(on_options_closed)
+			var inventory_options = UiManager.push_ui(UiManager.inventory_options_scene)
 	if event.is_action_pressed("no"):
 		if not reordering:
 			close()
@@ -127,9 +125,7 @@ func set_moving_slot():
 	slot[get_ui_slot()].frame = 2
 	
 func close():
-	inventory_closed.emit()
-	get_parent().remove_child(self)
-	queue_free()
+	UiManager.pop_ui(self)
 	
 func swap_items(_from_index: int, _to_index: int) -> void:
 	update_display()
@@ -184,13 +180,3 @@ func clear_slot_ui(slot_enum: int) -> void:
 	if desc_label:
 		desc_label.text = ""
 	
-func show_inventory_options():
-	var inventory_options = UiManager.show_inventory_options()
-	print("Options added to scene tree: ", inventory_options.is_inside_tree())
-	print("Options visibility: ", inventory_options.visible)
-	print("Options CanvasLayer layer: ", inventory_options.layer)
-	print("Options process mode: ", inventory_options.get_process_mode())
-	return inventory_options
-	
-func on_options_closed() -> void:
-	processing = true

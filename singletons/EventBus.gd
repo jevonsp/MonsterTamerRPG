@@ -32,7 +32,7 @@ signal switch_done_animating
 
 signal advance_dialogue
 
-signal party_open
-signal party_closed
+#signal party_open
+#signal party_closed
 
 @warning_ignore_restore("unused_signal")

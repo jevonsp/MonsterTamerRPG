@@ -45,13 +45,11 @@ func _ready() -> void:
 	anim_tree.set("parameters/Walk/blend_position", blend_dir)
 	anim_state.travel("Idle")
 	
-	GameManager.input_state_changed.connect(_on_input_state_changed)
-	
 func _process(delta: float) -> void:
 	update_held_keys(delta)
 		
 func _physics_process(delta: float) -> void:
-	if not processing:
+	if not UiManager.ui_stack.is_empty():
 		return
 		
 	match current_state:
@@ -63,10 +61,12 @@ func _physics_process(delta: float) -> void:
 			process_walking_state(delta)
 
 func _input(event: InputEvent) -> void:
-	if not processing:
+	if not UiManager.ui_stack.is_empty():
 		return
 	if event.is_action_pressed("yes"):
 		attempt_interaction()
+	if event.is_action_pressed("menu"):
+		UiManager.push_ui(UiManager.menu_scene)
 
 # ============================================================================
 # STATE PROCESSING
@@ -259,20 +259,3 @@ func attempt_interaction() -> void:
 		var collider = ray2d.get_collider()
 		if collider.is_in_group("interactable"):
 			collider.interact()
-
-# ============================================================================
-# INPUT STATE MANAGEMENT
-# ============================================================================
-
-func _on_input_state_changed(new_state) -> void:
-	match new_state:
-		GameManager.InputState.OVERWORLD:
-			processing = true
-		GameManager.InputState.BATTLE:
-			processing = false
-		GameManager.InputState.DIALOGUE:
-			processing = false
-		GameManager.InputState.MENU:
-			processing = false
-		GameManager.InputState.INACTIVE:
-			pass

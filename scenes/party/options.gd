@@ -23,6 +23,9 @@ func _ready() -> void:
 	processing = true
 	
 func _input(event: InputEvent) -> void:
+	if self != UiManager.ui_stack.back():
+		return
+	
 	if event.is_action_pressed("yes") \
 	or event.is_action_pressed("no") or \
 	event.is_action_pressed("up") or \

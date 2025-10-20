@@ -20,13 +20,13 @@ var selected_slot: MenuSlot = MenuSlot.SLOT0
 	4: MenuSlot.SLOT4 }
 
 func _ready() -> void:
-	EventBus.party_open.connect(_on_party_open)
-	EventBus.party_closed.connect(_on_party_closed)
 	processing = true
 	set_active_slot()
 	
 func _input(event: InputEvent) -> void:
-	if not processing:
+	if UiManager.ui_stack.is_empty():
+		return
+	if self != UiManager.ui_stack.back():
 		return
 	if event.is_action_pressed("yes"):
 		_input_selection()
@@ -45,11 +45,9 @@ func _move(direction: int):
 	
 func _input_selection():
 	if selected_slot == 0:
-		PartyManager.show_party()
+		UiManager.push_ui(UiManager.party_remake)
 	elif selected_slot == 1:
-		processing = false
-		var inventory = UiManager.show_inventory()
-		inventory.inventory_closed.connect(_on_inventory_closed)
+		UiManager.push_ui(UiManager.inventory_scene)
 	elif selected_slot == 2:
 		print("caught pressed")
 		print(selected_slot)
@@ -69,15 +67,5 @@ func set_active_slot():
 	slot[selected_slot].frame = 1
 	
 func close():
-	GameManager.input_state = GameManager.InputState.OVERWORLD
-	get_parent().remove_child(self)
-	queue_free()
+	UiManager.pop_ui(self)
 	
-func _on_party_open():
-	processing = false
-	
-func _on_party_closed():
-	processing = true
-	
-func _on_inventory_closed():
-	processing = true
