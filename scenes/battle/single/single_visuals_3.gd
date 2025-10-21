@@ -152,6 +152,11 @@ func _on_health_changed(monster: Monster, _old: int, new: int) -> void:
 	await tween.finished
 	EventBus.health_done_animating.emit()
 	
+func _on_monster_revived(_monster: Monster) -> void:
+	print("do revive animation here")
+	await get_tree().create_timer(Settings.game_speed).timeout
+	EventBus.monster_revive_done_animating.emit()
+	
 func _on_switch_animation(old: Monster, new: Monster) -> void:
 	var direction
 	print("old: ", old)

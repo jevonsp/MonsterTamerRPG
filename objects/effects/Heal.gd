@@ -20,14 +20,20 @@ func apply(actor_ref: Monster, target_ref: Monster, data_ref) -> void:
 			print("Unhandled target_type in Heal: ", target_type)
 			
 func _apply_heal() -> void:
+	print("apply heal called")
 	DialogueManager.show_dialogue("%s was used on %s" % [data.name, target.name], true)
-	EventBus.effect_started.emit(target_type, actor, target, animation)
-	await EventBus.effect_ended
+	await DialogueManager.dialogue_closed
+	if BattleManager.in_battle:
+		EventBus.effect_started.emit(target_type, actor, target, animation)
+		await EventBus.effect_ended
 	if revives and target.is_fainted:
 		target.revive()
 		DialogueManager.show_dialogue("%s was revived by its effect" % target.name)
 		await DialogueManager.dialogue_closed
-	elif not target.is_fainted:
+	if heal_amount > 0:
+		print("healed monster for: ", heal_amount)
 		await target.heal(heal_amount)
-		DialogueManager.show_dialogue("%s was healed for %s by its effect" % [target.name, heal_amount])
+		DialogueManager.show_dialogue("%s was healed for %s by its effect" % [target.name, heal_amount], false)
 		await DialogueManager.dialogue_closed
+	if not BattleManager.in_battle:
+		EventBus.party_effect_ended.emit()

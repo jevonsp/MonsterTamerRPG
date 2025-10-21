@@ -5,6 +5,8 @@ var state = State.DEFAULT
 
 @export var testing: bool = true
 
+var processing: bool = true
+
 var using_item: bool = false
 var giving_item: bool = false
 var item: Item = null
@@ -47,6 +49,8 @@ func _ready() -> void:
 
 	EventBus.free_switch.connect(_on_free_switch)
 	EventBus.using_item.connect(_on_using_item)
+	EventBus.health_changed.connect(_on_health_changed)
+	
 	if not BattleManager.in_battle:
 		free_switch = true
 	set_active_slot()
@@ -54,6 +58,9 @@ func _ready() -> void:
 	
 #region Movement and Inputs
 func _input(event: InputEvent) -> void:
+	if not processing:
+		return
+	
 	if event.is_action_pressed("yes") \
 	or event.is_action_pressed("no") or \
 	event.is_action_pressed("up") or \
@@ -335,8 +342,24 @@ func use_item(slot_enum) -> void:
 		effect.apply(PartyManager.party[slot_enum], PartyManager.party[slot_enum], item)
 		print("effect: ", effect)
 	item = null
+	processing = false
+	print("processing: ", processing)
+	await EventBus.party_effect_ended
+	print("processing: ", processing)
+	close()
 	
 func give_item(slot_enum) -> void:
 	print("would give item to: ", slot_enum)
 	
 	item = null
+	
+	close()
+	
+func _on_health_changed(_monster: Monster, _old: int, _new: int) -> void:
+	print("_on_health_changed called")
+	await get_tree().create_timer(Settings.game_speed).timeout
+	EventBus.health_done_animating.emit()
+	print("health_done_animating")
+	processing = true
+	print("processing: ", processing)
+	

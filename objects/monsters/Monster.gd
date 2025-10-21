@@ -166,12 +166,14 @@ func heal(amount: int) -> void:
 	hitpoints += amount
 	EventBus.health_changed.emit(self, starting, hitpoints)
 	await EventBus.health_done_animating
+	print("health finished animating")
 	await Engine.get_main_loop().process_frame
 	if hitpoints >= max_hitpoints:
 		hitpoints = max_hitpoints
 	
 func revive() -> void:
 	is_fainted = false
+	EventBus.monster_revived.emit(self)
 	
 func attempt_capture(capture_value: int, instant: bool):
 	capture_in_progress = true

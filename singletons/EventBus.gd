@@ -14,6 +14,7 @@ signal enemy_battle_actor_sent(monster: Monster)
 
 signal effect_started(effect_type: String, actor: Monster, target: Monster, image: Texture2D)
 signal effect_ended
+signal party_effect_ended
 
 signal health_changed(monster: Monster, old: int, new: int)
 signal health_done_animating
@@ -24,6 +25,8 @@ signal exp_done_animating
 
 signal monster_fainted(monster: Monster)
 signal fainting_done_animating
+signal monster_revived(monster: Monster)
+signal monster_revive_done_animating
 
 signal capture_shake(monster: Monster, shake_number: int)
 signal shake_done_animating
@@ -38,6 +41,7 @@ signal switch_done_animating
 signal advance_dialogue
 
 signal using_item(item: Item)
+signal inventory_item_effect_ended
 signal giving_item(item: Item)
 
 @warning_ignore_restore("unused_signal")
