@@ -80,8 +80,10 @@ func _input(event: InputEvent) -> void:
 		match UiManager.context:
 			"picking":
 				print("context picking")
-				print("would use %s on %s" % [chosen_item.name, v2_to_slot[selected_slot]])
+				await use_item(chosen_item)
+				chosen_item = null
 				UiManager.context = ""
+				close()
 			"using":
 				print("context: using")
 			"giving":
