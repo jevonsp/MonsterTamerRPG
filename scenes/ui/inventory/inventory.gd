@@ -3,7 +3,6 @@ extends CanvasLayer
 const VISIBLE_SLOTS = 6
 var processing: bool = false
 var reordering: bool = false
-var no_selection: bool = false
 
 enum Slot {SLOT0, SLOT1, SLOT2, SLOT3, SLOT4, SLOT5}
 var cursor_index: Slot = Slot.SLOT0
@@ -41,7 +40,6 @@ func _ready() -> void:
 	processing = true
 	for item in InventoryManager.inventory:
 		items.append(item)
-	EventBus.no_selection.connect(_on_no_selection)
 	update_display()
 	
 func _input(event: InputEvent) -> void:
@@ -55,10 +53,6 @@ func _input(event: InputEvent) -> void:
 		return
 	
 	if event.is_action_pressed("yes"):
-		if no_selection:
-			print("no selection: ", no_selection)
-			_open_options_from_party()
-			return
 		if not reordering:
 			if cursor_index < InventoryManager.inventory.size():
 				_open_options()
@@ -128,6 +122,7 @@ func set_moving_slot():
 	
 func close():
 	UiManager.pop_ui(self)
+	UiManager.context = ""
 	
 func swap_items(_from_index: int, _to_index: int) -> void:
 	update_display()
@@ -186,47 +181,44 @@ func _open_options():
 	var options = UiManager.push_ui(UiManager.inventory_options_scene)
 	if not options.option_chosen.is_connected(_on_option_chosen):
 		options.option_chosen.connect(_on_option_chosen)
-	
-func _open_options_from_party():
-	print("would open just use/give")
-	no_selection = false
-	print("no_selection reset to: ", no_selection)
-	_open_options()
-	EventBus.limit_choices.emit()
+	print("inventory opening options context: ", UiManager.context)
+	if UiManager.context == "from_party":
+		options.set_limited_options(true)
 	
 func _on_option_chosen(slot_enum: int):
 	print("got slot_enum: " , slot_enum)
+	print("inventory got UiManager.context: ", UiManager.context)
+	match UiManager.context:
+		"":
+			print("normal case where transitions to party")
+			UiManager.context = "from_inventory"
+			UiManager.push_ui_by_name(UiManager.SCENE_PARTY)
+		"using":
+			print("use: ", items[cursor_index]["item"].name)
+			EventBus.using_item.emit(items[cursor_index]["item"])
+			close()
+			return
+		"giving":
+			print("give: ", items[cursor_index]["item"].name)
+			EventBus.giving_item.emit(items[cursor_index]["item"])
+			close()
+			return
+		_:
+			print("wrong ui context")
 	match slot_enum:
-		0: 
-			print("use")
-			var item = InventoryManager.inventory[cursor_index]["item"]
-			if BattleManager.in_battle:
-				use_item_in_battle(item)
-			else:
-				use_item_out_of_battle(item)
-		1: 
-			print("give")
-			var item = InventoryManager.inventory[cursor_index]["item"]
-			if BattleManager.in_battle:
-				give_item_in_battle(item)
-			else:
-				give_item_out_of_battle(item)
 		2: 
 			print("move")
 		3: pass
 	
 func use_item_in_battle(item: Item):
 	print("(in battle) use item: %s here" % item.name)
-	if item.in_battle_only:
-		pass
+	if not item.in_battle_only:
+		return
 	else:
-		print("attempt to call: push_ui_by_name")
-		UiManager.push_ui_by_name(UiManager.SCENE_PARTY, "inventory")
+		UiManager.context = "from_inventory"
+		UiManager.push_ui_by_name(UiManager.SCENE_PARTY)
 		EventBus.using_item.emit(item)
 		print("called push_ui_by_name")
-
-	
-func _on_no_selection() -> void: no_selection = true
 	
 func use_item_out_of_battle(item: Item):
 	print("use item: %s here" % item.name)
@@ -235,32 +227,9 @@ func use_item_out_of_battle(item: Item):
 		await DialogueManager.dialogue_closed
 	else:
 		print("can use item")
-		if no_selection:
-			print("attempt to call: push_ui_by_name")
-			print("called push_ui_by_name")
-		else:
-			print("attempt to call: push_ui_by_name")
-			UiManager.push_ui_by_name(UiManager.SCENE_PARTY, "inventory")
-			EventBus.using_item.emit(item)
-			print("called push_ui_by_name")
+		print("attempt to call: push_ui_by_name")
+		UiManager.context = "from_inventory"
+		UiManager.push_ui_by_name(UiManager.SCENE_PARTY)
+		EventBus.using_item.emit(item)
+		print("called push_ui_by_name")
 		
-func give_item_in_battle(item: Item):
-	print("(in battle) give item: %s here" % item.name)
-	if not item.is_held:
-		DialogueManager.show_dialogue("Thats not a held item!", true)
-		await DialogueManager.dialogue_closed
-		return
-	else:
-		UiManager.push_ui(UiManager.party_scene)
-		EventBus.giving_item.emit(item)
-	
-func give_item_out_of_battle(item: Item):
-	print("give item: %s here" % item.name)
-	if not item.is_held:
-		DialogueManager.show_dialogue("Thats not a held item!", true)
-		await DialogueManager.dialogue_closed
-		return
-	else:
-		print("can use item")
-		UiManager.push_ui(UiManager.party_scene)
-		EventBus.giving_item.emit(item)

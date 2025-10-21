@@ -22,8 +22,7 @@ func _ready():
 	set_active_slot()
 	if UiManager.ui_stack.is_empty():
 		UiManager.ui_stack.append(self)
-	EventBus.limit_choices.connect(_on_limit_choices)
-
+		
 func _input(event: InputEvent) -> void:
 	if self != UiManager.ui_stack.back():
 		return
@@ -35,7 +34,7 @@ func _input(event: InputEvent) -> void:
 		get_viewport().set_input_as_handled()
 	if event.is_action_pressed("yes"):
 		_input_selection()
-		unlimit_choices()
+		set_limited_options(false)
 	if event.is_action_pressed("no"):
 		print("no pressed")
 		option_chosen.emit(Slot.SLOT3)
@@ -44,7 +43,6 @@ func _input(event: InputEvent) -> void:
 		_move(-1)
 	if event.is_action_pressed("down"):
 		_move(1)
-		
 		
 func _move(direction: int):
 	unset_active_slot()
@@ -63,7 +61,13 @@ func _move(direction: int):
 	print(selected_slot)
 	
 func _input_selection():
+	if UiManager.context == "from_party":
+		if selected_slot == 0:
+			UiManager.context = "using"
+		if selected_slot == 1:
+			UiManager.context = "giving"
 	option_chosen.emit(selected_slot)
+	set_limited_options(false)
 	close()
 	
 func unset_active_slot():
@@ -81,13 +85,14 @@ func set_active_slot():
 func close():
 	UiManager.pop_ui(self)
 	
-func _on_limit_choices():
-	choices_limited = true
-	slot[Slot.SLOT2].modulate = Color(0.5, 0.5, 0.5, 0.5)
-	slot[Slot.SLOT3].modulate = Color(0.5, 0.5, 0.5, 0.5)
+func set_limited_options(b: bool) -> void:
+	if b:
+		choices_limited = true
+		slot[Slot.SLOT2].modulate = Color(0.5, 0.5, 0.5, 0.5)
+		slot[Slot.SLOT3].modulate = Color(0.5, 0.5, 0.5, 0.5)
+	else:
+		choices_limited = false
+		# Restore normal appearance
+		slot[Slot.SLOT2].modulate = Color(1, 1, 1, 1)
+		slot[Slot.SLOT3].modulate = Color(1, 1, 1, 1)
 	
-func unlimit_choices():
-	choices_limited = false
-	# Restore normal appearance
-	slot[Slot.SLOT2].modulate = Color(1, 1, 1, 1)
-	slot[Slot.SLOT3].modulate = Color(1, 1, 1, 1)

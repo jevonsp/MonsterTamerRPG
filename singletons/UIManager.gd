@@ -1,7 +1,12 @@
 extends Node
 
 var ui_stack: Array[Node] = []
-var current_context: String = ""
+var context: String = "":
+	get:
+		return context
+	set(new_context):
+		context = new_context
+
 #region Scene Constants
 const SCENE_DIALOGUE := "dialogue"
 const SCENE_BATTLE := "battle"
@@ -49,26 +54,22 @@ func push_ui(scene: PackedScene):
 	ui_stack.append(ui)
 	return ui
 	
-func push_ui_by_name(scene_name: String, context: String = ""):
-	print("push_ui_by_name context: ", context)
-	if context != "" and context == current_context:
-		return null
-	if scenes.has(scene_name):
-		return push_ui(scenes[scene_name])
-	push_error("scene not found: ", scene_name)
-	return null
-	
 func pop_ui(target: Node = null):
-	if current_context != "":
-		current_context = ""
 	if ui_stack.is_empty():
 		return
 	var ui = target if target else ui_stack.pop_back()
 	if ui_stack.has(ui):
 		ui_stack.erase(ui)
 	ui.queue_free()
-	
 	return ui
+	
+func push_ui_by_name(scene_name: String):
+	print("push_ui_by_name context: ", context)
+	if scenes.has(scene_name):
+		var ui = push_ui(scenes[scene_name])
+		return ui
+	push_error("scene not found: ", scene_name)
+	return null
 	
 func clear_ui():
 	print("clear_ui called")

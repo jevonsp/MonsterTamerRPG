@@ -3,13 +3,13 @@ extends CanvasLayer
 const HP_SCALE: float = 10.0
 
 enum State {DEFAULT, REORDER, USING, GIVING}
+var reordering: bool = false
 var state = State.DEFAULT
 
 @export var testing: bool = true
 
 var processing: bool = true
 
-var item: Item = null
 var swap_index: int = -1
 var free_switch: bool = false
 
@@ -48,7 +48,8 @@ func _ready() -> void:
 		UiManager.ui_stack.append(self)
 
 	EventBus.free_switch.connect(_on_free_switch)
-	EventBus.using_item.connect(_on_using_item)
+	EventBus.using_item.connect(use_item)
+	EventBus.giving_item.connect(give_item)
 	EventBus.health_changed.connect(_on_health_changed)
 	
 	if not BattleManager.in_battle:
@@ -71,26 +72,19 @@ func _input(event: InputEvent) -> void:
 		return
 	
 	if event.is_action_pressed("yes"):
-		match state:
-			State.DEFAULT:
+		if reordering:
+			swap_monsters(swap_index, v2_to_slot[selected_slot])
+		match UiManager.context:
+			"from_inventory":
+				print("context from_inventory")
+			"using":
+				print("context: using")
+			"giving":
+				print("context: giving")
+			"":
 				if v2_to_slot[selected_slot] < PartyManager.party.size():
 					_open_options()
-			State.REORDER:
-				swap_monsters(swap_index, v2_to_slot[selected_slot])
-			State.USING:
-				print("use item here")
-				print("item: ", item.name)
-				use_item(v2_to_slot[selected_slot])
-				state = State.DEFAULT
-				if BattleManager.in_battle:
-					close()
-			State.GIVING:
-				print("give item here")
-				print("item: ", item.name)
-				give_item(v2_to_slot[selected_slot])
-				state = State.DEFAULT
-				if BattleManager.in_battle:
-					close()
+				
 	if event.is_action_pressed("no"):
 		match state:
 			State.DEFAULT:
@@ -100,11 +94,9 @@ func _input(event: InputEvent) -> void:
 			State.USING:
 				print("cancelled item use/give")
 				use_item(v2_to_slot[selected_slot])
-				item = null
 				state = State.DEFAULT
 			State.GIVING:
 				print("cancelled item use/give")
-				item = null
 				state = State.DEFAULT
 	if event.is_action_pressed("up"):
 		_move(Vector2.UP)
@@ -142,7 +134,7 @@ func _move(direction: Vector2):
 			new_slot.y = ys[index]
 	if new_slot in allowed:
 		selected_slot = new_slot
-	if not state == State.REORDER:
+	if not reordering:
 		set_active_slot()
 	else:
 		set_moving_slot()
@@ -186,8 +178,9 @@ func set_moving_slot():
 	
 func close():
 	clear_maps()
-	item = null
+
 	UiManager.pop_ui(self)
+	UiManager.context = ""
 #endregion
 
 #region Mapping
@@ -293,25 +286,18 @@ func initiate_swap(party_index):
 	else:
 		print("initiating swap")
 		state = State.REORDER
+		reordering = true
 		swap_index = v2_to_slot[selected_slot]
 		set_moving_slot()
 	
 func cancel_swap():
 	print("cancelling swap")
 	state = State.DEFAULT
+	reordering = false
 	swap_index = -1
 	set_active_slot()
 	
 func _on_free_switch() -> void: free_switch = true
-
-func _on_using_item(item_using) -> void:
-	print("using item")
-	item = item_using
-	state = State.USING
-
-func _on_giving_item(item_giving) -> void:
-	item = item_giving
-	state = State.GIVING
 	
 func swap_monsters(from_index: int, to_index: int):
 	print("from_index: ", from_index, ", to_index: ", to_index)
@@ -338,28 +324,24 @@ func swap_monsters(from_index: int, to_index: int):
 			
 func open_inventory():
 	print("attempt to call: push_ui_by_name")
-	UiManager.push_ui_by_name(UiManager.SCENE_INVENTORY, "party")
-	EventBus.no_selection.emit()
-	print("called push_ui_by_name")
+	UiManager.context = "from_party"
+	UiManager.push_ui_by_name(UiManager.SCENE_INVENTORY)
 	
-func use_item(slot_enum) -> void:
+func use_item(item) -> void:
+	print("party got UiManager.context: ", UiManager.context)
+	var slot_enum = v2_to_slot[selected_slot]
 	print("would use item on: ", slot_enum)
 	for effect in item.effects:
 		effect.apply(PartyManager.party[slot_enum], PartyManager.party[slot_enum], item)
 		print("effect: ", effect)
-	item = null
 	processing = false
 	print("processing: ", processing)
 	await EventBus.party_effect_ended
 	print("processing: ", processing)
-	close()
 	
-func give_item(slot_enum) -> void:
+func give_item(_item) -> void:
+	var slot_enum = v2_to_slot[selected_slot]
 	print("would give item to: ", slot_enum)
-	
-	item = null
-	
-	close()
 	
 func _on_health_changed(monster: Monster, _old: int, new: int) -> void:
 	print("_on_health_changed called")
