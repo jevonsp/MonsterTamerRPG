@@ -42,5 +42,6 @@ signal advance_dialogue
 
 signal using_item(item: Item)
 signal giving_item(item: Item)
+signal item_chosen(item: Item)
 
 @warning_ignore_restore("unused_signal")

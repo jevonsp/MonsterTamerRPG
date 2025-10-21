@@ -191,15 +191,18 @@ func _on_option_chosen(slot_enum: int):
 	match UiManager.context:
 		"":
 			print("normal case where transitions to party")
-			UiManager.context = "from_inventory"
+			UiManager.context = "picking"
 			UiManager.push_ui_by_name(UiManager.SCENE_PARTY)
+			EventBus.item_chosen.emit(items[cursor_index]["item"])
 		"using":
 			print("use: ", items[cursor_index]["item"].name)
+			
 			EventBus.using_item.emit(items[cursor_index]["item"])
 			close()
 			return
 		"giving":
 			print("give: ", items[cursor_index]["item"].name)
+			
 			EventBus.giving_item.emit(items[cursor_index]["item"])
 			close()
 			return

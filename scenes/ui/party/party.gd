@@ -13,6 +13,8 @@ var processing: bool = true
 var swap_index: int = -1
 var free_switch: bool = false
 
+var chosen_item: Item = null
+
 #region Slot
 enum PartySlot {SLOT0, SLOT1, SLOT2, SLOT3, SLOT4, SLOT5}
 var selected_slot: Vector2 = Vector2(0,0)
@@ -50,6 +52,7 @@ func _ready() -> void:
 	EventBus.free_switch.connect(_on_free_switch)
 	EventBus.using_item.connect(use_item)
 	EventBus.giving_item.connect(give_item)
+	EventBus.item_chosen.connect(_on_item_chosen)
 	EventBus.health_changed.connect(_on_health_changed)
 	
 	if not BattleManager.in_battle:
@@ -75,8 +78,10 @@ func _input(event: InputEvent) -> void:
 		if reordering:
 			swap_monsters(swap_index, v2_to_slot[selected_slot])
 		match UiManager.context:
-			"from_inventory":
-				print("context from_inventory")
+			"picking":
+				print("context picking")
+				print("would use %s on %s" % [chosen_item.name, v2_to_slot[selected_slot]])
+				UiManager.context = ""
 			"using":
 				print("context: using")
 			"giving":
@@ -337,11 +342,15 @@ func use_item(item) -> void:
 	processing = false
 	print("processing: ", processing)
 	await EventBus.party_effect_ended
+	processing = true
 	print("processing: ", processing)
 	
 func give_item(_item) -> void:
 	var slot_enum = v2_to_slot[selected_slot]
 	print("would give item to: ", slot_enum)
+	
+func _on_item_chosen(item: Item) -> void:
+	chosen_item = item
 	
 func _on_health_changed(monster: Monster, _old: int, new: int) -> void:
 	print("_on_health_changed called")
