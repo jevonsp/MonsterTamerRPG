@@ -2,14 +2,11 @@ extends CanvasLayer
 
 const HP_SCALE: float = 10.0
 
-enum State {DEFAULT, REORDER, USING, GIVING}
 var reordering: bool = false
-var state = State.DEFAULT
 
 @export var testing: bool = true
 
 var processing: bool = true
-
 var swap_index: int = -1
 var free_switch: bool = false
 
@@ -77,6 +74,9 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("yes"):
 		if reordering:
 			swap_monsters(swap_index, v2_to_slot[selected_slot])
+			set_active_slot()
+			reordering = false
+			return
 		match UiManager.context:
 			"picking":
 				print("context picking")
@@ -93,18 +93,12 @@ func _input(event: InputEvent) -> void:
 					_open_options()
 				
 	if event.is_action_pressed("no"):
-		match state:
-			State.DEFAULT:
-				close()
-			State.REORDER:
-				cancel_swap()
-			State.USING:
-				print("cancelled item use/give")
-				use_item(v2_to_slot[selected_slot])
-				state = State.DEFAULT
-			State.GIVING:
-				print("cancelled item use/give")
-				state = State.DEFAULT
+		if reordering:
+			set_active_slot()
+			reordering = false
+			return
+		elif not reordering:
+			close()
 	if event.is_action_pressed("up"):
 		_move(Vector2.UP)
 	if event.is_action_pressed("down"):
@@ -292,14 +286,12 @@ func initiate_swap(party_index):
 		swap_monsters(party_index, 0)
 	else:
 		print("initiating swap")
-		state = State.REORDER
 		reordering = true
 		swap_index = v2_to_slot[selected_slot]
 		set_moving_slot()
 	
 func cancel_swap():
 	print("cancelling swap")
-	state = State.DEFAULT
 	reordering = false
 	swap_index = -1
 	set_active_slot()
@@ -314,7 +306,6 @@ func swap_monsters(from_index: int, to_index: int):
 	if not BattleManager.in_battle:
 		PartyManager.swap_party(from_index, to_index, free_switch)
 		update_slots()
-		state = State.DEFAULT
 		swap_index = -1
 		set_active_slot()
 		return

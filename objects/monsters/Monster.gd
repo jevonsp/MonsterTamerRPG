@@ -91,10 +91,10 @@ func get_stat(stat: String) -> int:
 		base_value = int(base_value * _get_stage_multi(stage))
 	
 	if status:
-		return status.modify_stat(stat, self, base_value)
+		return status.modify_stat(stat, base_value)
 		
 	#for effect in statuses:
-		#base_value = effect.modify_stat(stat, self, base_value)
+		#base_value = effect.modify_stat(stat, base_value)
 	
 	return base_value
 	

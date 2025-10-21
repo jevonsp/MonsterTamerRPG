@@ -11,6 +11,7 @@ script = ExtResource("2_s4koy")
 name = "Pistol Shrimp"
 sprite = ExtResource("4_e6udc")
 type = "WATER"
+role = "RANGED"
 base_hitpoints = 80
 base_speed = 100
 base_attack = 120

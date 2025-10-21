@@ -137,6 +137,10 @@ func execute_turn():
 		return a.actor.get_stat("speed") > b.actor.get_stat("speed")
 		)
 	
+	for monster in [player_actor, enemy_actor]:
+		if monster and monster.status:
+			monster.status.apply_on_turn_start(monster)
+			
 	for action in turn_actions:
 		if not in_battle:
 			return
@@ -144,6 +148,12 @@ func execute_turn():
 			force_switch()
 			turn_actions.clear()
 			return
+		
+		if action.actor.status and not action.actor.status.can_act(action.actor):
+			DialogueManager.show_dialogue("%s is unable to act" % action.actor.name)
+			await DialogueManager.dialogue_closed
+			continue
+		
 		print("executing action: ", action.type)
 		await action.execute()
 		if not in_battle:
@@ -157,6 +167,16 @@ func execute_turn():
 			return
 		if await check_loss(): 
 			return
+			
+	for monster in [player_actor, enemy_actor]:
+		if monster and monster.status:
+			monster.status.apply_on_turn_end(monster)
+			
+			if monster.status.tick():
+				DialogueManager.show_dialogue("%s's %s wore off" % [monster.name, monster.status.name])
+				await DialogueManager.dialogue_closed
+				monster.status = null
+				
 	turn_actions.clear()
 	processing_turn = false
 	
