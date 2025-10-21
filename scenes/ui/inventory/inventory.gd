@@ -3,6 +3,7 @@ extends CanvasLayer
 const VISIBLE_SLOTS = 6
 var processing: bool = false
 var reordering: bool = false
+var no_selection: bool = false
 
 enum Slot {SLOT0, SLOT1, SLOT2, SLOT3, SLOT4, SLOT5}
 var cursor_index: Slot = Slot.SLOT0
@@ -40,6 +41,7 @@ func _ready() -> void:
 	processing = true
 	for item in InventoryManager.inventory:
 		items.append(item)
+	EventBus.no_selection.connect(_on_no_selection)
 	update_display()
 	
 func _input(event: InputEvent) -> void:
@@ -53,10 +55,13 @@ func _input(event: InputEvent) -> void:
 		return
 	
 	if event.is_action_pressed("yes"):
+		if no_selection:
+			print("no selection: ", no_selection)
+			_open_options_from_party()
+			return
 		if not reordering:
 			if cursor_index < InventoryManager.inventory.size():
 				_open_options()
-			
 	if event.is_action_pressed("no"):
 		if not reordering:
 			close()
@@ -182,6 +187,13 @@ func _open_options():
 	if not options.option_chosen.is_connected(_on_option_chosen):
 		options.option_chosen.connect(_on_option_chosen)
 	
+func _open_options_from_party():
+	print("would open just use/give")
+	no_selection = false
+	print("no_selection reset to: ", no_selection)
+	_open_options()
+	EventBus.limit_choices.emit()
+	
 func _on_option_chosen(slot_enum: int):
 	print("got slot_enum: " , slot_enum)
 	match slot_enum:
@@ -208,9 +220,13 @@ func use_item_in_battle(item: Item):
 	if item.in_battle_only:
 		pass
 	else:
-		UiManager.push_ui(UiManager.party_scene)
+		print("attempt to call: push_ui_by_name")
+		UiManager.push_ui_by_name(UiManager.SCENE_PARTY, "inventory")
 		EventBus.using_item.emit(item)
+		print("called push_ui_by_name")
+
 	
+func _on_no_selection() -> void: no_selection = true
 	
 func use_item_out_of_battle(item: Item):
 	print("use item: %s here" % item.name)
@@ -219,8 +235,14 @@ func use_item_out_of_battle(item: Item):
 		await DialogueManager.dialogue_closed
 	else:
 		print("can use item")
-		UiManager.push_ui(UiManager.party_scene)
-		EventBus.using_item.emit(item)
+		if no_selection:
+			print("attempt to call: push_ui_by_name")
+			print("called push_ui_by_name")
+		else:
+			print("attempt to call: push_ui_by_name")
+			UiManager.push_ui_by_name(UiManager.SCENE_PARTY, "inventory")
+			EventBus.using_item.emit(item)
+			print("called push_ui_by_name")
 		
 func give_item_in_battle(item: Item):
 	print("(in battle) give item: %s here" % item.name)

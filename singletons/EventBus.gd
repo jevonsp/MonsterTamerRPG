@@ -40,6 +40,8 @@ signal switch_done_animating
 
 signal advance_dialogue
 
+signal no_selection
+signal limit_choices
 signal using_item(item: Item)
 signal inventory_item_effect_ended
 signal giving_item(item: Item)

@@ -1,5 +1,7 @@
 extends CanvasLayer
 
+const HP_SCALE: float = 10.0
+
 enum State {DEFAULT, REORDER, USING, GIVING}
 var state = State.DEFAULT
 
@@ -7,8 +9,6 @@ var state = State.DEFAULT
 
 var processing: bool = true
 
-var using_item: bool = false
-var giving_item: bool = false
 var item: Item = null
 var swap_index: int = -1
 var free_switch: bool = false
@@ -99,6 +99,7 @@ func _input(event: InputEvent) -> void:
 				cancel_swap()
 			State.USING:
 				print("cancelled item use/give")
+				use_item(v2_to_slot[selected_slot])
 				item = null
 				state = State.DEFAULT
 			State.GIVING:
@@ -115,12 +116,8 @@ func _input(event: InputEvent) -> void:
 		_move(Vector2.RIGHT)
 	
 func _move(direction: Vector2):
-	print("State: ", state)
-	print("Current slot: ", selected_slot)
-	print("Direction: ", direction)
 	unset_active_slot()
 	var allowed = get_allowed_slots()
-	print("allowed: ", allowed)
 	var new_slot = selected_slot + direction
 	
 	if direction.x != 0:
@@ -170,7 +167,9 @@ func _on_option_chosen(slot_enum) -> void:
 	match slot_enum:
 		0: print("summary")
 		1: initiate_swap(v2_to_slot[selected_slot])
-		2: print("item")
+		2: 
+			print("item")
+			open_inventory()
 		3: print("options closed")
 	
 func get_curr_slot():
@@ -250,8 +249,8 @@ func map_portrait(monster: Monster, slot_enum: int):
 func map_hp(monster: Monster, slot_enum: int):
 	var hp_node = slot[slot_enum].get_node_or_null("PlayerHP")
 	if hp_node:
-		hp_node.max_value = monster.max_hitpoints
-		hp_node.value = monster.hitpoints
+		hp_node.max_value = monster.max_hitpoints * HP_SCALE
+		hp_node.value = monster.hitpoints * HP_SCALE
 		hp_map[monster] = hp_node
 func map_name(monster: Monster, slot_enum: int):
 	var name_node = slot[slot_enum].get_node_or_null("NameLabel")
@@ -306,6 +305,7 @@ func cancel_swap():
 func _on_free_switch() -> void: free_switch = true
 
 func _on_using_item(item_using) -> void:
+	print("using item")
 	item = item_using
 	state = State.USING
 
@@ -336,6 +336,12 @@ func swap_monsters(from_index: int, to_index: int):
 			free_switch = false
 			close()
 			
+func open_inventory():
+	print("attempt to call: push_ui_by_name")
+	UiManager.push_ui_by_name(UiManager.SCENE_INVENTORY, "party")
+	EventBus.no_selection.emit()
+	print("called push_ui_by_name")
+	
 func use_item(slot_enum) -> void:
 	print("would use item on: ", slot_enum)
 	for effect in item.effects:
@@ -355,9 +361,11 @@ func give_item(slot_enum) -> void:
 	
 	close()
 	
-func _on_health_changed(_monster: Monster, _old: int, _new: int) -> void:
+func _on_health_changed(monster: Monster, _old: int, new: int) -> void:
 	print("_on_health_changed called")
-	await get_tree().create_timer(Settings.game_speed).timeout
+	var tween = get_tree().create_tween()
+	tween.tween_property(hp_map[monster], "value", new * HP_SCALE, Settings.game_speed)
+	await tween.finished
 	EventBus.health_done_animating.emit()
 	print("health_done_animating")
 	processing = true

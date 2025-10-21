@@ -61,6 +61,8 @@ func apply(actor_ref: Monster, target_ref: Monster, move_ref) -> void:
 			await target_ref.take_damage(damage)
 			DialogueManager.show_dialogue("%s dealt %s to %s!" % [move_ref.name, damage, target.name], false)
 			await DialogueManager.dialogue_closed
+	if not BattleManager.in_battle:
+		EventBus.party_effect_ended.emit()
 	
 func calculate_damage() -> int:
 	var atk: int = 0
