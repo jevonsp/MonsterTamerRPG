@@ -24,6 +24,8 @@ Settings="*res://singletons/Settings.gd"
 InventoryManager="*res://singletons/InventoryManager.gd"
 DialogueManager="*res://singletons/DialogueManager.gd"
 UiManager="*res://singletons/UIManager.gd"
+BeehaveGlobalMetrics="*res://addons/beehave/metrics/beehave_global_metrics.gd"
+BeehaveGlobalDebugger="*res://addons/beehave/debug/global_debugger.gd"
 
 [display]
 
