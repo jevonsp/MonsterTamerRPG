@@ -2,8 +2,9 @@ extends Node
 
 signal dialogue_closed
 
-var dialogue_scene = preload("res://scenes/ui/dialogue/dialogue_box.tscn")
+
 var current_dialogue: Node = null
+var current_choice_box: Node = null
 
 func show_dialogue(text: String, auto_close: bool = false) -> void:
 	print("show dialogue called")
@@ -25,3 +26,14 @@ func close_dialogue() -> void:
 		UiManager.pop_ui(current_dialogue)
 		current_dialogue = null
 	dialogue_closed.emit()
+	
+func show_choice(text: String) -> bool:
+	if text != "":
+		show_dialogue(text, false)
+	var choice_box = UiManager.push_ui(UiManager.choice_scene)
+	var result = await choice_box.choice_selected
+	
+	UiManager.pop_ui(choice_box)
+	close_dialogue()
+	
+	return result

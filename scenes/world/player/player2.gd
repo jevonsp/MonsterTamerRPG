@@ -125,7 +125,6 @@ func process_walking_state(delta: float) -> void:
 				anim_state.travel("Idle")
 				start_turning(new_facing)
 			else:
-				print("Continuing walk, attempting movement...")
 				if not attempt_movement(input_dir):
 					current_state = State.IDLE
 					anim_state.travel("Idle")
@@ -167,18 +166,9 @@ func attempt_movement(input_dir: Vector2) -> bool:
 	ray2d.target_position = input_dir * TILE_SIZE / 2
 	ray2d.force_raycast_update()
 	
-	print("Attempting move from: ", position, " in direction: ", input_dir)
-	print("Raycast colliding: ", ray2d.is_colliding())
 	if ray2d.is_colliding():
-		print("Collider: ", ray2d.get_collider())
-	
-	if ray2d.is_colliding():
-		# Blocked - return false but DON'T change state
-		print("BLOCKED - returning false")
 		return false
 	
-	# Start walking
-	print("NOT BLOCKED - starting walk")
 	tile_start_pos = position
 	tile_target_pos = position + (input_dir * TILE_SIZE)
 	move_progress = 0.0

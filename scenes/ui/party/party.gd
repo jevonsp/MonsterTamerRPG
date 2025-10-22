@@ -79,15 +79,17 @@ func _input(event: InputEvent) -> void:
 			return
 		match UiManager.context:
 			"picking":
-				print("context picking")
+				print("context:  picking")
 				await use_item(chosen_item)
 				chosen_item = null
 				UiManager.context = ""
 				close()
 			"using":
 				print("context: using")
+				return
 			"giving":
 				print("context: giving")
+				return
 			"":
 				if v2_to_slot[selected_slot] < PartyManager.party.size():
 					_open_options()
@@ -325,7 +327,7 @@ func open_inventory():
 	UiManager.context = "from_party"
 	UiManager.push_ui_by_name(UiManager.SCENE_INVENTORY)
 	
-func use_item(item) -> void:
+func use_item(item: Item) -> void:
 	print("party got UiManager.context: ", UiManager.context)
 	var slot_enum = v2_to_slot[selected_slot]
 	print("would use item on: ", slot_enum)
@@ -335,12 +337,17 @@ func use_item(item) -> void:
 	processing = false
 	print("processing: ", processing)
 	await EventBus.party_effect_ended
+	InventoryManager.remove_items(item)
 	processing = true
 	print("processing: ", processing)
 	
-func give_item(_item) -> void:
+func give_item(item) -> void:
 	var slot_enum = v2_to_slot[selected_slot]
 	print("would give item to: ", slot_enum)
+	PartyManager.party[slot_enum].held_item = item
+	InventoryManager.remove_items(item)
+	DialogueManager.show_dialogue("Gave %s to %s to hold" % [item.name, PartyManager.party[slot_enum].name])
+	await DialogueManager.dialogue_closed
 	
 func _on_item_chosen(item: Item) -> void:
 	chosen_item = item

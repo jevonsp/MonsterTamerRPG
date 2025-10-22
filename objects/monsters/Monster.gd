@@ -33,7 +33,9 @@ var stat_stages: Dictionary = {
 
 var moves: Array[Move]
 
-var status: StatusEffect
+var status: StatusEffect = null
+
+var held_item: Item = null
 
 func setup_monster(md: MonsterData, lvl: int) -> void:
 	species = md
@@ -121,9 +123,8 @@ func gain_exp(amount: int) -> void:
 	if levels_gained > 0:
 		level = new_level
 		set_stats()
-
+		
 	EventBus.exp_changed.emit(self, old_level, experience, levels_gained)
-	
 	
 func grant_exp() -> int:
 	var is_getting_exp: int = 0
@@ -143,8 +144,18 @@ func set_moves():
 	
 func add_move(move: Move):
 	if moves.size() == 4:
-		print("already have 4 moves, add case")
+		var should_replace = await DialogueManager.show_choice(
+			"%s already has 4 moves. Do you wish to remove one?" % name )
+		if should_replace:
+			await decide_move(move)
+		else:
+			DialogueManager.show_dialogue("%s did not learn %s" % [name, move.name], true)
+	DialogueManager.show_dialogue("%s learned %s" % [name, move.name])
+	await DialogueManager.dialogue_closed
 	moves.append(move)
+	
+func decide_move(move: Move):
+	print("pick a move to replace with: ", move.name)
 	
 func take_damage(amount: int):
 	var starting = hitpoints

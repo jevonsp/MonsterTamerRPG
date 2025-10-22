@@ -251,8 +251,7 @@ func force_switch():
 	if not in_battle:
 		return
 	print("force_switch here")
-	var battle_party = UiManager.show_party()
-	add_child(battle_party)
+	UiManager.push_ui_by_name(UiManager.SCENE_PARTY)
 	EventBus.free_switch.emit()
 	await EventBus.free_switch_chosen
 	await get_tree().create_timer(Settings.game_speed).timeout

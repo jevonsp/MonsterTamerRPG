@@ -29,11 +29,7 @@ func show_party():
 	UiManager.push_ui(UiManager.party_scene2)
 	
 func swap_party(from_index: int, to_index: int, free_switch: bool = true) -> void:
-	print("free_switch: ", free_switch)
-	print("BattleManager.in_battle: ", BattleManager.in_battle)
 	if free_switch:
-		print("switching: ",  party[from_index])
-		print("with: ", party[to_index])
 		var temp = party[from_index]
 		party[from_index] = party[to_index]
 		party[to_index] = temp

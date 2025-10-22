@@ -1,8 +1,9 @@
-[gd_resource type="Resource" script_class="MonsterData" load_steps=5 format=3 uid="uid://pxtac13xygko"]
+[gd_resource type="Resource" script_class="MonsterData" load_steps=6 format=3 uid="uid://pxtac13xygko"]
 
 [ext_resource type="Script" uid="uid://coff2nnisn6g2" path="res://objects/moves/Move.gd" id="1_lxe2k"]
 [ext_resource type="Resource" uid="uid://yba5nj2cbh3b" path="res://objects/moves/moves/Slap.tres" id="2_cmk2l"]
 [ext_resource type="Script" uid="uid://cf7d81q2bjlj0" path="res://objects/monsters/MonsterData.gd" id="2_gautn"]
+[ext_resource type="Resource" uid="uid://bgnlmll76xe20" path="res://objects/moves/moves/NettleSting.tres" id="3_0uj8m"]
 [ext_resource type="Texture2D" uid="uid://ch5o824ebxq1t" path="res://objects/monsters/fox_mcleaf/fox_mcleaf.png" id="4_suhad"]
 
 [resource]
@@ -14,6 +15,6 @@ role = "TANK"
 base_hitpoints = 120
 base_defense = 100
 base_special_defense = 80
-moves = Array[ExtResource("1_lxe2k")]([ExtResource("2_cmk2l"), null])
-levels = Array[int]([1])
+moves = Array[ExtResource("1_lxe2k")]([ExtResource("2_cmk2l"), ExtResource("3_0uj8m")])
+levels = Array[int]([1, 5])
 metadata/_custom_type_script = "uid://cf7d81q2bjlj0"

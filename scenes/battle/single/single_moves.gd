@@ -2,11 +2,11 @@ extends CanvasLayer
 
 @export var processing: bool = false
 
+var reordering: bool = false
+var swap_index: int = -1
+
 #region Move Slots
 enum MoveSlot {MOVE0, MOVE1, MOVE2, MOVE3}
-enum MoveState {PICKING, REORDERING}
-
-var state = MoveState.PICKING
 
 var selected_slot: Vector2 = Vector2(0,0)
 var v2_to_slot: Dictionary = {
@@ -34,17 +34,32 @@ func _ready() -> void:
 	update_moves()
 	
 func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("yes") \
+	or event.is_action_pressed("no") or \
+	event.is_action_pressed("up") or \
+	event.is_action_pressed("down"):
+		get_viewport().set_input_as_handled()
+		
 	if self != UiManager.ui_stack.back():
 		return
+		
 	if event.is_action_pressed("yes"):
-		_input_move()
+		if not reordering:
+			_input_move()
+		else:
+			swap_moves(swap_index, v2_to_slot[selected_slot])
 	if event.is_action_pressed("no"):
-		print("no pressed")
-		match state:
-			MoveState.PICKING:
-				close()
-			MoveState.REORDERING:
-				pass
+		if not reordering:
+			close()
+		else:
+			cancel_swap()
+	if event.is_action_pressed("menu"):
+		if not reordering:
+			reordering = true
+			set_moving_slot()
+			swap_index = v2_to_slot[selected_slot]
+		else:
+			cancel_swap()
 	if event.is_action_pressed("up"):
 		_move(Vector2.UP)
 	if event.is_action_pressed("down"):
@@ -62,7 +77,10 @@ func _move(direction: Vector2):
 	new_slot.y = clamp(new_slot.y, 0, 1)
 	if new_slot in allowed:
 		selected_slot = new_slot
-	set_active_slot()
+	if not reordering:
+		set_active_slot()
+	else:
+		set_moving_slot()
 	
 func get_allowed_moves() -> Array:
 	if not BattleManager.in_battle:
@@ -118,3 +136,22 @@ func update_moves():
 	BattleManager.player_actor.moves.size() > 2 else ""
 	move3_label.text = BattleManager.player_actor.moves[3].name if \
 	BattleManager.player_actor.moves.size() > 3 else ""
+	
+func swap_moves(from_index: int, to_index: int) -> void:
+	print("would move %s to %s" % [from_index, to_index])
+	
+	var monster = BattleManager.player_actor
+	
+	var temp = monster.moves[from_index]
+	monster.moves[from_index] = monster.moves[to_index]
+	monster.moves[to_index] = temp
+	
+	reordering = false
+	swap_index = -1
+	set_active_slot()
+	update_moves()
+	
+func cancel_swap():
+	reordering = false
+	swap_index = -1
+	set_active_slot()

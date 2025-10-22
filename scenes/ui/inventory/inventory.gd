@@ -1,8 +1,10 @@
 extends CanvasLayer
 
 const VISIBLE_SLOTS = 6
+
 var processing: bool = false
 var reordering: bool = false
+var swap_index: int = -1
 
 enum Slot {SLOT0, SLOT1, SLOT2, SLOT3, SLOT4, SLOT5}
 var cursor_index: Slot = Slot.SLOT0
@@ -34,12 +36,12 @@ var giga_ball_resource = preload("res://objects/items/ball/GigaBall.tres")
 var mega_ball_resource = preload("res://objects/items/ball/MegaBall.tres")
 	
 func _ready() -> void:
+	add_to_group("inventory")
 	if UiManager.ui_stack.is_empty():
 		UiManager.ui_stack.append(self)
 	set_active_slot()
 	processing = true
-	for item in InventoryManager.inventory:
-		items.append(item)
+	items = InventoryManager.inventory
 	update_display()
 	
 func _input(event: InputEvent) -> void:
@@ -56,6 +58,11 @@ func _input(event: InputEvent) -> void:
 		if not reordering:
 			if cursor_index < InventoryManager.inventory.size():
 				_open_options()
+		elif reordering:
+			swap_items(swap_index, cursor_index)
+			reordering = false
+			swap_index = -1
+			set_active_slot()
 	if event.is_action_pressed("no"):
 		if not reordering:
 			close()
@@ -124,13 +131,21 @@ func close():
 	UiManager.pop_ui(self)
 	UiManager.context = ""
 	
-func swap_items(_from_index: int, _to_index: int) -> void:
+func swap_items(from_index: int, to_index: int) -> void:
+	if from_index == to_index:
+		cancel_swap()
+		return
+	InventoryManager.swap_items(from_index, to_index)
 	update_display()
 	
 func cancel_swap():
-	pass
+	print("cancelling swap")
+	reordering = false
+	set_active_slot()
 	
 func update_display():
+	items = InventoryManager.inventory
+	
 	print("update displays here")
 	for i in range(VISIBLE_SLOTS):
 		var slot_enum = Slot.values()[i]
@@ -186,6 +201,34 @@ func _open_options():
 		options.set_limited_options(true)
 	
 func _on_option_chosen(slot_enum: int):
+	var item = items[cursor_index]["item"]
+	
+	match slot_enum:
+		0:
+			if item.is_held:
+				DialogueManager.show_dialogue("That cant be held!")
+				await DialogueManager.dialogue_closed
+				return
+			if item.in_battle_only and not BattleManager.in_battle:
+				DialogueManager.show_dialogue("You arent in battle right now")
+				await DialogueManager.dialogue_closed
+				return
+			if item.effects.is_empty():
+				DialogueManager.show_dialogue("This item has no use!")
+				await DialogueManager.dialogue_closed
+				return
+		1:
+			if not item.is_held:
+				DialogueManager.show_dialogue("That isn't a held item!")
+				await DialogueManager.dialogue_closed
+				return
+		2: 
+			reordering = true
+			swap_index = cursor_index
+			set_moving_slot()
+			return
+		3: 
+			return
 	print("got slot_enum: " , slot_enum)
 	print("inventory got UiManager.context: ", UiManager.context)
 	match UiManager.context:
@@ -193,46 +236,18 @@ func _on_option_chosen(slot_enum: int):
 			print("normal case where transitions to party")
 			UiManager.context = "picking"
 			UiManager.push_ui_by_name(UiManager.SCENE_PARTY)
-			EventBus.item_chosen.emit(items[cursor_index]["item"])
+			EventBus.item_chosen.emit(item)
 		"using":
-			print("use: ", items[cursor_index]["item"].name)
-			
-			EventBus.using_item.emit(items[cursor_index]["item"])
+			print("use: ", item.name)
+			EventBus.using_item.emit(item)
+			update_display()
 			close()
 			return
 		"giving":
-			print("give: ", items[cursor_index]["item"].name)
-			
-			EventBus.giving_item.emit(items[cursor_index]["item"])
+			print("give: ", item.name)
+			EventBus.giving_item.emit(item)
+			update_display()
 			close()
 			return
 		_:
 			print("wrong ui context")
-	match slot_enum:
-		2: 
-			print("move")
-		3: pass
-	
-func use_item_in_battle(item: Item):
-	print("(in battle) use item: %s here" % item.name)
-	if not item.in_battle_only:
-		return
-	else:
-		UiManager.context = "from_inventory"
-		UiManager.push_ui_by_name(UiManager.SCENE_PARTY)
-		EventBus.using_item.emit(item)
-		print("called push_ui_by_name")
-	
-func use_item_out_of_battle(item: Item):
-	print("use item: %s here" % item.name)
-	if item.in_battle_only:
-		DialogueManager.show_dialogue("Thats a battle item!", true)
-		await DialogueManager.dialogue_closed
-	else:
-		print("can use item")
-		print("attempt to call: push_ui_by_name")
-		UiManager.context = "from_inventory"
-		UiManager.push_ui_by_name(UiManager.SCENE_PARTY)
-		EventBus.using_item.emit(item)
-		print("called push_ui_by_name")
-		

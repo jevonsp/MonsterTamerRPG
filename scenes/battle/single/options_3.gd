@@ -1,10 +1,5 @@
 extends CanvasLayer
 
-signal fight_selected
-signal party_selected
-signal item_selected
-signal run_selected
-
 @export var processing: bool = false
 
 enum MoveSlot {FIGHT, PARTY, ITEM, RUN}
@@ -25,9 +20,6 @@ var v2_to_slot: Dictionary = {
 func _ready() -> void:
 	print("options3 _ready")
 	set_active_slot()
-	fight_selected.connect(UiManager.fight_selected)
-	party_selected.connect(UiManager.party_selected)
-	item_selected.connect(UiManager.item_selected)
 	
 func _input(event: InputEvent) -> void:
 	if not processing or BattleManager.processing_turn:
@@ -58,15 +50,16 @@ func _input_selection():
 	match get_curr_slot():
 		MoveSlot.FIGHT:
 			print("FIGHT")
-			fight_selected.emit()
+			UiManager.push_ui(UiManager.battle_moves_scene)
 		MoveSlot.PARTY:
 			print("PARTY")
-			party_selected.emit()
+			UiManager.push_ui(UiManager.party_scene)
 		MoveSlot.ITEM: 
 			print("ITEM")
-			item_selected.emit()
+			UiManager.push_ui(UiManager.inventory_scene)
 		MoveSlot.RUN: 
-			run_selected.emit()
+			var action = RunAction.new(BattleManager.player_actor, [BattleManager.enemy_actor])
+			BattleManager.on_action_selected(action)
 			print("RUN")
 	
 func get_curr_slot():
