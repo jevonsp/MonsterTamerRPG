@@ -174,8 +174,6 @@ func display_moves():
 	var monster = PartyManager.party[selected_monster]
 	for i in range(4):
 		var slot_node = get_node("Slot%d" % i).get_child(0)
-		print(slot_node)
-		print(slot_node.get_children())
 		if i < monster.moves.size():
 			slot_node.get_node("Name").text = monster.moves[i].name
 			slot_node.get_node("Power").text = str(get_move_power(monster.moves[i]))

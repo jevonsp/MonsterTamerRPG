@@ -54,9 +54,9 @@ func apply(actor_ref: Monster, target_ref: Monster, move_ref) -> void:
 	match target_type:
 		"ENEMY":
 			if BattleManager.in_battle:
-				DialogueManager.show_dialogue("%s used %s!" % [actor.name, move_ref.name], true)
 				EventBus.effect_started.emit(animation_type, actor_ref, target_ref, animation)
 				await EventBus.effect_ended
+			
 			var damage = calculate_damage()
 			await target_ref.take_damage(damage)
 			DialogueManager.show_dialogue("%s dealt %s to %s!" % [move_ref.name, damage, target.name], false)

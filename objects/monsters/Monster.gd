@@ -48,19 +48,6 @@ func setup_monster(md: MonsterData, lvl: int) -> void:
 	decide_nature()
 	set_stats()
 	set_moves()
-	print("monster created: ", name)
-	print("capture rate: ", capture_rate)
-	print("monster level: ", level)
-	print("monster experience: ", experience)
-	print("hitpoints: ", hitpoints)
-	print("speed: ", speed)
-	print("attack: ", attack)
-	print("defense: ", defense)
-	print("special_attack: ", special_attack)
-	print("special_defense: ", special_defense)
-	print("moves: ")
-	for move in moves:
-		print(" - ", move.name)
 	
 func decide_nature():
 	pass
@@ -94,9 +81,6 @@ func get_stat(stat: String) -> int:
 	
 	if status:
 		return status.modify_stat(stat, base_value)
-		
-	#for effect in statuses:
-		#base_value = effect.modify_stat(stat, base_value)
 	
 	return base_value
 	
@@ -173,7 +157,10 @@ func take_damage(amount: int):
 		await EventBus.fainting_done_animating
 		await Engine.get_main_loop().process_frame
 	
-func heal(amount: int) -> void:
+func heal(amount: int, full: bool = false) -> void:
+	print("heal called")
+	if full:
+		amount = max_hitpoints - hitpoints
 	var starting = hitpoints
 	hitpoints += amount
 	EventBus.health_changed.emit(self, starting, hitpoints)

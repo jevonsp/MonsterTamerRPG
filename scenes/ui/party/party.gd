@@ -165,7 +165,10 @@ func _on_option_chosen(slot_enum) -> void:
 			summary.selected_monster = v2_to_slot[selected_slot]
 			print("selected slot: ", v2_to_slot[selected_slot])
 			summary.display_selected_monster()
-		1: initiate_swap(v2_to_slot[selected_slot])
+		1:
+			if PartyManager.party.size() == 1:
+				return
+			initiate_swap(v2_to_slot[selected_slot])
 		2: 
 			print("item")
 			open_inventory()

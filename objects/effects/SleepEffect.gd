@@ -4,7 +4,6 @@ class_name SleepEffect extends BattleEffect
 
 var name = "SLEEP"
 
-
 func apply(actor_ref: Monster, target_ref: Monster, data_ref) -> void:
 	super(actor_ref, target_ref, data_ref)
 	animation_type = "TARGET"

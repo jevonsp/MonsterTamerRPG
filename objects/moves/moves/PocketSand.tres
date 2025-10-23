@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="Move" load_steps=7 format=3 uid="uid://cv4rlq76tubod"]
+
+[ext_resource type="Script" uid="uid://dwops4cp56fq3" path="res://classes/base/BattleEffect.gd" id="1_m116k"]
+[ext_resource type="Script" uid="uid://coff2nnisn6g2" path="res://objects/moves/Move.gd" id="2_1opph"]
+[ext_resource type="Script" uid="uid://cg2gwmc5eufqa" path="res://objects/effects/Damage.gd" id="2_6dinp"]
+[ext_resource type="Script" uid="uid://dtp6jr4jhas0k" path="res://objects/effects/StatChange.gd" id="3_uvwus"]
+
+[sub_resource type="Resource" id="Resource_13cr2"]
+script = ExtResource("2_6dinp")
+base_power = 55
+animation_type = "THROWN"
+metadata/_custom_type_script = "uid://cg2gwmc5eufqa"
+
+[sub_resource type="Resource" id="Resource_7tkeg"]
+script = ExtResource("3_uvwus")
+change_chance = 1.0
+stat = 5
+animation_type = "TARGET"
+metadata/_custom_type_script = "uid://dtp6jr4jhas0k"
+
+[resource]
+script = ExtResource("2_1opph")
+name = "Pocket Sand"
+accuracy = 90
+animation_type = "THROWN"
+effects = Array[ExtResource("1_m116k")]([SubResource("Resource_13cr2"), SubResource("Resource_7tkeg")])
+metadata/_custom_type_script = "uid://coff2nnisn6g2"
