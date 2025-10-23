@@ -1,0 +1,391 @@
+[gd_scene load_steps=14 format=3 uid="uid://dfkbmogunv8ty"]
+
+[ext_resource type="Script" uid="uid://bemvdsu6rwcob" path="res://scenes/ui/summary/summary.gd" id="1_cq6ol"]
+[ext_resource type="Texture2D" uid="uid://bblshkejbt64c" path="res://objects/monsters/pistol_shrimp/pistol_shrimp.png" id="1_ihn38"]
+[ext_resource type="Texture2D" uid="uid://dbxs3k3s3shrd" path="res://assets/ui/hp_back_mockup.png" id="2_anrtv"]
+[ext_resource type="Texture2D" uid="uid://b2ctlluobpc6f" path="res://assets/ui/hp_outline_mockup.png" id="3_oaogl"]
+[ext_resource type="Texture2D" uid="uid://d3e8ad8fp174n" path="res://assets/ui/hp_fill_mockup.png" id="4_cq6ol"]
+[ext_resource type="Texture2D" uid="uid://b43sk6yw1smka" path="res://assets/ui/exp_under.png" id="5_6ehok"]
+[ext_resource type="Texture2D" uid="uid://biw0cyyuqvb7e" path="res://assets/ui/exp_over.png" id="6_3yi4t"]
+[ext_resource type="Texture2D" uid="uid://ikvubcm5myxt" path="res://assets/ui/exp_prog.png" id="7_loo5k"]
+[ext_resource type="FontFile" uid="uid://dnq6mej4gi63b" path="res://assets/m3x6.ttf" id="8_5vjpn"]
+[ext_resource type="FontFile" uid="uid://jbbx5lupeleb" path="res://assets/m5x7.ttf" id="9_s2q84"]
+[ext_resource type="Texture2D" uid="uid://brk63t2v0krpi" path="res://assets/ui/text_box_mockup.png" id="10_2s1is"]
+[ext_resource type="Texture2D" uid="uid://dujoyv2fb471r" path="res://assets/ui/button_mockup.png" id="11_anrtv"]
+[ext_resource type="Theme" uid="uid://bqshp7x0tkycx" path="res://assets/default_theme.tres" id="12_6ehok"]
+
+[node name="Summary" type="CanvasLayer" node_paths=PackedStringArray("portrait", "hp_bar", "exp_bar", "name_label", "level_label", "type_label", "role_label", "hp_label", "speed_label", "attack_label", "defense_label", "special_attack_label", "special_defense_label", "description_pane")]
+script = ExtResource("1_cq6ol")
+portrait = NodePath("Info/Portrait")
+hp_bar = NodePath("Info/HP")
+exp_bar = NodePath("Info/EXP")
+name_label = NodePath("Info/NameLabel")
+level_label = NodePath("Info/LevelLabel")
+type_label = NodePath("Info/TypeLabel")
+role_label = NodePath("Info/RoleLabel")
+hp_label = NodePath("StatsPane/GridContainer/HP")
+speed_label = NodePath("StatsPane/GridContainer/Speed")
+attack_label = NodePath("StatsPane/GridContainer/Attack")
+defense_label = NodePath("StatsPane/GridContainer/Defense")
+special_attack_label = NodePath("StatsPane/GridContainer/SpecialAttack")
+special_defense_label = NodePath("StatsPane/GridContainer/SpecialDefense")
+description_pane = NodePath("DescriptionPane")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -14.0
+offset_top = -10.0
+offset_right = 657.0
+offset_bottom = 373.0
+
+[node name="Info" type="Node2D" parent="."]
+
+[node name="Portrait" type="TextureRect" parent="Info"]
+offset_left = 16.0
+offset_top = 65.0
+offset_right = 56.0
+offset_bottom = 105.0
+scale = Vector2(3, 3)
+texture = ExtResource("1_ihn38")
+flip_h = true
+
+[node name="HP" type="TextureProgressBar" parent="Info"]
+offset_left = 161.0
+offset_top = 83.0
+offset_right = 321.0
+offset_bottom = 103.0
+value = 75.0
+texture_under = ExtResource("2_anrtv")
+texture_over = ExtResource("3_oaogl")
+texture_progress = ExtResource("4_cq6ol")
+
+[node name="EXP" type="TextureProgressBar" parent="Info"]
+offset_left = 160.0
+offset_top = 116.0
+offset_right = 320.0
+offset_bottom = 136.0
+value = 70.0
+texture_under = ExtResource("5_6ehok")
+texture_over = ExtResource("6_3yi4t")
+texture_progress = ExtResource("7_loo5k")
+
+[node name="NameLabel" type="Label" parent="Info"]
+offset_left = 24.0
+offset_top = 20.0
+offset_right = 219.0
+offset_bottom = 58.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("8_5vjpn")
+theme_override_font_sizes/font_size = 48
+text = "NAMEY NAMINGTON"
+
+[node name="LevelLabel" type="Label" parent="Info"]
+offset_left = 229.0
+offset_top = 20.0
+offset_right = 319.0
+offset_bottom = 58.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("8_5vjpn")
+theme_override_font_sizes/font_size = 48
+text = "Lvl. 100"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TypeLabel" type="Label" parent="Info"]
+offset_left = 169.0
+offset_top = 138.0
+offset_right = 289.0
+offset_bottom = 164.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("9_s2q84")
+theme_override_font_sizes/font_size = 32
+text = "TYPE: Grass"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RoleLabel" type="Label" parent="Info"]
+offset_left = 176.0
+offset_top = 164.0
+offset_right = 284.0
+offset_bottom = 190.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("9_s2q84")
+theme_override_font_sizes/font_size = 32
+text = "ROLE: Tank"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StatsPane" type="Sprite2D" parent="."]
+position = Vector2(176.5, 272)
+scale = Vector2(1.0531249, 1.3000001)
+texture = ExtResource("10_2s1is")
+
+[node name="GridContainer" type="GridContainer" parent="StatsPane"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -317.15137
+offset_top = -98.46153
+offset_right = -2.8486328
+offset_bottom = -2.3076935
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+columns = 2
+
+[node name="HP" type="Label" parent="StatsPane/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 6
+theme_override_fonts/font = ExtResource("8_5vjpn")
+theme_override_font_sizes/font_size = 32
+text = "HITPOINTS: 50"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Speed" type="Label" parent="StatsPane/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 6
+theme_override_fonts/font = ExtResource("8_5vjpn")
+theme_override_font_sizes/font_size = 32
+text = "SPEED: 100"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Attack" type="Label" parent="StatsPane/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 6
+theme_override_fonts/font = ExtResource("8_5vjpn")
+theme_override_font_sizes/font_size = 32
+text = "ATTACK: 100"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Defense" type="Label" parent="StatsPane/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 6
+theme_override_fonts/font = ExtResource("8_5vjpn")
+theme_override_font_sizes/font_size = 32
+text = "DEFENSE: 50"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SpecialAttack" type="Label" parent="StatsPane/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 6
+theme_override_fonts/font = ExtResource("8_5vjpn")
+theme_override_font_sizes/font_size = 32
+text = "S.ATTACK: 150"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SpecialDefense" type="Label" parent="StatsPane/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 6
+theme_override_fonts/font = ExtResource("8_5vjpn")
+theme_override_font_sizes/font_size = 32
+text = "S.DEFENSE: 50"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Header" type="Label" parent="StatsPane"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -180.0
+offset_top = -60.0
+offset_right = -140.0
+offset_bottom = -37.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("8_5vjpn")
+theme_override_font_sizes/font_size = 32
+text = "Base Stats:"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DescriptionPane" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(176.5, 272)
+scale = Vector2(1.0531249, 1.3000001)
+texture = ExtResource("10_2s1is")
+
+[node name="Label" type="Label" parent="DescriptionPane"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -316.20178
+offset_top = -115.38461
+offset_right = -3.7981873
+offset_bottom = -4.615387
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 6
+theme = ExtResource("12_6ehok")
+text = "Description"
+autowrap_mode = 3
+
+[node name="Slot0" type="Node2D" parent="."]
+position = Vector2(493, 44)
+scale = Vector2(1.7592516, 1.4234399)
+
+[node name="Background" type="Sprite2D" parent="Slot0"]
+texture = ExtResource("11_anrtv")
+hframes = 3
+
+[node name="Name" type="Label" parent="Slot0/Background"]
+offset_left = -44.337044
+offset_top = -33.01861
+offset_right = 37.662956
+offset_bottom = -7.018608
+theme_override_fonts/font = ExtResource("8_5vjpn")
+theme_override_font_sizes/font_size = 32
+text = "Move Name"
+
+[node name="Power" type="Label" parent="Slot0/Background"]
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = -52.863396
+offset_top = -33.512615
+offset_right = -12.863396
+offset_bottom = -7.512617
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("8_5vjpn")
+theme_override_font_sizes/font_size = 32
+text = "100"
+
+[node name="Type" type="Label" parent="Slot0/Background"]
+offset_left = 17.62113
+offset_top = -2.1075706
+offset_right = 57.62113
+offset_bottom = 23.89243
+theme_override_fonts/font = ExtResource("8_5vjpn")
+theme_override_font_sizes/font_size = 32
+text = "Grass"
+
+[node name="Slot1" type="Node2D" parent="."]
+position = Vector2(493, 133)
+scale = Vector2(1.7592516, 1.4234397)
+
+[node name="Background" type="Sprite2D" parent="Slot1"]
+texture = ExtResource("11_anrtv")
+hframes = 3
+
+[node name="Name" type="Label" parent="Slot1/Background"]
+offset_left = -44.337044
+offset_top = -33.01861
+offset_right = 37.662956
+offset_bottom = -7.018608
+theme_override_fonts/font = ExtResource("8_5vjpn")
+theme_override_font_sizes/font_size = 32
+text = "Move Name"
+
+[node name="Power" type="Label" parent="Slot1/Background"]
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = -52.863396
+offset_top = -33.512615
+offset_right = -12.863396
+offset_bottom = -7.512617
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("8_5vjpn")
+theme_override_font_sizes/font_size = 32
+text = "100"
+
+[node name="Type" type="Label" parent="Slot1/Background"]
+offset_left = 17.62113
+offset_top = -2.1075706
+offset_right = 57.62113
+offset_bottom = 23.89243
+theme_override_fonts/font = ExtResource("8_5vjpn")
+theme_override_font_sizes/font_size = 32
+text = "Grass"
+
+[node name="Slot2" type="Node2D" parent="."]
+position = Vector2(493, 226)
+scale = Vector2(1.7592516, 1.4234399)
+
+[node name="Background" type="Sprite2D" parent="Slot2"]
+texture = ExtResource("11_anrtv")
+hframes = 3
+
+[node name="Name" type="Label" parent="Slot2/Background"]
+offset_left = -44.337044
+offset_top = -33.01861
+offset_right = 37.662956
+offset_bottom = -7.018608
+theme_override_fonts/font = ExtResource("8_5vjpn")
+theme_override_font_sizes/font_size = 32
+text = "Move Name"
+
+[node name="Power" type="Label" parent="Slot2/Background"]
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = -52.863396
+offset_top = -33.512615
+offset_right = -12.863396
+offset_bottom = -7.512617
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("8_5vjpn")
+theme_override_font_sizes/font_size = 32
+text = "100"
+
+[node name="Type" type="Label" parent="Slot2/Background"]
+offset_left = 17.62113
+offset_top = -2.1075706
+offset_right = 57.62113
+offset_bottom = 23.89243
+theme_override_fonts/font = ExtResource("8_5vjpn")
+theme_override_font_sizes/font_size = 32
+text = "Grass"
+
+[node name="Slot3" type="Node2D" parent="."]
+position = Vector2(493, 316)
+scale = Vector2(1.7592516, 1.4234397)
+
+[node name="Background" type="Sprite2D" parent="Slot3"]
+texture = ExtResource("11_anrtv")
+hframes = 3
+
+[node name="Name" type="Label" parent="Slot3/Background"]
+offset_left = -44.337044
+offset_top = -33.01861
+offset_right = 37.662956
+offset_bottom = -7.018608
+theme_override_fonts/font = ExtResource("8_5vjpn")
+theme_override_font_sizes/font_size = 32
+text = "Move Name"
+
+[node name="Power" type="Label" parent="Slot3/Background"]
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = -52.863396
+offset_top = -33.512615
+offset_right = -12.863396
+offset_bottom = -7.512617
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("8_5vjpn")
+theme_override_font_sizes/font_size = 32
+text = "100"
+
+[node name="Type" type="Label" parent="Slot3/Background"]
+offset_left = 17.62113
+offset_top = -2.1075706
+offset_right = 57.62113
+offset_bottom = 23.89243
+theme_override_fonts/font = ExtResource("8_5vjpn")
+theme_override_font_sizes/font_size = 32
+text = "Grass"

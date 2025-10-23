@@ -10,6 +10,7 @@ var context: String = "":
 #region Scene Constants
 const SCENE_DIALOGUE := "dialogue"
 const SCENE_CHOICE := "choice"
+const SCENE_SUMMARY := "summary"
 const SCENE_BATTLE := "battle"
 const SCENE_BATTLE_OPTIONS := "battle_options"
 const SCENE_BATTLE_MOVES := "battle_moves"
@@ -22,6 +23,7 @@ const SCENE_INVENTORY_OPTIONS := "inventory_options"
 #region Scenes
 var dialogue_scene := preload("res://scenes/ui/dialogue/dialogue_box.tscn")
 var choice_scene := preload("res://scenes/ui/dialogue/yes_no_box.tscn")
+var summary_scene := preload("res://scenes/ui/summary/summary.tscn")
 var battle_scene := preload("res://scenes/battle/single/battle_3.tscn")
 var battle_options_scene := preload("res://scenes/battle/single/options_3.tscn")
 var battle_moves_scene := preload("res://scenes/battle/single/single_moves.tscn")
@@ -35,6 +37,7 @@ var inventory_options_scene := preload("res://scenes/ui/inventory/options.tscn")
 var scenes: Dictionary = {
 	SCENE_DIALOGUE: preload("res://scenes/ui/dialogue/dialogue_box.tscn"),
 	SCENE_CHOICE: preload("res://scenes/ui/dialogue/yes_no_box.tscn"),
+	SCENE_SUMMARY: preload("res://scenes/ui/summary/summary.tscn"),
 	SCENE_BATTLE: preload("res://scenes/battle/single/battle_3.tscn"),
 	SCENE_BATTLE_OPTIONS: preload("res://scenes/battle/single/options_3.tscn"),
 	SCENE_BATTLE_MOVES: preload("res://scenes/battle/single/single_moves.tscn"),

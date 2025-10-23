@@ -9,7 +9,7 @@ layer = 7
 script = ExtResource("1_ni2l6")
 
 [node name="Slot0" type="Node2D" parent="."]
-position = Vector2(233, 164)
+position = Vector2(363, 273)
 
 [node name="Background" type="Sprite2D" parent="Slot0"]
 scale = Vector2(0.6, 0.6)
@@ -36,7 +36,7 @@ vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
 
 [node name="Slot1" type="Node2D" parent="."]
-position = Vector2(233, 203)
+position = Vector2(363, 312)
 
 [node name="Background" type="Sprite2D" parent="Slot1"]
 scale = Vector2(0.6, 0.6)
@@ -60,3 +60,4 @@ theme_override_font_sizes/font_size = 48
 text = "N O"
 horizontal_alignment = 1
 vertical_alignment = 1
+metadata/_edit_use_anchors_ = true

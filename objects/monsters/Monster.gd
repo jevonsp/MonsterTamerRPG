@@ -156,6 +156,7 @@ func add_move(move: Move):
 	
 func decide_move(move: Move):
 	print("pick a move to replace with: ", move.name)
+	print("open summary screen here")
 	
 func take_damage(amount: int):
 	var starting = hitpoints

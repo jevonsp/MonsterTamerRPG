@@ -33,6 +33,8 @@ func show_choice(text: String) -> bool:
 	var choice_box = UiManager.push_ui(UiManager.choice_scene)
 	var result = await choice_box.choice_selected
 	
+	print("result: ", result)
+	
 	UiManager.pop_ui(choice_box)
 	close_dialogue()
 	

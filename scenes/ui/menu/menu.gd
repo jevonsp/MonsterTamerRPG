@@ -22,8 +22,15 @@ var selected_slot: MenuSlot = MenuSlot.SLOT0
 func _ready() -> void:
 	processing = true
 	set_active_slot()
+	if UiManager.ui_stack.is_empty():
+		UiManager.ui_stack.append(self)
 	
 func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("yes") \
+	or event.is_action_pressed("no") or \
+	event.is_action_pressed("up") or \
+	event.is_action_pressed("down"):
+		get_viewport().set_input_as_handled()
 	if UiManager.ui_stack.is_empty():
 		return
 	if self != UiManager.ui_stack.back():
@@ -68,4 +75,5 @@ func set_active_slot():
 	
 func close():
 	UiManager.pop_ui(self)
+	UiManager.clear_ui()
 	

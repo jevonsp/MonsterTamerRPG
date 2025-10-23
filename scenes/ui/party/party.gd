@@ -160,7 +160,11 @@ func _open_options():
 func _on_option_chosen(slot_enum) -> void:
 	print("option chosen")
 	match slot_enum:
-		0: print("summary")
+		0: 
+			var summary = UiManager.push_ui(UiManager.summary_scene)
+			summary.selected_monster = v2_to_slot[selected_slot]
+			print("selected slot: ", v2_to_slot[selected_slot])
+			summary.display_selected_monster()
 		1: initiate_swap(v2_to_slot[selected_slot])
 		2: 
 			print("item")
@@ -181,7 +185,6 @@ func set_moving_slot():
 	
 func close():
 	clear_maps()
-
 	UiManager.pop_ui(self)
 	UiManager.context = ""
 #endregion
