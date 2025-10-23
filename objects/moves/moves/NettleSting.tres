@@ -20,6 +20,7 @@ metadata/_custom_type_script = "uid://d1w7r1vpiua3o"
 [resource]
 script = ExtResource("4_8ekmb")
 name = "Nettle Sting"
+description = "Slices the enemy with poisonous leaves. Small chance to poison."
 type = "GRASS"
 effects = Array[ExtResource("1_73jwn")]([SubResource("Resource_becob"), SubResource("Resource_2fq2u")])
 metadata/_custom_type_script = "uid://coff2nnisn6g2"

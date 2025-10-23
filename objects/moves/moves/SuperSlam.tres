@@ -12,5 +12,6 @@ metadata/_custom_type_script = "uid://cg2gwmc5eufqa"
 [resource]
 script = ExtResource("3_wggri")
 name = "Super Slam"
+description = "A strong normal attack."
 effects = Array[ExtResource("1_uk7pf")]([SubResource("Resource_0ldct")])
 metadata/_custom_type_script = "uid://coff2nnisn6g2"

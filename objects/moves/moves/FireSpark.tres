@@ -19,6 +19,7 @@ metadata/_custom_type_script = "uid://stiruukt82pu"
 [resource]
 script = ExtResource("3_r78tt")
 name = "Fire Spark"
+description = "A basic fire attack. Has a chance to burn the opponent."
 type = "FIRE"
 effects = Array[ExtResource("1_sijiy")]([SubResource("Resource_becob"), SubResource("Resource_5n8bs")])
 metadata/_custom_type_script = "uid://coff2nnisn6g2"

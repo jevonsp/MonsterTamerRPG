@@ -16,6 +16,7 @@ extends CanvasLayer
 @export var special_defense_label: Label
 
 @export var description_pane: Sprite2D
+@export var description_label: Label
 
 enum State {DEFAULT, READING, REORDERING}
 var state: State = State.DEFAULT
@@ -78,8 +79,13 @@ func _input(event: InputEvent) -> void:
 				_move(1)
 		State.REORDERING:
 			if event.is_action_pressed("yes"):
-				print("move %s to %s" % [moving_index, selected_slot])
+				var moves = PartyManager.party[selected_monster].moves
+				var temp = moves[moving_index]
+				moves[moving_index] = moves[selected_slot]
+				moves[selected_slot] = temp
 				moving_index = -1
+				display_moves()
+				display_move_description()
 				_set_state(State.READING)
 			if event.is_action_pressed("no"):
 				_set_state(State.DEFAULT)
@@ -186,5 +192,8 @@ func get_move_power(move: Move) -> String:
 	return "-"
 			
 func display_move_description():
-	pass
+	var monster = PartyManager.party[selected_monster]
+	var moves = monster.moves
+	var description = moves[selected_slot].description
+	description_label.text = description
 	

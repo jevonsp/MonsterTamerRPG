@@ -2,6 +2,7 @@ class_name Move extends Resource
 
 @export var name: String = ""
 @export var icon: Texture2D
+@export var description: String = ""
 
 @export_enum("FIRE", "WATER", "GRASS", "LIGHT", "DARK", "NONE") var type = "NONE"
 @export_range(-7, 7) var priority: int = 0
@@ -18,7 +19,3 @@ class_name Move extends Resource
 
 @export_subgroup("Effects")
 @export var effects: Array[BattleEffect] = []
-
-@export_subgroup("Descriptions")
-@export var short_description: String = ""
-@export var long_description: String = ""

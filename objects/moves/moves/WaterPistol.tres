@@ -13,6 +13,7 @@ metadata/_custom_type_script = "uid://cg2gwmc5eufqa"
 [resource]
 script = ExtResource("2_sshtl")
 name = "Water Pistol"
+description = "Splashes the enemy with water for medium damage"
 type = "WATER"
 effects = Array[ExtResource("1_44luj")]([SubResource("Resource_becob")])
 metadata/_custom_type_script = "uid://coff2nnisn6g2"
