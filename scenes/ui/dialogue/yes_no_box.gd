@@ -30,8 +30,7 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("yes"):
 		input_selection(selected_slot)
 	if event.is_action_pressed("no"):
-	
-		close()
+		input_selection(1)
 	if event.is_action_pressed("up"):
 		_move(-1)
 	if event.is_action_pressed("down"):

@@ -31,6 +31,8 @@ var turn_timer: float = 0.0
 # Processing control
 var processing: bool = true
 
+var respawn_point: Vector2
+
 @onready var anim_state = anim_tree.get("parameters/playback")
 
 func _ready() -> void:
@@ -114,6 +116,7 @@ func process_walking_state(delta: float) -> void:
 		position = tile_target_pos
 		move_progress = 0.0
 		EventBus.step_completed.emit(global_position)
+		print(global_position)
 
 		# Check for continued movement
 		var input_dir = get_input_direction()
@@ -249,3 +252,16 @@ func attempt_interaction() -> void:
 		var collider = ray2d.get_collider()
 		if collider.is_in_group("interactable"):
 			collider.interact()
+			
+func save_position():
+	respawn_point = global_position
+	print("respawn_point: ", respawn_point)
+			
+func respawn():
+	position = respawn_point
+	print("respawned")
+	for monster in PartyManager.party:
+		if monster:
+			monster.heal(0, true)
+			monster.revive()
+	print("healed party")

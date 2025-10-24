@@ -17,6 +17,7 @@ var battle_reference: Node = null
 
 var escape_attempts: int = 0
 var escaped: bool = false
+var lost: bool = false
 
 func _ready() -> void:
 	EventBus.battle_reference.connect(_on_battle_reference)
@@ -185,8 +186,8 @@ func give_exp():
 	print("exp_to_give: ", exp_to_give)
 	for monster in PartyManager.party:
 		if monster.getting_exp:
-			monster.gain_exp(exp_to_give)
-			await EventBus.exp_done_animating
+			await monster.gain_exp(exp_to_give)
+
 	
 func check_victory():
 	var alive: int = 0
@@ -227,6 +228,7 @@ func lose():
 		return
 	DialogueManager.show_dialogue("You lose!")
 	await DialogueManager.dialogue_closed
+	lost = true
 	end_battle()
 	
 func escape():
@@ -317,4 +319,7 @@ func end_battle():
 	print("actors/party cleared")
 	escape_attempts = 0
 	turn_actions.clear()
-	
+	if lost:
+		var player = get_tree().get_first_node_in_group("player")
+		player.respawn()
+	lost = false

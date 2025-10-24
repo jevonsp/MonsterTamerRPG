@@ -75,9 +75,11 @@ func map_actor(monster: Monster) -> void:
 	
 	var name_label = player_name if is_player else enemy_name
 	name_label.text = monster.species.name
+	name_map[monster] = name_label
 	
 	var level_label = player_level if is_player else enemy_level
 	level_label.text = "Lvl. " + str(monster.level)
+	level_map[monster] = level_label
 	
 func update_maps(old_monster: Monster, new_monster: Monster) -> void:
 	var hp_bar = hp_map.get(old_monster)
@@ -183,22 +185,30 @@ func _on_switch_animation(old: Monster, new: Monster) -> void:
 	
 func _on_exp_changed(monster: Monster, old_level: int, new_experience: int, times: int) -> void:
 	print("do experience animation here")
-	var old_lvl = old_level
-	for i in times:
-		var _level_start = monster.experience_to_level(old_lvl)
-		var level_end = monster.experience_to_level(old_lvl + 1)
+	if times == 1:
+		# Level up animation
+		var level_start = monster.experience_to_level(old_level)
+		var level_end = monster.experience_to_level(old_level + 1)
+		
 		var full_tween = get_tree().create_tween()
-		full_tween.tween_property(exp_map[monster], "value", level_end - _level_start, Settings.game_speed)
+		full_tween.tween_property(exp_map[monster], "value", level_end - level_start, Settings.game_speed)
 		await full_tween.finished
+		
 		exp_map[monster].value = 0
 		await get_tree().process_frame
-		DialogueManager.show_dialogue("%s leveled up to %s" % [monster.name, old_lvl + 1], true)
-		old_lvl += 1
-	var level_start = monster.experience_to_level(old_lvl)
-	var tween = get_tree().create_tween()
-	tween.tween_property(exp_map[monster], "value", new_experience - level_start, Settings.game_speed)
-	await tween.finished
-	EventBus.exp_done_animating.emit()
+		
+		DialogueManager.show_dialogue("%s leveled up to %s" % [monster.name, old_level + 1], true)
+		level_map[monster].text = "Lvl. " + str(old_level + 1)
+		
+		EventBus.level_done_animating.emit()
+	else:
+		# Just exp gain, no level up
+		var level_start = monster.experience_to_level(monster.level)
+		var tween = get_tree().create_tween()
+		tween.tween_property(exp_map[monster], "value", new_experience - level_start, Settings.game_speed)
+		await tween.finished
+		
+		EventBus.exp_done_animating.emit()
 	
 func _on_monster_fainted(monster: Monster):
 	var texture = portrait_map[monster]

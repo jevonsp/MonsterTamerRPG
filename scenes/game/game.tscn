@@ -60,6 +60,7 @@ item = ExtResource("11_kp23o")
 [node name="HealingZone" parent="." instance=ExtResource("13_ftsea")]
 position = Vector2(8.016594, -8.5424)
 script = ExtResource("14_otnwt")
+respawn_point = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HealingZone"]
 position = Vector2(-0.016593933, 0.54240036)

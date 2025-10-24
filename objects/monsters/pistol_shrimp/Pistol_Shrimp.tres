@@ -18,5 +18,5 @@ base_speed = 100
 base_attack = 120
 base_defense = 70
 moves = Array[ExtResource("1_3g2kv")]([ExtResource("2_05o4f"), ExtResource("3_e6udc"), ExtResource("4_mbecd")])
-levels = Array[int]([1, 5, 5])
+levels = Array[int]([1, 5, 6])
 metadata/_custom_type_script = "uid://cf7d81q2bjlj0"

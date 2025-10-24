@@ -161,7 +161,7 @@ func _on_option_chosen(slot_enum) -> void:
 	print("option chosen")
 	match slot_enum:
 		0: 
-			var summary = UiManager.push_ui(UiManager.summary_scene)
+			var summary = UiManager.push_ui_by_name(UiManager.SCENE_SUMMARY)
 			summary.selected_monster = v2_to_slot[selected_slot]
 			print("selected slot: ", v2_to_slot[selected_slot])
 			summary.display_selected_monster()

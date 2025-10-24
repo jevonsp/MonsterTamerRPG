@@ -25,4 +25,10 @@ func get_moves_for_lvl(lvl: int) -> Array[Move]:
 		if i < levels.size() and levels[i] <= lvl:
 			available_moves.append(moves[i])
 	return available_moves
+func get_moves_at_exact_lvl(lvl: int) -> Array[Move]:
+	var new_moves: Array[Move] = []
+	for i in range(moves.size()):
+		if i < levels.size() and levels[i] == lvl:
+			new_moves.append(moves[i])
+	return new_moves
 #endregion

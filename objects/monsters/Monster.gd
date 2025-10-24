@@ -98,17 +98,24 @@ func gain_exp(amount: int) -> void:
 	var old_level = level
 	
 	experience += amount
-	var new_level = level
-	while experience >= experience_to_level(new_level + 1) and new_level < 100:
-		new_level += 1
-	
-	var levels_gained = new_level - old_level
-	
-	if levels_gained > 0:
-		level = new_level
-		set_stats()
-		
-	EventBus.exp_changed.emit(self, old_level, experience, levels_gained)
+	var levels_to_gain = 0
+	var temp_level = level
+	while experience >= experience_to_level(temp_level + 1) and temp_level < 100:
+		levels_to_gain += 1
+		temp_level +=1
+	if levels_to_gain > 0:
+		for i in range(levels_to_gain):
+			level += 1
+			set_stats()
+			EventBus.exp_changed.emit(self, old_level, experience, 1)
+			await EventBus.level_done_animating
+			
+			var new_moves = species.get_moves_at_exact_lvl(level)
+			for move in new_moves:
+				await add_move(move)
+	else:
+		EventBus.exp_changed.emit(self, old_level, experience, 0)
+		await EventBus.exp_done_animating
 	
 func grant_exp() -> int:
 	var is_getting_exp: int = 0
@@ -131,16 +138,24 @@ func add_move(move: Move):
 		var should_replace = await DialogueManager.show_choice(
 			"%s already has 4 moves. Do you wish to remove one?" % name )
 		if should_replace:
-			await decide_move(move)
+			decide_move(move)
+			return
 		else:
 			DialogueManager.show_dialogue("%s did not learn %s" % [name, move.name], true)
+			return
 	DialogueManager.show_dialogue("%s learned %s" % [name, move.name])
 	await DialogueManager.dialogue_closed
 	moves.append(move)
 	
 func decide_move(move: Move):
 	print("pick a move to replace with: ", move.name)
+	var summary = UiManager.push_ui(UiManager.summary_scene)
 	print("open summary screen here")
+	
+	summary._set_state(summary.State.READING)
+	summary.deciding = true
+	summary.move_deciding = move
+	summary.display_selected_monster()
 	
 func take_damage(amount: int):
 	var starting = hitpoints
@@ -163,12 +178,17 @@ func heal(amount: int, full: bool = false) -> void:
 		amount = max_hitpoints - hitpoints
 	var starting = hitpoints
 	hitpoints += amount
-	EventBus.health_changed.emit(self, starting, hitpoints)
-	await EventBus.health_done_animating
-	print("health finished animating")
-	await Engine.get_main_loop().process_frame
 	if hitpoints >= max_hitpoints:
 		hitpoints = max_hitpoints
+	if BattleManager.in_battle:
+		EventBus.health_changed.emit(self, starting, hitpoints)
+		await EventBus.health_done_animating
+		await Engine.get_main_loop().process_frame
+		return
+	EventBus.health_changed.emit(self, starting, hitpoints)
+	print("health finished animating")
+	await Engine.get_main_loop().process_frame
+	
 	
 func revive() -> void:
 	is_fainted = false

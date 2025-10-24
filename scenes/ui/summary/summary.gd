@@ -22,6 +22,9 @@ enum State {DEFAULT, READING, REORDERING}
 var state: State = State.DEFAULT
 var moving_index: int = -1
 
+var deciding: bool = false
+var move_deciding: Move = null
+
 var selected_monster: int = 0
 
 enum Slot {SLOT0, SLOT1, SLOT2, SLOT3}
@@ -68,11 +71,45 @@ func _input(event: InputEvent) -> void:
 				display_selected_monster()
 		State.READING:
 			if event.is_action_pressed("yes"):
-				_set_state(State.REORDERING)
-				moving_index = selected_slot
-				print(moving_index)
+				if not deciding:
+					_set_state(State.REORDERING)
+					moving_index = selected_slot
+					print(moving_index)
+				else:
+					var monster = PartyManager.party[selected_monster]
+					var selected_move = monster.moves[selected_slot]
+					var decision = await DialogueManager.show_choice(
+						"Are you sure you want to replace %s with %s" % [
+							selected_move.name, move_deciding.name])
+					if decision:
+						print("yes: delete")
+						monster.moves[selected_slot] = move_deciding
+						display_moves()
+						DialogueManager.show_dialogue("%s replaced %s with %s" % [
+							monster.name, selected_move.name, move_deciding.name
+						], true)
+						await DialogueManager.dialogue_closed
+						move_deciding = null
+						close()
+					else:
+						print("no: restart")
+					
 			if event.is_action_pressed("no"):
-				_set_state(State.DEFAULT)
+				if not deciding:
+					_set_state(State.DEFAULT)
+				else:
+					print("decide no here")
+					var decision = await DialogueManager.show_choice(
+						"Are you sure you want to stop learning %s" % move_deciding.name)
+					if decision:
+						print("yes: stop")
+						var monster = PartyManager.party[selected_monster]
+						DialogueManager.show_dialogue("%s did not learn %s" % [monster.name, move_deciding.name], true)
+						await DialogueManager.dialogue_closed
+						close()
+					else:
+						print("no: continue")
+					
 			if event.is_action_pressed("up"):
 				_move(-1)
 			if event.is_action_pressed("down"):

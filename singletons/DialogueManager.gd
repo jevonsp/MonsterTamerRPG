@@ -12,6 +12,7 @@ func show_dialogue(text: String, auto_close: bool = false) -> void:
 		UiManager.pop_ui(current_dialogue)
 		
 	current_dialogue = UiManager.push_ui(UiManager.dialogue_scene)
+	print("current_dialogue", current_dialogue)
 	await get_tree().process_frame
 	current_dialogue.display_text(text)
 	if auto_close:

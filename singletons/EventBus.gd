@@ -23,6 +23,7 @@ signal health_done_animating
 
 signal exp_granted(amount: int)
 signal exp_changed(monster: Monster, old_level: int, new_experience: int, times: int)
+signal level_done_animating
 signal exp_done_animating
 
 signal monster_fainted(monster: Monster)
@@ -45,5 +46,7 @@ signal advance_dialogue
 signal using_item(item: Item)
 signal giving_item(item: Item)
 signal item_chosen(item: Item)
+
+signal move_remov
 
 @warning_ignore_restore("unused_signal")
