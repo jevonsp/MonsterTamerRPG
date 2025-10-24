@@ -185,7 +185,9 @@ func heal(amount: int, full: bool = false) -> void:
 		await EventBus.health_done_animating
 		await Engine.get_main_loop().process_frame
 		return
-	EventBus.health_changed.emit(self, starting, hitpoints)
+	if not UiManager.ui_stack.is_empty():
+		EventBus.health_changed.emit(self, starting, hitpoints)
+		await  EventBus.party_effect_ended
 	print("health finished animating")
 	await Engine.get_main_loop().process_frame
 	

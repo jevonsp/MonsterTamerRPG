@@ -13,13 +13,13 @@ func setup():
 func interact():
 	print("interact")
 	if frame == 0:
-		PartyManager.make_monster(pyro_badger, 5)
+		PartyManager.make_monster(pyro_badger, 1)
 		dialogue()
 	if frame == 1:
-		PartyManager.make_monster(pistol_shrimp, 5)
+		PartyManager.make_monster(pistol_shrimp, 1)
 		dialogue()
 	if frame == 2:
-		PartyManager.make_monster(fox_mcleaf, 5)
+		PartyManager.make_monster(fox_mcleaf, 1)
 		dialogue()
 	queue_free()
 	

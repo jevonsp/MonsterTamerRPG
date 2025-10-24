@@ -48,16 +48,17 @@ var scenes: Dictionary = {
 	SCENE_INVENTORY_OPTIONS: preload("res://scenes/ui/inventory/options.tscn") }
 #endregion
 func _ready() -> void:
-	EventBus.battle_manager_ready.connect(on_battle_ready)
+	pass
 	
 func push_ui(scene: PackedScene):
+	print("tried to push scene: ", scene)
 	if scene == null:
 		push_error("PackedScene is null! Scene not loaded correctly.")
 		return null
 	var ui = scene.instantiate()
 	ui.layer = ui_stack.size() + 1
-	add_child(ui)
 	ui_stack.append(ui)
+	add_child(ui)
 	return ui
 	
 func pop_ui(target: Node = null):
@@ -72,6 +73,7 @@ func pop_ui(target: Node = null):
 func push_ui_by_name(scene_name: String):
 	print("push_ui_by_name context: ", context)
 	if scenes.has(scene_name):
+		print("pushing: ", scene_name)
 		var ui = push_ui(scenes[scene_name])
 		return ui
 	push_error("scene not found: ", scene_name)
@@ -83,6 +85,3 @@ func clear_ui():
 		pop_ui()
 		print("ui_stack:", ui_stack)
 	print("final ui_stack:", ui_stack)
-	
-func on_battle_ready():
-	push_ui(battle_scene)

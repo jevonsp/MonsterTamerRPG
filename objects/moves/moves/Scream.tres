@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="Move" load_steps=5 format=3 uid="uid://cs6ym0bmr6ufq"]
+
+[ext_resource type="Script" uid="uid://dwops4cp56fq3" path="res://classes/base/BattleEffect.gd" id="1_td7i3"]
+[ext_resource type="Script" uid="uid://cg2gwmc5eufqa" path="res://objects/effects/Damage.gd" id="2_4hefe"]
+[ext_resource type="Script" uid="uid://coff2nnisn6g2" path="res://objects/moves/Move.gd" id="3_evgpy"]
+
+[sub_resource type="Resource" id="Resource_sxrhn"]
+script = ExtResource("2_4hefe")
+base_power = 50
+damage_category = "SPECIAL"
+metadata/_custom_type_script = "uid://cg2gwmc5eufqa"
+
+[resource]
+script = ExtResource("3_evgpy")
+name = "Scream"
+description = "A basic attack."
+accuracy = 90
+effects = Array[ExtResource("1_td7i3")]([SubResource("Resource_sxrhn")])
+metadata/_custom_type_script = "uid://coff2nnisn6g2"

@@ -58,6 +58,14 @@ func apply(actor_ref: Monster, target_ref: Monster, move_ref) -> void:
 				await EventBus.effect_ended
 			
 			var damage = calculate_damage()
+			
+			if randf() <= 0.625:
+				await target_ref.take_damage(damage * 2)
+				DialogueManager.show_dialogue("Critical hit!", true)
+				await DialogueManager.dialogue_closed
+				DialogueManager.show_dialogue("%s dealt %s to %s!" % [move_ref.name, damage, target.name], false)
+				await DialogueManager.dialogue_closed
+				return
 			await target_ref.take_damage(damage)
 			DialogueManager.show_dialogue("%s dealt %s to %s!" % [move_ref.name, damage, target.name], false)
 			await DialogueManager.dialogue_closed
@@ -78,7 +86,7 @@ func calculate_damage() -> int:
 	var mods: float = type_bonus
 	var damage = int((((((2 * actor.level) / 5.0) + 2) * base_power * atk / float(def)) / 50.0) * mods)
 	
-	return damage
+	return max(damage, 1)
 	
 func get_type_effectiveness(attacking_type: String, defending_type: String) -> float:
 	attacking_type = attacking_type.to_upper()

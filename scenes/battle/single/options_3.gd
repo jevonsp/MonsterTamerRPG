@@ -20,10 +20,18 @@ var v2_to_slot: Dictionary = {
 func _ready() -> void:
 	print("options3 _ready")
 	set_active_slot()
+	print("UiManager.ui_stack: ", UiManager.ui_stack)
 	
 func _input(event: InputEvent) -> void:
-	if not processing or BattleManager.processing_turn:
+	if self != UiManager.ui_stack.back():
 		return
+	
+	if event.is_action_pressed("yes") \
+	or event.is_action_pressed("no") or \
+	event.is_action_pressed("up") or \
+	event.is_action_pressed("down"):
+		get_viewport().set_input_as_handled()
+	
 	if event.is_action_pressed("yes"):
 		_input_selection()
 	if event.is_action_pressed("no"):

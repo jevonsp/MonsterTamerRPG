@@ -32,8 +32,8 @@ position = Vector2(32, 32)
 collision_layer = 2
 collision_mask = 0
 encounters = Array[ExtResource("5_87uf6")]([ExtResource("6_2a8rs"), ExtResource("7_4j704"), ExtResource("8_kp23o")])
-min_levels = Array[int]([3, 3, 3])
-max_levels = Array[int]([5, 5, 5])
+min_levels = Array[int]([2, 2, 2])
+max_levels = Array[int]([3, 3, 3])
 probabilities = Array[float]([0.33, 0.33, 0.34])
 ai_profile = ExtResource("8_otnwt")
 

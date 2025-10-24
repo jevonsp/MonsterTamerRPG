@@ -11,6 +11,7 @@ func dialogue():
 		for monster in PartyManager.party:
 			if monster:
 				monster.heal(0, true)
+				monster.status = null
 				monster.revive()
 		if respawn_point:
 			var player = get_tree().get_first_node_in_group("player")

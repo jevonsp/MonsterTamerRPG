@@ -14,6 +14,8 @@ func show_dialogue(text: String, auto_close: bool = false) -> void:
 	current_dialogue = UiManager.push_ui(UiManager.dialogue_scene)
 	print("current_dialogue", current_dialogue)
 	await get_tree().process_frame
+	if not current_dialogue:
+		return
 	current_dialogue.display_text(text)
 	if auto_close:
 		await get_tree().create_timer(Settings.game_speed).timeout

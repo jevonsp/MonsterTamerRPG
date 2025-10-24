@@ -49,7 +49,7 @@ func start_battle():
 	player_actor.getting_exp = true
 	await get_tree().process_frame
 	print("enemy party size: ", enemy_party.size())
-	EventBus.battle_manager_ready.emit()
+	UiManager.push_ui_by_name(UiManager.SCENE_BATTLE)
 	
 func _on_battle_reference(node: Node):
 	battle_reference = node
@@ -72,16 +72,7 @@ func on_action_selected(action: BattleAction):
 	execute_turn()
 	
 func get_enemy_action(monster: Monster):
-	if not in_battle:
-		return
-	var index = randi_range(0, monster.moves.size() - 1)
-	var enemy_move = monster.moves[index]
-	var enemy_target_index: int = -1
-	if single_battle:
-		enemy_target_index = 0
-	elif not single_battle:
-		enemy_target_index = [0, 2].pick_random()
-	var enemy_action = MoveAction.new(monster, [enemy_target_index], enemy_move)
+	var enemy_action = AiManager.get_enemy_action(monster)
 	turn_actions.append(enemy_action)
 	print("got enemy action")
 	
@@ -97,7 +88,9 @@ func resolve_targets(target_type: String, actor: Monster) -> Array[Monster]:
 	return result
 	
 func get_opposing_actor(actor: Monster) -> Monster:
+	print("trying to get opposing actor")
 	var opponents = []
+	print("opponents: ", opponents)
 	if actor in [player_actor, player_actor2]:
 		opponents = [enemy_actor, enemy_actor2]
 	elif actor in [enemy_actor, enemy_actor2]:
@@ -145,10 +138,6 @@ func execute_turn():
 	for action in turn_actions:
 		if not in_battle:
 			return
-		if player_actor.is_fainted:
-			force_switch()
-			turn_actions.clear()
-			return
 		
 		if action.actor.status and not action.actor.status.can_act(action.actor):
 			DialogueManager.show_dialogue("%s is unable to act" % action.actor.name)
@@ -160,14 +149,23 @@ func execute_turn():
 		if not in_battle:
 			return
 		await get_tree().create_timer(Settings.game_speed).timeout
+		
 		if enemy_actor and enemy_actor.is_fainted:
 			await give_exp()
 		if enemy_actor2 and enemy_actor2.is_fainted:
 			await give_exp()
 		if await check_victory(): 
 			return
-		if await check_loss(): 
+			
+		if player_actor.is_fainted:
+			UiManager.pop_ui()
+			if await check_loss(): 
+				return
+			await force_switch()
+			turn_actions.clear()
+			processing_turn = false
 			return
+		
 			
 	for monster in [player_actor, enemy_actor]:
 		if monster and monster.status:
@@ -212,8 +210,8 @@ func check_loss():
 	if alive == 0:
 		lose()
 		return true
-	if player_actor.is_fainted:
-		await force_switch()
+	#if player_actor.is_fainted:
+		#await force_switch()
 	return false
 	
 func win():
@@ -253,12 +251,14 @@ func force_switch():
 	if not in_battle:
 		return
 	print("force_switch here")
+	var old_actor = player_actor
 	UiManager.push_ui_by_name(UiManager.SCENE_PARTY)
 	EventBus.free_switch.emit()
 	await EventBus.free_switch_chosen
 	await get_tree().create_timer(Settings.game_speed).timeout
 	print("free switch complete")
-	update_battle_actors()
+	player_actor = PartyManager.party[0]
+	EventBus.switch_animation.emit(old_actor, player_actor)
 	
 func force_enemy_switch():
 	var next = get_next_enemy_monster()
@@ -279,27 +279,10 @@ func get_next_enemy_monster() -> int:
 	return -1
 	
 func update_battle_actors() -> void:
-	var p1_temp = player_actor
-	var p2_temp = player_actor2
-	var e1_temp = enemy_actor
-	var e2_temp = enemy_actor2
-	
 	if player_actor: player_actor = PartyManager.party[0]
 	if player_actor2: player_actor2 = PartyManager.party[1]
 	if enemy_actor: enemy_actor = enemy_party[0]
 	if enemy_actor2: enemy_actor2 = enemy_party[1]
-	
-	var old: Monster
-	var new: Monster
-	
-	for monster in [p1_temp, p2_temp, e1_temp, e2_temp]:
-		if monster not in [player_actor, player_actor2, enemy_actor, enemy_actor2]:
-			old = monster
-	for monster in [player_actor, player_actor2, enemy_actor, enemy_actor2]:
-		if monster not in [p1_temp, p2_temp, e1_temp, e2_temp]:
-			new = monster
-	
-	EventBus.switch_animation.emit(old, new)
 	
 func end_battle():
 	await get_tree().create_timer(Settings.game_speed).timeout

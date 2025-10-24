@@ -30,10 +30,12 @@ func show_party():
 	
 func swap_party(from_index: int, to_index: int, free_switch: bool = true) -> void:
 	if free_switch:
+		print("got free switch")
 		var temp = party[from_index]
 		party[from_index] = party[to_index]
 		party[to_index] = temp
-	else:
-		var switch = SwitchAction.new(BattleManager.player_actor, [BattleManager.enemy_actor], from_index)
 		EventBus.free_switch_chosen.emit()
+	else:
+		print("not free")
+		var switch = SwitchAction.new(BattleManager.player_actor, [BattleManager.enemy_actor], from_index)
 		BattleManager.on_action_selected(switch)

@@ -34,14 +34,14 @@ func _ready() -> void:
 	update_moves()
 	
 func _input(event: InputEvent) -> void:
+	if self != UiManager.ui_stack.back():
+		return
+	
 	if event.is_action_pressed("yes") \
 	or event.is_action_pressed("no") or \
 	event.is_action_pressed("up") or \
 	event.is_action_pressed("down"):
 		get_viewport().set_input_as_handled()
-		
-	if self != UiManager.ui_stack.back():
-		return
 		
 	if event.is_action_pressed("yes"):
 		if not reordering:
