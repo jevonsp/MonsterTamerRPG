@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="AiProfile" load_steps=3 format=3 uid="uid://d1fp2rnrrx1b3"]
+
+[ext_resource type="Script" uid="uid://br2gl0bftv06o" path="res://objects/items/Item.gd" id="1_rfkig"]
+[ext_resource type="Script" uid="uid://dqg8httx2eean" path="res://classes/base/AiProfile.gd" id="2_nt8jy"]
+
+[resource]
+script = ExtResource("2_nt8jy")
+battle_type = 0
+strategy = 0
+item_usage = 0
+move_preference = 2
+switching_behavor = 0
+heal_hp_threshold = 20.0
+metadata/_custom_type_script = "uid://dqg8httx2eean"

@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://b1yah1hhi0u3c"]
+[gd_scene load_steps=18 format=3 uid="uid://b1yah1hhi0u3c"]
 
 [ext_resource type="Script" uid="uid://btbok5mr6fuht" path="res://scenes/game/game.gd" id="1_5jirj"]
 [ext_resource type="PackedScene" uid="uid://c32838kx1ass2" path="res://scenes/world/maps/test_map.tscn" id="1_7h61r"]
@@ -9,6 +9,7 @@
 [ext_resource type="Resource" uid="uid://pxtac13xygko" path="res://objects/monsters/fox_mcleaf/Fox_McLeaf.tres" id="6_2a8rs"]
 [ext_resource type="Resource" uid="uid://drqip02v341yq" path="res://objects/monsters/pyro_badger/Pyro_Badger.tres" id="7_4j704"]
 [ext_resource type="Resource" uid="uid://bkcc35o5n7kil" path="res://objects/monsters/pistol_shrimp/Pistol_Shrimp.tres" id="8_kp23o"]
+[ext_resource type="Resource" uid="uid://d1fp2rnrrx1b3" path="res://scenes/world/level_components/wild_zone/WildProfile1.tres" id="8_otnwt"]
 [ext_resource type="PackedScene" uid="uid://c53i0nmmfx7q0" path="res://scenes/world/level_components/ground_item/ground_item.tscn" id="9_4j704"]
 [ext_resource type="Resource" uid="uid://pep8g7geka17" path="res://objects/items/ball/Ball.tres" id="10_kp23o"]
 [ext_resource type="Resource" uid="uid://dtmg71j7e8iq8" path="res://objects/items/potion/Potion.tres" id="11_kp23o"]
@@ -34,6 +35,7 @@ encounters = Array[ExtResource("5_87uf6")]([ExtResource("6_2a8rs"), ExtResource(
 min_levels = Array[int]([3, 3, 3])
 max_levels = Array[int]([5, 5, 5])
 probabilities = Array[float]([0.33, 0.33, 0.34])
+ai_profile = ExtResource("8_otnwt")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WildZone"]
 shape = SubResource("RectangleShape2D_lfrn8")

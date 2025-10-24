@@ -7,10 +7,11 @@ extends EncounterZone
 @export var probabilities: Array[float] = []
 
 func trigger():
+	AiManager.set_ai_profile(ai_profile)
 	if randf() < encounter_chance:
 		print("trigger battle")
 	build_encounter()
-		
+	
 func build_encounter() -> void:
 	var roll = randf()
 	var cumulative: float = 0.0

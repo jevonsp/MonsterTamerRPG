@@ -18,12 +18,12 @@ config/features=PackedStringArray("4.5", "GL Compatibility")
 
 BattleManager="*res://singletons/BattleManager.gd"
 EventBus="*res://singletons/EventBus.gd"
-GameManager="res://singletons/GameManager.gd"
 PartyManager="*res://singletons/PartyManager.gd"
 Settings="*res://singletons/Settings.gd"
 InventoryManager="*res://singletons/InventoryManager.gd"
 DialogueManager="*res://singletons/DialogueManager.gd"
 UiManager="*res://singletons/UiManager.gd"
+AiManager="*res://singletons/AiManager.gd"
 
 [display]
 
@@ -41,7 +41,8 @@ enabled=PackedStringArray("res://addons/gut/plugin.cfg")
 
 folder_colors={
 "res://addons/": "gray",
-"res://tests/": "gray"
+"res://tests/": "gray",
+"res://tools/": "gray"
 }
 
 [gui]
