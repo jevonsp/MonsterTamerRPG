@@ -59,8 +59,10 @@ func _input_selection():
 		print("caught pressed")
 		print(selected_slot)
 	elif selected_slot == 3:
-		print("save pressed")
-		print(selected_slot)
+		var choice = await DialogueManager.show_choice("Do you want to save the game")
+		if choice:
+			SaverLoader.save_game()
+			DialogueManager.show_dialogue("Game saved!", true)
 	elif selected_slot == 4:
 		print("options pressed")
 		print(selected_slot)

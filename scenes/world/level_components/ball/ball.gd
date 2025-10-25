@@ -13,17 +13,16 @@ func setup():
 
 func interact():
 	print("interact")
-	if can_interact:
-		if frame == 0:
-			PartyManager.make_monster(pyro_badger, level)
-			dialogue()
-		if frame == 1:
-			PartyManager.make_monster(pistol_shrimp, level)
-			dialogue()
-		if frame == 2:
-			PartyManager.make_monster(fox_mcleaf, level)
-			dialogue()
-		obtain()
+	if frame == 0:
+		PartyManager.make_monster(pyro_badger, level)
+		dialogue()
+	if frame == 1:
+		PartyManager.make_monster(pistol_shrimp, level)
+		dialogue()
+	if frame == 2:
+		PartyManager.make_monster(fox_mcleaf, level)
+		dialogue()
+	obtain()
 	
 func dialogue():
 	var monster

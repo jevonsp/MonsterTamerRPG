@@ -3,10 +3,9 @@ extends Interactable
 @export var item: Item
 
 func interact():
-	if can_interact:
-		InventoryManager.add_items(item, 1)
-		dialogue()
-		obtain()
+	InventoryManager.add_items(item, 1)
+	dialogue()
+	obtain()
 	
 func dialogue():
 	DialogueManager.show_dialogue("You got a %s!" % item.name)

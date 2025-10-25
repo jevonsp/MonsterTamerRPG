@@ -1,6 +1,5 @@
 class_name Interactable extends Area2D
 
-@export var can_interact: bool = false
 @export var obtained: bool = false
 
 var shape: Node2D
@@ -48,7 +47,6 @@ func dialogue():
 	
 func obtain():
 	print("obtain called")
-	can_interact = false
 	obtained = true
 	visible = false
 	shape.disabled = true

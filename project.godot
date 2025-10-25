@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="MonsterTamer_v0.3.2(R2)"
-run/main_scene="uid://b1yah1hhi0u3c"
+run/main_scene="uid://dmakht5pd3jyh"
 config/features=PackedStringArray("4.5", "GL Compatibility")
 
 [autoload]
