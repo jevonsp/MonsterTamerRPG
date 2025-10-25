@@ -213,19 +213,21 @@ func display_moves():
 		var slot_node = get_node("Slot%d" % i).get_child(0)
 		if i < monster.moves.size():
 			slot_node.get_node("Name").text = monster.moves[i].name
-			slot_node.get_node("Power").text = str(get_move_power(monster.moves[i]))
+			slot_node.get_node("Power").text = (monster.moves[i]).get_move_power()
 			slot_node.get_node("Type").text = str(monster.moves[i].type)
+			slot_node.get_node("Category").text = (monster.moves[i]).get_move_damage_category()
 		else:
 			slot_node.get_node("Name").text = ""
 			slot_node.get_node("Power").text = ""
 			slot_node.get_node("Type").text = ""
-			
-func get_move_power(move: Move) -> String:
+			slot_node.get_node("Category").text = ""
+	
+func get_move_damage_category(move: Move) -> String:
 	for effect in move.effects:
 		if effect.name == "DAMAGE":
-			return str (effect.base_power)
+			return effect.damage_category
 	return "-"
-			
+	
 func display_move_description():
 	var monster = PartyManager.party[selected_monster]
 	var moves = monster.moves

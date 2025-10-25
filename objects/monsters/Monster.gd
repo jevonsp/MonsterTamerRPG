@@ -1,25 +1,26 @@
 class_name Monster extends Resource
 
-var species: MonsterData
+@export var species: MonsterData
 
-var name: String = ""
-var type: String = ""
-var role: String = ""
-var capture_rate: int = 0
-var level: int = 1
-var experience: int = 0
+@export var name: String = ""
+@export var gender: String = ""
+@export var type: String = ""
+@export var role: String = ""
+@export var capture_rate: int = 0
+@export var level: int = 1
+@export var experience: int = 0
 
-var is_fainted: bool = false
-var capture_in_progress: bool = false
-var getting_exp: bool = false
+@export var is_fainted: bool = false
+@export var capture_in_progress: bool = false
+@export var getting_exp: bool = false
 
-var max_hitpoints: int = 0
-var hitpoints: int = 0
-var speed: int = 0
-var attack: int = 0
-var defense: int = 0
-var special_attack: int = 0
-var special_defense: int = 0
+@export var max_hitpoints: int = 0
+@export var hitpoints: int = 0
+@export var speed: int = 0
+@export var attack: int = 0
+@export var defense: int = 0
+@export var special_attack: int = 0
+@export var special_defense: int = 0
 
 var stat_stages: Dictionary = {
 	"speed": 0,
@@ -46,11 +47,30 @@ func setup_monster(md: MonsterData, lvl: int) -> void:
 	role = species.role
 	experience = experience_to_level(level)
 	decide_nature()
+	decide_gender()
 	set_stats()
 	set_moves()
 	
 func decide_nature():
 	pass
+	
+func decide_gender():
+	print("allowed_genders: ", species.allowed_genders)
+	match species.allowed_genders:
+		"NONE": 
+			gender = "NONE"
+		"MALE": 
+			gender = "MALE"
+		"FEMALE": 
+			gender = "FEMALE"
+		"BOTH": 
+			var choice = randi_range(0, 1)
+			if choice == 0:
+				gender = "MALE"
+			elif choice == 1:
+				gender = "FEMALE"
+	print("gender: ", gender)
+	
 	
 func set_stats() -> void:
 	max_hitpoints = int((2 * species.base_hitpoints * level) / 100.0) + level + 10
@@ -107,15 +127,17 @@ func gain_exp(amount: int) -> void:
 		for i in range(levels_to_gain):
 			level += 1
 			set_stats()
-			EventBus.exp_changed.emit(self, old_level, experience, 1)
-			await EventBus.level_done_animating
+			if self == BattleManager.player_actor:
+				EventBus.exp_changed.emit(self, old_level, experience, 1)
+				await EventBus.level_done_animating
 			
 			var new_moves = species.get_moves_at_exact_lvl(level)
 			for move in new_moves:
 				await add_move(move)
 	else:
-		EventBus.exp_changed.emit(self, old_level, experience, 0)
-		await EventBus.exp_done_animating
+		if self == BattleManager.player_actor:
+			EventBus.exp_changed.emit(self, old_level, experience, 0)
+			await EventBus.exp_done_animating
 	
 func grant_exp() -> int:
 	var is_getting_exp: int = 0
@@ -169,6 +191,7 @@ func take_damage(amount: int):
 		is_fainted = true
 		hitpoints = 0
 		EventBus.monster_fainted.emit(self)
+		getting_exp = false
 		await EventBus.fainting_done_animating
 		await Engine.get_main_loop().process_frame
 	

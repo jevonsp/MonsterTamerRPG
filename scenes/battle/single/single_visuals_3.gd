@@ -164,9 +164,9 @@ func _on_switch_animation(old: Monster, new: Monster) -> void:
 	print("old: ", old)
 	print("BattleManager.player_actor: ", BattleManager.player_actor)
 	print("new: ", new)
-	if old or new == BattleManager.player_actor:
+	if old == BattleManager.player_actor or new == BattleManager.player_actor:
 		direction = Vector2(-200,0)
-	elif old or new == BattleManager.enemy_actor:
+	elif old == BattleManager.enemy_actor or new == BattleManager.enemy_actor:
 		direction = Vector2(200,0)
 	var texture = portrait_map[old]
 	var start_pos = texture.position

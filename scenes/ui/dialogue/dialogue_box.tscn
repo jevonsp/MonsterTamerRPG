@@ -1,13 +1,15 @@
-[gd_scene load_steps=4 format=3 uid="uid://bvhrfd84kpnun"]
+[gd_scene load_steps=5 format=3 uid="uid://bvhrfd84kpnun"]
 
 [ext_resource type="Script" uid="uid://bekxfcrpus64s" path="res://scenes/ui/dialogue/dialogue_box.gd" id="1_6uen5"]
 [ext_resource type="Texture2D" uid="uid://brk63t2v0krpi" path="res://assets/ui/text_box_mockup.png" id="2_tp52r"]
 [ext_resource type="FontFile" uid="uid://jbbx5lupeleb" path="res://assets/m5x7.ttf" id="3_eprfq"]
+[ext_resource type="Texture2D" uid="uid://c5ea7af3ccqpl" path="res://scenes/ui/dialogue/arrow.png" id="4_1tmw4"]
 
-[node name="DialgoueBox" type="CanvasLayer" node_paths=PackedStringArray("label")]
+[node name="DialogueBox" type="CanvasLayer" node_paths=PackedStringArray("label", "arrow")]
 layer = 5
 script = ExtResource("1_6uen5")
 label = NodePath("Sprite2D/Label")
+arrow = NodePath("Arrow")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(157, 297)
@@ -32,3 +34,15 @@ theme_override_fonts/font = ExtResource("3_eprfq")
 theme_override_font_sizes/font_size = 32
 text = "test"
 autowrap_mode = 3
+
+[node name="Arrow" type="Sprite2D" parent="."]
+position = Vector2(302, 348)
+texture = ExtResource("4_1tmw4")
+region_enabled = true
+region_rect = Rect2(14.9583435, 0, 17.041656, 32)
+
+[node name="Timer" type="Timer" parent="Arrow"]
+wait_time = 0.75
+autostart = true
+
+[connection signal="timeout" from="Arrow/Timer" to="." method="blink_arrow"]

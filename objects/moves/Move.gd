@@ -20,3 +20,15 @@ class_name Move extends Resource
 
 @export_subgroup("Effects")
 @export var effects: Array[BattleEffect] = []
+
+func get_move_power() -> String:
+	for effect in effects:
+		if effect.name == "DAMAGE":
+			return str (effect.base_power)
+	return "-"
+	
+func get_move_damage_category() -> String:
+	for effect in effects:
+		if effect.name == "DAMAGE":
+			return effect.damage_category
+	return "-"

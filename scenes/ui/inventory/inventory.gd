@@ -25,16 +25,7 @@ var items: Array[Dictionary] = []
 	3: Slot.SLOT3,
 	4: Slot.SLOT4,
 	5: Slot.SLOT5 }
-	
-var potion_resource = preload("res://objects/items/potion/Potion.tres")
-var super_potion_resource = preload("res://objects/items/potion/SuperPotion.tres")
-var giga_potion_resource = preload("res://objects/items/potion/GigaPotion.tres")
-var mega_potion_resource = preload("res://objects/items/potion/MegaPotion.tres")
-var ball_resource = preload("res://objects/items/ball/Ball.tres")
-var super_ball_resource = preload("res://objects/items/ball/SuperBall.tres")
-var giga_ball_resource = preload("res://objects/items/ball/GigaBall.tres")
-var mega_ball_resource = preload("res://objects/items/ball/MegaBall.tres")
-	
+
 func _ready() -> void:
 	add_to_group("inventory")
 	if UiManager.ui_stack.is_empty():

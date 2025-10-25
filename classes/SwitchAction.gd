@@ -53,9 +53,14 @@ func execute() -> void:
 		BattleManager.enemy_actor = party[0]
 		
 	EventBus.switch_animation.emit(temp, party[_out])
-	DialogueManager.show_dialogue("Thats enough, %s" % old_monster_name)
-	await EventBus.switch_done_animating
+	if is_player_switch:
+		DialogueManager.show_dialogue("Thats enough, %s" % old_monster_name)
+		await EventBus.switch_done_animating
+	else:
+		DialogueManager.show_dialogue("Your opponent called back %s" % old_monster_name)
+		await EventBus.switch_done_animating
 	print("got switch_done_animating")
-	DialogueManager.show_dialogue("Your turn, %s" % new_monster_name, false)
-	await DialogueManager.dialogue_closed
+	if is_player_switch:
+		DialogueManager.show_dialogue("The enemy sent out %s" % new_monster_name, false)
+		await DialogueManager.dialogue_closed
 	print("got dialogue_closed")

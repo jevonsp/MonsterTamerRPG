@@ -1,14 +1,15 @@
 extends Node
 
 var party: Array[Monster] = []
+var storage: Array[Monster] = []
 
 func make_monster(monster_data: MonsterData, lvl: int) -> void:
-	if not party.size() < 6:
-		print("no more room in party!")
-		return
-	
 	var monster = Monster.new()
 	monster.setup_monster(monster_data, lvl)
+	if not party.size() < 6:
+		print("no more room in party!")
+		storage.append(monster)
+		return
 	party.append(monster)
 	print("party: ", party)
 	

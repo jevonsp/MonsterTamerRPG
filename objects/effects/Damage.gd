@@ -59,11 +59,9 @@ func apply(actor_ref: Monster, target_ref: Monster, move_ref) -> void:
 			
 			var damage = calculate_damage()
 			
-			if randf() <= 0.625:
+			if randf() <= 0.0625:
 				await target_ref.take_damage(damage * 2)
-				DialogueManager.show_dialogue("Critical hit!", true)
-				await DialogueManager.dialogue_closed
-				DialogueManager.show_dialogue("%s dealt %s to %s!" % [move_ref.name, damage, target.name], false)
+				DialogueManager.show_dialogue("Critical hit!. \n%s dealt %s to %s!" % [move_ref.name, damage, target.name], false)
 				await DialogueManager.dialogue_closed
 				return
 			await target_ref.take_damage(damage)
@@ -82,10 +80,9 @@ func calculate_damage() -> int:
 		"SPECIAL":
 			atk = actor.get_stat("special_attack")
 			def = target.get_stat("special_defense")
-	var type_bonus = get_type_effectiveness(actor.type, target.type)
+	var type_bonus = get_type_effectiveness(data.type, target.type)
 	var mods: float = type_bonus
 	var damage = int((((((2 * actor.level) / 5.0) + 2) * base_power * atk / float(def)) / 50.0) * mods)
-	
 	return max(damage, 1)
 	
 func get_type_effectiveness(attacking_type: String, defending_type: String) -> float:

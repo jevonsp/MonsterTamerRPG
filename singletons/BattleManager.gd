@@ -15,9 +15,12 @@ var processing_turn: bool = false
 var in_battle: bool = false
 var battle_reference: Node = null
 
+var is_wild: bool = true
 var escape_attempts: int = 0
 var escaped: bool = false
 var lost: bool = false
+
+var slap := preload("res://objects/moves/moves/Slap.tres") # 40 power physical move for confusion
 
 func _ready() -> void:
 	EventBus.battle_reference.connect(_on_battle_reference)
@@ -66,7 +69,12 @@ func on_action_selected(action: BattleAction):
 		"MOVE": print("action selected: MOVE. Move name: ", action.move.name)
 		"SWITCH": print("action selected: SWITCH.")
 		"ITEM": print("action selected: ITEM. Item name: ")
-		"RUN": print("action selected: RUN")
+		"RUN": 
+			print("action selected: RUN")
+			if not is_wild:
+				DialogueManager.show_dialogue("You can run from trainers!", true)
+				await DialogueManager.dialogue_closed
+				return
 	turn_actions.append(action)
 	get_enemy_action(enemy_actor)
 	execute_turn()
@@ -125,6 +133,8 @@ func execute_turn():
 	print("turn_actions: ", turn_actions)
 	processing_turn = true
 	
+	EventBus.toggle_labels.emit()
+	
 	turn_actions.sort_custom(func(a, b):
 		if a.priority != b.priority:
 			return a.priority > b.priority
@@ -138,10 +148,28 @@ func execute_turn():
 	for action in turn_actions:
 		if not in_battle:
 			return
-		
-		if action.actor.status and not action.actor.status.can_act(action.actor):
-			DialogueManager.show_dialogue("%s is unable to act" % action.actor.name)
-			await DialogueManager.dialogue_closed
+		var actor = action.actor
+		if actor.status and not actor.status.can_act(actor):
+			match actor.status:
+				"SLEEP": 
+					DialogueManager.show_dialogue("%s is fast asleep!" % actor.name)
+					await DialogueManager.dialogue_closed
+				"FREEZE": 
+					DialogueManager.show_dialogue("%s is frozen!" % actor.name)
+					await DialogueManager.dialogue_closed
+				"PARALYZE": 
+					DialogueManager.show_dialogue("%s is unable to move!" % actor.name)
+					await DialogueManager.dialogue_closed
+				"CONFUSION":
+					var effect = Damage.new()
+					effect.base_power = 40
+					effect.damage_category = "PHYSICAL"
+					effect.actor = actor
+					effect.target = actor
+					var damage = effect.calculate_damage()
+					await actor.take_damage(damage)
+					DialogueManager.show_dialogue("%s hurt itself due to confusion" % actor.name)
+					await DialogueManager.dialogue_closed
 			continue
 		
 		print("executing action: ", action.type)
@@ -164,6 +192,7 @@ func execute_turn():
 			await force_switch()
 			turn_actions.clear()
 			processing_turn = false
+			EventBus.toggle_labels.emit()
 			return
 		
 			
@@ -178,6 +207,7 @@ func execute_turn():
 				
 	turn_actions.clear()
 	processing_turn = false
+	EventBus.toggle_labels.emit()
 	
 func give_exp():
 	var exp_to_give = enemy_actor.grant_exp()
@@ -200,6 +230,9 @@ func check_victory():
 		return true
 	if enemy_actor.is_fainted:
 		await force_enemy_switch()
+		turn_actions.clear()
+		processing_turn = false
+		EventBus.toggle_labels.emit()
 	return false
 	
 func check_loss():
@@ -210,8 +243,6 @@ func check_loss():
 	if alive == 0:
 		lose()
 		return true
-	#if player_actor.is_fainted:
-		#await force_switch()
 	return false
 	
 func win():
@@ -219,6 +250,8 @@ func win():
 		return
 	DialogueManager.show_dialogue("You win!")
 	await DialogueManager.dialogue_closed
+	if not is_wild:
+		AiManager.trainer.defeated = true
 	end_battle()
 	
 func lose():
@@ -267,7 +300,7 @@ func force_enemy_switch():
 		return
 	var switch = SwitchAction.new(enemy_actor, [player_actor], next)
 	switch.execute()
-	await EventBus.battle_switch
+	await EventBus.switch_done_animating
 	await get_tree().create_timer(Settings.game_speed).timeout
 	print("free enemy switch complete")
 	update_battle_actors()
@@ -290,6 +323,7 @@ func end_battle():
 	escaped = false
 	battle_reference.clear_maps()
 	UiManager.clear_ui()
+	AiManager.clear_ai()
 	battle_reference = null
 	for monster in PartyManager.party:
 		monster.getting_exp = false

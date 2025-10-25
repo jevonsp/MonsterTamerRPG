@@ -6,6 +6,9 @@ class_name MonsterData extends Resource
 @export_enum("MELEE", "RANGED", "TANK") var role = "MELEE"
 @export_range(0, 255) var capture_rate = 200
 @export var exp_value: int = 50
+
+@export_enum("NONE", "MALE", "FEMALE", "BOTH") var allowed_genders = "BOTH"
+
 #region Stats
 @export_subgroup("Base Stats")
 @export var base_hitpoints: int = 50
@@ -15,6 +18,7 @@ class_name MonsterData extends Resource
 @export var base_special_attack: int = 50
 @export var base_special_defense: int = 50
 #endregion
+
 #region Moves
 @export_subgroup("Moveset")
 @export var moves: Array[Move] = []

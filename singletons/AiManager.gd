@@ -1,10 +1,18 @@
 extends Node
 
-var ai_profile
+var ai_profile: AiProfile
+var trainer: Trainer
 
-func set_ai_profile(profile: AiProfile):
+func set_ai(profile: AiProfile, trainer_ref: Trainer):
 	ai_profile = profile
 	print("got ai_profile: ", ai_profile)
+	trainer = trainer_ref
+	print("got ai_profile: ", ai_profile)
+	
+func clear_ai():
+	ai_profile = null
+	trainer = null
+	
 
 func get_enemy_action(monster: Monster):
 	if not ai_profile:

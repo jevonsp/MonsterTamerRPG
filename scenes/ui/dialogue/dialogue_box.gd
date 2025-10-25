@@ -1,6 +1,7 @@
 extends CanvasLayer
 
 @export var label: Label
+@export var arrow: Sprite2D
 
 func _ready() -> void:
 	print("Dialogue Manager waiting for continue")
@@ -14,3 +15,6 @@ func display_text(text: String) -> void:
 	print("display_text called")
 	label.text = text
 	print(text)
+	
+func blink_arrow():
+	arrow.visible = !arrow.visible

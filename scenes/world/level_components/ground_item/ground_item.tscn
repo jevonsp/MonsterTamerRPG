@@ -8,6 +8,7 @@ size = Vector2(16, 16)
 
 [node name="GroundItem" type="Area2D"]
 script = ExtResource("1_l0mf2")
+can_interact = true
 metadata/_custom_type_script = "uid://dff3max0oa2kp"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

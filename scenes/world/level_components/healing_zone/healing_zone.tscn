@@ -6,4 +6,5 @@
 collision_layer = 4
 collision_mask = 2
 script = ExtResource("1_1xwv7")
+can_interact = true
 metadata/_custom_type_script = "uid://dff3max0oa2kp"

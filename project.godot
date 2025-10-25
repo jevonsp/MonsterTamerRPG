@@ -24,6 +24,7 @@ InventoryManager="*res://singletons/InventoryManager.gd"
 DialogueManager="*res://singletons/DialogueManager.gd"
 UiManager="*res://singletons/UiManager.gd"
 AiManager="*res://singletons/AiManager.gd"
+SaverLoader="*res://singletons/SaverLoader.gd"
 
 [display]
 

@@ -2,7 +2,6 @@ extends Node
 
 signal dialogue_closed
 
-
 var current_dialogue: Node = null
 var current_choice_box: Node = null
 
@@ -13,7 +12,7 @@ func show_dialogue(text: String, auto_close: bool = false) -> void:
 		
 	current_dialogue = UiManager.push_ui(UiManager.dialogue_scene)
 	print("current_dialogue", current_dialogue)
-	await get_tree().process_frame
+	#await get_tree().process_frame
 	if not current_dialogue:
 		return
 	current_dialogue.display_text(text)

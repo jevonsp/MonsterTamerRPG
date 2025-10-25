@@ -1,6 +1,9 @@
 extends CanvasLayer
 
-@export var processing: bool = false
+@export var description_label: Label
+@export var power_label: Label
+@export var type_label: Label
+@export var category_label: Label
 
 var reordering: bool = false
 var swap_index: int = -1
@@ -32,6 +35,8 @@ func _ready() -> void:
 		UiManager.ui_stack.append(self)
 	set_active_slot()
 	update_moves()
+	display_move_labels()
+	EventBus.toggle_labels.connect(toggle_description)
 	
 func _input(event: InputEvent) -> void:
 	if self != UiManager.ui_stack.back():
@@ -81,6 +86,7 @@ func _move(direction: Vector2):
 		set_active_slot()
 	else:
 		set_moving_slot()
+	display_move_labels()
 	
 func get_allowed_moves() -> Array:
 	if not BattleManager.in_battle:
@@ -97,8 +103,6 @@ func get_allowed_moves() -> Array:
 	return allowed
 	
 func _input_move():
-	if not processing:
-		return
 	var current_slot = get_curr_slot()
 	var move_data 
 	if PartyManager.get_first_alive():
@@ -155,3 +159,20 @@ func cancel_swap():
 	reordering = false
 	swap_index = -1
 	set_active_slot()
+	
+func display_move_labels():
+	var monster = PartyManager.party[0]
+	var moves = monster.moves
+	var move = moves[v2_to_slot[selected_slot]]
+	print("move: ", move.name)
+	var description = move.description
+	description_label.text = description
+	power_label.text = move.get_move_power()
+	type_label.text = move.type
+	var move_category = move.get_move_damage_category()
+	var move_category_label = "PHYS" if move_category == "PHYSICAL" else "SPEC"
+	category_label.text = move_category_label
+	
+func toggle_description():
+	for label in [description_label, power_label, type_label, category_label]:
+		label.visible = !label.visible

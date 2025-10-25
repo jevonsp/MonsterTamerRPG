@@ -23,7 +23,7 @@ func setup():
 	
 func _on_step_completed(pos: Vector2):
 	if shape and check_position(pos):
-		trigger()
+		trigger(pos)
 	
 func check_position(pos: Vector2):
 	var space_state = get_world_2d().direct_space_state
@@ -37,5 +37,5 @@ func check_position(pos: Vector2):
 			return true
 	return false
 	
-func trigger():
+func trigger(_pos: Vector2):
 	pass

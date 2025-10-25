@@ -47,6 +47,8 @@ signal using_item(item: Item)
 signal giving_item(item: Item)
 signal item_chosen(item: Item)
 
-signal move_remov
+signal move_removed
+
+signal toggle_labels
 
 @warning_ignore_restore("unused_signal")

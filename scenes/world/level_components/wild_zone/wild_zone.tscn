@@ -3,5 +3,7 @@
 [ext_resource type="Script" uid="uid://cr75b2b7w5xms" path="res://scenes/world/level_components/wild_zone/wild_zone.gd" id="1_bwirk"]
 
 [node name="WildZone" type="Area2D"]
+collision_layer = 2
+collision_mask = 0
 script = ExtResource("1_bwirk")
 metadata/_custom_type_script = "uid://b4iga57vuw36y"

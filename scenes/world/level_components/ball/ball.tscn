@@ -11,6 +11,7 @@ collision_layer = 4
 collision_mask = 2
 script = ExtResource("1_oqv3d")
 sprite = NodePath("Sprite2D")
+can_interact = true
 metadata/_custom_type_script = "uid://dff3max0oa2kp"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

@@ -1,13 +1,18 @@
-[gd_scene load_steps=4 format=3 uid="uid://bvd84nab3ilbu"]
+[gd_scene load_steps=6 format=3 uid="uid://bvd84nab3ilbu"]
 
 [ext_resource type="Script" uid="uid://dv68oxyicg6ne" path="res://scenes/battle/single/single_moves.gd" id="1_hul3g"]
 [ext_resource type="Texture2D" uid="uid://dujoyv2fb471r" path="res://assets/ui/button_mockup.png" id="2_ek5cb"]
 [ext_resource type="FontFile" uid="uid://jbbx5lupeleb" path="res://assets/m5x7.ttf" id="3_8qk3b"]
+[ext_resource type="Texture2D" uid="uid://brk63t2v0krpi" path="res://assets/ui/text_box_mockup.png" id="4_fajtj"]
+[ext_resource type="FontFile" uid="uid://dnq6mej4gi63b" path="res://assets/m3x6.ttf" id="5_8l45u"]
 
-[node name="MoveControls" type="CanvasLayer"]
+[node name="MoveControls" type="CanvasLayer" node_paths=PackedStringArray("description_label", "power_label", "type_label", "category_label")]
 layer = 2
 script = ExtResource("1_hul3g")
-processing = true
+description_label = NodePath("DescriptionPane/Description")
+power_label = NodePath("DescriptionPane/Power")
+type_label = NodePath("DescriptionPane/Type")
+category_label = NodePath("DescriptionPane/Category")
 
 [node name="Slot0" type="Node2D" parent="."]
 position = Vector2(396, 266)
@@ -116,3 +121,48 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
 metadata/_edit_use_anchors_ = true
+
+[node name="DescriptionPane" type="Sprite2D" parent="."]
+position = Vector2(157, 297)
+scale = Vector2(0.96875, 1.0166667)
+texture = ExtResource("4_fajtj")
+
+[node name="Description" type="Label" parent="DescriptionPane"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -310.7097
+offset_top = -117.04918
+offset_right = -56.7742
+offset_bottom = -2.950821
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 6
+theme_override_fonts/font = ExtResource("5_8l45u")
+text = "Text"
+
+[node name="Power" type="Label" parent="DescriptionPane"]
+offset_left = 110.0
+offset_top = -55.0
+offset_right = 150.0
+offset_bottom = -29.0
+theme_override_fonts/font = ExtResource("5_8l45u")
+text = "??"
+
+[node name="Type" type="Label" parent="DescriptionPane"]
+offset_left = 110.0
+offset_top = -15.0
+offset_right = 150.0
+offset_bottom = 11.0
+theme_override_fonts/font = ExtResource("5_8l45u")
+text = "LIGHT"
+
+[node name="Category" type="Label" parent="DescriptionPane"]
+offset_left = 110.0
+offset_top = 21.0
+offset_right = 150.0
+offset_bottom = 47.0
+text = "PHYS"

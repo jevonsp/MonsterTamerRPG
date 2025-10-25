@@ -1,0 +1,104 @@
+[gd_scene load_steps=4 format=3 uid="uid://dmakht5pd3jyh"]
+
+[ext_resource type="Script" uid="uid://dt2beejmi0nko" path="res://scenes/ui/main_menu/main_menu.gd" id="1_qt1dd"]
+[ext_resource type="Texture2D" uid="uid://dujoyv2fb471r" path="res://assets/ui/button_mockup.png" id="2_cmwxi"]
+[ext_resource type="FontFile" uid="uid://jbbx5lupeleb" path="res://assets/m5x7.ttf" id="3_r70wa"]
+
+[node name="MainMenu" type="Node2D"]
+script = ExtResource("1_qt1dd")
+
+[node name="Slot0" type="NinePatchRect" parent="."]
+offset_left = 240.0
+offset_top = 88.0
+offset_right = 400.0
+offset_bottom = 144.0
+texture = ExtResource("2_cmwxi")
+region_rect = Rect2(0, 0, 160, 60)
+patch_margin_left = 1
+patch_margin_top = 1
+patch_margin_right = 1
+
+[node name="Label" type="Label" parent="Slot0"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -44.0
+offset_top = -13.0
+offset_right = 44.0
+offset_bottom = 13.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 1
+theme_override_fonts/font = ExtResource("3_r70wa")
+theme_override_font_sizes/font_size = 32
+text = "Continue"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Slot1" type="NinePatchRect" parent="."]
+offset_left = 240.0
+offset_top = 152.0
+offset_right = 400.0
+offset_bottom = 208.0
+texture = ExtResource("2_cmwxi")
+region_rect = Rect2(0, 0, 160, 60)
+patch_margin_left = 1
+patch_margin_top = 1
+patch_margin_right = 1
+
+[node name="Label" type="Label" parent="Slot1"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -44.0
+offset_top = -13.0
+offset_right = 44.0
+offset_bottom = 13.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 1
+theme_override_fonts/font = ExtResource("3_r70wa")
+theme_override_font_sizes/font_size = 32
+text = "New Game"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Slot2" type="NinePatchRect" parent="."]
+offset_left = 240.0
+offset_top = 216.0
+offset_right = 400.0
+offset_bottom = 272.0
+texture = ExtResource("2_cmwxi")
+region_rect = Rect2(0, 0, 160, 60)
+patch_margin_left = 1
+patch_margin_top = 1
+patch_margin_right = 1
+
+[node name="Label" type="Label" parent="Slot2"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -44.0
+offset_top = -13.0
+offset_right = 44.0
+offset_bottom = 13.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 1
+theme_override_fonts/font = ExtResource("3_r70wa")
+theme_override_font_sizes/font_size = 32
+text = "Erase Save"
+horizontal_alignment = 1
+vertical_alignment = 1

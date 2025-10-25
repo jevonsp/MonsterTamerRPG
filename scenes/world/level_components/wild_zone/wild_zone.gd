@@ -1,4 +1,4 @@
-extends EncounterZone
+class_name Wild extends EncounterZone
 
 @export_range(0, 1) var encounter_chance: float = 0.5
 @export var encounters: Array[MonsterData] = []
@@ -6,11 +6,13 @@ extends EncounterZone
 @export var max_levels: Array[int] = []
 @export var probabilities: Array[float] = []
 
-func trigger():
-	AiManager.set_ai_profile(ai_profile)
+func trigger(_pos):
 	if randf() < encounter_chance:
 		print("trigger battle")
-	build_encounter()
+		AiManager.set_ai_profile(ai_profile)
+		build_encounter()
+	else:
+		print("did not trigger battle")
 	
 func build_encounter() -> void:
 	var roll = randf()
