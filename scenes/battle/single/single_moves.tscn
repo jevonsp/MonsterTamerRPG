@@ -143,6 +143,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 6
 theme_override_fonts/font = ExtResource("5_8l45u")
 text = "Text"
+autowrap_mode = 3
 
 [node name="Power" type="Label" parent="DescriptionPane"]
 offset_left = 110.0

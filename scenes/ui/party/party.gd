@@ -79,8 +79,12 @@ func _input(event: InputEvent) -> void:
 			return
 		match UiManager.context:
 			"picking":
-				print("context:  picking")
-				await use_item(chosen_item)
+				print("party got context:  picking")
+				print("chosen item: ", chosen_item)
+				if not chosen_item.is_held:
+					await use_item(chosen_item)
+				else:
+					await give_item(chosen_item)
 				chosen_item = null
 				UiManager.context = ""
 				close()
@@ -349,8 +353,9 @@ func use_item(item: Item) -> void:
 	
 func give_item(item) -> void:
 	var slot_enum = v2_to_slot[selected_slot]
-	print("would give item to: ", slot_enum)
+	print("would give %s to at slot %s" % [item.name, slot_enum])
 	PartyManager.party[slot_enum].held_item = item
+	print("PartyManager.party[slot_enum].held_item: ", PartyManager.party[slot_enum].held_item.name)
 	InventoryManager.remove_items(item)
 	DialogueManager.show_dialogue("Gave %s to %s to hold" % [item.name, PartyManager.party[slot_enum].name])
 	await DialogueManager.dialogue_closed

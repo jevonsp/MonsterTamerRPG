@@ -1,6 +1,7 @@
 extends CanvasLayer
 
-const VISIBLE_SLOTS = 6
+const VISIBLE_SLOTS: int = 6
+const TILE_WIDTH: int = 160
 
 var processing: bool = false
 var reordering: bool = false
@@ -110,13 +111,17 @@ func get_ui_slot():
 	return slot_dict[ui_index]
 	
 func unset_active_slot():
-	slot[get_ui_slot()].frame = 0
+	slot[get_ui_slot()].region_rect.position.x = 0
 	
 func set_active_slot():
-	slot[get_ui_slot()].frame = 1
+	print("set_active_slot called")
+	var ui_slot = get_ui_slot()
+	print("UI slot: ", ui_slot)
+	print("Slot node: ", slot[ui_slot])
+	slot[get_ui_slot()].region_rect.position.x = TILE_WIDTH
 	
 func set_moving_slot():
-	slot[get_ui_slot()].frame = 2
+	slot[get_ui_slot()].region_rect.position.x = TILE_WIDTH * 2
 	
 func close():
 	UiManager.pop_ui(self)

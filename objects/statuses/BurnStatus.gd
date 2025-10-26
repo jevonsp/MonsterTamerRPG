@@ -10,7 +10,7 @@ func apply_on_turn_end(monster: Monster) -> void:
 	await DialogueManager.dialogue_closed
 	await monster.take_damage(damage)
 	
-func modify_stat(stat: String, base_value: int) -> int:
+func modify_stat(stat: String, base_value: float) -> float:
 	if stat == "attack":
 		return int(base_value * 0.5)
 	return base_value

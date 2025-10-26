@@ -60,8 +60,10 @@ func apply(actor_ref: Monster, target_ref: Monster, move_ref) -> void:
 			var damage = calculate_damage()
 			
 			if randf() <= 0.0625:
-				await target_ref.take_damage(damage * 2)
-				DialogueManager.show_dialogue("Critical hit!. \n%s dealt %s to %s!" % [move_ref.name, damage, target.name], false)
+				var crit_damage = damage * 2
+				await target_ref.take_damage(crit_damage)
+				DialogueManager.show_dialogue("Critical hit!. \n
+				%s dealt %s to %s!" % [move_ref.name, crit_damage, target.name], false)
 				await DialogueManager.dialogue_closed
 				return
 			await target_ref.take_damage(damage)
@@ -81,8 +83,23 @@ func calculate_damage() -> int:
 			atk = actor.get_stat("special_attack")
 			def = target.get_stat("special_defense")
 	var type_bonus = get_type_effectiveness(data.type, target.type)
-	var mods: float = type_bonus
+	var item_bonus: float = 1.0
+	print("Actor held item: ", actor.held_item)
+	if actor.held_item:
+		print("Hold effects: ", actor.held_item.hold_effects)
+		print("Hold effects count: ", actor.held_item.hold_effects.size())
+		if actor.held_item.hold_effects:
+			for effect in actor.held_item.hold_effects:
+				print("Checking effect Boosted type: '", effect.boosted_type, "' Move type: '", data.type, "'")
+				if effect.boosted_type == data.type:
+					print("type matched: ", effect.type_modifier)
+					item_bonus = effect.type_modifier
+					break
+	print("item bonus: ", item_bonus)
+	
+	var mods: float = type_bonus * item_bonus
 	var damage = int((((((2 * actor.level) / 5.0) + 2) * base_power * atk / float(def)) / 50.0) * mods)
+	print("final damage: ", damage)
 	return max(damage, 1)
 	
 func get_type_effectiveness(attacking_type: String, defending_type: String) -> float:

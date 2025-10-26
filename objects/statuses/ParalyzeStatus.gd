@@ -11,7 +11,7 @@ func can_act(monster: Monster) -> bool:
 		return false
 	return true
 	
-func modify_stat(stat: String, base_value: int) -> int:
+func modify_stat(stat: String, base_value: float) -> float:
 	if stat == "speed":
 		return int(base_value * 0.5)
 	return base_value

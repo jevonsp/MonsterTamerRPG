@@ -1,5 +1,7 @@
 extends CanvasLayer
 
+const TILE_WIDTH: int = 160
+
 @export var portrait: TextureRect
 @export var hp_bar: TextureProgressBar
 @export var exp_bar: TextureProgressBar
@@ -7,6 +9,7 @@ extends CanvasLayer
 @export var level_label: Label
 @export var type_label: Label
 @export var role_label: Label
+@export var nature_label: Label
 
 @export var hp_label: Label
 @export var speed_label: Label
@@ -163,13 +166,13 @@ func _set_state(new_state: State) -> void:
 			set_moving_slot()
 			
 func unset_active_slot():
-	slot[selected_slot].frame = 0
+	slot[selected_slot].region_rect.position.x = 0
 	
 func set_active_slot():
-	slot[selected_slot].frame = 1
+	slot[selected_slot].region_rect.position.x = TILE_WIDTH
 	
 func set_moving_slot():
-	slot[selected_slot].frame = 2
+	slot[selected_slot].region_rect.position.x = TILE_WIDTH * 2
 	
 func close():
 	selected_monster = 0
@@ -191,12 +194,10 @@ func display_selected_monster():
 	exp_bar.min_value = 0
 	
 	name_label.text = monster.name
-	
 	level_label.text = "Lvl. " + str(monster.level)
-	
 	type_label.text = monster.type
-	
 	role_label.text = monster.role
+	nature_label.text = "Nature: "+ str(monster.get_nature_name())
 	
 	hp_label.text = "HITPOINTS: " + str(monster.max_hitpoints)
 	speed_label.text = "SPEED: " + str(monster.speed)

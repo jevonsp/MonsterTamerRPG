@@ -14,7 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://dujoyv2fb471r" path="res://assets/ui/button_mockup.png" id="11_anrtv"]
 [ext_resource type="Theme" uid="uid://bqshp7x0tkycx" path="res://assets/default_theme.tres" id="12_6ehok"]
 
-[node name="Summary" type="CanvasLayer" node_paths=PackedStringArray("portrait", "hp_bar", "exp_bar", "name_label", "level_label", "type_label", "role_label", "hp_label", "speed_label", "attack_label", "defense_label", "special_attack_label", "special_defense_label", "description_pane", "description_label")]
+[node name="Summary" type="CanvasLayer" node_paths=PackedStringArray("portrait", "hp_bar", "exp_bar", "name_label", "level_label", "type_label", "role_label", "nature_label", "hp_label", "speed_label", "attack_label", "defense_label", "special_attack_label", "special_defense_label", "description_pane", "description_label")]
 script = ExtResource("1_cq6ol")
 portrait = NodePath("Info/Portrait")
 hp_bar = NodePath("Info/HP")
@@ -23,6 +23,7 @@ name_label = NodePath("Info/NameLabel")
 level_label = NodePath("Info/LevelLabel")
 type_label = NodePath("Info/TypeLabel")
 role_label = NodePath("Info/RoleLabel")
+nature_label = NodePath("Info/NatureLabel")
 hp_label = NodePath("StatsPane/GridContainer/HP")
 speed_label = NodePath("StatsPane/GridContainer/Speed")
 attack_label = NodePath("StatsPane/GridContainer/Attack")
@@ -112,6 +113,18 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("9_s2q84")
 theme_override_font_sizes/font_size = 32
 text = "ROLE: Tank"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="NatureLabel" type="Label" parent="Info"]
+offset_left = 136.0
+offset_top = 56.0
+offset_right = 344.0
+offset_bottom = 82.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("9_s2q84")
+theme_override_font_sizes/font_size = 32
+text = "Nature: "
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -239,28 +252,41 @@ autowrap_mode = 3
 position = Vector2(493, 44)
 scale = Vector2(1.7592516, 1.4234399)
 
-[node name="Background" type="Sprite2D" parent="Slot0"]
+[node name="Background" type="NinePatchRect" parent="Slot0"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -80.0
+offset_top = -30.0
+offset_right = 80.0
+offset_bottom = 30.0
+grow_horizontal = 2
+grow_vertical = 2
 texture = ExtResource("11_anrtv")
-hframes = 3
+region_rect = Rect2(0, 0, 160, 60)
 
 [node name="Name" type="Label" parent="Slot0/Background"]
-offset_left = -44.337044
-offset_top = -33.01861
-offset_right = 37.662956
-offset_bottom = -7.018608
+layout_mode = 0
+offset_left = 35.66296
+offset_top = -0.20851135
+offset_right = 117.662964
+offset_bottom = 25.791489
 theme_override_fonts/font = ExtResource("8_5vjpn")
 theme_override_font_sizes/font_size = 32
 text = "Move Name"
 horizontal_alignment = 1
 
 [node name="Power" type="Label" parent="Slot0/Background"]
+layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
-offset_left = -76.73718
-offset_top = -33.51262
-offset_right = -36.737183
-offset_bottom = -7.512619
+offset_left = 3.2628205
+offset_top = -0.7025223
+offset_right = 43.26282
+offset_bottom = 25.297478
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("8_5vjpn")
 theme_override_font_sizes/font_size = 32
@@ -268,174 +294,212 @@ text = "100"
 horizontal_alignment = 1
 
 [node name="Type" type="Label" parent="Slot0/Background"]
-offset_left = -34.67384
-offset_top = -3.5126176
-offset_right = 5.3261604
-offset_bottom = 22.487383
+layout_mode = 0
+offset_left = 45.326164
+offset_top = 29.29748
+offset_right = 85.326164
+offset_bottom = 55.297478
 theme_override_fonts/font = ExtResource("8_5vjpn")
 theme_override_font_sizes/font_size = 32
 text = "Grass"
 horizontal_alignment = 1
 
 [node name="Category" type="Label" parent="Slot0/Background"]
-offset_left = 14.210589
-offset_top = -2.810094
-offset_right = 72.21059
-offset_bottom = 23.189905
+layout_mode = 0
+offset_left = 94.21059
+offset_top = 30.000002
+offset_right = 152.21059
+offset_bottom = 56.0
 text = "Physical"
 
 [node name="Slot1" type="Node2D" parent="."]
 position = Vector2(493, 133)
 scale = Vector2(1.7592516, 1.4234397)
 
-[node name="Background" type="Sprite2D" parent="Slot1"]
+[node name="Background" type="NinePatchRect" parent="Slot1"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -80.0
+offset_top = -30.0
+offset_right = 80.0
+offset_bottom = 30.0
+grow_horizontal = 2
+grow_vertical = 2
 texture = ExtResource("11_anrtv")
-hframes = 3
+region_rect = Rect2(0, 0, 160, 60)
 
 [node name="Name" type="Label" parent="Slot1/Background"]
-offset_left = -44.337044
-offset_top = -33.01861
-offset_right = 37.662956
-offset_bottom = -7.018608
+layout_mode = 0
+offset_left = 35.66296
+offset_top = -0.20851135
+offset_right = 117.662964
+offset_bottom = 25.791489
 theme_override_fonts/font = ExtResource("8_5vjpn")
 theme_override_font_sizes/font_size = 32
 text = "Move Name"
 horizontal_alignment = 1
-vertical_alignment = 1
 
 [node name="Power" type="Label" parent="Slot1/Background"]
+layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
-offset_left = -76.73718
-offset_top = -33.51262
-offset_right = -36.737183
-offset_bottom = -7.512619
+offset_left = 3.2628205
+offset_top = -0.7025223
+offset_right = 43.26282
+offset_bottom = 25.297478
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("8_5vjpn")
 theme_override_font_sizes/font_size = 32
 text = "100"
 horizontal_alignment = 1
-vertical_alignment = 1
 
 [node name="Type" type="Label" parent="Slot1/Background"]
-offset_left = -34.673832
-offset_top = -3.5126178
-offset_right = 5.326168
-offset_bottom = 22.487383
+layout_mode = 0
+offset_left = 45.326164
+offset_top = 29.29748
+offset_right = 85.326164
+offset_bottom = 55.297478
 theme_override_fonts/font = ExtResource("8_5vjpn")
 theme_override_font_sizes/font_size = 32
 text = "Grass"
 horizontal_alignment = 1
-vertical_alignment = 1
 
 [node name="Category" type="Label" parent="Slot1/Background"]
-offset_left = 14.210589
-offset_top = -2.810094
-offset_right = 72.21059
-offset_bottom = 23.189905
+layout_mode = 0
+offset_left = 94.21059
+offset_top = 30.000002
+offset_right = 152.21059
+offset_bottom = 56.0
 text = "Physical"
 
 [node name="Slot2" type="Node2D" parent="."]
 position = Vector2(493, 226)
 scale = Vector2(1.7592516, 1.4234399)
 
-[node name="Background" type="Sprite2D" parent="Slot2"]
+[node name="Background" type="NinePatchRect" parent="Slot2"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -80.14773
+offset_top = -29.505985
+offset_right = 79.01086
+offset_bottom = 30.494015
+grow_horizontal = 2
+grow_vertical = 2
 texture = ExtResource("11_anrtv")
-hframes = 3
+region_rect = Rect2(0, 0, 160, 60)
 
 [node name="Name" type="Label" parent="Slot2/Background"]
-offset_left = -44.337044
-offset_top = -33.01861
-offset_right = 37.662956
-offset_bottom = -7.018608
+layout_mode = 0
+offset_left = 35.66296
+offset_top = -0.20851135
+offset_right = 117.662964
+offset_bottom = 25.791489
 theme_override_fonts/font = ExtResource("8_5vjpn")
 theme_override_font_sizes/font_size = 32
 text = "Move Name"
 horizontal_alignment = 1
-vertical_alignment = 1
 
 [node name="Power" type="Label" parent="Slot2/Background"]
+layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
-offset_left = -76.73718
-offset_top = -33.51262
-offset_right = -36.737183
-offset_bottom = -7.512619
+offset_left = 3.2628205
+offset_top = -0.7025223
+offset_right = 43.26282
+offset_bottom = 25.297478
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("8_5vjpn")
 theme_override_font_sizes/font_size = 32
 text = "100"
 horizontal_alignment = 1
-vertical_alignment = 1
 
 [node name="Type" type="Label" parent="Slot2/Background"]
-offset_left = -34.67384
-offset_top = -3.5126176
-offset_right = 5.3261604
-offset_bottom = 22.487383
+layout_mode = 0
+offset_left = 45.326164
+offset_top = 29.29748
+offset_right = 85.326164
+offset_bottom = 55.297478
 theme_override_fonts/font = ExtResource("8_5vjpn")
 theme_override_font_sizes/font_size = 32
 text = "Grass"
 horizontal_alignment = 1
-vertical_alignment = 1
 
 [node name="Category" type="Label" parent="Slot2/Background"]
-offset_left = 14.210589
-offset_top = -2.810094
-offset_right = 72.21059
-offset_bottom = 23.189905
+layout_mode = 0
+offset_left = 94.21059
+offset_top = 30.000002
+offset_right = 152.21059
+offset_bottom = 56.0
 text = "Physical"
 
 [node name="Slot3" type="Node2D" parent="."]
 position = Vector2(493, 316)
 scale = Vector2(1.7592516, 1.4234397)
 
-[node name="Background" type="Sprite2D" parent="Slot3"]
+[node name="Background" type="NinePatchRect" parent="Slot3"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -80.0
+offset_top = -30.0
+offset_right = 80.0
+offset_bottom = 30.0
+grow_horizontal = 2
+grow_vertical = 2
 texture = ExtResource("11_anrtv")
-hframes = 3
+region_rect = Rect2(0, 0, 160, 60)
 
 [node name="Name" type="Label" parent="Slot3/Background"]
-offset_left = -44.337044
-offset_top = -33.01861
-offset_right = 37.662956
-offset_bottom = -7.018608
+layout_mode = 0
+offset_left = 35.66296
+offset_top = -0.20851135
+offset_right = 117.662964
+offset_bottom = 25.791489
 theme_override_fonts/font = ExtResource("8_5vjpn")
 theme_override_font_sizes/font_size = 32
 text = "Move Name"
 horizontal_alignment = 1
-vertical_alignment = 1
 
 [node name="Power" type="Label" parent="Slot3/Background"]
+layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
-offset_left = -76.73718
-offset_top = -33.51262
-offset_right = -36.737183
-offset_bottom = -7.512619
+offset_left = 3.2628205
+offset_top = -0.7025223
+offset_right = 43.26282
+offset_bottom = 25.297478
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("8_5vjpn")
 theme_override_font_sizes/font_size = 32
 text = "100"
 horizontal_alignment = 1
-vertical_alignment = 1
 
 [node name="Type" type="Label" parent="Slot3/Background"]
-offset_left = -34.673832
-offset_top = -3.5126178
-offset_right = 5.326168
-offset_bottom = 22.487383
+layout_mode = 0
+offset_left = 45.326164
+offset_top = 29.29748
+offset_right = 85.326164
+offset_bottom = 55.297478
 theme_override_fonts/font = ExtResource("8_5vjpn")
 theme_override_font_sizes/font_size = 32
 text = "Grass"
 horizontal_alignment = 1
-vertical_alignment = 1
 
 [node name="Category" type="Label" parent="Slot3/Background"]
-offset_left = 14.210589
-offset_top = -2.810094
-offset_right = 72.21059
-offset_bottom = 23.189905
+layout_mode = 0
+offset_left = 94.21059
+offset_top = 30.000002
+offset_right = 152.21059
+offset_bottom = 56.0
 text = "Physical"

@@ -19,6 +19,9 @@ class_name Item extends Resource
 @export_subgroup("Effects")
 @export var effects: Array[BattleEffect] = []
 
+@export_subgroup("Hold Effects")
+@export var hold_effects: Array[HoldEffect] = []
+
 @export_subgroup("Descriptions")
 @export var short_description: String = ""
 @export var long_description: String = ""

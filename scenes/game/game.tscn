@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=4 uid="uid://b1yah1hhi0u3c"]
+[gd_scene load_steps=22 format=4 uid="uid://b1yah1hhi0u3c"]
 
 [ext_resource type="Script" uid="uid://btbok5mr6fuht" path="res://scenes/game/game.gd" id="1_5jirj"]
 [ext_resource type="PackedScene" uid="uid://c32838kx1ass2" path="res://scenes/world/maps/test_map.tscn" id="1_7h61r"]
@@ -13,6 +13,7 @@
 [ext_resource type="Resource" uid="uid://pep8g7geka17" path="res://objects/items/ball/Ball.tres" id="10_kp23o"]
 [ext_resource type="Resource" uid="uid://dtmg71j7e8iq8" path="res://objects/items/potion/Potion.tres" id="11_kp23o"]
 [ext_resource type="PackedScene" uid="uid://c8vlwpljm3ud5" path="res://scenes/world/level_components/healing_zone/healing_zone.tscn" id="13_ftsea"]
+[ext_resource type="Resource" uid="uid://c7euximlbu2c7" path="res://objects/items/water_gun/WaterGun.tres" id="14_5v6r0"]
 [ext_resource type="Script" uid="uid://q106bupy48wl" path="res://scenes/world/level_components/healing_zone/healing_zone.gd" id="14_otnwt"]
 [ext_resource type="PackedScene" uid="uid://bvh6c81okfnnv" path="res://scenes/world/level_components/trainer/trainer.tscn" id="16_3xj4h"]
 [ext_resource type="PackedScene" uid="uid://b425x261se8kq" path="res://scenes/world/level_components/saving_zone/storage.tscn" id="17_5v6r0"]
@@ -64,18 +65,24 @@ shape = SubResource("RectangleShape2D_5v6r0")
 
 [node name="Ball" parent="Items" instance=ExtResource("3_0sr1o")]
 position = Vector2(40, 8)
+level = 5
 
 [node name="Ball2" parent="Items" instance=ExtResource("3_0sr1o")]
 position = Vector2(8, 24)
 frame = 1
+level = 5
 
-[node name="GroundItem" parent="Items" instance=ExtResource("9_4j704")]
+[node name="BallItem" parent="Items" instance=ExtResource("9_4j704")]
 position = Vector2(24, 8)
 item = ExtResource("10_kp23o")
 
-[node name="GroundItem2" parent="Items" instance=ExtResource("9_4j704")]
+[node name="Potion" parent="Items" instance=ExtResource("9_4j704")]
 position = Vector2(8, 40)
 item = ExtResource("11_kp23o")
+
+[node name="WaterGun" parent="Items" instance=ExtResource("9_4j704")]
+position = Vector2(56, 8)
+item = ExtResource("14_5v6r0")
 
 [node name="HealingZone" parent="." instance=ExtResource("13_ftsea")]
 position = Vector2(8.016594, -8.5424)

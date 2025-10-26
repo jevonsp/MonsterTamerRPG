@@ -12,7 +12,7 @@ func apply_on_turn_start(_monster: Monster) -> void:
 func apply_on_turn_end(_monster: Monster) -> void:
 	pass
 	
-func modify_stat(_stat: String, base_value: int) -> int:
+func modify_stat(_stat: String, base_value: float) -> float:
 	return base_value
 	
 func can_act(_monster: Monster) -> bool:

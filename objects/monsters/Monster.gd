@@ -14,6 +14,7 @@ class_name Monster extends Resource
 @export var capture_in_progress: bool = false
 @export var getting_exp: bool = false
 
+@export var nature: Nature
 @export var max_hitpoints: int = 0
 @export var hitpoints: int = 0
 @export var speed: int = 0
@@ -22,6 +23,70 @@ class_name Monster extends Resource
 @export var special_attack: int = 0
 @export var special_defense: int = 0
 
+#region Nature Dicts
+enum Nature {
+	HARDY, LONELY, BRAVE, ADAMANT, NAUGHTY,
+	BOLD, DOCILE, RELAXED, IMPISH, LAX,
+	TIMID, HASTY, SERIOUS, JOLLY, NAIVE,
+	MODEST, MILD, QUIET, BASHFUL, RASH,
+	CALM, GENTLE, SASSY, CAREFUL, QUIRKY }
+	
+const NATURE_MODIFIERS = {
+	Nature.HARDY:    {"atk": 1.0, "def": 1.0, "spa": 1.0, "spd": 1.0, "spe": 1.0},
+	Nature.LONELY:   {"atk": 1.1, "def": 0.9, "spa": 1.0, "spd": 1.0, "spe": 1.0},
+	Nature.BRAVE:    {"atk": 1.1, "def": 1.0, "spa": 1.0, "spd": 1.0, "spe": 0.9},
+	Nature.ADAMANT:  {"atk": 1.1, "def": 1.0, "spa": 0.9, "spd": 1.0, "spe": 1.0},
+	Nature.NAUGHTY:  {"atk": 1.1, "def": 1.0, "spa": 1.0, "spd": 0.9, "spe": 1.0},
+	Nature.BOLD:     {"atk": 0.9, "def": 1.1, "spa": 1.0, "spd": 1.0, "spe": 1.0},
+	Nature.DOCILE:   {"atk": 1.0, "def": 1.0, "spa": 1.0, "spd": 1.0, "spe": 1.0},
+	Nature.RELAXED:  {"atk": 1.0, "def": 1.1, "spa": 1.0, "spd": 1.0, "spe": 0.9},
+	Nature.IMPISH:   {"atk": 1.0, "def": 1.1, "spa": 0.9, "spd": 1.0, "spe": 1.0},
+	Nature.LAX:      {"atk": 1.0, "def": 1.1, "spa": 1.0, "spd": 0.9, "spe": 1.0},
+	Nature.TIMID:    {"atk": 0.9, "def": 1.0, "spa": 1.0, "spd": 1.0, "spe": 1.1},
+	Nature.HASTY:    {"atk": 1.0, "def": 0.9, "spa": 1.0, "spd": 1.0, "spe": 1.1},
+	Nature.SERIOUS:  {"atk": 1.0, "def": 1.0, "spa": 1.0, "spd": 1.0, "spe": 1.0},
+	Nature.JOLLY:    {"atk": 1.0, "def": 1.0, "spa": 0.9, "spd": 1.0, "spe": 1.1},
+	Nature.NAIVE:    {"atk": 1.0, "def": 1.0, "spa": 1.0, "spd": 0.9, "spe": 1.1},
+	Nature.MODEST:   {"atk": 0.9, "def": 1.0, "spa": 1.1, "spd": 1.0, "spe": 1.0},
+	Nature.MILD:     {"atk": 1.0, "def": 0.9, "spa": 1.1, "spd": 1.0, "spe": 1.0},
+	Nature.QUIET:    {"atk": 1.0, "def": 1.0, "spa": 1.1, "spd": 1.0, "spe": 0.9},
+	Nature.BASHFUL:  {"atk": 1.0, "def": 1.0, "spa": 1.0, "spd": 1.0, "spe": 1.0},
+	Nature.RASH:     {"atk": 1.0, "def": 1.0, "spa": 1.1, "spd": 0.9, "spe": 1.0},
+	Nature.CALM:     {"atk": 0.9, "def": 1.0, "spa": 1.0, "spd": 1.1, "spe": 1.0},
+	Nature.GENTLE:   {"atk": 1.0, "def": 0.9, "spa": 1.0, "spd": 1.1, "spe": 1.0},
+	Nature.SASSY:    {"atk": 1.0, "def": 1.0, "spa": 1.0, "spd": 1.1, "spe": 0.9},
+	Nature.CAREFUL:  {"atk": 1.0, "def": 1.0, "spa": 0.9, "spd": 1.1, "spe": 1.0},
+	Nature.QUIRKY:   {"atk": 1.0, "def": 1.0, "spa": 1.0, "spd": 1.0, "spe": 1.0} }
+	
+const NATURE_NAMES = {
+	Nature.HARDY: "Hardy",
+	Nature.LONELY: "Lonely", 
+	Nature.BRAVE: "Brave",
+	Nature.ADAMANT: "Adamant",
+	Nature.NAUGHTY: "Naughty",
+	Nature.BOLD: "Bold",
+	Nature.DOCILE: "Docile",
+	Nature.RELAXED: "Relaxed",
+	Nature.IMPISH: "Impish",
+	Nature.LAX: "Lax",
+	Nature.TIMID: "Timid",
+	Nature.HASTY: "Hasty",
+	Nature.SERIOUS: "Serious",
+	Nature.JOLLY: "Jolly",
+	Nature.NAIVE: "Naive",
+	Nature.MODEST: "Modest",
+	Nature.MILD: "Mild",
+	Nature.QUIET: "Quiet",
+	Nature.BASHFUL: "Bashful",
+	Nature.RASH: "Rash",
+	Nature.CALM: "Calm",
+	Nature.GENTLE: "Gentle",
+	Nature.SASSY: "Sassy",
+	Nature.CAREFUL: "Careful",
+	Nature.QUIRKY: "Quirky"}
+#endregion
+
+#region Stat Stages Dict
 var stat_stages: Dictionary = {
 	"speed": 0,
 	"attack": 0,
@@ -31,6 +96,7 @@ var stat_stages: Dictionary = {
 	"accuracy": 0,
 	"evasion": 0
 }
+#endregion
 
 @export var moves: Array[Move]
 
@@ -52,7 +118,10 @@ func setup_monster(md: MonsterData, lvl: int) -> void:
 	set_moves()
 	
 func decide_nature():
-	pass
+	nature = randi() % Nature.size() as Nature
+	
+func get_nature_name() -> String:
+	return NATURE_NAMES.get(nature, "Unknown")
 	
 func decide_gender():
 	print("allowed_genders: ", species.allowed_genders)
@@ -75,14 +144,15 @@ func decide_gender():
 func set_stats() -> void:
 	max_hitpoints = int((2 * species.base_hitpoints * level) / 100.0) + level + 10
 	hitpoints = max_hitpoints
-	speed = int((((2 * species.base_speed * level) / 100.0) + 5) * 1)
-	attack = int((((2 * species.base_attack * level) / 100.0) + 5) * 1)
-	defense = int((((2 * species.base_defense * level) / 100.0) + 5) * 1)
-	special_attack = int((((2 * species.base_special_attack * level) / 100.0) + 5) * 1)
-	special_defense = int((((2 * species.base_special_defense * level) / 100.0) + 5) * 1)
+	var mods = NATURE_MODIFIERS[nature]
+	speed = int((((2 * species.base_speed * level) / 100.0) + 5) * mods["spe"]) 
+	attack = int((((2 * species.base_attack * level) / 100.0) + 5) * mods["atk"]) 
+	defense = int((((2 * species.base_defense * level) / 100.0) + 5)  * mods["def"])
+	special_attack = int((((2 * species.base_special_attack * level) / 100.0) + 5) * mods["spa"]) 
+	special_defense = int((((2 * species.base_special_defense * level) / 100.0) + 5) * mods["spd"]) 
 	
-func get_stat(stat: String) -> int:
-	var base_value: int = 0
+func get_stat(stat: String) -> float:
+	var base_value: float = 0.0
 	
 	match stat:
 		"hitpoints": base_value = hitpoints
@@ -95,9 +165,16 @@ func get_stat(stat: String) -> int:
 			push_error("Unknown stat param: ", stat)
 			return 0
 	
+	if held_item and held_item.hold_effects:
+		for effect in held_item.hold_effects:
+			if effect.stat_to_modify == stat:
+				base_value = base_value * effect.modifier
+			if effect.boosted_role == role:
+				base_value = base_value * effect.role_modifier
+	
 	if stat in stat_stages:
 		var stage = stat_stages[stat]
-		base_value = int(base_value * _get_stage_multi(stage))
+		base_value = base_value * _get_stage_multi(stage)
 	
 	if status:
 		return status.modify_stat(stat, base_value)
@@ -109,6 +186,9 @@ func _get_stage_multi(stage: int) -> float:
 	if stage >= 0:
 		return (2.0 + stage) / 2.0
 	return 2.0 / (2.0 - stage)
+	
+func get_item_bonus():
+	pass
 	
 func experience_to_level(lvl: int) -> int:
 	var BASE = 50

@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="Item" load_steps=5 format=3 uid="uid://c7euximlbu2c7"]
+
+[ext_resource type="Script" uid="uid://dwops4cp56fq3" path="res://classes/base/BattleEffect.gd" id="1_2gqjk"]
+[ext_resource type="Script" uid="uid://dphyevi8s22fb" path="res://objects/items/HoldEffect.gd" id="2_ya2vf"]
+[ext_resource type="Script" uid="uid://br2gl0bftv06o" path="res://objects/items/Item.gd" id="3_qcl0u"]
+
+[sub_resource type="Resource" id="Resource_2gqjk"]
+script = ExtResource("2_ya2vf")
+boosted_type = "WATER"
+type_modifier = 1.5
+metadata/_custom_type_script = "uid://dphyevi8s22fb"
+
+[resource]
+script = ExtResource("3_qcl0u")
+name = "Water Gun"
+in_battle_only = false
+is_held = true
+hold_effects = Array[ExtResource("2_ya2vf")]([SubResource("Resource_2gqjk")])
+metadata/_custom_type_script = "uid://br2gl0bftv06o"
