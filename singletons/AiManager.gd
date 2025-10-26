@@ -13,7 +13,6 @@ func clear_ai():
 	ai_profile = null
 	trainer = null
 	
-
 func get_enemy_action(monster: Monster):
 	if not ai_profile:
 		push_error("No ai profile")

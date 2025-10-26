@@ -32,11 +32,11 @@ var stat_stages: Dictionary = {
 	"evasion": 0
 }
 
-var moves: Array[Move]
+@export var moves: Array[Move]
 
-var status: StatusEffect = null
+@export var status: StatusEffect = null
 
-var held_item: Item = null
+@export var held_item: Item = null
 
 func setup_monster(md: MonsterData, lvl: int) -> void:
 	species = md

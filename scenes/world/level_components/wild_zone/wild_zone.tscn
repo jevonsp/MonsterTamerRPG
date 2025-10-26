@@ -1,9 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://dx1h5hc75ct73"]
+[gd_scene load_steps=3 format=3 uid="uid://dx1h5hc75ct73"]
 
 [ext_resource type="Script" uid="uid://cr75b2b7w5xms" path="res://scenes/world/level_components/wild_zone/wild_zone.gd" id="1_bwirk"]
+[ext_resource type="Resource" uid="uid://d1fp2rnrrx1b3" path="res://scenes/world/level_components/wild_zone/WildProfile1.tres" id="2_841gf"]
 
 [node name="WildZone" type="Area2D"]
 collision_layer = 2
 collision_mask = 0
 script = ExtResource("1_bwirk")
+ai_profile = ExtResource("2_841gf")
 metadata/_custom_type_script = "uid://b4iga57vuw36y"

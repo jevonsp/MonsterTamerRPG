@@ -162,6 +162,7 @@ func cancel_swap():
 	
 func display_move_labels():
 	var monster = PartyManager.party[0]
+	print("monster: ", monster)
 	var moves = monster.moves
 	var move = moves[v2_to_slot[selected_slot]]
 	print("move: ", move.name)

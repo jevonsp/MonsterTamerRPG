@@ -252,6 +252,7 @@ func win():
 	await DialogueManager.dialogue_closed
 	if not is_wild:
 		AiManager.trainer.defeated = true
+		print("AiManager.trainer.defeated:", AiManager.trainer.defeated)
 	end_battle()
 	
 func lose():

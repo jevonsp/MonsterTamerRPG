@@ -6,10 +6,12 @@ class_name Wild extends EncounterZone
 @export var max_levels: Array[int] = []
 @export var probabilities: Array[float] = []
 
+@export var ai_profile: AiProfile
+
 func trigger(_pos):
 	if randf() < encounter_chance:
 		print("trigger battle")
-		AiManager.set_ai_profile(ai_profile)
+		AiManager.set_ai(ai_profile, null)
 		build_encounter()
 	else:
 		print("did not trigger battle")

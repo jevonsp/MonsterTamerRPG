@@ -1,18 +1,18 @@
 @abstract
 class_name EncounterZone extends Area2D
 
-var default_profile := preload("res://scenes/world/level_components/wild_zone/WildProfile1.tres")
-
-@export var ai_profile: AiProfile = default_profile
-
 var shape
 
 func _ready() -> void:
 	add_to_group("encounter")
 	EventBus.step_completed.connect(_on_step_completed)
 	setup()
+	shape_setup()
 	
 func setup():
+	pass
+	
+func shape_setup():
 	for child in get_children():
 		if child is CollisionShape2D:
 			shape = child
