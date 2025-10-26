@@ -66,31 +66,23 @@ shape = SubResource("RectangleShape2D_5v6r0")
 
 [node name="Ball" parent="Items" instance=ExtResource("3_0sr1o")]
 position = Vector2(40, 8)
-frame = null
-level = null
-obtained = null
 
 [node name="Ball2" parent="Items" instance=ExtResource("3_0sr1o")]
 position = Vector2(8, 24)
 frame = 1
-level = null
-obtained = null
 
 [node name="GroundItem" parent="Items" instance=ExtResource("9_4j704")]
 position = Vector2(24, 8)
 item = ExtResource("10_kp23o")
-can_interact = false
 
 [node name="GroundItem2" parent="Items" instance=ExtResource("9_4j704")]
 position = Vector2(8, 40)
 item = ExtResource("11_kp23o")
-can_interact = false
 
 [node name="HealingZone" parent="." instance=ExtResource("13_ftsea")]
 position = Vector2(8.016594, -8.5424)
 script = ExtResource("14_otnwt")
 respawn_point = true
-can_interact = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HealingZone"]
 position = Vector2(-0.016593933, 0.54240036)
@@ -98,7 +90,6 @@ shape = SubResource("RectangleShape2D_3xj4h")
 
 [node name="Storage" parent="." instance=ExtResource("17_5v6r0")]
 position = Vector2(56, -8)
-can_interact = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Storage"]
 shape = SubResource("RectangleShape2D_uyinl")
