@@ -41,3 +41,4 @@ func obtain():
 	visible = false
 	shape.disabled = true
 	monitoring = false
+	EventBus.obstacle_removed.emit(global_position)

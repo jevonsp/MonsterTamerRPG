@@ -8,7 +8,7 @@ signal inventory_reference(node: Node)
 signal battle_manager_ready
 
 signal step_completed(position: Vector2)
-signal toggle_player
+signal obstacle_removed(position: Vector2)
 
 signal request_battle_actors
 signal player_battle_actor_sent(monster: Monster)

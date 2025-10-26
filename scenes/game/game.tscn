@@ -21,7 +21,7 @@
 size = Vector2(32, 32)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5v6r0"]
-size = Vector2(16, 120)
+size = Vector2(16, 80)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3xj4h"]
 size = Vector2(16, 16)
@@ -52,12 +52,12 @@ shape = SubResource("RectangleShape2D_lfrn8")
 [node name="Trainers" type="Node2D" parent="."]
 
 [node name="Trainer" parent="Trainers" instance=ExtResource("16_3xj4h")]
-position = Vector2(8, 96)
+position = Vector2(8, 104)
 team = Array[ExtResource("5_87uf6")]([ExtResource("6_2a8rs")])
 levels = Array[int]([1])
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Trainers/Trainer"]
-position = Vector2(0, -20)
+position = Vector2(0, -32)
 shape = SubResource("RectangleShape2D_5v6r0")
 
 [node name="Items" type="Node2D" parent="."]

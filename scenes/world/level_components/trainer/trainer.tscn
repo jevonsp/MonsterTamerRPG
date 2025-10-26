@@ -1,28 +1,47 @@
-[gd_scene load_steps=5 format=3 uid="uid://bvh6c81okfnnv"]
+[gd_scene load_steps=7 format=3 uid="uid://bvh6c81okfnnv"]
 
 [ext_resource type="Script" uid="uid://bjrv204kw8rxl" path="res://scenes/world/level_components/trainer/trainer.gd" id="1_oxi5s"]
 [ext_resource type="Resource" uid="uid://tavtommh30dv" path="res://scenes/world/level_components/trainer/profiles/TrainerProfile1.tres" id="2_of5uj"]
 [ext_resource type="Texture2D" uid="uid://ocbi1huhgdh8" path="res://scenes/world/player/player_sprite_sheet.png" id="3_eb86w"]
+[ext_resource type="Script" uid="uid://cyj5okjunk5ic" path="res://scenes/world/level_components/trainer/interactable.gd" id="4_k3rr7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_eb86w"]
 size = Vector2(16, 16)
 
-[node name="Trainer" type="Area2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d4fjg"]
+size = Vector2(18, 18)
+
+[node name="Trainer" type="Area2D" node_paths=PackedStringArray("static_body")]
 collision_layer = 2
 collision_mask = 0
 script = ExtResource("1_oxi5s")
+static_body = NodePath("AnimatableBody2D")
+fight_text = "You have to fight me now!"
+defeat_text = "How could I lose?"
+post_fight_text = "Maybe we can fight again later?"
 ai_profile = ExtResource("2_of5uj")
 metadata/_custom_type_script = "uid://b4iga57vuw36y"
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="AnimatableBody2D" type="AnimatableBody2D" parent="."]
+collision_layer = 4
+collision_mask = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="AnimatableBody2D"]
 texture = ExtResource("3_eb86w")
+offset = Vector2(0, -4)
 hframes = 3
 vframes = 3
 frame = 1
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatableBody2D"]
+shape = SubResource("RectangleShape2D_eb86w")
+
+[node name="Interactable" type="Area2D" parent="." node_paths=PackedStringArray("trainer")]
 collision_layer = 4
 collision_mask = 2
+script = ExtResource("4_k3rr7")
+trainer = NodePath("..")
+metadata/_custom_type_script = "uid://dff3max0oa2kp"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-shape = SubResource("RectangleShape2D_eb86w")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Interactable"]
+shape = SubResource("RectangleShape2D_d4fjg")

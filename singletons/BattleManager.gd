@@ -248,11 +248,14 @@ func check_loss():
 func win():
 	if not in_battle:
 		return
-	DialogueManager.show_dialogue("You win!")
-	await DialogueManager.dialogue_closed
+	if is_wild:
+		DialogueManager.show_dialogue("You defeated the wild %s!" % enemy_actor.name)
+		await DialogueManager.dialogue_closed
 	if not is_wild:
 		AiManager.trainer.defeated = true
-		print("AiManager.trainer.defeated:", AiManager.trainer.defeated)
+		DialogueManager.show_dialogue(AiManager.trainer.defeat_text)
+		await DialogueManager.dialogue_closed
+		
 	end_battle()
 	
 func lose():
@@ -337,7 +340,8 @@ func end_battle():
 	print("actors/party cleared")
 	escape_attempts = 0
 	turn_actions.clear()
+	var player = get_tree().get_first_node_in_group("player")
 	if lost:
-		var player = get_tree().get_first_node_in_group("player")
 		player.respawn()
 	lost = false
+	player.processing = true

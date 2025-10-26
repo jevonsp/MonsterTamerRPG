@@ -6,6 +6,7 @@ var shape
 func _ready() -> void:
 	add_to_group("encounter")
 	EventBus.step_completed.connect(_on_step_completed)
+	EventBus.obstacle_removed.connect(_on_obstacle_removed)
 	setup()
 	shape_setup()
 	
@@ -20,6 +21,14 @@ func shape_setup():
 		if child is CollisionPolygon2D:
 			shape = child
 			break
+			
+func _on_obstacle_removed(pos: Vector2):
+	await DialogueManager.dialogue_closed
+	print("got obstacle removed")
+	if shape and check_position(pos):
+		var player = get_tree().get_first_node_in_group("player")
+		player.processing = false
+		trigger(pos)
 	
 func _on_step_completed(pos: Vector2):
 	if shape and check_position(pos):
