@@ -19,6 +19,10 @@ var v2_to_slot: Dictionary = {}
 var selected_box: int = 0
 
 var reordering: bool = false
+var monster_slot: int:
+	get:
+		return int(selected_box * (BOX_SLOTS)) + int(selected_slot.y * GRID_WIDTH + selected_slot.x)
+var swap_index: int = -1
 
 @onready var slot: Dictionary = {}
 
@@ -48,11 +52,10 @@ func _ready() -> void:
 	for i in range(0, 30):
 		if PartyManager.storage[i] == null:
 			continue
-		print("storage monster %s: %s" % [i, PartyManager.storage[i].name])
 			
 	set_active_slot()
 	display_mini_monsters()
-	display_hovered()
+	display_hovered_slot()
 	
 func _input(event: InputEvent) -> void:
 	if self != UiManager.ui_stack.back():
@@ -82,6 +85,12 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("yes"):
 		if not reordering:
 			_open_options()
+		else:
+			print("would swap %s with %s" % [swap_index, monster_slot])
+			swap_slots()
+			swap_index = -1
+			reordering = false
+			set_active_slot()
 	
 func _move(direction: Vector2):
 	unset_active_slot()
@@ -94,21 +103,14 @@ func _move(direction: Vector2):
 		set_active_slot()
 	else:
 		set_moving_slot()
-		
-	print("selected_box: ", selected_box)
-	var monster_slot: int = (selected_box * (BOX_SLOTS)) + int(selected_slot.y * GRID_WIDTH + selected_slot.x)
-	print("monster_slot: ", monster_slot)
 	
-	display_hovered()
+	display_hovered_slot()
 	
 func _shift(direction: int):
 	selected_box = (selected_box + direction) % Box.size() as Box
 	if selected_box < 0: selected_box = (Box.size() - 1) as Box
-	print("selected_box:", selected_box)
-	var monster_slot: int = (selected_box * (BOX_SLOTS)) + int(selected_slot.y * GRID_WIDTH + selected_slot.x)
-	print("monster_slot: ", monster_slot)
 	display_mini_monsters()
-	display_hovered()
+	display_hovered_slot()
 	
 func get_curr_slot():
 	return v2_to_slot[selected_slot]
@@ -128,35 +130,43 @@ func _open_options():
 		options.option_chosen.connect(_on_option_chosen)
 		
 func _on_option_chosen(slot_enum: int):
-	print("got slot_enum: ", slot_enum)
+	match slot_enum:
+		1: 
+			swap_index = int(monster_slot)
+			reordering = true
+			set_moving_slot()
+			print("swap_index: ", swap_index)
+		2: pass
 	
-func display_hovered():
-	var monster_slot = (selected_box * (BOX_SLOTS)) + (selected_slot.y * GRID_WIDTH + selected_slot.x)
-	print("would display monster %s as big" % monster_slot)
+func display_hovered_slot():
+	if PartyManager.storage[monster_slot] != null:
+		print("%s in %s" % [PartyManager.storage[monster_slot].name, monster_slot % 30])
+	else:
+		display_empty_hovered_slot()
+		
+func display_empty_hovered_slot():
+	print("nothing in %s" % [monster_slot % 30])
 	
 func display_mini_monsters():
 	var start_index: int = selected_box * (BOX_SLOTS)
-	var end_index: int = start_index + (BOX_SLOTS) - 1
-	print("would display monsters %s to %s" % [start_index, end_index])
+	pass
 	
 	for y in range(GRID_HEIGHT):
 		for x in range(GRID_WIDTH):
 			var slot_index = y * GRID_WIDTH + x
-			print("slot index: ", slot_index)
 			var monster_index = start_index + slot_index
-			print("monster slot: ", monster_index)
 			var slot_node = slot[Slot.values()[slot_index]]
-			print("slot_node: ", slot_node.name)
 			var storage = PartyManager.storage
 			if monster_index < storage.size() and storage[monster_index] != null:
-				display_monster_in_slot(slot_node, storage[monster_index])
+				display_mini_slot(slot_node, storage[monster_index])
 			else:
-				display_empty_slot(slot_node)
+				display_empty_mini_slot(slot_node)
 			
-func display_monster_in_slot(slot_node: Node, monster: Monster):
-	print("would display %s in %s" % [monster.name, slot_node.name])
+func display_mini_slot(slot_node: Node, monster: Monster):
 	slot_node.get_node("MiniPortrait").texture = monster.species.sprite
 	
-func display_empty_slot(slot_node):
-	print("would display empty in %s" % slot_node)
+func display_empty_mini_slot(slot_node):
 	slot_node.get_node("MiniPortrait").texture = null
+	
+func swap_slots():
+	pass
