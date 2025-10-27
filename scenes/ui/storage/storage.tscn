@@ -1,0 +1,317 @@
+[gd_scene load_steps=3 format=3 uid="uid://bqj5ifd6afl8k"]
+
+[ext_resource type="Script" uid="uid://bvmqk2wdvdq0o" path="res://scenes/ui/storage/storage.gd" id="1_e8c47"]
+[ext_resource type="Texture2D" uid="uid://dujoyv2fb471r" path="res://assets/ui/button_mockup.png" id="1_lrxqj"]
+
+[node name="Storage" type="CanvasLayer" node_paths=PackedStringArray("grid")]
+script = ExtResource("1_e8c47")
+grid = NodePath("GridContainer")
+
+[node name="GridContainer" type="GridContainer" parent="."]
+offset_left = 187.0
+offset_top = 6.0
+offset_right = 633.0
+offset_bottom = 352.0
+theme_override_constants/h_separation = 10
+theme_override_constants/v_separation = 4
+columns = 6
+
+[node name="Slot0" type="NinePatchRect" parent="GridContainer"]
+custom_minimum_size = Vector2(66, 66)
+layout_mode = 2
+texture = ExtResource("1_lrxqj")
+region_rect = Rect2(0, 0, 160, 60)
+patch_margin_left = 1
+patch_margin_top = 1
+patch_margin_right = 1
+patch_margin_bottom = 1
+
+[node name="Slot1" type="NinePatchRect" parent="GridContainer"]
+custom_minimum_size = Vector2(66, 66)
+layout_mode = 2
+texture = ExtResource("1_lrxqj")
+region_rect = Rect2(0, 0, 160, 60)
+patch_margin_left = 1
+patch_margin_top = 1
+patch_margin_right = 1
+patch_margin_bottom = 1
+
+[node name="Slot2" type="NinePatchRect" parent="GridContainer"]
+custom_minimum_size = Vector2(66, 66)
+layout_mode = 2
+texture = ExtResource("1_lrxqj")
+region_rect = Rect2(0, 0, 160, 60)
+patch_margin_left = 1
+patch_margin_top = 1
+patch_margin_right = 1
+patch_margin_bottom = 1
+
+[node name="Slot3" type="NinePatchRect" parent="GridContainer"]
+custom_minimum_size = Vector2(66, 66)
+layout_mode = 2
+texture = ExtResource("1_lrxqj")
+region_rect = Rect2(0, 0, 160, 60)
+patch_margin_left = 1
+patch_margin_top = 1
+patch_margin_right = 1
+patch_margin_bottom = 1
+
+[node name="Slot4" type="NinePatchRect" parent="GridContainer"]
+custom_minimum_size = Vector2(66, 66)
+layout_mode = 2
+texture = ExtResource("1_lrxqj")
+region_rect = Rect2(0, 0, 160, 60)
+patch_margin_left = 1
+patch_margin_top = 1
+patch_margin_right = 1
+patch_margin_bottom = 1
+
+[node name="Slot5" type="NinePatchRect" parent="GridContainer"]
+custom_minimum_size = Vector2(66, 66)
+layout_mode = 2
+texture = ExtResource("1_lrxqj")
+region_rect = Rect2(0, 0, 160, 60)
+patch_margin_left = 1
+patch_margin_top = 1
+patch_margin_right = 1
+patch_margin_bottom = 1
+
+[node name="Slot6" type="NinePatchRect" parent="GridContainer"]
+custom_minimum_size = Vector2(66, 66)
+layout_mode = 2
+texture = ExtResource("1_lrxqj")
+region_rect = Rect2(0, 0, 160, 60)
+patch_margin_left = 1
+patch_margin_top = 1
+patch_margin_right = 1
+patch_margin_bottom = 1
+
+[node name="Slot7" type="NinePatchRect" parent="GridContainer"]
+custom_minimum_size = Vector2(66, 66)
+layout_mode = 2
+texture = ExtResource("1_lrxqj")
+region_rect = Rect2(0, 0, 160, 60)
+patch_margin_left = 1
+patch_margin_top = 1
+patch_margin_right = 1
+patch_margin_bottom = 1
+
+[node name="Slot8" type="NinePatchRect" parent="GridContainer"]
+custom_minimum_size = Vector2(66, 66)
+layout_mode = 2
+texture = ExtResource("1_lrxqj")
+region_rect = Rect2(0, 0, 160, 60)
+patch_margin_left = 1
+patch_margin_top = 1
+patch_margin_right = 1
+patch_margin_bottom = 1
+
+[node name="Slot9" type="NinePatchRect" parent="GridContainer"]
+custom_minimum_size = Vector2(66, 66)
+layout_mode = 2
+texture = ExtResource("1_lrxqj")
+region_rect = Rect2(0, 0, 160, 60)
+patch_margin_left = 1
+patch_margin_top = 1
+patch_margin_right = 1
+patch_margin_bottom = 1
+
+[node name="Slot10" type="NinePatchRect" parent="GridContainer"]
+custom_minimum_size = Vector2(66, 66)
+layout_mode = 2
+texture = ExtResource("1_lrxqj")
+region_rect = Rect2(0, 0, 160, 60)
+patch_margin_left = 1
+patch_margin_top = 1
+patch_margin_right = 1
+patch_margin_bottom = 1
+
+[node name="Slot11" type="NinePatchRect" parent="GridContainer"]
+custom_minimum_size = Vector2(66, 66)
+layout_mode = 2
+texture = ExtResource("1_lrxqj")
+region_rect = Rect2(0, 0, 160, 60)
+patch_margin_left = 1
+patch_margin_top = 1
+patch_margin_right = 1
+patch_margin_bottom = 1
+
+[node name="Slot12" type="NinePatchRect" parent="GridContainer"]
+custom_minimum_size = Vector2(66, 66)
+layout_mode = 2
+texture = ExtResource("1_lrxqj")
+region_rect = Rect2(0, 0, 160, 60)
+patch_margin_left = 1
+patch_margin_top = 1
+patch_margin_right = 1
+patch_margin_bottom = 1
+
+[node name="Slot13" type="NinePatchRect" parent="GridContainer"]
+custom_minimum_size = Vector2(66, 66)
+layout_mode = 2
+texture = ExtResource("1_lrxqj")
+region_rect = Rect2(0, 0, 160, 60)
+patch_margin_left = 1
+patch_margin_top = 1
+patch_margin_right = 1
+patch_margin_bottom = 1
+
+[node name="Slot14" type="NinePatchRect" parent="GridContainer"]
+custom_minimum_size = Vector2(66, 66)
+layout_mode = 2
+texture = ExtResource("1_lrxqj")
+region_rect = Rect2(0, 0, 160, 60)
+patch_margin_left = 1
+patch_margin_top = 1
+patch_margin_right = 1
+patch_margin_bottom = 1
+
+[node name="Slot15" type="NinePatchRect" parent="GridContainer"]
+custom_minimum_size = Vector2(66, 66)
+layout_mode = 2
+texture = ExtResource("1_lrxqj")
+region_rect = Rect2(0, 0, 160, 60)
+patch_margin_left = 1
+patch_margin_top = 1
+patch_margin_right = 1
+patch_margin_bottom = 1
+
+[node name="Slot16" type="NinePatchRect" parent="GridContainer"]
+custom_minimum_size = Vector2(66, 66)
+layout_mode = 2
+texture = ExtResource("1_lrxqj")
+region_rect = Rect2(0, 0, 160, 60)
+patch_margin_left = 1
+patch_margin_top = 1
+patch_margin_right = 1
+patch_margin_bottom = 1
+
+[node name="Slot17" type="NinePatchRect" parent="GridContainer"]
+custom_minimum_size = Vector2(66, 66)
+layout_mode = 2
+texture = ExtResource("1_lrxqj")
+region_rect = Rect2(0, 0, 160, 60)
+patch_margin_left = 1
+patch_margin_top = 1
+patch_margin_right = 1
+patch_margin_bottom = 1
+
+[node name="Slot18" type="NinePatchRect" parent="GridContainer"]
+custom_minimum_size = Vector2(66, 66)
+layout_mode = 2
+texture = ExtResource("1_lrxqj")
+region_rect = Rect2(0, 0, 160, 60)
+patch_margin_left = 1
+patch_margin_top = 1
+patch_margin_right = 1
+patch_margin_bottom = 1
+
+[node name="Slot19" type="NinePatchRect" parent="GridContainer"]
+custom_minimum_size = Vector2(66, 66)
+layout_mode = 2
+texture = ExtResource("1_lrxqj")
+region_rect = Rect2(0, 0, 160, 60)
+patch_margin_left = 1
+patch_margin_top = 1
+patch_margin_right = 1
+patch_margin_bottom = 1
+
+[node name="Slot20" type="NinePatchRect" parent="GridContainer"]
+custom_minimum_size = Vector2(66, 66)
+layout_mode = 2
+texture = ExtResource("1_lrxqj")
+region_rect = Rect2(0, 0, 160, 60)
+patch_margin_left = 1
+patch_margin_top = 1
+patch_margin_right = 1
+patch_margin_bottom = 1
+
+[node name="Slot21" type="NinePatchRect" parent="GridContainer"]
+custom_minimum_size = Vector2(66, 66)
+layout_mode = 2
+texture = ExtResource("1_lrxqj")
+region_rect = Rect2(0, 0, 160, 60)
+patch_margin_left = 1
+patch_margin_top = 1
+patch_margin_right = 1
+patch_margin_bottom = 1
+
+[node name="Slot22" type="NinePatchRect" parent="GridContainer"]
+custom_minimum_size = Vector2(66, 66)
+layout_mode = 2
+texture = ExtResource("1_lrxqj")
+region_rect = Rect2(0, 0, 160, 60)
+patch_margin_left = 1
+patch_margin_top = 1
+patch_margin_right = 1
+patch_margin_bottom = 1
+
+[node name="Slot23" type="NinePatchRect" parent="GridContainer"]
+custom_minimum_size = Vector2(66, 66)
+layout_mode = 2
+texture = ExtResource("1_lrxqj")
+region_rect = Rect2(0, 0, 160, 60)
+patch_margin_left = 1
+patch_margin_top = 1
+patch_margin_right = 1
+patch_margin_bottom = 1
+
+[node name="Slot24" type="NinePatchRect" parent="GridContainer"]
+custom_minimum_size = Vector2(66, 66)
+layout_mode = 2
+texture = ExtResource("1_lrxqj")
+region_rect = Rect2(0, 0, 160, 60)
+patch_margin_left = 1
+patch_margin_top = 1
+patch_margin_right = 1
+patch_margin_bottom = 1
+
+[node name="Slot25" type="NinePatchRect" parent="GridContainer"]
+custom_minimum_size = Vector2(66, 66)
+layout_mode = 2
+texture = ExtResource("1_lrxqj")
+region_rect = Rect2(0, 0, 160, 60)
+patch_margin_left = 1
+patch_margin_top = 1
+patch_margin_right = 1
+patch_margin_bottom = 1
+
+[node name="Slot26" type="NinePatchRect" parent="GridContainer"]
+custom_minimum_size = Vector2(66, 66)
+layout_mode = 2
+texture = ExtResource("1_lrxqj")
+region_rect = Rect2(0, 0, 160, 60)
+patch_margin_left = 1
+patch_margin_top = 1
+patch_margin_right = 1
+patch_margin_bottom = 1
+
+[node name="Slot27" type="NinePatchRect" parent="GridContainer"]
+custom_minimum_size = Vector2(66, 66)
+layout_mode = 2
+texture = ExtResource("1_lrxqj")
+region_rect = Rect2(0, 0, 160, 60)
+patch_margin_left = 1
+patch_margin_top = 1
+patch_margin_right = 1
+patch_margin_bottom = 1
+
+[node name="Slot28" type="NinePatchRect" parent="GridContainer"]
+custom_minimum_size = Vector2(66, 66)
+layout_mode = 2
+texture = ExtResource("1_lrxqj")
+region_rect = Rect2(0, 0, 160, 60)
+patch_margin_left = 1
+patch_margin_top = 1
+patch_margin_right = 1
+patch_margin_bottom = 1
+
+[node name="Slot29" type="NinePatchRect" parent="GridContainer"]
+custom_minimum_size = Vector2(66, 66)
+layout_mode = 2
+texture = ExtResource("1_lrxqj")
+region_rect = Rect2(0, 0, 160, 60)
+patch_margin_left = 1
+patch_margin_top = 1
+patch_margin_right = 1
+patch_margin_bottom = 1

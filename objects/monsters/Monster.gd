@@ -247,6 +247,9 @@ func can_use_move(move: Move) -> bool:
 	print("pp left:", move_pp[move.name])
 	return false
 	
+func restore_pp(move: Move):
+	move_pp[move.name] = move.max_pp
+	
 func add_move(move: Move):
 	if move in moves:
 		DialogueManager.show_dialogue("%s already knows %s" % [name, move.name])

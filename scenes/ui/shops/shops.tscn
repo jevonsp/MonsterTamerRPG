@@ -8,19 +8,19 @@ layer = 2
 
 [node name="ColorRect" type="ColorRect" parent="."]
 offset_left = -12.0
-offset_top = -11.0
+offset_top = -12.0
 offset_right = 654.0
-offset_bottom = 371.0
+offset_bottom = 370.0
 
-[node name="Slot0" type="Node2D" parent="."]
-position = Vector2(368, 30)
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+offset_left = 208.0
+offset_top = 5.0
+offset_right = 528.0
+offset_bottom = 357.0
 
-[node name="Background" type="NinePatchRect" parent="Slot0"]
-offset_left = -160.0
-offset_top = -28.999998
-offset_right = 160.0
-offset_bottom = 31.000002
-scale = Vector2(1, 0.98)
+[node name="Slot0" type="NinePatchRect" parent="VBoxContainer"]
+custom_minimum_size = Vector2(320, 55)
+layout_mode = 2
 texture = ExtResource("1_ihqoc")
 region_rect = Rect2(0, 0, 160, 60)
 patch_margin_left = 1
@@ -29,11 +29,13 @@ patch_margin_right = 1
 patch_margin_bottom = 1
 metadata/_edit_use_anchors_ = true
 
-[node name="Icon" type="TextureRect" parent="Slot0/Background"]
+[node name="Icon" type="TextureRect" parent="VBoxContainer/Slot0"]
 layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
+anchors_preset = -1
+anchor_left = -0.01875
+anchor_top = 0.55992585
+anchor_right = -0.01875
+anchor_bottom = 0.55992585
 offset_left = 6.0
 offset_top = -19.795921
 offset_right = 46.0
@@ -42,7 +44,7 @@ grow_vertical = 2
 texture = ExtResource("2_v65ak")
 metadata/_edit_use_anchors_ = true
 
-[node name="NameLabel" type="Label" parent="Slot0/Background"]
+[node name="NameLabel" type="Label" parent="VBoxContainer/Slot0"]
 layout_mode = 0
 offset_left = 43.0
 offset_top = 4.0816307
@@ -51,7 +53,7 @@ offset_bottom = 30.08163
 text = "Item Name"
 metadata/_edit_use_anchors_ = true
 
-[node name="QuantityLabel" type="Label" parent="Slot0/Background"]
+[node name="QuantityLabel" type="Label" parent="VBoxContainer/Slot0"]
 layout_mode = 0
 offset_left = 42.0
 offset_top = 26.530611
@@ -60,8 +62,13 @@ offset_bottom = 52.53061
 text = "x ##"
 metadata/_edit_use_anchors_ = true
 
-[node name="DescriptionLabel" type="Label" parent="Slot0/Background"]
-layout_mode = 0
+[node name="DescriptionLabel" type="Label" parent="VBoxContainer/Slot0"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.003125
+anchor_top = -0.11020407
+anchor_right = -0.003125
+anchor_bottom = -0.11020411
 offset_left = 141.0
 offset_top = 3.061224
 offset_right = 314.0
@@ -71,15 +78,9 @@ cannot be longer than"
 autowrap_mode = 3
 metadata/_edit_use_anchors_ = true
 
-[node name="Slot1" type="Node2D" parent="."]
-position = Vector2(368, 90)
-
-[node name="Background" type="NinePatchRect" parent="Slot1"]
-offset_left = -160.0
-offset_top = -28.999998
-offset_right = 160.0
-offset_bottom = 31.000002
-scale = Vector2(1, 0.98)
+[node name="Slot1" type="NinePatchRect" parent="VBoxContainer"]
+custom_minimum_size = Vector2(320, 55)
+layout_mode = 2
 texture = ExtResource("1_ihqoc")
 region_rect = Rect2(0, 0, 160, 60)
 patch_margin_left = 1
@@ -88,11 +89,13 @@ patch_margin_right = 1
 patch_margin_bottom = 1
 metadata/_edit_use_anchors_ = true
 
-[node name="Icon" type="TextureRect" parent="Slot1/Background"]
+[node name="Icon" type="TextureRect" parent="VBoxContainer/Slot1"]
 layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
+anchors_preset = -1
+anchor_left = -0.01875
+anchor_top = 0.55992585
+anchor_right = -0.01875
+anchor_bottom = 0.55992585
 offset_left = 6.0
 offset_top = -19.795921
 offset_right = 46.0
@@ -101,7 +104,7 @@ grow_vertical = 2
 texture = ExtResource("2_v65ak")
 metadata/_edit_use_anchors_ = true
 
-[node name="NameLabel" type="Label" parent="Slot1/Background"]
+[node name="NameLabel" type="Label" parent="VBoxContainer/Slot1"]
 layout_mode = 0
 offset_left = 43.0
 offset_top = 4.0816307
@@ -110,7 +113,7 @@ offset_bottom = 30.08163
 text = "Item Name"
 metadata/_edit_use_anchors_ = true
 
-[node name="QuantityLabel" type="Label" parent="Slot1/Background"]
+[node name="QuantityLabel" type="Label" parent="VBoxContainer/Slot1"]
 layout_mode = 0
 offset_left = 42.0
 offset_top = 26.530611
@@ -119,8 +122,13 @@ offset_bottom = 52.53061
 text = "x ##"
 metadata/_edit_use_anchors_ = true
 
-[node name="DescriptionLabel" type="Label" parent="Slot1/Background"]
-layout_mode = 0
+[node name="DescriptionLabel" type="Label" parent="VBoxContainer/Slot1"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.003125
+anchor_top = -0.11020407
+anchor_right = -0.003125
+anchor_bottom = -0.11020411
 offset_left = 141.0
 offset_top = 3.061224
 offset_right = 314.0
@@ -130,15 +138,9 @@ cannot be longer than"
 autowrap_mode = 3
 metadata/_edit_use_anchors_ = true
 
-[node name="Slot2" type="Node2D" parent="."]
-position = Vector2(368, 150)
-
-[node name="Background" type="NinePatchRect" parent="Slot2"]
-offset_left = -160.0
-offset_top = -28.999998
-offset_right = 160.0
-offset_bottom = 31.000002
-scale = Vector2(1, 0.98)
+[node name="Slot2" type="NinePatchRect" parent="VBoxContainer"]
+custom_minimum_size = Vector2(320, 55)
+layout_mode = 2
 texture = ExtResource("1_ihqoc")
 region_rect = Rect2(0, 0, 160, 60)
 patch_margin_left = 1
@@ -147,11 +149,13 @@ patch_margin_right = 1
 patch_margin_bottom = 1
 metadata/_edit_use_anchors_ = true
 
-[node name="Icon" type="TextureRect" parent="Slot2/Background"]
+[node name="Icon" type="TextureRect" parent="VBoxContainer/Slot2"]
 layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
+anchors_preset = -1
+anchor_left = -0.01875
+anchor_top = 0.55992585
+anchor_right = -0.01875
+anchor_bottom = 0.55992585
 offset_left = 6.0
 offset_top = -19.795921
 offset_right = 46.0
@@ -160,7 +164,7 @@ grow_vertical = 2
 texture = ExtResource("2_v65ak")
 metadata/_edit_use_anchors_ = true
 
-[node name="NameLabel" type="Label" parent="Slot2/Background"]
+[node name="NameLabel" type="Label" parent="VBoxContainer/Slot2"]
 layout_mode = 0
 offset_left = 43.0
 offset_top = 4.0816307
@@ -169,7 +173,7 @@ offset_bottom = 30.08163
 text = "Item Name"
 metadata/_edit_use_anchors_ = true
 
-[node name="QuantityLabel" type="Label" parent="Slot2/Background"]
+[node name="QuantityLabel" type="Label" parent="VBoxContainer/Slot2"]
 layout_mode = 0
 offset_left = 42.0
 offset_top = 26.530611
@@ -178,8 +182,13 @@ offset_bottom = 52.53061
 text = "x ##"
 metadata/_edit_use_anchors_ = true
 
-[node name="DescriptionLabel" type="Label" parent="Slot2/Background"]
-layout_mode = 0
+[node name="DescriptionLabel" type="Label" parent="VBoxContainer/Slot2"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.003125
+anchor_top = -0.11020407
+anchor_right = -0.003125
+anchor_bottom = -0.11020411
 offset_left = 141.0
 offset_top = 3.061224
 offset_right = 314.0
@@ -189,15 +198,9 @@ cannot be longer than"
 autowrap_mode = 3
 metadata/_edit_use_anchors_ = true
 
-[node name="Slot3" type="Node2D" parent="."]
-position = Vector2(368, 210)
-
-[node name="Background" type="NinePatchRect" parent="Slot3"]
-offset_left = -160.0
-offset_top = -28.999998
-offset_right = 160.0
-offset_bottom = 31.000002
-scale = Vector2(1, 0.98)
+[node name="Slot3" type="NinePatchRect" parent="VBoxContainer"]
+custom_minimum_size = Vector2(320, 55)
+layout_mode = 2
 texture = ExtResource("1_ihqoc")
 region_rect = Rect2(0, 0, 160, 60)
 patch_margin_left = 1
@@ -206,11 +209,13 @@ patch_margin_right = 1
 patch_margin_bottom = 1
 metadata/_edit_use_anchors_ = true
 
-[node name="Icon" type="TextureRect" parent="Slot3/Background"]
+[node name="Icon" type="TextureRect" parent="VBoxContainer/Slot3"]
 layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
+anchors_preset = -1
+anchor_left = -0.01875
+anchor_top = 0.55992585
+anchor_right = -0.01875
+anchor_bottom = 0.55992585
 offset_left = 6.0
 offset_top = -19.795921
 offset_right = 46.0
@@ -219,7 +224,7 @@ grow_vertical = 2
 texture = ExtResource("2_v65ak")
 metadata/_edit_use_anchors_ = true
 
-[node name="NameLabel" type="Label" parent="Slot3/Background"]
+[node name="NameLabel" type="Label" parent="VBoxContainer/Slot3"]
 layout_mode = 0
 offset_left = 43.0
 offset_top = 4.0816307
@@ -228,7 +233,7 @@ offset_bottom = 30.08163
 text = "Item Name"
 metadata/_edit_use_anchors_ = true
 
-[node name="QuantityLabel" type="Label" parent="Slot3/Background"]
+[node name="QuantityLabel" type="Label" parent="VBoxContainer/Slot3"]
 layout_mode = 0
 offset_left = 42.0
 offset_top = 26.530611
@@ -237,8 +242,13 @@ offset_bottom = 52.53061
 text = "x ##"
 metadata/_edit_use_anchors_ = true
 
-[node name="DescriptionLabel" type="Label" parent="Slot3/Background"]
-layout_mode = 0
+[node name="DescriptionLabel" type="Label" parent="VBoxContainer/Slot3"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.003125
+anchor_top = -0.11020407
+anchor_right = -0.003125
+anchor_bottom = -0.11020411
 offset_left = 141.0
 offset_top = 3.061224
 offset_right = 314.0
@@ -248,15 +258,9 @@ cannot be longer than"
 autowrap_mode = 3
 metadata/_edit_use_anchors_ = true
 
-[node name="Slot4" type="Node2D" parent="."]
-position = Vector2(368, 270)
-
-[node name="Background" type="NinePatchRect" parent="Slot4"]
-offset_left = -160.0
-offset_top = -28.999998
-offset_right = 160.0
-offset_bottom = 31.000002
-scale = Vector2(1, 0.98)
+[node name="Slot4" type="NinePatchRect" parent="VBoxContainer"]
+custom_minimum_size = Vector2(320, 55)
+layout_mode = 2
 texture = ExtResource("1_ihqoc")
 region_rect = Rect2(0, 0, 160, 60)
 patch_margin_left = 1
@@ -265,11 +269,13 @@ patch_margin_right = 1
 patch_margin_bottom = 1
 metadata/_edit_use_anchors_ = true
 
-[node name="Icon" type="TextureRect" parent="Slot4/Background"]
+[node name="Icon" type="TextureRect" parent="VBoxContainer/Slot4"]
 layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
+anchors_preset = -1
+anchor_left = -0.01875
+anchor_top = 0.55992585
+anchor_right = -0.01875
+anchor_bottom = 0.55992585
 offset_left = 6.0
 offset_top = -19.795921
 offset_right = 46.0
@@ -278,7 +284,7 @@ grow_vertical = 2
 texture = ExtResource("2_v65ak")
 metadata/_edit_use_anchors_ = true
 
-[node name="NameLabel" type="Label" parent="Slot4/Background"]
+[node name="NameLabel" type="Label" parent="VBoxContainer/Slot4"]
 layout_mode = 0
 offset_left = 43.0
 offset_top = 4.0816307
@@ -287,7 +293,7 @@ offset_bottom = 30.08163
 text = "Item Name"
 metadata/_edit_use_anchors_ = true
 
-[node name="QuantityLabel" type="Label" parent="Slot4/Background"]
+[node name="QuantityLabel" type="Label" parent="VBoxContainer/Slot4"]
 layout_mode = 0
 offset_left = 42.0
 offset_top = 26.530611
@@ -296,8 +302,13 @@ offset_bottom = 52.53061
 text = "x ##"
 metadata/_edit_use_anchors_ = true
 
-[node name="DescriptionLabel" type="Label" parent="Slot4/Background"]
-layout_mode = 0
+[node name="DescriptionLabel" type="Label" parent="VBoxContainer/Slot4"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.003125
+anchor_top = -0.11020407
+anchor_right = -0.003125
+anchor_bottom = -0.11020411
 offset_left = 141.0
 offset_top = 3.061224
 offset_right = 314.0
@@ -307,15 +318,9 @@ cannot be longer than"
 autowrap_mode = 3
 metadata/_edit_use_anchors_ = true
 
-[node name="Slot5" type="Node2D" parent="."]
-position = Vector2(368, 330)
-
-[node name="Background" type="NinePatchRect" parent="Slot5"]
-offset_left = -160.0
-offset_top = -28.999998
-offset_right = 160.0
-offset_bottom = 31.000002
-scale = Vector2(1, 0.98)
+[node name="Slot5" type="NinePatchRect" parent="VBoxContainer"]
+custom_minimum_size = Vector2(320, 55)
+layout_mode = 2
 texture = ExtResource("1_ihqoc")
 region_rect = Rect2(0, 0, 160, 60)
 patch_margin_left = 1
@@ -324,11 +329,13 @@ patch_margin_right = 1
 patch_margin_bottom = 1
 metadata/_edit_use_anchors_ = true
 
-[node name="Icon" type="TextureRect" parent="Slot5/Background"]
+[node name="Icon" type="TextureRect" parent="VBoxContainer/Slot5"]
 layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
+anchors_preset = -1
+anchor_left = -0.01875
+anchor_top = 0.55992585
+anchor_right = -0.01875
+anchor_bottom = 0.55992585
 offset_left = 6.0
 offset_top = -19.795921
 offset_right = 46.0
@@ -337,7 +344,7 @@ grow_vertical = 2
 texture = ExtResource("2_v65ak")
 metadata/_edit_use_anchors_ = true
 
-[node name="NameLabel" type="Label" parent="Slot5/Background"]
+[node name="NameLabel" type="Label" parent="VBoxContainer/Slot5"]
 layout_mode = 0
 offset_left = 43.0
 offset_top = 4.0816307
@@ -346,7 +353,7 @@ offset_bottom = 30.08163
 text = "Item Name"
 metadata/_edit_use_anchors_ = true
 
-[node name="QuantityLabel" type="Label" parent="Slot5/Background"]
+[node name="QuantityLabel" type="Label" parent="VBoxContainer/Slot5"]
 layout_mode = 0
 offset_left = 42.0
 offset_top = 26.530611
@@ -355,8 +362,13 @@ offset_bottom = 52.53061
 text = "x ##"
 metadata/_edit_use_anchors_ = true
 
-[node name="DescriptionLabel" type="Label" parent="Slot5/Background"]
-layout_mode = 0
+[node name="DescriptionLabel" type="Label" parent="VBoxContainer/Slot5"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.003125
+anchor_top = -0.11020407
+anchor_right = -0.003125
+anchor_bottom = -0.11020411
 offset_left = 141.0
 offset_top = 3.061224
 offset_right = 314.0
@@ -368,9 +380,9 @@ metadata/_edit_use_anchors_ = true
 
 [node name="Money" type="NinePatchRect" parent="."]
 offset_left = 532.0
-offset_top = 4.0
+offset_top = 5.0
 offset_right = 638.0
-offset_bottom = 48.0
+offset_bottom = 49.0
 texture = ExtResource("1_ihqoc")
 region_rect = Rect2(0, 0, 160, 60)
 patch_margin_left = 1
@@ -398,9 +410,9 @@ vertical_alignment = 1
 
 [node name="ShopPane" type="NinePatchRect" parent="."]
 offset_left = 4.0
-offset_top = 4.0
+offset_top = 5.0
 offset_right = 204.0
-offset_bottom = 356.0
+offset_bottom = 355.0
 texture = ExtResource("1_ihqoc")
 region_rect = Rect2(0, 0, 160, 60)
 patch_margin_left = 1

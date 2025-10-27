@@ -183,5 +183,5 @@ func display_move_labels():
 	category_label.text = move_category_label
 	
 func toggle_description():
-	for label in [description_label, power_label, type_label, category_label]:
+	for label in [description_label, power_label, pp_label, type_label, category_label]:
 		label.visible = !label.visible

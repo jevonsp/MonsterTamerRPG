@@ -40,3 +40,8 @@ func swap_party(from_index: int, to_index: int, free_switch: bool = true) -> voi
 		print("not free")
 		var switch = SwitchAction.new(BattleManager.player_actor, [BattleManager.enemy_actor], from_index)
 		BattleManager.on_action_selected(switch)
+		
+func refresh_party():
+	for monster in party:
+		for move in monster.moves:
+			monster.restore_pp(move)

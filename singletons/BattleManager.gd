@@ -328,6 +328,7 @@ func end_battle():
 	battle_reference.clear_maps()
 	UiManager.clear_ui()
 	AiManager.clear_ai()
+	PartyManager.refresh_party()
 	battle_reference = null
 	for monster in PartyManager.party:
 		monster.getting_exp = false
