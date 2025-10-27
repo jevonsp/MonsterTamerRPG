@@ -59,9 +59,6 @@ func _ready() -> void:
 	
 #region Movement and Inputs
 func _input(event: InputEvent) -> void:
-	if not processing:
-		return
-	
 	if event.is_action_pressed("yes") \
 	or event.is_action_pressed("no") or \
 	event.is_action_pressed("up") or \

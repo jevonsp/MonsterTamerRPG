@@ -1,5 +1,7 @@
 extends CanvasLayer
 
+const TILE_WIDTH: int = 160
+
 enum MenuSlot {SLOT0, SLOT1, SLOT2, SLOT3, SLOT4}
 
 @export var processing: bool = false
@@ -7,11 +9,11 @@ enum MenuSlot {SLOT0, SLOT1, SLOT2, SLOT3, SLOT4}
 var selected_slot: MenuSlot = MenuSlot.SLOT0
 
 @onready var slot: Dictionary = {
-	MenuSlot.SLOT0: $Slot0/Background,
-	MenuSlot.SLOT1: $Slot1/Background,
-	MenuSlot.SLOT2: $Slot2/Background,
-	MenuSlot.SLOT3: $Slot3/Background, 
-	MenuSlot.SLOT4: $Slot4/Background }
+	MenuSlot.SLOT0: $Slot0,
+	MenuSlot.SLOT1: $Slot1,
+	MenuSlot.SLOT2: $Slot2,
+	MenuSlot.SLOT3: $Slot3, 
+	MenuSlot.SLOT4: $Slot4 }
 @onready var slot_dict: Dictionary = {
 	0: MenuSlot.SLOT0,
 	1: MenuSlot.SLOT1,
@@ -72,10 +74,10 @@ func _input_selection():
 		print("somehow got out of bounds")
 	
 func unset_active_slot():
-	slot[selected_slot].frame = 0
+	slot[selected_slot].region_rect.position.x = 0
 	
 func set_active_slot():
-	slot[selected_slot].frame = 1
+	slot[selected_slot].region_rect.position.x = TILE_WIDTH
 	
 func close():
 	UiManager.pop_ui(self)

@@ -3,20 +3,30 @@ extends Node
 var party: Array[Monster] = []
 var storage: Array[Monster] = []
 
+func _ready():
+	for i in range(0, 300):
+		storage.append(null)
+	print("storage size: ", storage.size())
+
 func make_monster(monster_data: MonsterData, lvl: int) -> void:
 	var monster = Monster.new()
 	monster.setup_monster(monster_data, lvl)
 	if not party.size() < 6:
-		print("no more room in party!")
-		storage.append(monster)
-		return
+		print("no more room in party, adding to storage")
+		for i in range(0, 300):
+			if storage[i] == null:
+				storage[i] = monster
+				return
 	party.append(monster)
 	print("party: ", party)
 	
 func add_monster(monster: Monster) -> void:
 	if not party.size() < 6:
-		print("no more room in party!")
-		return
+		print("no more room in party, adding to storage")
+		for i in range(0, 300):
+			if storage[i] == null:
+				storage[i] = monster
+				return
 	party.append(monster)
 	print("party: ", party)
 	

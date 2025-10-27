@@ -10,8 +10,10 @@ monster_data = ExtResource("2_ox2bv")
 move = ExtResource("3_vjh3y")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
-offset_right = 40.0
-offset_bottom = 40.0
+offset_left = 3.0
+offset_top = -1.0
+offset_right = 43.0
+offset_bottom = 7.0
 
 [node name="Button" type="Button" parent="HBoxContainer"]
 layout_mode = 2
