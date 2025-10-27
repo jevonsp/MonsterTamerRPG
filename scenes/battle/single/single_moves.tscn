@@ -1,36 +1,46 @@
-[gd_scene load_steps=6 format=3 uid="uid://bvd84nab3ilbu"]
+[gd_scene load_steps=5 format=3 uid="uid://bvd84nab3ilbu"]
 
 [ext_resource type="Script" uid="uid://dv68oxyicg6ne" path="res://scenes/battle/single/single_moves.gd" id="1_hul3g"]
 [ext_resource type="Texture2D" uid="uid://dujoyv2fb471r" path="res://assets/ui/button_mockup.png" id="2_ek5cb"]
 [ext_resource type="FontFile" uid="uid://jbbx5lupeleb" path="res://assets/m5x7.ttf" id="3_8qk3b"]
-[ext_resource type="Texture2D" uid="uid://brk63t2v0krpi" path="res://assets/ui/text_box_mockup.png" id="4_fajtj"]
 [ext_resource type="FontFile" uid="uid://dnq6mej4gi63b" path="res://assets/m3x6.ttf" id="5_8l45u"]
 
-[node name="MoveControls" type="CanvasLayer" node_paths=PackedStringArray("description_label", "power_label", "type_label", "category_label")]
+[node name="MoveControls" type="CanvasLayer" node_paths=PackedStringArray("description_label", "power_label", "pp_label", "type_label", "category_label")]
 layer = 2
 script = ExtResource("1_hul3g")
 description_label = NodePath("DescriptionPane/Description")
-power_label = NodePath("DescriptionPane/Power")
-type_label = NodePath("DescriptionPane/Type")
-category_label = NodePath("DescriptionPane/Category")
+power_label = NodePath("DescriptionPane/VBoxContainer/Power")
+pp_label = NodePath("DescriptionPane/VBoxContainer/PP")
+type_label = NodePath("DescriptionPane/VBoxContainer/Type")
+category_label = NodePath("DescriptionPane/VBoxContainer/Category")
 
 [node name="Slot0" type="Node2D" parent="."]
-position = Vector2(396, 266)
+position = Vector2(395, 269)
 
-[node name="Background" type="Sprite2D" parent="Slot0"]
+[node name="Background" type="NinePatchRect" parent="Slot0"]
+offset_left = -77.0
+offset_top = -31.0
+offset_right = 83.0
+offset_bottom = 29.0
 texture = ExtResource("2_ek5cb")
-hframes = 3
+region_rect = Rect2(0, 0, 160, 60)
+patch_margin_left = 1
+patch_margin_top = 1
+patch_margin_right = 1
+patch_margin_bottom = 1
+metadata/_edit_use_anchors_ = true
 
 [node name="Label" type="Label" parent="Slot0/Background"]
-anchors_preset = -1
-anchor_left = 0.1375
-anchor_top = 0.225
-anchor_right = 0.8625
-anchor_bottom = 0.775
-offset_left = -100.0
-offset_top = -41.5
-offset_right = -60.0
-offset_bottom = -18.5
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -81.0
+offset_top = -12.0
+offset_right = 79.0
+offset_bottom = 14.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("3_8qk3b")
@@ -42,22 +52,32 @@ autowrap_mode = 3
 metadata/_edit_use_anchors_ = true
 
 [node name="Slot1" type="Node2D" parent="."]
-position = Vector2(558, 266)
+position = Vector2(557, 269)
 
-[node name="Background" type="Sprite2D" parent="Slot1"]
+[node name="Background" type="NinePatchRect" parent="Slot1"]
+offset_left = -78.0
+offset_top = -31.0
+offset_right = 82.0
+offset_bottom = 29.0
 texture = ExtResource("2_ek5cb")
-hframes = 3
+region_rect = Rect2(0, 0, 160, 60)
+patch_margin_left = 1
+patch_margin_top = 1
+patch_margin_right = 1
+patch_margin_bottom = 1
+metadata/_edit_use_anchors_ = true
 
 [node name="Label" type="Label" parent="Slot1/Background"]
-anchors_preset = -1
-anchor_left = 0.1375
-anchor_top = 0.225
-anchor_right = 0.8625
-anchor_bottom = 0.775
-offset_left = -100.0
-offset_top = -41.5
-offset_right = -60.0
-offset_bottom = -18.5
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -81.0
+offset_top = -12.0
+offset_right = 79.0
+offset_bottom = 14.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("3_8qk3b")
@@ -69,22 +89,32 @@ autowrap_mode = 3
 metadata/_edit_use_anchors_ = true
 
 [node name="Slot2" type="Node2D" parent="."]
-position = Vector2(396, 328)
+position = Vector2(395, 331)
 
-[node name="Background" type="Sprite2D" parent="Slot2"]
+[node name="Background" type="NinePatchRect" parent="Slot2"]
+offset_left = -77.0
+offset_top = -32.0
+offset_right = 83.0
+offset_bottom = 28.0
 texture = ExtResource("2_ek5cb")
-hframes = 3
+region_rect = Rect2(0, 0, 160, 60)
+patch_margin_left = 1
+patch_margin_top = 1
+patch_margin_right = 1
+patch_margin_bottom = 1
+metadata/_edit_use_anchors_ = true
 
 [node name="Label" type="Label" parent="Slot2/Background"]
-anchors_preset = -1
-anchor_left = 0.1375
-anchor_top = 0.225
-anchor_right = 0.8625
-anchor_bottom = 0.775
-offset_left = -100.0
-offset_top = -41.5
-offset_right = -60.0
-offset_bottom = -18.5
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -81.0
+offset_top = -12.0
+offset_right = 79.0
+offset_bottom = 14.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("3_8qk3b")
@@ -96,22 +126,32 @@ autowrap_mode = 3
 metadata/_edit_use_anchors_ = true
 
 [node name="Slot3" type="Node2D" parent="."]
-position = Vector2(558, 328)
+position = Vector2(557, 331)
 
-[node name="Background" type="Sprite2D" parent="Slot3"]
+[node name="Background" type="NinePatchRect" parent="Slot3"]
+offset_left = -78.0
+offset_top = -32.0
+offset_right = 82.0
+offset_bottom = 28.0
 texture = ExtResource("2_ek5cb")
-hframes = 3
+region_rect = Rect2(0, 0, 160, 60)
+patch_margin_left = 1
+patch_margin_top = 1
+patch_margin_right = 1
+patch_margin_bottom = 1
+metadata/_edit_use_anchors_ = true
 
 [node name="Label" type="Label" parent="Slot3/Background"]
-anchors_preset = -1
-anchor_left = 0.1375
-anchor_top = 0.225
-anchor_right = 0.8625
-anchor_bottom = 0.775
-offset_left = -100.0
-offset_top = -41.5
-offset_right = -60.0
-offset_bottom = -18.5
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -81.0
+offset_top = -12.0
+offset_right = 79.0
+offset_bottom = 14.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("3_8qk3b")
@@ -122,21 +162,30 @@ vertical_alignment = 1
 autowrap_mode = 3
 metadata/_edit_use_anchors_ = true
 
-[node name="DescriptionPane" type="Sprite2D" parent="."]
-position = Vector2(157, 297)
+[node name="DescriptionPane" type="NinePatchRect" parent="."]
+offset_left = 1.0
+offset_top = 237.99998
+offset_right = 326.1613
+offset_bottom = 357.0164
 scale = Vector2(0.96875, 1.0166667)
-texture = ExtResource("4_fajtj")
+texture = ExtResource("2_ek5cb")
+region_rect = Rect2(0, 0, 160, 60)
+patch_margin_left = 1
+patch_margin_top = 1
+patch_margin_right = 1
+patch_margin_bottom = 1
 
 [node name="Description" type="Label" parent="DescriptionPane"]
+layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -310.7097
-offset_top = -117.04918
-offset_right = -56.7742
-offset_bottom = -2.950821
+offset_left = -152.7742
+offset_top = -59.01639
+offset_right = 101.161285
+offset_bottom = 55.08197
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
@@ -145,25 +194,33 @@ theme_override_fonts/font = ExtResource("5_8l45u")
 text = "Text"
 autowrap_mode = 3
 
-[node name="Power" type="Label" parent="DescriptionPane"]
-offset_left = 110.0
-offset_top = -55.0
-offset_right = 150.0
-offset_bottom = -29.0
-theme_override_fonts/font = ExtResource("5_8l45u")
-text = "??"
+[node name="VBoxContainer" type="VBoxContainer" parent="DescriptionPane"]
+layout_mode = 0
+offset_left = 280.7742
+offset_top = 0.98362494
+offset_right = 322.7742
+offset_bottom = 116.98363
+theme_override_constants/separation = 2
 
-[node name="Type" type="Label" parent="DescriptionPane"]
-offset_left = 110.0
-offset_top = -15.0
-offset_right = 150.0
-offset_bottom = 11.0
+[node name="Power" type="Label" parent="DescriptionPane/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("5_8l45u")
+text = "40"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PP" type="Label" parent="DescriptionPane/VBoxContainer"]
+layout_mode = 2
+text = "pp 20"
+horizontal_alignment = 1
+
+[node name="Type" type="Label" parent="DescriptionPane/VBoxContainer"]
+layout_mode = 2
 theme_override_fonts/font = ExtResource("5_8l45u")
 text = "LIGHT"
+horizontal_alignment = 1
 
-[node name="Category" type="Label" parent="DescriptionPane"]
-offset_left = 110.0
-offset_top = 21.0
-offset_right = 150.0
-offset_bottom = 47.0
+[node name="Category" type="Label" parent="DescriptionPane/VBoxContainer"]
+layout_mode = 2
 text = "PHYS"
+horizontal_alignment = 1

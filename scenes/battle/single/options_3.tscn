@@ -1,111 +1,170 @@
-[gd_scene load_steps=5 format=3 uid="uid://dv7v1j6y0tsfx"]
+[gd_scene load_steps=4 format=3 uid="uid://dv7v1j6y0tsfx"]
 
 [ext_resource type="Script" uid="uid://c0u23ou3cltn8" path="res://scenes/battle/single/options_3.gd" id="1_fawrh"]
 [ext_resource type="Texture2D" uid="uid://dujoyv2fb471r" path="res://assets/ui/button_mockup.png" id="2_mvwv4"]
 [ext_resource type="FontFile" uid="uid://jbbx5lupeleb" path="res://assets/m5x7.ttf" id="3_s6pb2"]
-[ext_resource type="Texture2D" uid="uid://brk63t2v0krpi" path="res://assets/ui/text_box_mockup.png" id="4_tdsam"]
 
 [node name="options3" type="CanvasLayer"]
 script = ExtResource("1_fawrh")
 processing = true
 
-[node name="Slot0" type="Node2D" parent="."]
-position = Vector2(396, 266)
-
-[node name="Background" type="Sprite2D" parent="Slot0"]
+[node name="DescriptionPane" type="NinePatchRect" parent="."]
+offset_left = 1.0
+offset_top = 237.99998
+offset_right = 326.1613
+offset_bottom = 357.0164
+scale = Vector2(0.96875, 1.0166667)
 texture = ExtResource("2_mvwv4")
-hframes = 3
+region_rect = Rect2(0, 0, 160, 60)
+patch_margin_left = 1
+patch_margin_top = 1
+patch_margin_right = 1
+patch_margin_bottom = 1
+
+[node name="Slot0" type="Node2D" parent="."]
+position = Vector2(395, 269)
+
+[node name="Background" type="NinePatchRect" parent="Slot0"]
+offset_left = -77.0
+offset_top = -31.0
+offset_right = 83.0
+offset_bottom = 29.0
+texture = ExtResource("2_mvwv4")
+region_rect = Rect2(0, 0, 160, 60)
+patch_margin_left = 1
+patch_margin_top = 1
+patch_margin_right = 1
+patch_margin_bottom = 1
+metadata/_edit_use_anchors_ = true
 
 [node name="Label" type="Label" parent="Slot0/Background"]
+layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -100.0
-offset_top = -41.5
-offset_right = -60.0
-offset_bottom = -18.5
+offset_left = -81.0
+offset_top = -12.0
+offset_right = 79.0
+offset_bottom = 14.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("3_s6pb2")
-theme_override_font_sizes/font_size = 48
+theme_override_font_sizes/font_size = 32
 text = "FIGHT"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
 metadata/_edit_use_anchors_ = true
 
 [node name="Slot1" type="Node2D" parent="."]
-position = Vector2(558, 266)
+position = Vector2(557, 269)
 
-[node name="Background" type="Sprite2D" parent="Slot1"]
+[node name="Background" type="NinePatchRect" parent="Slot1"]
+offset_left = -78.0
+offset_top = -31.0
+offset_right = 82.0
+offset_bottom = 29.0
 texture = ExtResource("2_mvwv4")
-hframes = 3
+region_rect = Rect2(0, 0, 160, 60)
+patch_margin_left = 1
+patch_margin_top = 1
+patch_margin_right = 1
+patch_margin_bottom = 1
+metadata/_edit_use_anchors_ = true
 
 [node name="Label" type="Label" parent="Slot1/Background"]
+layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -100.0
-offset_top = -41.5
-offset_right = -60.0
-offset_bottom = -18.5
+offset_left = -81.0
+offset_top = -12.0
+offset_right = 79.0
+offset_bottom = 14.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("3_s6pb2")
-theme_override_font_sizes/font_size = 48
+theme_override_font_sizes/font_size = 32
 text = "PARTY"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
 metadata/_edit_use_anchors_ = true
 
 [node name="Slot2" type="Node2D" parent="."]
-position = Vector2(396, 328)
+position = Vector2(395, 331)
 
-[node name="Background" type="Sprite2D" parent="Slot2"]
+[node name="Background" type="NinePatchRect" parent="Slot2"]
+offset_left = -77.0
+offset_top = -32.0
+offset_right = 83.0
+offset_bottom = 28.0
 texture = ExtResource("2_mvwv4")
-hframes = 3
+region_rect = Rect2(0, 0, 160, 60)
+patch_margin_left = 1
+patch_margin_top = 1
+patch_margin_right = 1
+patch_margin_bottom = 1
+metadata/_edit_use_anchors_ = true
 
 [node name="Label" type="Label" parent="Slot2/Background"]
+layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -100.0
-offset_top = -41.5
-offset_right = -60.0
-offset_bottom = -18.5
+offset_left = -81.0
+offset_top = -12.0
+offset_right = 79.0
+offset_bottom = 14.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("3_s6pb2")
-theme_override_font_sizes/font_size = 48
+theme_override_font_sizes/font_size = 32
 text = "ITEM"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
 metadata/_edit_use_anchors_ = true
 
 [node name="Slot3" type="Node2D" parent="."]
-position = Vector2(558, 328)
+position = Vector2(557, 331)
 
-[node name="Background" type="Sprite2D" parent="Slot3"]
+[node name="Background" type="NinePatchRect" parent="Slot3"]
+offset_left = -78.0
+offset_top = -32.0
+offset_right = 82.0
+offset_bottom = 28.0
 texture = ExtResource("2_mvwv4")
-hframes = 3
+region_rect = Rect2(0, 0, 160, 60)
+patch_margin_left = 1
+patch_margin_top = 1
+patch_margin_right = 1
+patch_margin_bottom = 1
+metadata/_edit_use_anchors_ = true
 
 [node name="Label" type="Label" parent="Slot3/Background"]
+layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -100.0
-offset_top = -41.5
-offset_right = -60.0
-offset_bottom = -18.5
+offset_left = -81.0
+offset_top = -12.0
+offset_right = 79.0
+offset_bottom = 14.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("3_s6pb2")
-theme_override_font_sizes/font_size = 48
+theme_override_font_sizes/font_size = 32
 text = "RUN"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
 metadata/_edit_use_anchors_ = true
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(157, 297)
-scale = Vector2(0.96875, 1.0166667)
-texture = ExtResource("4_tdsam")

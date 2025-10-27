@@ -1,7 +1,10 @@
 extends CanvasLayer
 
+const TILE_WIDTH: int = 160
+
 @export var description_label: Label
 @export var power_label: Label
+@export var pp_label: Label
 @export var type_label: Label
 @export var category_label: Label
 
@@ -104,29 +107,33 @@ func get_allowed_moves() -> Array:
 	
 func _input_move():
 	var current_slot = get_curr_slot()
-	var move_data 
-	if PartyManager.get_first_alive():
-		move_data = PartyManager.get_first_alive().moves[current_slot]
+	var move 
+	var monster = BattleManager.player_actor
+	if monster:
+		move = monster.moves[current_slot]
 	
-	if move_data == null:
+	if move == null:
 		print("No move in this slot!")
 		return
 	
-	print("Selected move: ", move_data.name)
-	var action = MoveAction.new(BattleManager.player_actor, [BattleManager.enemy_actor], move_data)
+	if not monster.can_use_move(move):
+		return
+	
+	print("Selected move: ", move.name)
+	var action = MoveAction.new(monster, [BattleManager.enemy_actor], move)
 	BattleManager.on_action_selected(action)
 	
 func get_curr_slot():
 	return v2_to_slot[selected_slot]
 	
 func unset_active_slot():
-	slot[get_curr_slot()].frame = 0
+	slot[get_curr_slot()].region_rect.position.x = 0
 	
 func set_active_slot():
-	slot[get_curr_slot()].frame = 1
+	slot[get_curr_slot()].region_rect.position.x = TILE_WIDTH
 	
 func set_moving_slot():
-	slot[get_curr_slot()].frame = 2
+	slot[get_curr_slot()].region_rect.position.x = TILE_WIDTH * 2
 	
 func close() -> void:
 	UiManager.pop_ui(self)
@@ -169,6 +176,7 @@ func display_move_labels():
 	var description = move.description
 	description_label.text = description
 	power_label.text = move.get_move_power()
+	pp_label.text = "PP " + str(monster.move_pp[move.name])
 	type_label.text = move.type
 	var move_category = move.get_move_damage_category()
 	var move_category_label = "PHYS" if move_category == "PHYSICAL" else "SPEC"

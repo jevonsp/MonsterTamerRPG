@@ -1,5 +1,7 @@
 extends CanvasLayer
 
+const TILE_WIDTH: int = 160
+
 @export var processing: bool = false
 
 enum MoveSlot {FIGHT, PARTY, ITEM, RUN}
@@ -74,7 +76,7 @@ func get_curr_slot():
 	return v2_to_slot[selected_slot]
 	
 func unset_active_slot():
-	slot[get_curr_slot()].frame = 0
+	slot[get_curr_slot()].region_rect.position.x = 0
 	
 func set_active_slot():
-	slot[get_curr_slot()].frame = 1
+	slot[get_curr_slot()].region_rect.position.x = TILE_WIDTH

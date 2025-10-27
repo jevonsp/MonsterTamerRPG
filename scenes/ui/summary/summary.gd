@@ -87,6 +87,9 @@ func _input(event: InputEvent) -> void:
 					if decision:
 						print("yes: delete")
 						monster.moves[selected_slot] = move_deciding
+						monster.move_pp.erase(selected_move.name)
+						monster.move_pp[move_deciding.name] = move_deciding.max_pp
+						print("pp: ", monster.move_pp)
 						display_moves()
 						DialogueManager.show_dialogue("%s replaced %s with %s" % [
 							monster.name, selected_move.name, move_deciding.name
@@ -94,8 +97,6 @@ func _input(event: InputEvent) -> void:
 						await DialogueManager.dialogue_closed
 						move_deciding = null
 						close()
-					else:
-						print("no: restart")
 					
 			if event.is_action_pressed("no"):
 				if not deciding:
@@ -110,8 +111,6 @@ func _input(event: InputEvent) -> void:
 						DialogueManager.show_dialogue("%s did not learn %s" % [monster.name, move_deciding.name], true)
 						await DialogueManager.dialogue_closed
 						close()
-					else:
-						print("no: continue")
 					
 			if event.is_action_pressed("up"):
 				_move(-1)
@@ -216,12 +215,19 @@ func display_moves():
 			slot_node.get_node("Name").text = monster.moves[i].name
 			slot_node.get_node("Power").text = (monster.moves[i]).get_move_power()
 			slot_node.get_node("Type").text = str(monster.moves[i].type)
-			slot_node.get_node("Category").text = (monster.moves[i]).get_move_damage_category()
+			var category = (monster.moves[i]).get_move_damage_category()
+			if category == "PHYSICAL":
+				category = "Phys"
+			elif category == "SPECIAL":
+				category = "Spec"
+			slot_node.get_node("Category").text = category
+			slot_node.get_node("PP").text = "PP " + str(monster.moves[i].max_pp)
 		else:
 			slot_node.get_node("Name").text = ""
 			slot_node.get_node("Power").text = ""
 			slot_node.get_node("Type").text = ""
 			slot_node.get_node("Category").text = ""
+			slot_node.get_node("PP").text = ""
 	
 func get_move_damage_category(move: Move) -> String:
 	for effect in move.effects:

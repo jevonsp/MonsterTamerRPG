@@ -269,10 +269,10 @@ region_rect = Rect2(0, 0, 160, 60)
 
 [node name="Name" type="Label" parent="Slot0/Background"]
 layout_mode = 0
-offset_left = 35.66296
-offset_top = -0.20851135
-offset_right = 117.662964
-offset_bottom = 25.791489
+offset_left = 8.947055
+offset_top = -0.9110343
+offset_right = 90.94705
+offset_bottom = 25.088966
 theme_override_fonts/font = ExtResource("8_5vjpn")
 theme_override_font_sizes/font_size = 32
 text = "Move Name"
@@ -283,10 +283,10 @@ layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
-offset_left = 3.2628205
-offset_top = -0.7025223
-offset_right = 43.26282
-offset_bottom = 25.297478
+offset_left = 13.494444
+offset_top = -2.810093
+offset_right = 53.494446
+offset_bottom = 23.189907
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("8_5vjpn")
 theme_override_font_sizes/font_size = 32
@@ -295,10 +295,10 @@ horizontal_alignment = 1
 
 [node name="Type" type="Label" parent="Slot0/Background"]
 layout_mode = 0
-offset_left = 45.326164
-offset_top = 29.29748
-offset_right = 85.326164
-offset_bottom = 55.297478
+offset_left = 58.96832
+offset_top = 27.189907
+offset_right = 98.96832
+offset_bottom = 53.189907
 theme_override_fonts/font = ExtResource("8_5vjpn")
 theme_override_font_sizes/font_size = 32
 text = "Grass"
@@ -306,11 +306,21 @@ horizontal_alignment = 1
 
 [node name="Category" type="Label" parent="Slot0/Background"]
 layout_mode = 0
-offset_left = 94.21059
-offset_top = 30.000002
-offset_right = 152.21059
-offset_bottom = 56.0
-text = "Physical"
+offset_left = 118.08438
+offset_top = 27.189907
+offset_right = 150.08438
+offset_bottom = 53.189907
+theme_override_fonts/font = ExtResource("8_5vjpn")
+text = "Phys"
+
+[node name="PP" type="Label" parent="Slot0/Background"]
+layout_mode = 0
+offset_left = 113.68471
+offset_top = -0.9110343
+offset_right = 159.68472
+offset_bottom = 25.088966
+theme_override_fonts/font = ExtResource("8_5vjpn")
+text = "pp 10"
 
 [node name="Slot1" type="Node2D" parent="."]
 position = Vector2(493, 133)
@@ -333,10 +343,10 @@ region_rect = Rect2(0, 0, 160, 60)
 
 [node name="Name" type="Label" parent="Slot1/Background"]
 layout_mode = 0
-offset_left = 35.66296
-offset_top = -0.20851135
-offset_right = 117.662964
-offset_bottom = 25.791489
+offset_left = 8.947058
+offset_top = -1.6135579
+offset_right = 90.94706
+offset_bottom = 24.386442
 theme_override_fonts/font = ExtResource("8_5vjpn")
 theme_override_font_sizes/font_size = 32
 text = "Move Name"
@@ -347,10 +357,10 @@ layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
-offset_left = 3.2628205
-offset_top = -0.7025223
-offset_right = 43.26282
-offset_bottom = 25.297478
+offset_left = 13.64217
+offset_top = -3.512617
+offset_right = 53.64217
+offset_bottom = 22.487381
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("8_5vjpn")
 theme_override_font_sizes/font_size = 32
@@ -359,10 +369,10 @@ horizontal_alignment = 1
 
 [node name="Type" type="Label" parent="Slot1/Background"]
 layout_mode = 0
-offset_left = 45.326164
-offset_top = 29.29748
-offset_right = 85.326164
-offset_bottom = 55.297478
+offset_left = 59.11606
+offset_top = 26.487383
+offset_right = 99.11606
+offset_bottom = 52.48738
 theme_override_fonts/font = ExtResource("8_5vjpn")
 theme_override_font_sizes/font_size = 32
 text = "Grass"
@@ -370,11 +380,20 @@ horizontal_alignment = 1
 
 [node name="Category" type="Label" parent="Slot1/Background"]
 layout_mode = 0
-offset_left = 94.21059
-offset_top = 30.000002
-offset_right = 152.21059
-offset_bottom = 56.0
-text = "Physical"
+offset_left = 118.08438
+offset_top = 26.487381
+offset_right = 150.08438
+offset_bottom = 52.48738
+text = "Phys"
+
+[node name="PP" type="Label" parent="Slot1/Background"]
+layout_mode = 0
+offset_left = 113.68471
+offset_top = -0.9110343
+offset_right = 159.68472
+offset_bottom = 25.088966
+theme_override_fonts/font = ExtResource("8_5vjpn")
+text = "pp 10"
 
 [node name="Slot2" type="Node2D" parent="."]
 position = Vector2(493, 226)
@@ -397,10 +416,9 @@ region_rect = Rect2(0, 0, 160, 60)
 
 [node name="Name" type="Label" parent="Slot2/Background"]
 layout_mode = 0
-offset_left = 35.66296
-offset_top = -0.20851135
-offset_right = 117.662964
-offset_bottom = 25.791489
+offset_left = 9.094781
+offset_right = 91.09478
+offset_bottom = 25.999998
 theme_override_fonts/font = ExtResource("8_5vjpn")
 theme_override_font_sizes/font_size = 32
 text = "Move Name"
@@ -411,10 +429,10 @@ layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
-offset_left = 3.2628205
-offset_top = -0.7025223
-offset_right = 43.26282
-offset_bottom = 25.297478
+offset_left = 13.642172
+offset_top = -3.512617
+offset_right = 53.642174
+offset_bottom = 22.487381
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("8_5vjpn")
 theme_override_font_sizes/font_size = 32
@@ -423,10 +441,10 @@ horizontal_alignment = 1
 
 [node name="Type" type="Label" parent="Slot2/Background"]
 layout_mode = 0
-offset_left = 45.326164
-offset_top = 29.29748
-offset_right = 85.326164
-offset_bottom = 55.297478
+offset_left = 59.11606
+offset_top = 26.487383
+offset_right = 99.11606
+offset_bottom = 52.48738
 theme_override_fonts/font = ExtResource("8_5vjpn")
 theme_override_font_sizes/font_size = 32
 text = "Grass"
@@ -434,11 +452,20 @@ horizontal_alignment = 1
 
 [node name="Category" type="Label" parent="Slot2/Background"]
 layout_mode = 0
-offset_left = 94.21059
-offset_top = 30.000002
-offset_right = 152.21059
-offset_bottom = 56.0
-text = "Physical"
+offset_left = 118.2321
+offset_top = 28.100939
+offset_right = 150.2321
+offset_bottom = 54.100937
+text = "Phys"
+
+[node name="PP" type="Label" parent="Slot2/Background"]
+layout_mode = 0
+offset_left = 113.68471
+offset_top = -0.9110343
+offset_right = 159.68472
+offset_bottom = 25.088966
+theme_override_fonts/font = ExtResource("8_5vjpn")
+text = "pp 10"
 
 [node name="Slot3" type="Node2D" parent="."]
 position = Vector2(493, 316)
@@ -461,10 +488,9 @@ region_rect = Rect2(0, 0, 160, 60)
 
 [node name="Name" type="Label" parent="Slot3/Background"]
 layout_mode = 0
-offset_left = 35.66296
-offset_top = -0.20851135
-offset_right = 117.662964
-offset_bottom = 25.791489
+offset_left = 9.094784
+offset_right = 91.09479
+offset_bottom = 25.999998
 theme_override_fonts/font = ExtResource("8_5vjpn")
 theme_override_font_sizes/font_size = 32
 text = "Move Name"
@@ -475,10 +501,10 @@ layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
-offset_left = 3.2628205
-offset_top = -0.7025223
-offset_right = 43.26282
-offset_bottom = 25.297478
+offset_left = 13.64217
+offset_top = -3.512617
+offset_right = 53.64217
+offset_bottom = 22.487381
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("8_5vjpn")
 theme_override_font_sizes/font_size = 32
@@ -487,10 +513,10 @@ horizontal_alignment = 1
 
 [node name="Type" type="Label" parent="Slot3/Background"]
 layout_mode = 0
-offset_left = 45.326164
-offset_top = 29.29748
-offset_right = 85.326164
-offset_bottom = 55.297478
+offset_left = 59.11606
+offset_top = 26.487383
+offset_right = 99.11606
+offset_bottom = 52.48738
 theme_override_fonts/font = ExtResource("8_5vjpn")
 theme_override_font_sizes/font_size = 32
 text = "Grass"
@@ -498,8 +524,17 @@ horizontal_alignment = 1
 
 [node name="Category" type="Label" parent="Slot3/Background"]
 layout_mode = 0
-offset_left = 94.21059
-offset_top = 30.000002
-offset_right = 152.21059
-offset_bottom = 56.0
-text = "Physical"
+offset_left = 118.08438
+offset_top = 27.18991
+offset_right = 150.08438
+offset_bottom = 53.18991
+text = "Phys"
+
+[node name="PP" type="Label" parent="Slot3/Background"]
+layout_mode = 0
+offset_left = 113.68471
+offset_top = -0.9110343
+offset_right = 159.68472
+offset_bottom = 25.088966
+theme_override_fonts/font = ExtResource("8_5vjpn")
+text = "pp 10"

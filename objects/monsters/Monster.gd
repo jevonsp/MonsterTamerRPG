@@ -99,6 +99,7 @@ var stat_stages: Dictionary = {
 #endregion
 
 @export var moves: Array[Move]
+@export var move_pp: Dictionary = {}
 
 @export var status: StatusEffect = null
 
@@ -234,8 +235,23 @@ func set_moves():
 		moves = available_moves.slice(available_moves.size() - 4, available_moves.size())
 	else:
 		moves = available_moves.duplicate()
+	for move in moves:
+		move_pp[move.name] = move.max_pp
+	print("move_pp:", move_pp)
+	
+func can_use_move(move: Move) -> bool:
+	if move_pp[move.name] > 0:
+		move_pp[move.name] -= 1
+		print("pp left:", move_pp[move.name])
+		return true
+	print("pp left:", move_pp[move.name])
+	return false
 	
 func add_move(move: Move):
+	if move in moves:
+		DialogueManager.show_dialogue("%s already knows %s" % [name, move.name])
+		return
+		
 	if moves.size() == 4:
 		var should_replace = await DialogueManager.show_choice(
 			"%s already has 4 moves. Do you wish to remove one?" % name )
@@ -248,6 +264,7 @@ func add_move(move: Move):
 	DialogueManager.show_dialogue("%s learned %s" % [name, move.name])
 	await DialogueManager.dialogue_closed
 	moves.append(move)
+	move_pp[move.name] = move.max_pp
 	
 func decide_move(move: Move):
 	print("pick a move to replace with: ", move.name)

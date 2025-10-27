@@ -24,7 +24,6 @@ func build_encounter() -> void:
 		if roll <= cumulative:
 			var monster = encounters[i]
 			var level = randi_range(min_levels[i], max_levels[i])
-			EventBus.toggle_player.emit()
 			BattleManager.add_enemies([monster], [level])
 			BattleManager.start_battle()
 			return
