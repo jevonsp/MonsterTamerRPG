@@ -4,7 +4,7 @@ signal option_chosen(slot_enum)
 
 const TILE_WIDTH: int = 160
 
-enum Slot {SLOT0, SLOT1, SLOT2, SLOT3}
+enum Slot {SLOT0, SLOT1, SLOT2, SLOT3, SLOT4}
 
 @export var processing: bool = false
 
@@ -14,12 +14,14 @@ var selected_slot: Slot = Slot.SLOT0
 	Slot.SLOT0: $Slot0,
 	Slot.SLOT1: $Slot1,
 	Slot.SLOT2: $Slot2,
-	Slot.SLOT3: $Slot3 }
+	Slot.SLOT3: $Slot3,
+	Slot.SLOT4: $Slot4 }
 @onready var slot_dict: Dictionary = {
 	0: Slot.SLOT0,
 	1: Slot.SLOT1,
 	2: Slot.SLOT2,
-	3: Slot.SLOT3}
+	3: Slot.SLOT3,
+	4: Slot.SLOT4 }
 	
 func _ready() -> void:
 	if UiManager.ui_stack.is_empty():
@@ -60,16 +62,22 @@ func set_active_slot():
 func _input_selection():
 	match selected_slot:
 		0: 
-			UiManager.context = "storage"
-			UiManager.push_ui_by_name(UiManager.SCENE_PARTY)
-			print("UiManager.context: ", UiManager.context)
+			print("selected_slot:", selected_slot)
+			option_chosen.emit(selected_slot)
+			close()
 		1:
+			print("selected_slot:", selected_slot)
 			option_chosen.emit(selected_slot)
 			close()
 		2: 
+			print("selected_slot:", selected_slot)
 			option_chosen.emit(selected_slot)
 			close()
 		3:
+			print("selected_slot:", selected_slot)
+			option_chosen.emit(selected_slot)
+			close()
+		4: 
 			close()
 		
 func close():

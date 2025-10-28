@@ -9,9 +9,9 @@ script = ExtResource("1_tgapu")
 [node name="Slot0" type="NinePatchRect" parent="."]
 custom_minimum_size = Vector2(60, 35)
 offset_left = 61.0
-offset_top = 214.0
+offset_top = 178.0
 offset_right = 132.0
-offset_bottom = 249.0
+offset_bottom = 213.0
 texture = ExtResource("2_v27b5")
 region_rect = Rect2(0, 0, 160, 60)
 patch_margin_left = 1
@@ -33,7 +33,7 @@ offset_right = 32.0
 offset_bottom = 13.000008
 grow_horizontal = 2
 grow_vertical = 2
-text = "Summary"
+text = "Move"
 horizontal_alignment = 1
 vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
@@ -41,9 +41,9 @@ metadata/_edit_use_anchors_ = true
 [node name="Slot1" type="NinePatchRect" parent="."]
 custom_minimum_size = Vector2(60, 35)
 offset_left = 61.0
-offset_top = 250.0
+offset_top = 214.0
 offset_right = 132.0
-offset_bottom = 285.0
+offset_bottom = 249.0
 texture = ExtResource("2_v27b5")
 region_rect = Rect2(0, 0, 160, 60)
 patch_margin_left = 1
@@ -65,7 +65,7 @@ offset_right = 32.0
 offset_bottom = 13.000008
 grow_horizontal = 2
 grow_vertical = 2
-text = "Switch"
+text = "Withdraw"
 horizontal_alignment = 1
 vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
@@ -73,9 +73,9 @@ metadata/_edit_use_anchors_ = true
 [node name="Slot2" type="NinePatchRect" parent="."]
 custom_minimum_size = Vector2(60, 35)
 offset_left = 61.0
-offset_top = 286.0
+offset_top = 250.0
 offset_right = 132.0
-offset_bottom = 321.0
+offset_bottom = 285.0
 texture = ExtResource("2_v27b5")
 region_rect = Rect2(0, 0, 160, 60)
 patch_margin_left = 1
@@ -97,12 +97,44 @@ offset_right = 32.0
 offset_bottom = 13.000008
 grow_horizontal = 2
 grow_vertical = 2
-text = "Release"
+text = "Deposit"
 horizontal_alignment = 1
 vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
 
 [node name="Slot3" type="NinePatchRect" parent="."]
+custom_minimum_size = Vector2(60, 35)
+offset_left = 61.0
+offset_top = 286.0
+offset_right = 132.0
+offset_bottom = 321.0
+texture = ExtResource("2_v27b5")
+region_rect = Rect2(0, 0, 160, 60)
+patch_margin_left = 1
+patch_margin_top = 1
+patch_margin_right = 1
+patch_margin_bottom = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="Slot3"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -32.0
+offset_top = -13.000008
+offset_right = 32.0
+offset_bottom = 13.000008
+grow_horizontal = 2
+grow_vertical = 2
+text = "Release"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Slot4" type="NinePatchRect" parent="."]
 custom_minimum_size = Vector2(60, 35)
 offset_left = 61.0
 offset_top = 322.0
@@ -116,7 +148,7 @@ patch_margin_right = 1
 patch_margin_bottom = 1
 metadata/_edit_use_anchors_ = true
 
-[node name="Label" type="Label" parent="Slot3"]
+[node name="Label" type="Label" parent="Slot4"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5

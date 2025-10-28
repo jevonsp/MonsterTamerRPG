@@ -1,11 +1,20 @@
-[gd_scene load_steps=3 format=3 uid="uid://bqj5ifd6afl8k"]
+[gd_scene load_steps=6 format=3 uid="uid://bqj5ifd6afl8k"]
 
 [ext_resource type="Script" uid="uid://bvmqk2wdvdq0o" path="res://scenes/ui/storage/storage.gd" id="1_e8c47"]
 [ext_resource type="Texture2D" uid="uid://dujoyv2fb471r" path="res://assets/ui/button_mockup.png" id="1_lrxqj"]
+[ext_resource type="Texture2D" uid="uid://ch5o824ebxq1t" path="res://objects/monsters/fox_mcleaf/fox_mcleaf.png" id="3_nmu2y"]
+[ext_resource type="FontFile" uid="uid://dnq6mej4gi63b" path="res://assets/m3x6.ttf" id="4_sj0i7"]
+[ext_resource type="FontFile" uid="uid://jbbx5lupeleb" path="res://assets/m5x7.ttf" id="5_2wpqs"]
 
-[node name="Storage" type="CanvasLayer" node_paths=PackedStringArray("grid")]
+[node name="Storage" type="CanvasLayer" node_paths=PackedStringArray("grid", "name_label", "portrait", "level_label", "type_label", "role_label", "nature_label")]
 script = ExtResource("1_e8c47")
 grid = NodePath("GridContainer")
+name_label = NodePath("Info/NameLabel")
+portrait = NodePath("Info/PortraitRect")
+level_label = NodePath("Info/VBoxContainer/LevelLabel")
+type_label = NodePath("Info/VBoxContainer/TypeLabel")
+role_label = NodePath("Info/VBoxContainer/RoleLabel")
+nature_label = NodePath("Info/VBoxContainer/NatureLabel")
 
 [node name="GridContainer" type="GridContainer" parent="."]
 offset_left = 187.0
@@ -570,6 +579,17 @@ patch_margin_right = 1
 patch_margin_bottom = 1
 metadata/_edit_use_anchors_ = true
 
+[node name="NameLabel" type="Label" parent="Info"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -43.0
+offset_right = 43.0
+offset_bottom = 26.0
+grow_horizontal = 2
+text = "Fox McLeaf"
+
 [node name="PortraitRect" type="TextureRect" parent="Info"]
 custom_minimum_size = Vector2(128, 128)
 layout_mode = 0
@@ -577,14 +597,45 @@ offset_left = 28.0
 offset_top = 34.0
 offset_right = 156.0
 offset_bottom = 162.0
+texture = ExtResource("3_nmu2y")
 flip_h = true
 
-[node name="NameLabel" type="Label" parent="Info"]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -20.0
-offset_right = 20.0
-offset_bottom = 26.0
-grow_horizontal = 2
+[node name="VBoxContainer" type="VBoxContainer" parent="Info"]
+layout_mode = 0
+offset_left = 60.0
+offset_top = 173.0
+offset_right = 120.0
+offset_bottom = 337.0
+theme_override_constants/separation = 20
+
+[node name="LevelLabel" type="Label" parent="Info/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_sj0i7")
+theme_override_font_sizes/font_size = 32
+text = "Lvl. 100"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TypeLabel" type="Label" parent="Info/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("5_2wpqs")
+theme_override_font_sizes/font_size = 32
+text = "Grass"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RoleLabel" type="Label" parent="Info/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("5_2wpqs")
+theme_override_font_sizes/font_size = 32
+text = "Tank"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="NatureLabel" type="Label" parent="Info/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("5_2wpqs")
+theme_override_font_sizes/font_size = 32
+text = "Hardy"
+horizontal_alignment = 1
+vertical_alignment = 1

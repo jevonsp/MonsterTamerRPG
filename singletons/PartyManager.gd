@@ -51,6 +51,17 @@ func swap_party(from_index: int, to_index: int, free_switch: bool = true) -> voi
 		var switch = SwitchAction.new(BattleManager.player_actor, [BattleManager.enemy_actor], from_index)
 		BattleManager.on_action_selected(switch)
 		
+func withdraw_monster(_monster: Monster) -> void:
+	pass
+		
+func deposit_monster(_monster: Monster) -> void:
+	pass
+		
+func swap_storage(from_index: int, to_index: int) -> void:
+	var temp = storage[from_index]
+	storage[from_index] = storage[to_index]
+	storage[to_index] = temp
+		
 func refresh_party():
 	for monster in party:
 		for move in monster.moves:

@@ -13,6 +13,13 @@ enum Box { BOX0, BOX1, BOX2, BOX3, BOX4, BOX5, BOX6, BOX7, BOX8, BOX9 }
 
 @export var grid: GridContainer
 
+@export var name_label: Label
+@export var portrait: TextureRect
+@export var level_label: Label
+@export var type_label: Label
+@export var role_label: Label
+@export var nature_label: Label
+
 var selected_slot: Vector2 = Vector2(0,0)
 var v2_to_slot: Dictionary = {}
 
@@ -72,13 +79,16 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("down"):
 		_move(Vector2.DOWN)
 	if event.is_action_pressed("left"):
+		if selected_slot.x == 0:
+			_shift(-1)
 		_move(Vector2.LEFT)
 	if event.is_action_pressed("right"):
+		if selected_slot.x == GRID_WIDTH - 1:
+			_shift(1)
 		_move(Vector2.RIGHT)
 		
 	if event.is_action_pressed("L"):
 		_shift(-1)
-		
 	if event.is_action_pressed("R"):
 		_shift(1)
 		
@@ -90,6 +100,11 @@ func _input(event: InputEvent) -> void:
 			swap_slots()
 			swap_index = -1
 			reordering = false
+			set_active_slot()
+	if event.is_action_pressed("no"):
+		if reordering:
+			reordering = false
+			swap_index = -1
 			set_active_slot()
 	
 func _move(direction: Vector2):
@@ -131,21 +146,41 @@ func _open_options():
 		
 func _on_option_chosen(slot_enum: int):
 	match slot_enum:
-		1: 
+		0: 
 			swap_index = int(monster_slot)
 			reordering = true
 			set_moving_slot()
 			print("swap_index: ", swap_index)
-		2: pass
+		1: 
+			print("check party space")
+		2: 
+			print("open party to pick deposit")
+		3: 
+			print("do release dialogue here")
+		4: 
+			pass
 	
 func display_hovered_slot():
-	if PartyManager.storage[monster_slot] != null:
-		print("%s in %s" % [PartyManager.storage[monster_slot].name, monster_slot % 30])
+	var monster = PartyManager.storage[monster_slot]
+	if monster != null:
+		print("display big %s in %s" % [monster.name, monster_slot % 30])
+		name_label.text = monster.name
+		portrait.texture = monster.species.sprite
+		level_label.text = "Lvl. " + str(monster.level)
+		type_label.text = monster.type
+		role_label.text = monster.role
+		nature_label.text = monster.NATURE_NAMES[monster.nature]
 	else:
 		display_empty_hovered_slot()
 		
 func display_empty_hovered_slot():
 	print("nothing in %s" % [monster_slot % 30])
+	name_label.text = ""
+	portrait.texture = null
+	level_label.text = ""
+	type_label.text = ""
+	role_label.text = ""
+	nature_label.text = ""
 	
 func display_mini_monsters():
 	var start_index: int = selected_box * (BOX_SLOTS)
@@ -169,4 +204,6 @@ func display_empty_mini_slot(slot_node):
 	slot_node.get_node("MiniPortrait").texture = null
 	
 func swap_slots():
-	pass
+	PartyManager.swap_storage(swap_index, monster_slot)
+	display_mini_monsters()
+	display_hovered_slot()
