@@ -192,10 +192,9 @@ func _open_options():
 	var options = UiManager.push_ui(UiManager.inventory_options_scene)
 	if not options.option_chosen.is_connected(_on_option_chosen):
 		options.option_chosen.connect(_on_option_chosen)
-	print("inventory opening options context: ", UiManager.context)
 	if UiManager.context == "from_party":
 		options.set_limited_options(true)
-	
+		
 func _on_option_chosen(slot_enum: int):
 	var item = items[cursor_index]["item"]
 	
@@ -225,6 +224,7 @@ func _on_option_chosen(slot_enum: int):
 			return
 		3: 
 			return
+			
 	print("got slot_enum: " , slot_enum)
 	print("inventory got UiManager.context: ", UiManager.context)
 	match UiManager.context:

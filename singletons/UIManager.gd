@@ -21,6 +21,7 @@ const SCENE_INVENTORY := "inventory"
 const SCENE_INVENTORY_OPTIONS := "inventory_options"
 const SCENE_STORAGE := "storage"
 const SCENE_STORAGE_OPTIONS := "storage_options"
+const SCENE_SHOP := "shop"
 #endregion
 #region Scenes
 var dialogue_scene := preload("res://scenes/ui/dialogue/dialogue_box.tscn")
@@ -36,6 +37,7 @@ var inventory_scene := preload("res://scenes/ui/inventory/inventory.tscn")
 var inventory_options_scene := preload("res://scenes/ui/inventory/options.tscn")
 var storage_scene := preload("res://scenes/ui/storage/storage.tscn")
 var storage_options_scene := preload("res://scenes/ui/storage/options.tscn")
+var shop_scene := preload("res://scenes/ui/shops/shops.tscn")
 #endregion
 #region Scenes Dictionary
 var scenes: Dictionary = {
@@ -51,7 +53,8 @@ var scenes: Dictionary = {
 	SCENE_INVENTORY: preload("res://scenes/ui/inventory/inventory.tscn"),
 	SCENE_INVENTORY_OPTIONS: preload("res://scenes/ui/inventory/options.tscn"),
 	SCENE_STORAGE: preload("res://scenes/ui/storage/storage.tscn"),
-	SCENE_STORAGE_OPTIONS: preload("res://scenes/ui/storage/options.tscn") }
+	SCENE_STORAGE_OPTIONS: preload("res://scenes/ui/storage/options.tscn"),
+	SCENE_SHOP: preload("res://scenes/ui/shops/shops.tscn") }
 #endregion
 
 func _ready() -> void:

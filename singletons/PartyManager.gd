@@ -6,7 +6,6 @@ var storage: Array[Monster] = []
 func _ready():
 	for i in range(0, 300):
 		storage.append(null)
-	print("storage size: ", storage.size())
 
 func make_monster(monster_data: MonsterData, lvl: int) -> void:
 	var monster = Monster.new()
