@@ -12,6 +12,8 @@ enum Slot { SLOT0, SLOT1, SLOT2, SLOT3, SLOT4, SLOT5, SLOT6, SLOT7, SLOT8, SLOT9
 enum Box { BOX0, BOX1, BOX2, BOX3, BOX4, BOX5, BOX6, BOX7, BOX8, BOX9 }
 
 @export var grid: GridContainer
+@export var info: NinePatchRect
+@export var party_popup: VBoxContainer
 
 @export var name_label: Label
 @export var portrait: TextureRect
@@ -25,13 +27,24 @@ var v2_to_slot: Dictionary = {}
 
 var selected_box: int = 0
 
+var selected_party_slot: int = 0
+
 var reordering: bool = false
 var monster_slot: int:
 	get:
 		return int(selected_box * (BOX_SLOTS)) + int(selected_slot.y * GRID_WIDTH + selected_slot.x)
 var swap_index: int = -1
 
+var depositing: bool:
+	set(value):
+		depositing = value
+		if party_popup:
+			party_popup.visible = value
+		if info:
+			info.visible = !value
+
 @onready var slot: Dictionary = {}
+@onready var party_slot: Dictionary = {}
 
 var preload_monster
 
@@ -60,6 +73,8 @@ func _ready() -> void:
 		if PartyManager.storage[i] == null:
 			continue
 			
+	party_popup.visible = false
+			
 	set_active_slot()
 	display_mini_monsters()
 	display_hovered_slot()
@@ -75,14 +90,24 @@ func _input(event: InputEvent) -> void:
 		get_viewport().set_input_as_handled()
 		
 	if event.is_action_pressed("up"):
+		if depositing:
+			_move_party(-1)
+			return
 		_move(Vector2.UP)
 	if event.is_action_pressed("down"):
+		if depositing:
+			_move_party(1)
+			return
 		_move(Vector2.DOWN)
 	if event.is_action_pressed("left"):
+		if depositing:
+			return
 		if selected_slot.x == 0:
 			_shift(-1)
 		_move(Vector2.LEFT)
 	if event.is_action_pressed("right"):
+		if depositing:
+			return
 		if selected_slot.x == GRID_WIDTH - 1:
 			_shift(1)
 		_move(Vector2.RIGHT)
@@ -93,19 +118,29 @@ func _input(event: InputEvent) -> void:
 		_shift(1)
 		
 	if event.is_action_pressed("yes"):
+		if depositing:
+			print("pressed yes while depositing")
+			await PartyManager.deposit_monster(selected_party_slot)
+			display_mini_monsters()
+			selected_party_slot = 0
+			depositing = false
+			return
 		if not reordering:
 			_open_options()
-		else:
+		elif reordering:
 			print("would swap %s with %s" % [swap_index, monster_slot])
 			swap_slots()
 			swap_index = -1
 			reordering = false
 			set_active_slot()
+			
 	if event.is_action_pressed("no"):
 		if reordering:
 			reordering = false
 			swap_index = -1
 			set_active_slot()
+		if depositing:
+			depositing = false
 	
 func _move(direction: Vector2):
 	unset_active_slot()
@@ -120,6 +155,12 @@ func _move(direction: Vector2):
 		set_moving_slot()
 	
 	display_hovered_slot()
+	
+func _move_party(direction: int):
+	party_unset_active_slot()
+	selected_party_slot = (selected_party_slot + direction) % PartyManager.party.size()
+	if selected_party_slot < 0: selected_party_slot = (PartyManager.party.size() - 1)
+	party_set_active_slot()
 	
 func _shift(direction: int):
 	selected_box = (selected_box + direction) % Box.size() as Box
@@ -139,6 +180,12 @@ func set_active_slot():
 func set_moving_slot():
 	slot[get_curr_slot()].region_rect.position.x = TILE_WIDTH * 2
 	
+func party_unset_active_slot():
+	party_slot[selected_party_slot].region_rect.position.x = 0
+	
+func party_set_active_slot():
+	party_slot[selected_party_slot].region_rect.position.x = TILE_WIDTH
+	
 func _open_options():
 	var options = UiManager.push_ui(UiManager.storage_options_scene)
 	if not options.option_chosen.is_connected(_on_option_chosen):
@@ -153,8 +200,10 @@ func _on_option_chosen(slot_enum: int):
 			print("swap_index: ", swap_index)
 		1: 
 			print("check party space")
+			withdraw_monster()
 		2: 
 			print("open party to pick deposit")
+			deposit_monster()
 		3: 
 			print("do release dialogue here")
 		4: 
@@ -200,10 +249,57 @@ func display_mini_monsters():
 func display_mini_slot(slot_node: Node, monster: Monster):
 	slot_node.get_node("MiniPortrait").texture = monster.species.sprite
 	
-func display_empty_mini_slot(slot_node):
+func display_empty_mini_slot(slot_node: Node):
 	slot_node.get_node("MiniPortrait").texture = null
 	
 func swap_slots():
 	PartyManager.swap_storage(swap_index, monster_slot)
 	display_mini_monsters()
 	display_hovered_slot()
+	
+func withdraw_monster() -> void:
+	if PartyManager.party.size() >= 6:
+		DialogueManager.show_dialogue("No more room!")
+		await DialogueManager.dialogue_closed
+	else:
+		await PartyManager.withdraw_monster(monster_slot)
+		display_mini_monsters()
+	
+func deposit_monster() -> void:
+	var null_count: int = 0
+	for i in range(0, 300):
+		if PartyManager.storage[i] == null:
+			null_count += 1
+	if null_count > 0:
+		toggle_deposit_window(true)
+		
+func toggle_deposit_window(value: bool):
+	print("open deposit window here")
+	depositing = value
+	display_party()
+	party_set_active_slot()
+	
+func display_party() -> void:
+	var party = PartyManager.party
+	for i in range(6):
+		var slot_node = party_popup.get_node_or_null("Slot" + str(i))
+		if slot_node:
+			party_slot[i] = slot_node
+			if i < party.size() and party[i]:
+				display_party_slot(slot_node, party[i])
+			else:
+				display_empty_party_slot(slot_node)
+	
+func display_party_slot(slot_node: Node, monster: Monster):
+	if monster == null:
+		display_empty_party_slot(slot_node)
+		return
+	else:
+		slot_node.get_node("MiniPortrait").texture = monster.species.sprite
+		slot_node.get_node("NameLabel").text = monster.name
+		slot_node.get_node("LevelLabel").text = "Lvl. " + str(monster.level)
+	
+func display_empty_party_slot(slot_node: Node):
+	slot_node.get_node("MiniPortrait").texture = null
+	slot_node.get_node("NameLabel").text = ""
+	slot_node.get_node("LevelLabel").text = ""

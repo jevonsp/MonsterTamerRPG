@@ -6,9 +6,11 @@
 [ext_resource type="FontFile" uid="uid://dnq6mej4gi63b" path="res://assets/m3x6.ttf" id="4_sj0i7"]
 [ext_resource type="FontFile" uid="uid://jbbx5lupeleb" path="res://assets/m5x7.ttf" id="5_2wpqs"]
 
-[node name="Storage" type="CanvasLayer" node_paths=PackedStringArray("grid", "name_label", "portrait", "level_label", "type_label", "role_label", "nature_label")]
+[node name="Storage" type="CanvasLayer" node_paths=PackedStringArray("grid", "info", "party_popup", "name_label", "portrait", "level_label", "type_label", "role_label", "nature_label")]
 script = ExtResource("1_e8c47")
 grid = NodePath("GridContainer")
+info = NodePath("Info")
+party_popup = NodePath("PartyPopup")
 name_label = NodePath("Info/NameLabel")
 portrait = NodePath("Info/PortraitRect")
 level_label = NodePath("Info/VBoxContainer/LevelLabel")
@@ -637,5 +639,277 @@ layout_mode = 2
 theme_override_fonts/font = ExtResource("5_2wpqs")
 theme_override_font_sizes/font_size = 32
 text = "Hardy"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PartyPopup" type="VBoxContainer" parent="."]
+custom_minimum_size = Vector2(66, 66)
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 183.0
+offset_bottom = 420.0
+metadata/_edit_use_anchors_ = true
+
+[node name="Slot0" type="NinePatchRect" parent="PartyPopup"]
+custom_minimum_size = Vector2(0, 55)
+layout_mode = 2
+texture = ExtResource("1_lrxqj")
+region_rect = Rect2(0, 0, 160, 60)
+patch_margin_left = 1
+patch_margin_top = 1
+patch_margin_right = 1
+patch_margin_bottom = 1
+
+[node name="MiniPortrait" type="TextureRect" parent="PartyPopup/Slot0"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 0
+offset_left = 17.0
+offset_top = 15.0
+offset_right = 49.0
+offset_bottom = 47.0
+texture = ExtResource("3_nmu2y")
+flip_h = true
+
+[node name="NameLabel" type="Label" parent="PartyPopup/Slot0"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -8.5
+offset_top = 3.0
+offset_right = 77.5
+offset_bottom = 29.0
+grow_horizontal = 2
+text = "Fox McLeaf"
+
+[node name="LevelLabel" type="Label" parent="PartyPopup/Slot0"]
+layout_mode = 0
+offset_left = 81.0
+offset_top = 25.0
+offset_right = 141.0
+offset_bottom = 51.0
+theme_override_fonts/font = ExtResource("4_sj0i7")
+theme_override_font_sizes/font_size = 32
+text = "Lvl. 100"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Slot1" type="NinePatchRect" parent="PartyPopup"]
+custom_minimum_size = Vector2(0, 55)
+layout_mode = 2
+texture = ExtResource("1_lrxqj")
+region_rect = Rect2(0, 0, 160, 60)
+patch_margin_left = 1
+patch_margin_top = 1
+patch_margin_right = 1
+patch_margin_bottom = 1
+
+[node name="MiniPortrait" type="TextureRect" parent="PartyPopup/Slot1"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 0
+offset_left = 17.0
+offset_top = 15.0
+offset_right = 49.0
+offset_bottom = 47.0
+texture = ExtResource("3_nmu2y")
+flip_h = true
+
+[node name="NameLabel" type="Label" parent="PartyPopup/Slot1"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -8.5
+offset_top = 3.0
+offset_right = 77.5
+offset_bottom = 29.0
+grow_horizontal = 2
+text = "Fox McLeaf"
+
+[node name="LevelLabel" type="Label" parent="PartyPopup/Slot1"]
+layout_mode = 0
+offset_left = 81.0
+offset_top = 25.0
+offset_right = 141.0
+offset_bottom = 51.0
+theme_override_fonts/font = ExtResource("4_sj0i7")
+theme_override_font_sizes/font_size = 32
+text = "Lvl. 100"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Slot2" type="NinePatchRect" parent="PartyPopup"]
+custom_minimum_size = Vector2(0, 55)
+layout_mode = 2
+texture = ExtResource("1_lrxqj")
+region_rect = Rect2(0, 0, 160, 60)
+patch_margin_left = 1
+patch_margin_top = 1
+patch_margin_right = 1
+patch_margin_bottom = 1
+
+[node name="MiniPortrait" type="TextureRect" parent="PartyPopup/Slot2"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 0
+offset_left = 17.0
+offset_top = 15.0
+offset_right = 49.0
+offset_bottom = 47.0
+texture = ExtResource("3_nmu2y")
+flip_h = true
+
+[node name="NameLabel" type="Label" parent="PartyPopup/Slot2"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -8.5
+offset_top = 3.0
+offset_right = 77.5
+offset_bottom = 29.0
+grow_horizontal = 2
+text = "Fox McLeaf"
+
+[node name="LevelLabel" type="Label" parent="PartyPopup/Slot2"]
+layout_mode = 0
+offset_left = 81.0
+offset_top = 25.0
+offset_right = 141.0
+offset_bottom = 51.0
+theme_override_fonts/font = ExtResource("4_sj0i7")
+theme_override_font_sizes/font_size = 32
+text = "Lvl. 100"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Slot3" type="NinePatchRect" parent="PartyPopup"]
+custom_minimum_size = Vector2(0, 55)
+layout_mode = 2
+texture = ExtResource("1_lrxqj")
+region_rect = Rect2(0, 0, 160, 60)
+patch_margin_left = 1
+patch_margin_top = 1
+patch_margin_right = 1
+patch_margin_bottom = 1
+
+[node name="MiniPortrait" type="TextureRect" parent="PartyPopup/Slot3"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 0
+offset_left = 17.0
+offset_top = 15.0
+offset_right = 49.0
+offset_bottom = 47.0
+texture = ExtResource("3_nmu2y")
+flip_h = true
+
+[node name="NameLabel" type="Label" parent="PartyPopup/Slot3"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -8.5
+offset_top = 3.0
+offset_right = 77.5
+offset_bottom = 29.0
+grow_horizontal = 2
+text = "Fox McLeaf"
+
+[node name="LevelLabel" type="Label" parent="PartyPopup/Slot3"]
+layout_mode = 0
+offset_left = 81.0
+offset_top = 25.0
+offset_right = 141.0
+offset_bottom = 51.0
+theme_override_fonts/font = ExtResource("4_sj0i7")
+theme_override_font_sizes/font_size = 32
+text = "Lvl. 100"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Slot4" type="NinePatchRect" parent="PartyPopup"]
+custom_minimum_size = Vector2(0, 55)
+layout_mode = 2
+texture = ExtResource("1_lrxqj")
+region_rect = Rect2(0, 0, 160, 60)
+patch_margin_left = 1
+patch_margin_top = 1
+patch_margin_right = 1
+patch_margin_bottom = 1
+
+[node name="MiniPortrait" type="TextureRect" parent="PartyPopup/Slot4"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 0
+offset_left = 17.0
+offset_top = 15.0
+offset_right = 49.0
+offset_bottom = 47.0
+texture = ExtResource("3_nmu2y")
+flip_h = true
+
+[node name="NameLabel" type="Label" parent="PartyPopup/Slot4"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -8.5
+offset_top = 3.0
+offset_right = 77.5
+offset_bottom = 29.0
+grow_horizontal = 2
+text = "Fox McLeaf"
+
+[node name="LevelLabel" type="Label" parent="PartyPopup/Slot4"]
+layout_mode = 0
+offset_left = 81.0
+offset_top = 25.0
+offset_right = 141.0
+offset_bottom = 51.0
+theme_override_fonts/font = ExtResource("4_sj0i7")
+theme_override_font_sizes/font_size = 32
+text = "Lvl. 100"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Slot5" type="NinePatchRect" parent="PartyPopup"]
+custom_minimum_size = Vector2(0, 55)
+layout_mode = 2
+texture = ExtResource("1_lrxqj")
+region_rect = Rect2(0, 0, 160, 60)
+patch_margin_left = 1
+patch_margin_top = 1
+patch_margin_right = 1
+patch_margin_bottom = 1
+
+[node name="MiniPortrait" type="TextureRect" parent="PartyPopup/Slot5"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 0
+offset_left = 17.0
+offset_top = 15.0
+offset_right = 49.0
+offset_bottom = 47.0
+texture = ExtResource("3_nmu2y")
+flip_h = true
+
+[node name="NameLabel" type="Label" parent="PartyPopup/Slot5"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -8.5
+offset_top = 3.0
+offset_right = 77.5
+offset_bottom = 29.0
+grow_horizontal = 2
+text = "Fox McLeaf"
+
+[node name="LevelLabel" type="Label" parent="PartyPopup/Slot5"]
+layout_mode = 0
+offset_left = 81.0
+offset_top = 25.0
+offset_right = 141.0
+offset_bottom = 51.0
+theme_override_fonts/font = ExtResource("4_sj0i7")
+theme_override_font_sizes/font_size = 32
+text = "Lvl. 100"
 horizontal_alignment = 1
 vertical_alignment = 1
