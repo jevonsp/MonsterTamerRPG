@@ -35,5 +35,3 @@ func swap_items(from_index: int, to_index: int) -> void:
 	inventory[from_index] = inventory[to_index]
 	inventory[to_index] = temp
 	
-
-	

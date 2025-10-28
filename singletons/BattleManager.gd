@@ -251,12 +251,14 @@ func win():
 	if is_wild:
 		DialogueManager.show_dialogue("You defeated the wild %s!" % enemy_actor.name)
 		await DialogueManager.dialogue_closed
+		end_battle()
+		return
 	if not is_wild:
 		AiManager.trainer.defeated = true
 		DialogueManager.show_dialogue(AiManager.trainer.defeat_text)
 		await DialogueManager.dialogue_closed
-		
-	end_battle()
+		end_battle()
+		return
 	
 func lose():
 	if not in_battle:

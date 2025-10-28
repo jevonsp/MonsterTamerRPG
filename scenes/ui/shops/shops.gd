@@ -248,9 +248,17 @@ func _set_state(new_state):
 		
 func buy(amount: int = 1):
 	print("buy %s %s" % [amount, items[cursor_index]["item"].name])
+	InventoryManager.add_items(items[cursor_index]["item"], amount)
+	print(InventoryManager.inventory)
+	update_display()
 	
 func sell(amount: int = 1):
 	print("sell %s %s" % [amount, player_items[cursor_index]["item"].name])
+	if amount > player_items[cursor_index]["quantity"]:
+		DialogueManager.show_dialogue("Not enough to sell that many!")
+		await DialogueManager.dialogue_closed
+	InventoryManager.remove_items(player_items[cursor_index]["item"], amount)
+	update_display_selling()
 			
 func close():
 	UiManager.pop_ui(self)
