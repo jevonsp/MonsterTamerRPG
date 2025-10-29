@@ -1,6 +1,7 @@
 extends Node
 
 var inventory: Array[Dictionary] = []
+var money: int = 0
 
 func _ready() -> void:
 	pass

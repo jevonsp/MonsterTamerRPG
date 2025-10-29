@@ -253,11 +253,16 @@ func buy(amount: int = 1):
 	update_display()
 	
 func sell(amount: int = 1):
-	print("sell %s %s" % [amount, player_items[cursor_index]["item"].name])
-	if amount > player_items[cursor_index]["quantity"]:
+	var item = player_items[cursor_index] as Item
+	print("sell %s %s" % [amount, item["item"].name])
+	if item.key_item:
+		DialogueManager.show_dialogue("Thats too important to sell!")
+		await DialogueManager.dialogue_closed
+	if amount > item["quantity"]:
 		DialogueManager.show_dialogue("Not enough to sell that many!")
 		await DialogueManager.dialogue_closed
-	InventoryManager.remove_items(player_items[cursor_index]["item"], amount)
+	
+	InventoryManager.remove_items(item["item"], amount)
 	update_display_selling()
 			
 func close():

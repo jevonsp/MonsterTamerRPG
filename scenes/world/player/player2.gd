@@ -254,7 +254,7 @@ func attempt_interaction() -> void:
 	if ray2d.is_colliding():
 		var collider = ray2d.get_collider()
 		if collider.is_in_group("interactable"):
-			collider.interact()
+			collider.interact(self)
 			
 func save_position():
 	respawn_point = global_position

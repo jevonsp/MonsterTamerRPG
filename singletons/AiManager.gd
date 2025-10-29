@@ -9,6 +9,12 @@ func set_ai(profile: AiProfile, trainer_ref: Trainer):
 	trainer = trainer_ref
 	print("got ai_profile: ", ai_profile)
 	
+func prize_money():
+	var payout = ai_profile.payout * BattleManager.enemy_actor.level
+	InventoryManager.money += payout
+	DialogueManager.show_dialogue("You got %s for winning" % payout)
+	await DialogueManager.dialogue_closed
+	
 func clear_ai():
 	ai_profile = null
 	trainer = null
@@ -40,7 +46,7 @@ func get_trainer_action(monster):
 	var enemy_target_index: int = -1
 	var enemy_action: BattleAction
 	if ai_profile.uses_items:
-		if monster.hitpoints <= (monster.hitpoints / monster.max_hitpoints):
+		if (monster.hitpoints / monster.max_hitpoints) <= ai_profile.healing_threshold:
 			for item in ai_profile.inventory:
 				for effect in item.effects:
 					if effect.name == "HEAL":
@@ -50,16 +56,6 @@ func get_trainer_action(monster):
 							enemy_target_index = [1, 3].pick_random()
 						enemy_action = ItemAction.new(monster, [enemy_target_index], item)
 						return enemy_action
-			for move in monster.moves:
-				for effect in move.effect:
-					if effect.name == "HEAL":
-						if BattleManager.single_battle:
-							enemy_target_index = 1
-						elif not BattleManager.single_battle:
-							enemy_target_index = [1, 3].pick_random()
-						enemy_action = ItemAction.new(monster, [enemy_target_index], move)
-						return enemy_action
-	
 	print("more complex trainer logic here")
 	print("getting random move (for now)")
 	var index = randi_range(0, monster.moves.size() - 1)

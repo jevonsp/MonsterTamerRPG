@@ -29,7 +29,7 @@ func on_load_game(_saved_data_array: Array[SavedData]):
 func setup():
 	pass
 	
-func interact():
+func interact(_interactor = null):
 	pass
 
 func dialogue():

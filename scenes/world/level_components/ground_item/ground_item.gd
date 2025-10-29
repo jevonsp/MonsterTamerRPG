@@ -2,7 +2,7 @@ extends Interactable
 
 @export var item: Item
 
-func interact():
+func interact(_interactor = null):
 	InventoryManager.add_items(item, 1)
 	dialogue()
 	obtain()

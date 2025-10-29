@@ -1,17 +1,20 @@
 class_name Trainer extends EncounterZone
 
-@export var static_body: StaticBody2D
+
 @export_range(0, 1) var encounter_chance: float = 1.0
+@export var trainer_name: String = "Trainer"
+@export var ai_profile: AiProfile
 @export var team: Array[MonsterData] = []
 @export var levels: Array[int] = []
+@export var defeated: bool = false
 
+@export_subgroup("Text")
 @export var fight_text: String
 @export var defeat_text: String
 @export var post_fight_text: String
-
-@export var defeated: bool = false
-
-@export var ai_profile: AiProfile
+@export_subgroup("Body Info")
+@export var static_body: StaticBody2D
+@export var facing_dir: Vector2
 
 var tween
 
@@ -27,8 +30,8 @@ func trigger(pos: Vector2):
 		return
 	print("checking raycast")
 	if check_ray_cast2d(pos):
-		AiManager.set_ai(ai_profile, self)
 		walk_to_player(pos)
+		
 	
 func check_ray_cast2d(pos: Vector2) -> bool:
 	var space_state = get_world_2d().direct_space_state
@@ -60,6 +63,7 @@ func walk_to_player(pos: Vector2):
 	build_encounter()
 	
 func build_encounter():
+	AiManager.set_ai(ai_profile, self)
 	BattleManager.add_enemies(team, levels)
 	BattleManager.is_wild = false
 	BattleManager.start_battle()

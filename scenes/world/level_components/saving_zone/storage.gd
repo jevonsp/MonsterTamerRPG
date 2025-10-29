@@ -3,7 +3,7 @@ extends Interactable
 func _ready() -> void:
 	add_to_group("interactable")
 
-func interact():
+func interact(_interactor = null):
 	print("interacted with storage")
 	dialogue()
 	

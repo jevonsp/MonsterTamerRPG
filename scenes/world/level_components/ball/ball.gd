@@ -11,7 +11,7 @@ var fox_mcleaf = preload("res://objects/monsters/fox_mcleaf/Fox_McLeaf.tres")
 func setup():
 	sprite.frame = frame
 
-func interact():
+func interact(_interactor = null):
 	print("interact")
 	if frame == 0:
 		PartyManager.make_monster(pyro_badger, level)

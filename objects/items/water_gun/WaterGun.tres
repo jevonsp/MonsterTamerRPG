@@ -12,8 +12,9 @@ metadata/_custom_type_script = "uid://dphyevi8s22fb"
 
 [resource]
 script = ExtResource("3_qcl0u")
-name = "Water Gun"
+name = "Super Soaker"
 in_battle_only = false
 is_held = true
+key_item = true
 hold_effects = Array[ExtResource("2_ya2vf")]([SubResource("Resource_2gqjk")])
 metadata/_custom_type_script = "uid://br2gl0bftv06o"

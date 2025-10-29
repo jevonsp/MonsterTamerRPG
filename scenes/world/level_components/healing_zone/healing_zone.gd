@@ -2,7 +2,7 @@ extends Interactable
 
 @export var respawn_point: bool = true
 
-func interact():
+func interact(_interactor = null):
 	dialogue()
 	
 func dialogue():

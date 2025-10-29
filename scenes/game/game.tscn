@@ -53,6 +53,7 @@ metadata/_custom_type_script = "uid://d3pa7qech6emx"
 size = Vector2(18, 18)
 
 [node name="Game" type="Node2D"]
+y_sort_enabled = true
 script = ExtResource("1_5jirj")
 
 [node name="TestMap" parent="." instance=ExtResource("1_7h61r")]
@@ -78,6 +79,7 @@ shape = SubResource("RectangleShape2D_lfrn8")
 position = Vector2(8, 104)
 team = Array[ExtResource("5_87uf6")]([ExtResource("6_2a8rs")])
 levels = Array[int]([1])
+facing_dir = Vector2(0, -1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Trainers/Trainer"]
 position = Vector2(0, -32)
