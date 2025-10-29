@@ -54,9 +54,6 @@ func _physics_process(delta: float) -> void:
 	if not UiManager.ui_stack.is_empty():
 		return
 		
-	if not processing:
-		return
-		
 	match current_state:
 		State.IDLE:
 			process_idle_state()

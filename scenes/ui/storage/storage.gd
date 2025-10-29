@@ -63,16 +63,7 @@ func _ready() -> void:
 		var slot_node = grid.get_node_or_null("Slot" + str(i))
 		if slot_node:
 			slot[Slot.values()[i]] = slot_node
-			
-	preload_monster = load("res://objects/monsters/pistol_shrimp/Pistol_Shrimp.tres")
-			
-	for i in range(0, 30):
-		PartyManager.make_monster(preload_monster, 5)
-		
-	for i in range(0, 30):
-		if PartyManager.storage[i] == null:
-			continue
-			
+	
 	party_popup.visible = false
 			
 	set_active_slot()
@@ -139,8 +130,11 @@ func _input(event: InputEvent) -> void:
 			reordering = false
 			swap_index = -1
 			set_active_slot()
+			return
 		if depositing:
 			depositing = false
+			return
+		close()
 	
 func _move(direction: Vector2):
 	unset_active_slot()
@@ -303,3 +297,7 @@ func display_empty_party_slot(slot_node: Node):
 	slot_node.get_node("MiniPortrait").texture = null
 	slot_node.get_node("NameLabel").text = ""
 	slot_node.get_node("LevelLabel").text = ""
+	
+func close():
+	get_parent().remove_child(self)
+	UiManager.pop_ui(self)

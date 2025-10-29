@@ -27,6 +27,7 @@ var deciding: bool:
 
 var viewport_start: int = 0
 var items: Array[ItemSlot] = []
+var shop
 var player_items
 
 @onready var slot: Dictionary = {
@@ -54,11 +55,11 @@ func _ready() -> void:
 		UiManager.ui_stack.append(self)
 		set_active_opt_slot()
 		
-func set_inventory(item_array: Array[ItemSlot]):
+func set_inventory(item_array: Array[ItemSlot], shop_node):
 	items = item_array
 	for item in items:
 		print(items)
-		
+	shop = shop_node
 	update_display()
 	set_active_opt_slot()
 	
@@ -247,21 +248,42 @@ func _set_state(new_state):
 			options_slot[2].get_node("Label").text ="Cancel"
 		
 func buy(amount: int = 1):
-	print("buy %s %s" % [amount, items[cursor_index]["item"].name])
-	InventoryManager.add_items(items[cursor_index]["item"], amount)
-	print(InventoryManager.inventory)
+	var item_slot = items[cursor_index] as ItemSlot
+	var item = item_slot.item
+	
+	print("buy %s %s" % [amount, item.name])
+	if not InventoryManager.money >= item.value:
+		DialogueManager.show_dialogue("Not enough money!", true)
+		await DialogueManager.dialogue_closed
+		return
+	if not item_slot.infinite and item_slot.quantity < amount:
+		DialogueManager.show_dialogue("Not enough in stock.", true)
+		await DialogueManager.dialogue_closed
+		return
+	InventoryManager.money -= item.value
+	InventoryManager.add_items(item, amount)
+	if not item_slot.infinite:
+		item_slot.quantity -= amount
+		
+		if item_slot.quantity <= 0:
+			items.remove_at(cursor_index)
+			if cursor_index >= items.size() and cursor_index > 0:
+				cursor_index = (cursor_index - 1) as Slot
+			if viewport_start >= items.size() and viewport_start > 0:
+				viewport_start = max(0, items.size() - VISIBLE_SLOTS)
+		
 	update_display()
 	
 func sell(amount: int = 1):
 	var item = player_items[cursor_index]
 	print("sell %s %s" % [amount, item["item"].name])
 	if item["item"].key_item:
-		DialogueManager.show_dialogue("Thats too important to sell!")
+		DialogueManager.show_dialogue("Thats too important to sell!", true)
 		await DialogueManager.dialogue_closed
 	if amount > item["quantity"]:
-		DialogueManager.show_dialogue("Not enough to sell that many!")
+		DialogueManager.show_dialogue("Not enough to sell that many!", true)
 		await DialogueManager.dialogue_closed
-	
+	InventoryManager.money += item.value
 	InventoryManager.remove_items(item["item"], amount)
 	update_display_selling()
 			

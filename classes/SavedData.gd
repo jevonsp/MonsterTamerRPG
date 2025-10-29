@@ -5,3 +5,4 @@ class_name SavedData extends Resource
 @export var node_path: NodePath
 @export var obtained: bool
 @export var defeated: bool
+@export var inventory: Array[ItemSlot]

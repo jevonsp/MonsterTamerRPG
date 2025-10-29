@@ -6,6 +6,7 @@ extends Interactable
 @export var facing_dir: Vector2
 
 func setup():
+	add_to_group("can_save")
 	if abs(facing_dir.x) > abs(facing_dir.y):
 		sprite.play("TurnLeft")
 		sprite.flip_h = facing_dir.x > 0
@@ -31,7 +32,7 @@ func dialogue():
 	
 func open_store():
 	var shop = UiManager.push_ui(UiManager.shop_scene)
-	shop.set_inventory(inventory)
+	shop.set_inventory(inventory, self)
 	
 func turn(interactor):
 	var direction = (interactor.global_position - global_position).normalized()
@@ -45,3 +46,14 @@ func turn(interactor):
 		else:
 			sprite.play("TurnUp")
 		
+func on_save_game(saved_data: Array[SavedData]):
+	var my_data = SavedData.new()
+	my_data.node_path = get_path()
+	my_data.inventory = inventory
+	saved_data.append(my_data)
+	
+func on_load_game(saved_data_array: Array[SavedData]):
+	for data in saved_data_array:
+		if data.node_path == get_path():
+			print("got node path")
+			inventory = data.inventory

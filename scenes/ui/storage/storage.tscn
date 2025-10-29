@@ -18,6 +18,12 @@ type_label = NodePath("Info/VBoxContainer/TypeLabel")
 role_label = NodePath("Info/VBoxContainer/RoleLabel")
 nature_label = NodePath("Info/VBoxContainer/NatureLabel")
 
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -11.0
+offset_top = -19.0
+offset_right = 646.0
+offset_bottom = 367.0
+
 [node name="GridContainer" type="GridContainer" parent="."]
 offset_left = 187.0
 offset_top = 6.0

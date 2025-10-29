@@ -56,6 +56,7 @@ func _input_selection():
 			var loaded_game = game.instantiate()
 			get_tree().root.add_child(loaded_game)
 			SaverLoader.load_game()
+			queue_free()
 		1: 
 			get_tree().change_scene_to_packed(game)
 		2: 

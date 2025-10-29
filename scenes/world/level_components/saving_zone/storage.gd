@@ -8,4 +8,5 @@ func interact(_interactor = null):
 	dialogue()
 	
 func dialogue():
-	DialogueManager.show_dialogue("Not yet implemented!", true)
+	DialogueManager.show_dialogue("Welcome to the Storage System!", true)
+	UiManager.push_ui(UiManager.storage_scene)
