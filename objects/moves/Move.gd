@@ -9,10 +9,7 @@ class_name Move extends Resource
 @export_enum("FIRE", "WATER", "GRASS", "LIGHT", "DARK", "NONE") var type = "NONE"
 @export_range(-7, 7) var priority: int = 0
 
-@export_subgroup("Animation")
-@export_enum("ACTOR", "TARGET", "THROWN", "CENTER") var animation_type = "CENTER"
-@export var still: bool = false
-@export var animation: PackedScene
+@export_subgroup("Image")
 @export var sprite: Texture2D
 
 @export_subgroup("Target Type")

@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="Move" load_steps=6 format=3 uid="uid://jkbkgimwqvyu"]
+
+[ext_resource type="PackedScene" uid="uid://t480ldufcpu2" path="res://objects/moves/moves/water_pistol/water_pistol.tscn" id="1_7j6st"]
+[ext_resource type="Script" uid="uid://dwops4cp56fq3" path="res://classes/base/BattleEffect.gd" id="1_vrssj"]
+[ext_resource type="Script" uid="uid://cg2gwmc5eufqa" path="res://objects/effects/Damage.gd" id="2_7j6st"]
+[ext_resource type="Script" uid="uid://coff2nnisn6g2" path="res://objects/moves/Move.gd" id="3_58qd5"]
+
+[sub_resource type="Resource" id="Resource_becob"]
+script = ExtResource("2_7j6st")
+base_power = 50
+animation_type = "THROWN"
+animation = ExtResource("1_7j6st")
+metadata/_custom_type_script = "uid://cg2gwmc5eufqa"
+
+[resource]
+script = ExtResource("3_58qd5")
+name = "Water Pistol"
+description = "Splashes the enemy with water for medium damage"
+type = "WATER"
+effects = Array[ExtResource("1_vrssj")]([SubResource("Resource_becob")])
+metadata/_custom_type_script = "uid://coff2nnisn6g2"

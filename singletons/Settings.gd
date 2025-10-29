@@ -6,7 +6,7 @@ enum Speed {SLOW = 0, MEDIUM = 1, FAST = 2}
 var GameSpeed = Speed.MEDIUM
 
 const SLOW: float = 1.0
-const MEDIUM: float = .5
+const MEDIUM: float = 0.5
 const FAST: float = .25
 
 var game_speed: float:

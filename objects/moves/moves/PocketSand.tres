@@ -22,6 +22,5 @@ metadata/_custom_type_script = "uid://dtp6jr4jhas0k"
 script = ExtResource("2_1opph")
 name = "Pocket Sand"
 accuracy = 90
-animation_type = "THROWN"
 effects = Array[ExtResource("1_m116k")]([SubResource("Resource_13cr2"), SubResource("Resource_7tkeg")])
 metadata/_custom_type_script = "uid://coff2nnisn6g2"

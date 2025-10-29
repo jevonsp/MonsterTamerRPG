@@ -14,6 +14,8 @@ const HP_SCALE: float = 10.0
 @export var player_status: NinePatchRect
 @export var enemy_status: NinePatchRect
 @export var center_marker: Marker2D
+@export var player_marker: Marker2D
+@export var enemy_marker: Marker2D
 
 var hp_map: Dictionary = {}
 var exp_map: Dictionary = {}
@@ -123,33 +125,50 @@ func clear_maps():
 func _on_effect_started(animation_type: String, actor: Monster, target: Monster, effect_anim):
 	print("animation_type: ", animation_type)
 	animate_effect(animation_type, actor, target, effect_anim)
-	await get_tree().create_timer(Settings.game_speed).timeout
+	await get_tree().create_timer(Settings.game_speed * 2).timeout
 	EventBus.effect_ended.emit()
 	
 func animate_effect(animation_type: String, actor: Monster, target: Monster, effect_anim: PackedScene) -> void:
+	print("playing: ", effect_anim)
 	var effect_center: Vector2
-	var effect_target: Vector2
 	if not effect_anim:
 		return
 	var effect: Node2D = effect_anim.instantiate()
 	add_child(effect)
 	
+	var anim = effect.get_node_or_null("AnimatedSprite2D")
+	anim.play()
+	
+	effect.visibility_layer = 10
+	
+	if actor == BattleManager.enemy_actor:
+		anim.flip_h = true
+	
 	match animation_type:
 		"ACTOR":
-			effect_center = portrait_map.get(actor).position
+			if actor == BattleManager.player_actor:
+				effect_center = player_marker.global_position
+			else:
+				effect_center = enemy_marker.global_position
 		"TARGET":
-			effect_center = portrait_map.get(target).position
+			if target == BattleManager.player_actor:
+				effect_center = player_marker.global_position
+			else:
+				effect_center = enemy_marker.global_position
 		"CENTER":
 			effect_center = center_marker.position
 		"THROWN":
-			effect_center = portrait_map.get(actor).position
-			effect_target = portrait_map.get(target).position
-			effect.position = effect_center
+			var start_marker: Marker2D = player_marker if actor == BattleManager.player_actor else enemy_marker
+			var end_marker: Marker2D = player_marker if target == BattleManager.player_actor else enemy_marker
+			effect.position = start_marker.global_position
 			var tween = get_tree().create_tween()
-			tween.tween_property(effect, "position", effect_target, Settings.game_time)
+			tween.tween_property(effect, "position", end_marker.global_position, Settings.game_speed * 2)
+			await get_tree().create_timer(Settings.game_speed).timeout
+			effect.queue_free()
 			return
 	effect.position = effect_center
-	get_tree().create_timer(Settings.game_speed).timeout.connect(effect.queue_free)
+	await get_tree().create_timer(Settings.game_speed * 2).timeout
+	effect.queue_free()
 	
 func _on_health_changed(monster: Monster, _old: int, new: int) -> void:
 	print("do health animation here")

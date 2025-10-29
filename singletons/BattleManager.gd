@@ -20,8 +20,6 @@ var escape_attempts: int = 0
 var escaped: bool = false
 var lost: bool = false
 
-var slap := preload("res://objects/moves/moves/Slap.tres") # 40 power physical move for confusion
-
 func _ready() -> void:
 	EventBus.battle_reference.connect(_on_battle_reference)
 	EventBus.request_battle_actors.connect(_on_battle_actors_requested)
