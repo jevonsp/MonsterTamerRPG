@@ -11,6 +11,8 @@ const HP_SCALE: float = 10.0
 @export var enemy_name: Label
 @export var player_level: Label
 @export var enemy_level: Label
+@export var player_status: NinePatchRect
+@export var enemy_status: NinePatchRect
 @export var center_marker: Marker2D
 
 var hp_map: Dictionary = {}
@@ -27,6 +29,8 @@ func _ready() -> void:
 	print("request_battle_actors sent")
 	connect_signals()
 	EventBus.battle_reference.emit(self)
+	for status in [player_status, enemy_status]:
+		status.visible = false
 	
 func connect_signals():
 	if not EventBus.effect_started.is_connected(_on_effect_started):

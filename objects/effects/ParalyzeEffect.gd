@@ -14,6 +14,6 @@ func apply(actor_ref: Monster, target_ref: Monster, data_ref) -> void:
 	if target.status:
 		return
 		
-	target.status = BurnStatus.new()
+	target.status = ParalyzeStatus.new()
 	DialogueManager.show_dialogue("%s was paralyzed!" % target.name)
 	await DialogueManager.dialogue_closed

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://ncl1qs2tu4w6"]
+[gd_scene load_steps=11 format=3 uid="uid://ncl1qs2tu4w6"]
 
 [ext_resource type="Script" uid="uid://b7u087evgklgb" path="res://scenes/battle/single/single_visuals_3.gd" id="1_8jynd"]
 [ext_resource type="Texture2D" uid="uid://dbxs3k3s3shrd" path="res://assets/ui/hp_back_mockup.png" id="1_d6cbt"]
@@ -9,8 +9,9 @@
 [ext_resource type="Texture2D" uid="uid://ikvubcm5myxt" path="res://assets/ui/exp_prog.png" id="6_bg2pr"]
 [ext_resource type="Texture2D" uid="uid://bblshkejbt64c" path="res://objects/monsters/pistol_shrimp/pistol_shrimp.png" id="7_8jynd"]
 [ext_resource type="FontFile" uid="uid://jbbx5lupeleb" path="res://assets/m5x7.ttf" id="8_6vlie"]
+[ext_resource type="PackedScene" uid="uid://b1221c6k2wflm" path="res://scenes/ui/status/status.tscn" id="10_6vlie"]
 
-[node name="SingleVisuals3" type="CanvasLayer" node_paths=PackedStringArray("player_portrait", "enemy_portrait", "player_hp_bar", "enemy_hp_bar", "player_exp_bar", "player_name", "enemy_name", "player_level", "enemy_level", "center_marker")]
+[node name="SingleVisuals3" type="CanvasLayer" node_paths=PackedStringArray("player_portrait", "enemy_portrait", "player_hp_bar", "enemy_hp_bar", "player_exp_bar", "player_name", "enemy_name", "player_level", "enemy_level", "player_status", "enemy_status", "center_marker")]
 script = ExtResource("1_8jynd")
 player_portrait = NodePath("Player/Portrait")
 enemy_portrait = NodePath("Enemy/Portrait")
@@ -21,6 +22,8 @@ player_name = NodePath("Player/Name")
 enemy_name = NodePath("Enemy/Name")
 player_level = NodePath("Player/Level")
 enemy_level = NodePath("Enemy/Level")
+player_status = NodePath("Player/Control/Status")
+enemy_status = NodePath("Enemy/Control/Status")
 center_marker = NodePath("Marker2D")
 
 [node name="Player" type="Control" parent="."]
@@ -89,6 +92,19 @@ theme_override_fonts/font = ExtResource("8_6vlie")
 theme_override_font_sizes/font_size = 32
 text = "Lvl. 100"
 
+[node name="Control" type="Control" parent="Player"]
+anchors_preset = 0
+offset_left = 266.0
+offset_top = 217.0
+offset_right = 306.0
+offset_bottom = 257.0
+
+[node name="Status" parent="Player/Control" instance=ExtResource("10_6vlie")]
+layout_mode = 1
+offset_right = -7.0
+offset_bottom = -28.0
+pivot_offset = Vector2(17, 12)
+
 [node name="Enemy" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
@@ -142,6 +158,19 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("8_6vlie")
 theme_override_font_sizes/font_size = 32
 text = "Lvl. 100"
+
+[node name="Control" type="Control" parent="Enemy"]
+anchors_preset = 0
+offset_left = 391.0
+offset_top = 217.0
+offset_right = 431.0
+offset_bottom = 257.0
+
+[node name="Status" parent="Enemy/Control" instance=ExtResource("10_6vlie")]
+layout_mode = 1
+offset_right = -7.0
+offset_bottom = -28.0
+pivot_offset = Vector2(17, 12)
 
 [node name="Marker2D" type="Marker2D" parent="."]
 position = Vector2(333, 120)
