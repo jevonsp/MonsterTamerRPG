@@ -25,6 +25,7 @@ DialogueManager="*res://singletons/DialogueManager.gd"
 UiManager="*res://singletons/UiManager.gd"
 AiManager="*res://singletons/AiManager.gd"
 SaverLoader="*res://singletons/SaverLoader.gd"
+SceneManager="*res://singletons/SceneManager.gd"
 
 [display]
 
@@ -45,6 +46,10 @@ folder_colors={
 "res://tests/": "gray",
 "res://tools/": "gray"
 }
+
+[global_group]
+
+overworld=""
 
 [gui]
 

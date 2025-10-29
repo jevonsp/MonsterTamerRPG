@@ -34,3 +34,4 @@ func load_game():
 	
 	get_tree().call_group("can_save", "on_before_load_game")
 	get_tree().call_group("can_save", "on_load_game", saved_game.saved_data)
+	
