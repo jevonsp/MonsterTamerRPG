@@ -30,7 +30,12 @@ func trigger(pos: Vector2):
 		return
 	print("checking raycast")
 	if check_ray_cast2d(pos):
-		walk_to_player(pos)
+		var player = get_tree().get_first_node_in_group("player")
+		player.processing = false
+		print("player.processing: ",player.processing)
+		await walk_to_player(pos)
+		player.processing = true
+		print("player.processing: ",player.processing)
 		
 	
 func check_ray_cast2d(pos: Vector2) -> bool:
