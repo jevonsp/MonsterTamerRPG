@@ -163,11 +163,11 @@ func animate_effect(animation_type: String, actor: Monster, target: Monster, eff
 			effect.position = start_marker.global_position
 			var tween = get_tree().create_tween()
 			tween.tween_property(effect, "position", end_marker.global_position, Settings.game_speed * 2)
-			await get_tree().create_timer(Settings.game_speed).timeout
+			await get_tree().create_timer(Settings.game_speed * 2).timeout
 			effect.queue_free()
 			return
 	effect.position = effect_center
-	await get_tree().create_timer(Settings.game_speed * 2).timeout
+	await get_tree().create_timer(Settings.game_speed).timeout
 	effect.queue_free()
 	
 func _on_health_changed(monster: Monster, _old: int, new: int) -> void:
