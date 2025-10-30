@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bsaxpscwig5a" path="res://scenes/test/testing.gd" id="1_67d31"]
 [ext_resource type="Resource" uid="uid://pxtac13xygko" path="res://objects/monsters/fox_mcleaf/Fox_McLeaf.tres" id="2_ox2bv"]
-[ext_resource type="Resource" uid="uid://cnlxnj1ieg8qa" path="res://objects/moves/moves/SuperSlam.tres" id="3_vjh3y"]
+[ext_resource type="Resource" uid="uid://cnlxnj1ieg8qa" path="res://objects/moves/super_slam/SuperSlam.tres" id="3_vjh3y"]
 
 [node name="Testing" type="Node2D"]
 script = ExtResource("1_67d31")

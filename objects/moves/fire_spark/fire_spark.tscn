@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://bjj3ic0bi4oco"]
 
-[ext_resource type="Texture2D" uid="uid://dw4bbo84lcjnx" path="res://objects/moves/moves/fire_spark/fire_spark-Sheet.png" id="1_6yr0m"]
+[ext_resource type="Texture2D" uid="uid://dw4bbo84lcjnx" path="res://objects/moves/fire_spark/fire_spark-Sheet.png" id="1_6yr0m"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pe77r"]
 atlas = ExtResource("1_6yr0m")
@@ -49,6 +49,6 @@ animations = [{
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_sew0j")
-frame_progress = 0.29887125
+frame_progress = 0.43142554
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]

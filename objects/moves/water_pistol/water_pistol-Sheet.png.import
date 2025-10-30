@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bfvfen07og75x"
-path="res://.godot/imported/water_pistol-Sheet.png-118f6f0bbe5b696fe3834273df76bcaa.ctex"
+path="res://.godot/imported/water_pistol-Sheet.png-2c85fc1f54247e05d4c3aa299ed53b14.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://objects/moves/moves/water_pistol/water_pistol-Sheet.png"
-dest_files=["res://.godot/imported/water_pistol-Sheet.png-118f6f0bbe5b696fe3834273df76bcaa.ctex"]
+source_file="res://objects/moves/water_pistol/water_pistol-Sheet.png"
+dest_files=["res://.godot/imported/water_pistol-Sheet.png-2c85fc1f54247e05d4c3aa299ed53b14.ctex"]
 
 [params]
 

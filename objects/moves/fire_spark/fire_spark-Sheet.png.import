@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dtednt5g41kgc"
-path="res://.godot/imported/scream-Sheet.png-268f845b650238361eac2096af12e3e6.ctex"
+uid="uid://dw4bbo84lcjnx"
+path="res://.godot/imported/fire_spark-Sheet.png-fbe52d4ca0f902eec0fcdeeae08449ad.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://objects/moves/moves/scream/scream-Sheet.png"
-dest_files=["res://.godot/imported/scream-Sheet.png-268f845b650238361eac2096af12e3e6.ctex"]
+source_file="res://objects/moves/fire_spark/fire_spark-Sheet.png"
+dest_files=["res://.godot/imported/fire_spark-Sheet.png-fbe52d4ca0f902eec0fcdeeae08449ad.ctex"]
 
 [params]
 

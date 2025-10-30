@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="Move" load_steps=6 format=3 uid="uid://cs6ym0bmr6ufq"]
 
 [ext_resource type="Script" uid="uid://dwops4cp56fq3" path="res://classes/base/BattleEffect.gd" id="1_pisvl"]
-[ext_resource type="PackedScene" uid="uid://delhlp5ae4w6p" path="res://objects/moves/moves/scream/scream.tscn" id="2_557gl"]
+[ext_resource type="PackedScene" uid="uid://delhlp5ae4w6p" path="res://objects/moves/scream/scream.tscn" id="2_557gl"]
 [ext_resource type="Script" uid="uid://cg2gwmc5eufqa" path="res://objects/effects/Damage.gd" id="3_8kbd8"]
 [ext_resource type="Script" uid="uid://coff2nnisn6g2" path="res://objects/moves/Move.gd" id="4_gr7bc"]
 

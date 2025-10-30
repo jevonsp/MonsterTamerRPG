@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bo414cq5o4jwv"
-path="res://.godot/imported/slap.png-e518b25b31bda3663168f41c137b2bbd.ctex"
+uid="uid://dhhh5dohq3ga1"
+path="res://.godot/imported/nettle_sting-Sheet.png-595a64ac86674eebb01b78a131fc7a90.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://objects/moves/moves/slap/slap.png"
-dest_files=["res://.godot/imported/slap.png-e518b25b31bda3663168f41c137b2bbd.ctex"]
+source_file="res://objects/moves/nettle_sting/nettle_sting-Sheet.png"
+dest_files=["res://.godot/imported/nettle_sting-Sheet.png-595a64ac86674eebb01b78a131fc7a90.ctex"]
 
 [params]
 
