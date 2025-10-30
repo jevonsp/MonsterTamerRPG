@@ -21,6 +21,8 @@ signal party_effect_ended
 signal health_changed(monster: Monster, old: int, new: int)
 signal health_done_animating
 
+signal status_changed(monster: Monster)
+
 signal exp_granted(amount: int)
 signal exp_changed(monster: Monster, old_level: int, new_experience: int, times: int)
 signal level_done_animating

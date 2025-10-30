@@ -22,6 +22,7 @@ var exp_map: Dictionary = {}
 var portrait_map: Dictionary = {}
 var name_map: Dictionary = {}
 var level_map: Dictionary = {}
+var status_map: Dictionary = {}
 
 func _ready() -> void:
 	EventBus.player_battle_actor_sent.connect(_on_player_battle_actor_sent)
@@ -39,6 +40,8 @@ func connect_signals():
 		EventBus.effect_started.connect(_on_effect_started)
 	if not EventBus.health_changed.is_connected(_on_health_changed):
 		EventBus.health_changed.connect(_on_health_changed)
+	if not EventBus.status_changed.is_connected(_on_status_changed):
+		EventBus.status_changed.connect(_on_status_changed)
 	if not EventBus.exp_changed.is_connected(_on_exp_changed):
 		EventBus.exp_changed.connect(_on_exp_changed)
 	if not EventBus.switch_animation.is_connected(_on_switch_animation):
@@ -87,6 +90,11 @@ func map_actor(monster: Monster) -> void:
 	level_label.text = "Lvl. " + str(monster.level)
 	level_map[monster] = level_label
 	
+	var status_label = player_status if is_player else enemy_status
+	if monster.status != null:
+		status_label.status = monster.status.name
+		status_map[monster] = status_label
+	
 func update_maps(old_monster: Monster, new_monster: Monster) -> void:
 	var hp_bar = hp_map.get(old_monster)
 	if hp_bar:
@@ -117,6 +125,13 @@ func update_maps(old_monster: Monster, new_monster: Monster) -> void:
 		level_label.text = "Lvl. " + str(new_monster.level)
 		level_map.erase(old_monster)
 		level_map[new_monster] = level_label
+	var status_label = status_map.get(old_monster)
+	if status_label:
+		if new_monster.status != null:
+			status_label.status = new_monster.status.name
+		status_map.erase(old_monster)
+		status_map[new_monster] = status_label
+	
 func clear_maps():
 	portrait_map.clear()
 	hp_map.clear()
@@ -176,6 +191,11 @@ func _on_health_changed(monster: Monster, _old: int, new: int) -> void:
 	tween.tween_property(hp_map[monster], "value", new * HP_SCALE, Settings.game_speed)
 	await tween.finished
 	EventBus.health_done_animating.emit()
+	
+func _on_status_changed(monster: Monster) -> void:
+	var status_label = status_map.get(monster)
+	if status_label:
+		status_label.status = monster.status.name
 	
 func _on_monster_revived(_monster: Monster) -> void:
 	print("do revive animation here")

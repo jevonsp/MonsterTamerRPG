@@ -24,6 +24,8 @@ func _process(_delta: float) -> void:
 		"POISON":
 			texture = poison_texture
 			new_text = "POISON"
+		_:
+			return
 	label.text = new_text
 	size.x = label.size.x + 2
 	position = -size * 0.5

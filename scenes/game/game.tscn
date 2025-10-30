@@ -81,7 +81,7 @@ y_sort_enabled = true
 [node name="Trainer" parent="Trainers" instance=ExtResource("16_3xj4h")]
 position = Vector2(8, 104)
 team = Array[ExtResource("5_87uf6")]([ExtResource("6_2a8rs")])
-levels = Array[int]([1])
+levels = Array[int]([5])
 facing_dir = Vector2(0, -1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Trainers/Trainer"]

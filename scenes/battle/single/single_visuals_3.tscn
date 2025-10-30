@@ -175,10 +175,10 @@ offset_bottom = -28.0
 pivot_offset = Vector2(17, 12)
 
 [node name="CenterMarker" type="Marker2D" parent="."]
-position = Vector2(333, 120)
+position = Vector2(320, 120)
 
 [node name="PlayerMarker" type="Marker2D" parent="."]
-position = Vector2(112, 120)
+position = Vector2(110, 120)
 
 [node name="EnemyMarker" type="Marker2D" parent="."]
-position = Vector2(534, 120)
+position = Vector2(530, 120)

@@ -141,7 +141,6 @@ func decide_gender():
 				gender = "FEMALE"
 	print("gender: ", gender)
 	
-	
 func set_stats() -> void:
 	max_hitpoints = int((2 * species.base_hitpoints * level) / 100.0) + level + 10
 	hitpoints = max_hitpoints
@@ -190,6 +189,10 @@ func _get_stage_multi(stage: int) -> float:
 	
 func get_item_bonus():
 	pass
+	
+func set_status(new_status: StatusEffect):
+	status = new_status
+	EventBus.status_changed.emit(self)
 	
 func experience_to_level(lvl: int) -> int:
 	var BASE = 50
@@ -313,7 +316,6 @@ func heal(amount: int, full: bool = false) -> void:
 		await  EventBus.party_effect_ended
 	print("health finished animating")
 	await Engine.get_main_loop().process_frame
-	
 	
 func revive() -> void:
 	is_fainted = false
