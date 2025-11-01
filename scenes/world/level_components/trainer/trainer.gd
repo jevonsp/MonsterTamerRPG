@@ -13,7 +13,7 @@ class_name Trainer extends EncounterZone
 @export var defeat_text: String
 @export var post_fight_text: String
 @export_subgroup("Body Info")
-@export var static_body: StaticBody2D
+@export var anim_body: AnimatableBody2D
 @export var facing_dir: Vector2
 
 var tween
@@ -32,6 +32,7 @@ func trigger(pos: Vector2):
 	if check_ray_cast2d(pos):
 		var player = get_tree().get_first_node_in_group("player")
 		player.processing = false
+		player.clear_inputs()
 		print("player.processing: ",player.processing)
 		await walk_to_player(pos)
 		player.processing = true
@@ -50,19 +51,45 @@ func check_ray_cast2d(pos: Vector2) -> bool:
 	return ray_result.is_empty()
 	
 func walk_to_player(pos: Vector2):
-	print("walking to player")
 	const TILE_SIZE = 16
 	const WALK_SPEED = 5.0
-	var distance = static_body.position.distance_to(pos)
-	var tiles_to_travel = distance /TILE_SIZE
+	
+	var player = get_tree().get_first_node_in_group("player")
+	print("player pos (from function): ", pos)
+	print("player actual global_position: ", player.global_position)
+	print("anim_body.global_position: ", anim_body.global_position)
+	print("facing_dir: ", facing_dir)
+	
+	# Determine which axis the trainer is looking (using facing_dir)
+	var target_pos: Vector2
+	
+	if abs(facing_dir.x) > abs(facing_dir.y):
+		# Facing horizontally - match player's Y, stop one tile away on X
+		target_pos = Vector2(pos.x - (sign(facing_dir.x) * TILE_SIZE), pos.y)
+		print("moving horizontally")
+	else:
+		# Facing vertically - match player's X, stop one tile away on Y
+		target_pos = Vector2(pos.x, pos.y - (sign(facing_dir.y) * TILE_SIZE))
+		print("moving vertically")
+	
+	print("target_pos (global): ", target_pos)
+	
+	var distance = anim_body.global_position.distance_to(target_pos)
+	var tiles_to_travel = distance / TILE_SIZE
 	var duration = tiles_to_travel / WALK_SPEED
 	
-	var local_target = to_local(pos)
+	anim_body.sync_to_physics = false
 	
 	tween = get_tree().create_tween()
-	tween.tween_property(static_body, "position", local_target, duration)
+	tween.tween_property(anim_body, "global_position", target_pos, duration)
 	await tween.finished
-	print("tween finished")
+	
+	anim_body.sync_to_physics = true
+	
+	print("final anim_body position: ", anim_body.global_position)
+	print("final player position: ", player.global_position)
+	
+	
 	DialogueManager.show_dialogue(fight_text)
 	await DialogueManager.dialogue_closed
 	build_encounter()

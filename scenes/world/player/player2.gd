@@ -177,6 +177,7 @@ func attempt_movement(input_dir: Vector2) -> bool:
 	
 	tile_start_pos = position
 	tile_target_pos = position + (input_dir * TILE_SIZE)
+	print("player going to: ", tile_target_pos)
 	move_progress = 0.0
 	current_state = State.WALKING
 	

@@ -83,7 +83,7 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d4fjg"]
 size = Vector2(18, 18)
 
-[node name="Trainer" type="Area2D" node_paths=PackedStringArray("static_body")]
+[node name="Trainer" type="Area2D" node_paths=PackedStringArray("anim_body")]
 collision_layer = 2
 collision_mask = 0
 script = ExtResource("1_oxi5s")
@@ -91,7 +91,7 @@ ai_profile = ExtResource("2_of5uj")
 fight_text = "You have to fight me now!"
 defeat_text = "How could I lose?"
 post_fight_text = "Maybe we can fight again later?"
-static_body = NodePath("AnimatableBody2D")
+anim_body = NodePath("AnimatableBody2D")
 metadata/_custom_type_script = "uid://b4iga57vuw36y"
 
 [node name="AnimatableBody2D" type="AnimatableBody2D" parent="."]

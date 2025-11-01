@@ -448,23 +448,21 @@ anim_tree = NodePath("AnimationTree")
 ray2d = NodePath("RayCast2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(8, 8)
 texture = ExtResource("1_8afob")
 offset = Vector2(0, -3)
 hframes = 3
 vframes = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(8, 8)
 shape = SubResource("RectangleShape2D_dovo2")
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
-position = Vector2(8, 8)
 target_position = Vector2(0, 16)
 collision_mask = 5
 collide_with_areas = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(0.08427048, -0.0010213852)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

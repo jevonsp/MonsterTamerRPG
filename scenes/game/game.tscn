@@ -1,7 +1,6 @@
-[gd_scene load_steps=28 format=4 uid="uid://b1yah1hhi0u3c"]
+[gd_scene load_steps=28 format=3 uid="uid://b1yah1hhi0u3c"]
 
 [ext_resource type="Script" uid="uid://btbok5mr6fuht" path="res://scenes/game/game.gd" id="1_5jirj"]
-[ext_resource type="PackedScene" uid="uid://c32838kx1ass2" path="res://scenes/world/maps/test_map.tscn" id="1_7h61r"]
 [ext_resource type="PackedScene" uid="uid://bvky3u2b5xv0x" path="res://scenes/world/player/player.tscn" id="2_0sr1o"]
 [ext_resource type="PackedScene" uid="uid://dqs3upsifk31c" path="res://scenes/world/level_components/ball/ball.tscn" id="3_0sr1o"]
 [ext_resource type="PackedScene" uid="uid://dx1h5hc75ct73" path="res://scenes/world/level_components/wild_zone/wild_zone.tscn" id="4_kelw5"]
@@ -19,12 +18,13 @@
 [ext_resource type="PackedScene" uid="uid://b425x261se8kq" path="res://scenes/world/level_components/saving_zone/storage.tscn" id="17_5v6r0"]
 [ext_resource type="PackedScene" uid="uid://dmwn27d12uvk5" path="res://scenes/world/level_components/shop/shop.tscn" id="18_uyinl"]
 [ext_resource type="Script" uid="uid://d3pa7qech6emx" path="res://scenes/world/level_components/shop/ItemSlot.gd" id="19_10c2w"]
+[ext_resource type="PackedScene" uid="uid://c4beh48d3tn7y" path="res://scenes/world/maps/map_draft_1/map_1.tscn" id="19_pg2xm"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lfrn8"]
-size = Vector2(32, 32)
+size = Vector2(32, 48)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5v6r0"]
-size = Vector2(16, 80)
+size = Vector2(64, 16)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3xj4h"]
 size = Vector2(16, 16)
@@ -56,11 +56,7 @@ size = Vector2(18, 18)
 y_sort_enabled = true
 script = ExtResource("1_5jirj")
 
-[node name="TestMap" parent="." groups=["overworld"] instance=ExtResource("1_7h61r")]
-tile_map_data = PackedByteArray("AAAAAAAAAQABAAAAAAAAAAEAAQABAAAAAAAAAAIAAQABAAAAAAAAAAMAAQABAAAAAAAAAAQAAQABAAAAAAAAAAUAAQABAAAAAAAAAAYAAQABAAAAAAABAAYAAQABAAAAAAACAAYAAQABAAAAAAADAAYAAQABAAAAAAAEAAYAAQABAAAAAAAFAAYAAQABAAAAAAAGAAYAAQABAAAAAAAHAAYAAQABAAAAAAAIAAYAAQABAAAAAAAJAAYAAQABAAAAAAAJAAUAAQABAAAAAAAJAAQAAQABAAAAAAAJAAMAAQABAAAAAAAJAAIAAQABAAAAAAAJAAEAAQABAAAAAAAIAAEAAQABAAAAAAAIAAAAAQABAAAAAAAJAAAAAQABAAAAAAAHAAAAAQABAAAAAAAGAAAAAQABAAAAAAAFAAAAAQABAAAAAAAEAAAAAQABAAAAAAADAAAAAQABAAAAAAACAAAAAQABAAAAAAABAAAAAQABAAAAAAAGAAIAAQABAAAAAAAGAAEAAQABAAAAAAAFAAEAAQABAAAAAAAEAAEAAQABAAAAAAADAAEAAQABAAAAAAACAAEAAQAAAAAAAAABAAEAAQAAAAAAAAABAAIAAQAAAAAAAAABAAMAAQABAAAAAAABAAQAAQABAAAAAAABAAUAAQABAAAAAAACAAUAAQABAAAAAAACAAQAAQABAAAAAAACAAMAAQABAAAAAAACAAIAAQAAAAAAAAADAAIAAQABAAAAAAADAAMAAQABAAAAAAADAAQAAQABAAAAAAADAAUAAQABAAAAAAAEAAUAAQABAAAAAAAEAAQAAQABAAAAAAAEAAMAAQABAAAAAAAEAAIAAQABAAAAAAAFAAIAAQABAAAAAAAFAAMAAQABAAAAAAAFAAQAAQABAAAAAAAFAAUAAQABAAAAAAAGAAUAAQABAAAAAAAGAAQAAQABAAAAAAAGAAMAAQABAAAAAAAHAAMAAQABAAAAAAAHAAIAAQABAAAAAAAHAAEAAQABAAAAAAAIAAIAAQABAAAAAAAIAAMAAQABAAAAAAAIAAQAAQABAAAAAAAHAAQAAQABAAAAAAAHAAUAAQABAAAAAAAIAAUAAQABAAAAAAD/////AQAAAAEAAAD//wAAAQAAAAEAAAD//wEAAQAAAAEAAAD//wIAAQAAAAEAAAD//wMAAQAAAAEAAAD//wQAAQAAAAEAAAD//wUAAQAAAAEAAAD//wYAAQAAAAEAAAD//wcAAQAAAAEAAAAAAAcAAQAAAAEAAAABAAcAAQAAAAEAAAACAAcAAQAAAAEAAAADAAcAAQAAAAEAAAAEAAcAAQAAAAEAAAAFAAcAAQAAAAEAAAAGAAcAAQAAAAEAAAAHAAcAAQAAAAEAAAAIAAcAAQAAAAEAAAAJAAcAAQAAAAEAAAAKAAcAAQAAAAEAAAAKAAYAAQAAAAEAAAAKAAUAAQAAAAEAAAAKAAQAAQAAAAEAAAAKAAMAAQAAAAEAAAAKAAIAAQAAAAEAAAAKAAEAAQAAAAEAAAAKAAAAAQAAAAEAAAAKAP//AQAAAAEAAAAJAP//AQAAAAEAAAAIAP//AQAAAAEAAAAHAP//AQAAAAEAAAAGAP//AQAAAAEAAAAFAP//AQAAAAEAAAAEAP//AQAAAAEAAAADAP//AAAAAAIAAAACAP//AQAAAAEAAAABAP//AQAAAAEAAAAAAP//AQABAAEAAAA=")
-
-[node name="Player" parent="." instance=ExtResource("2_0sr1o")]
-y_sort_enabled = true
+[node name="Map1" parent="." instance=ExtResource("19_pg2xm")]
 
 [node name="Wild" type="Node2D" parent="."]
 y_sort_enabled = true
@@ -73,6 +69,7 @@ max_levels = Array[int]([3, 3, 3])
 probabilities = Array[float]([0.33, 0.33, 0.34])
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Wild/WildZone"]
+position = Vector2(0, 8)
 shape = SubResource("RectangleShape2D_lfrn8")
 
 [node name="Trainers" type="Node2D" parent="."]
@@ -82,38 +79,39 @@ y_sort_enabled = true
 position = Vector2(8, 104)
 team = Array[ExtResource("5_87uf6")]([ExtResource("6_2a8rs")])
 levels = Array[int]([5])
-facing_dir = Vector2(0, -1)
+facing_dir = Vector2(1, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Trainers/Trainer"]
-position = Vector2(0, -32)
+position = Vector2(40, 0)
 shape = SubResource("RectangleShape2D_5v6r0")
 
 [node name="Items" type="Node2D" parent="."]
 y_sort_enabled = true
+position = Vector2(108, 0)
 
 [node name="Ball" parent="Items" instance=ExtResource("3_0sr1o")]
-position = Vector2(40, 8)
+position = Vector2(28, 104)
 level = 5
 
 [node name="Ball2" parent="Items" instance=ExtResource("3_0sr1o")]
-position = Vector2(8, 24)
+position = Vector2(44, 88)
 frame = 1
 level = 5
 
 [node name="BallItem" parent="Items" instance=ExtResource("9_4j704")]
-position = Vector2(24, 8)
+position = Vector2(44, 72)
 collision_layer = 4
 collision_mask = 2
 item = ExtResource("10_kp23o")
 
 [node name="Potion" parent="Items" instance=ExtResource("9_4j704")]
-position = Vector2(8, 40)
+position = Vector2(44, 56)
 collision_layer = 4
 collision_mask = 2
 item = ExtResource("11_kp23o")
 
 [node name="WaterGun" parent="Items" instance=ExtResource("9_4j704")]
-position = Vector2(56, 8)
+position = Vector2(28, 72)
 collision_layer = 4
 collision_mask = 2
 item = ExtResource("14_5v6r0")
@@ -134,9 +132,13 @@ position = Vector2(56, -8)
 shape = SubResource("RectangleShape2D_uyinl")
 
 [node name="Shop" parent="." instance=ExtResource("18_uyinl")]
-position = Vector2(64, 0)
+position = Vector2(80, 0)
 inventory = Array[ExtResource("19_10c2w")]([SubResource("Resource_pg2xm"), SubResource("Resource_10c2w"), SubResource("Resource_gc57s")])
+facing_dir = Vector2(-1, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Shop"]
 position = Vector2(8, 8)
 shape = SubResource("RectangleShape2D_10c2w")
+
+[node name="Player" parent="." instance=ExtResource("2_0sr1o")]
+position = Vector2(152, 104)
