@@ -119,8 +119,6 @@ func process_walking_state(delta: float) -> void:
 		position = tile_target_pos
 		move_progress = 0.0
 		EventBus.step_completed.emit(global_position)
-		print(global_position)
-
 		# Check for continued movement
 		var input_dir = get_input_direction()
 		if input_dir != Vector2.ZERO:
@@ -177,7 +175,6 @@ func attempt_movement(input_dir: Vector2) -> bool:
 	
 	tile_start_pos = position
 	tile_target_pos = position + (input_dir * TILE_SIZE)
-	print("player going to: ", tile_target_pos)
 	move_progress = 0.0
 	current_state = State.WALKING
 	
