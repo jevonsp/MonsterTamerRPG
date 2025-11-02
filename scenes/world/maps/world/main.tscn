@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://xwdvb4u6ftxl" path="res://scenes/world/maps/world/floor.gd" id="1_6ldpx"]
 [ext_resource type="TileSet" uid="uid://gaislo7kxb5w" path="res://scenes/world/maps/world/8x8new_tileset.tres" id="1_hinva"]
 [ext_resource type="PackedScene" uid="uid://bvky3u2b5xv0x" path="res://scenes/world/player/player.tscn" id="2_73bwi"]
-[ext_resource type="Script" uid="uid://cv7yiyr7nfrv7" path="res://scenes/world/level_components/door/door.gd" id="3_j1lk2"]
+[ext_resource type="PackedScene" uid="uid://sjjiqajnqlvd" path="res://scenes/world/level_components/door/door.tscn" id="2_mrqht"]
 [ext_resource type="PackedScene" uid="uid://xd5p2u07xcxu" path="res://scenes/world/level_components/door/blocker.tscn" id="4_qvmiy"]
 [ext_resource type="Script" uid="uid://bniq1m1pk1pda" path="res://scenes/world/level_components/door/door_point.gd" id="6_5vmbw"]
 
@@ -26,43 +26,40 @@ tile_set = ExtResource("1_hinva")
 [node name="Entrance" type="Node2D" parent="GroundLevel/Objects"]
 position = Vector2(8, -16)
 
-[node name="Door" type="Area2D" parent="GroundLevel/Objects/Entrance" node_paths=PackedStringArray("door_point", "shape", "blocker")]
-position = Vector2(-0.060447693, -0.15570831)
-script = ExtResource("3_j1lk2")
-floor_num = 1
-door_point = NodePath("../../DoorPoint")
+[node name="Door" parent="GroundLevel/Objects/Entrance" node_paths=PackedStringArray("door_point", "shape", "blocker") instance=ExtResource("2_mrqht")]
+door_point = NodePath("../../Exit/DoorPoint")
 shape = NodePath("CollisionShape2D")
 blocker = NodePath("Blocker")
-metadata/_custom_type_script = "uid://cv7yiyr7nfrv7"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="GroundLevel/Objects/Entrance/Door"]
+position = Vector2(-0.060447693, -0.15570831)
 shape = SubResource("RectangleShape2D_dccvp")
 
 [node name="Blocker" parent="GroundLevel/Objects/Entrance/Door" instance=ExtResource("4_qvmiy")]
+position = Vector2(-0.060447693, -0.15570831)
 
-[node name="DoorPoint" type="Marker2D" parent="GroundLevel/Objects"]
-position = Vector2(-392, -32)
+[node name="DoorPoint" type="Marker2D" parent="GroundLevel/Objects/Entrance"]
+position = Vector2(0, 16)
 script = ExtResource("6_5vmbw")
 metadata/_custom_type_script = "uid://bniq1m1pk1pda"
 
 [node name="Exit" type="Node2D" parent="GroundLevel/Objects"]
-position = Vector2(-392, 0)
+position = Vector2(-392, -16)
 
-[node name="Door" type="Area2D" parent="GroundLevel/Objects/Exit" node_paths=PackedStringArray("door_point", "shape", "blocker")]
-position = Vector2(-0.060455322, -16.155708)
-script = ExtResource("3_j1lk2")
-door_point = NodePath("../DoorPoint")
+[node name="Door" parent="GroundLevel/Objects/Exit" node_paths=PackedStringArray("door_point", "shape", "blocker") instance=ExtResource("2_mrqht")]
+door_point = NodePath("../../Entrance/DoorPoint")
 shape = NodePath("CollisionShape2D")
 blocker = NodePath("Blocker")
-metadata/_custom_type_script = "uid://cv7yiyr7nfrv7"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="GroundLevel/Objects/Exit/Door"]
+position = Vector2(-0.060455322, 0)
 shape = SubResource("RectangleShape2D_dccvp")
 
 [node name="Blocker" parent="GroundLevel/Objects/Exit/Door" instance=ExtResource("4_qvmiy")]
+position = Vector2(-0.060455322, 0)
 
 [node name="DoorPoint" type="Marker2D" parent="GroundLevel/Objects/Exit"]
-position = Vector2(392, 0)
+position = Vector2(0, -16)
 script = ExtResource("6_5vmbw")
 metadata/_custom_type_script = "uid://bniq1m1pk1pda"
 

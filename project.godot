@@ -25,6 +25,7 @@ DialogueManager="*res://singletons/DialogueManager.gd"
 UiManager="*res://singletons/UiManager.gd"
 AiManager="*res://singletons/AiManager.gd"
 SaverLoader="*res://singletons/SaverLoader.gd"
+FloorManager="res://singletons/FloorManager.gd"
 
 [display]
 

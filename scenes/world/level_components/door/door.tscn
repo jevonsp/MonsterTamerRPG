@@ -1,7 +1,26 @@
-[gd_scene load_steps=2 format=3 uid="uid://sjjiqajnqlvd"]
+[gd_scene load_steps=5 format=3 uid="uid://sjjiqajnqlvd"]
 
 [ext_resource type="Script" uid="uid://cv7yiyr7nfrv7" path="res://scenes/world/level_components/door/door.gd" id="1_7bqtr"]
+[ext_resource type="Shader" uid="uid://ju2wny6b5phs" path="res://scenes/world/level_components/door/iris.gdshader" id="2_np120"]
+[ext_resource type="Script" uid="uid://cc1m06adxu2hy" path="res://scenes/world/level_components/door/iris_effect.gd" id="3_2oivt"]
 
-[node name="Door" type="Area2D"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_s3mjr"]
+shader = ExtResource("2_np120")
+shader_parameter/radius = 0.5
+shader_parameter/center = Vector2(0.5, 0.5)
+shader_parameter/viewport_size = Vector2(640, 360)
+
+[node name="Door" type="Area2D" node_paths=PackedStringArray("iris_effect")]
 collision_mask = 0
 script = ExtResource("1_7bqtr")
+iris_effect = NodePath("CanvasLayer/IrisEffect")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="IrisEffect" type="ColorRect" parent="CanvasLayer"]
+visible = false
+material = SubResource("ShaderMaterial_s3mjr")
+offset_right = 640.0
+offset_bottom = 360.0
+color = Color(0, 0, 0, 0)
+script = ExtResource("3_2oivt")
