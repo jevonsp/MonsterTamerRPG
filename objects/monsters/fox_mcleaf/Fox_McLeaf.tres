@@ -4,12 +4,12 @@
 [ext_resource type="Resource" uid="uid://yba5nj2cbh3b" path="res://objects/moves/slap/Slap.tres" id="2_cmk2l"]
 [ext_resource type="Script" uid="uid://cf7d81q2bjlj0" path="res://objects/monsters/MonsterData.gd" id="2_gautn"]
 [ext_resource type="Resource" uid="uid://bgnlmll76xe20" path="res://objects/moves/nettle_sting/NettleSting.tres" id="3_0uj8m"]
-[ext_resource type="Texture2D" uid="uid://ch5o824ebxq1t" path="res://objects/monsters/fox_mcleaf/fox_mcleaf.png" id="4_suhad"]
+[ext_resource type="Texture2D" uid="uid://bobvff438yjjw" path="res://objects/monsters/fox_mcleaf/fox_mcleaf_remake.png" id="5_0uj8m"]
 
 [resource]
 script = ExtResource("2_gautn")
 name = "Fox McLeaf"
-sprite = ExtResource("4_suhad")
+sprite = ExtResource("5_0uj8m")
 type = "GRASS"
 role = "TANK"
 base_hitpoints = 100

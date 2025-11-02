@@ -89,7 +89,6 @@ func walk_to_player(pos: Vector2):
 	print("final anim_body position: ", anim_body.global_position)
 	print("final player position: ", player.global_position)
 	
-	
 	DialogueManager.show_dialogue(fight_text)
 	await DialogueManager.dialogue_closed
 	build_encounter()

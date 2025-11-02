@@ -1,8 +1,12 @@
-[gd_resource type="Resource" script_class="Monster" load_steps=3 format=3 uid="uid://cbldns3hwh6uw"]
+[gd_resource type="Resource" script_class="MonsterData" load_steps=4 format=3 uid="uid://cbldns3hwh6uw"]
 
 [ext_resource type="Script" uid="uid://coff2nnisn6g2" path="res://objects/moves/Move.gd" id="1_fa5e6"]
-[ext_resource type="Script" uid="uid://dpci05qyw6r1c" path="res://objects/monsters/Monster.gd" id="2_vbf7n"]
+[ext_resource type="Script" uid="uid://cf7d81q2bjlj0" path="res://objects/monsters/MonsterData.gd" id="2_fa5e6"]
+[ext_resource type="Texture2D" uid="uid://lv45fjnf6m0k" path="res://objects/monsters/shroomie/shroomie.png" id="3_vbf7n"]
 
 [resource]
-script = ExtResource("2_vbf7n")
-metadata/_custom_type_script = "uid://dpci05qyw6r1c"
+script = ExtResource("2_fa5e6")
+name = "Shroomie"
+sprite = ExtResource("3_vbf7n")
+type = "DARK"
+metadata/_custom_type_script = "uid://cf7d81q2bjlj0"

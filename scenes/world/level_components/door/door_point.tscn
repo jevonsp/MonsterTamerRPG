@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dyhqpchmjd38j"]
+
+[ext_resource type="Script" uid="uid://bniq1m1pk1pda" path="res://scenes/world/level_components/door/door_point.gd" id="1_n2yqj"]
+
+[node name="DoorPoint" type="Marker2D"]
+script = ExtResource("1_n2yqj")
