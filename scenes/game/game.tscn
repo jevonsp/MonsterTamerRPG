@@ -21,6 +21,7 @@
 [ext_resource type="PackedScene" uid="uid://c4beh48d3tn7y" path="res://scenes/world/maps/map_draft_1/map_1.tscn" id="19_pg2xm"]
 [ext_resource type="PackedScene" uid="uid://sjjiqajnqlvd" path="res://scenes/world/level_components/door/door.tscn" id="20_gc57s"]
 [ext_resource type="PackedScene" uid="uid://dyhqpchmjd38j" path="res://scenes/world/level_components/door/door_point.tscn" id="21_8b66f"]
+[ext_resource type="PackedScene" uid="uid://xd5p2u07xcxu" path="res://scenes/world/level_components/door/blocker.tscn" id="22_8b66f"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lfrn8"]
 size = Vector2(32, 48)
@@ -56,9 +57,6 @@ size = Vector2(18, 18)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3jaai"]
 size = Vector2(14, 14)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_gc57s"]
-size = Vector2(16, 16)
 
 [node name="TestGame" type="Node2D"]
 y_sort_enabled = true
@@ -156,7 +154,6 @@ position = Vector2(120, 104)
 door_point = NodePath("DoorPoint")
 shape = NodePath("CollisionShape2D")
 blocker = NodePath("Blocker")
-active = false
 
 [node name="DoorPoint" parent="Door" instance=ExtResource("21_8b66f")]
 position = Vector2(0.19397736, 33.261536)
@@ -164,7 +161,4 @@ position = Vector2(0.19397736, 33.261536)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Door"]
 shape = SubResource("RectangleShape2D_3jaai")
 
-[node name="Blocker" type="StaticBody2D" parent="Door"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Door/Blocker"]
-shape = SubResource("RectangleShape2D_gc57s")
+[node name="Blocker" parent="Door" instance=ExtResource("22_8b66f")]

@@ -1,9 +1,11 @@
 class_name Door extends Area2D
 
+@export var active: bool = true
+@export var floor_num: int = 0
+@export_subgroup("Nodes")
 @export var door_point: DoorPoint
 @export var shape: CollisionShape2D
 @export var blocker: StaticBody2D
-@export var active: bool = true
 
 func _ready() -> void:
 	set_door_state()
@@ -17,6 +19,9 @@ func set_door_state():
 		print("blocker: ", blocker)
 		if blocker:
 			blocker.collision_layer = 0
+			print("blocker.collision_layer: ", blocker.collision_layer)
+			blocker.collision_mask = 0
+			print("blocker.collision_mask: ", blocker.collision_mask)
 	monitoring = active
 	print("monitoring: ", monitoring)
 	
