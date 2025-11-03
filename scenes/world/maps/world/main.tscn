@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=4 uid="uid://rf1jm007es70"]
+[gd_scene load_steps=14 format=4 uid="uid://rf1jm007es70"]
 
 [ext_resource type="TileSet" uid="uid://gaislo7kxb5w" path="res://scenes/world/maps/world/8x8new_tileset.tres" id="1_hinva"]
 [ext_resource type="PackedScene" uid="uid://bvky3u2b5xv0x" path="res://scenes/world/player/player.tscn" id="2_73bwi"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://bniq1m1pk1pda" path="res://scenes/world/level_components/door/door_point.gd" id="6_5vmbw"]
 [ext_resource type="Shape2D" uid="uid://drjxbrqgygigv" path="res://scenes/world/level_components/door/14x14_rect.tres" id="6_6ldpx"]
 [ext_resource type="PackedScene" uid="uid://cs1pgc7b8e4j8" path="res://scenes/world/level_components/ledge/ledge.tscn" id="6_dccvp"]
+[ext_resource type="PackedScene" uid="uid://dx1h5hc75ct73" path="res://scenes/world/level_components/wild_zone/wild_zone.tscn" id="7_6ldpx"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dccvp"]
 size = Vector2(14, 14)
@@ -15,7 +16,13 @@ size = Vector2(14, 14)
 size = Vector2(14, 14)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mrqht"]
-size = Vector2(16, 80)
+size = Vector2(16, 64)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vwma2"]
+size = Vector2(48, 96)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5vmbw"]
+size = Vector2(80, 176)
 
 [node name="Main" type="Node2D"]
 
@@ -37,7 +44,7 @@ tile_set = ExtResource("1_hinva")
 position = Vector2(-72, 88)
 
 [node name="Door" parent="Layers/Objects/Town0/PlayerHome/Entrance" node_paths=PackedStringArray("door_point", "shape", "blocker") instance=ExtResource("2_mrqht")]
-door_point = NodePath("../../Exit/DoorPoint")
+door_point = NodePath("../DoorPoint")
 shape = NodePath("CollisionShape2D")
 blocker = NodePath("Blocker")
 
@@ -49,7 +56,7 @@ shape = SubResource("RectangleShape2D_dccvp")
 position = Vector2(-0.060447693, -0.15570831)
 
 [node name="DoorPoint" type="Marker2D" parent="Layers/Objects/Town0/PlayerHome/Entrance"]
-position = Vector2(0, 16)
+position = Vector2(-768, -112)
 script = ExtResource("6_5vmbw")
 metadata/_custom_type_script = "uid://bniq1m1pk1pda"
 
@@ -57,7 +64,7 @@ metadata/_custom_type_script = "uid://bniq1m1pk1pda"
 position = Vector2(-840, -8)
 
 [node name="Door" parent="Layers/Objects/Town0/PlayerHome/Exit" node_paths=PackedStringArray("door_point", "shape", "blocker") instance=ExtResource("2_mrqht")]
-door_point = NodePath("../../Entrance/DoorPoint")
+door_point = NodePath("../DoorPoint")
 shape = NodePath("CollisionShape2D")
 blocker = NodePath("Blocker")
 
@@ -69,7 +76,7 @@ shape = SubResource("RectangleShape2D_dccvp")
 position = Vector2(-0.060455322, 0)
 
 [node name="DoorPoint" type="Marker2D" parent="Layers/Objects/Town0/PlayerHome/Exit"]
-position = Vector2(0, -16)
+position = Vector2(768, 112)
 script = ExtResource("6_5vmbw")
 metadata/_custom_type_script = "uid://bniq1m1pk1pda"
 
@@ -156,7 +163,20 @@ collision_mask = 0
 allowed_direction = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Layers/Objects/Town0/Ledge"]
+position = Vector2(0, 8)
 shape = SubResource("RectangleShape2D_mrqht")
+
+[node name="WildZone" parent="Layers/Objects" instance=ExtResource("7_6ldpx")]
+position = Vector2(312, 16)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Layers/Objects/WildZone"]
+shape = SubResource("RectangleShape2D_vwma2")
+
+[node name="WildZone2" parent="Layers/Objects" instance=ExtResource("7_6ldpx")]
+position = Vector2(392, -24)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Layers/Objects/WildZone2"]
+shape = SubResource("RectangleShape2D_5vmbw")
 
 [node name="Roof" type="TileMapLayer" parent="Layers"]
 z_index = 1
@@ -164,4 +184,4 @@ tile_map_data = PackedByteArray("AADx/wYAAAAEAAQAAADx/wcAAAAEAAUAAADy/wYAAAAFAAQ
 tile_set = ExtResource("1_hinva")
 
 [node name="Player" parent="." instance=ExtResource("2_73bwi")]
-position = Vector2(296, -40)
+position = Vector2(296, -88)

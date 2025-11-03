@@ -171,7 +171,6 @@ func attempt_movement(input_dir: Vector2) -> bool:
 	# Check collision - raycast should be from current position
 	ray2d.target_position = input_dir * TILE_SIZE / 2
 	ray2d.force_raycast_update()
-	
 			
 	if ray2d.is_colliding():
 		var collider = ray2d.get_collider()
@@ -285,16 +284,25 @@ func respawn():
 # =
 
 func animate_ledge():
-	processing = false
 	var facing = vector_from_direction(facing_direction)
+	current_state = State.WALKING
+	anim_tree.set("parameters/Walk/blend_position", facing)
+	anim_state.travel("Walk")
+	print("Traveling to Walk")
+	print(anim_state.get_current_node())
+	#processing = false
+	
 	var move_target = facing * TILE_SIZE * 2
 	var pos_tween = get_tree().create_tween()
-	pos_tween.tween_property(self, "position", position + move_target, Settings.game_speed / 2)
+	pos_tween.tween_property(self, "position", position + move_target, 10.0 / 2)
+	print("pos_tween start", position, "target", position + move_target)
 	var up_tween = get_tree().create_tween()
-	up_tween.tween_property(sprite, "position", Vector2(0, -8), Settings.game_speed / 4)
+	up_tween.tween_property(sprite, "position", Vector2(0, -8), 10.0 / 4)
 	await up_tween.finished
 	var down_tween = get_tree().create_tween()
-	down_tween.tween_property(sprite, "position", Vector2.ZERO, Settings.game_speed / 4)
-	
+	down_tween.tween_property(sprite, "position", Vector2.ZERO, 10.0 / 4)
 	await pos_tween.finished
+	print("pos_tween finished")
+	current_state = State.IDLE
+	anim_state.travel("Idle")
 	processing = true
