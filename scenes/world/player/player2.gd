@@ -4,9 +4,10 @@ extends CharacterBody2D
 @export var ray2d: RayCast2D
 
 @export var sprite: Sprite2D
+@export var shadow: AnimatedSprite2D
 
 # State machine
-enum State {IDLE, TURNING, WALKING}
+enum State {IDLE, TURNING, WALKING, JUMPING}
 var current_state = State.IDLE
 
 # Facing direction
@@ -15,7 +16,7 @@ var facing_direction = Direction.DOWN
 
 # Constants
 const TILE_SIZE := 16.0
-const WALK_SPEED := 8.0
+const WALK_SPEED := 6.0
 const TURN_DURATION := 0.05
 
 # Movement tracking
@@ -47,7 +48,10 @@ func _ready() -> void:
 	anim_tree.set("parameters/Idle/blend_position", blend_dir)
 	anim_tree.set("parameters/Turn/blend_position", blend_dir)
 	anim_tree.set("parameters/Walk/blend_position", blend_dir)
+	anim_tree.set("parameters/Jump/blend_position", blend_dir)
 	anim_state.travel("Idle")
+	
+	shadow.visible = false
 	
 func _process(delta: float) -> void:
 	update_held_keys(delta)
@@ -140,7 +144,10 @@ func process_walking_state(delta: float) -> void:
 	else:
 		# Interpolate position
 		position = tile_start_pos.lerp(tile_target_pos, move_progress)
-
+		
+func process_jumping_state(delta: float) -> void:
+	pass
+	
 # ============================================================================
 # STATE TRANSITIONS
 # ============================================================================
@@ -175,16 +182,14 @@ func attempt_movement(input_dir: Vector2) -> bool:
 	if ray2d.is_colliding():
 		var collider = ray2d.get_collider()
 		if collider.is_in_group("ledge"):
-			print("ledge")
 			var facing = vector_from_direction(facing_direction)
 			var allowed = vector_from_direction(collider.allowed_direction)
 			if facing.dot(allowed) == -1:
-				print(facing)
-				print("allowed ledge")
 				animate_ledge()
-				
-		return false
+				return true
 	
+		return false
+	#sprite.flip_h = vector_from_direction(facing_direction).x > 0
 	tile_start_pos = position
 	tile_target_pos = position + (input_dir * TILE_SIZE)
 	move_progress = 0.0
@@ -284,25 +289,23 @@ func respawn():
 # =
 
 func animate_ledge():
+	processing = false
+	current_state = State.JUMPING
 	var facing = vector_from_direction(facing_direction)
-	current_state = State.WALKING
-	anim_tree.set("parameters/Walk/blend_position", facing)
-	anim_state.travel("Walk")
-	print("Traveling to Walk")
-	print(anim_state.get_current_node())
-	#processing = false
-	
+	anim_tree.set("parameters/Jump/blend_position", facing)
+	anim_state.travel("Jump")
+	shadow.visible = true
+	shadow.play()
 	var move_target = facing * TILE_SIZE * 2
 	var pos_tween = get_tree().create_tween()
-	pos_tween.tween_property(self, "position", position + move_target, 10.0 / 2)
-	print("pos_tween start", position, "target", position + move_target)
+	pos_tween.tween_property(self, "position", position + move_target, 0.30)
 	var up_tween = get_tree().create_tween()
-	up_tween.tween_property(sprite, "position", Vector2(0, -8), 10.0 / 4)
+	up_tween.tween_property(sprite, "position", Vector2(0, -8), 0.30 / 2)
 	await up_tween.finished
 	var down_tween = get_tree().create_tween()
-	down_tween.tween_property(sprite, "position", Vector2.ZERO, 10.0 / 4)
+	down_tween.tween_property(sprite, "position", Vector2.ZERO, 0.30 / 2)
 	await pos_tween.finished
-	print("pos_tween finished")
+	shadow.visible = false
 	current_state = State.IDLE
 	anim_state.travel("Idle")
 	processing = true

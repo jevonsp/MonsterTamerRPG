@@ -1,0 +1,43 @@
+[gd_scene load_steps=6 format=3 uid="uid://cmq8mvydqgybm"]
+
+[ext_resource type="Texture2D" uid="uid://byviy74ocee66" path="res://scenes/world/player/shadow.png" id="1_ejgws"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qq7al"]
+atlas = ExtResource("1_ejgws")
+region = Rect2(0, 0, 8, 5)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ecc4j"]
+atlas = ExtResource("1_ejgws")
+region = Rect2(8, 0, 8, 5)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lpfpt"]
+atlas = ExtResource("1_ejgws")
+region = Rect2(16, 0, 8, 5)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3abrf"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qq7al")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ecc4j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lpfpt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ecc4j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qq7al")
+}],
+"loop": false,
+"name": &"default",
+"speed": 20.0
+}]
+
+[node name="Shadow" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_3abrf")
+frame = 4
+frame_progress = 1.0
