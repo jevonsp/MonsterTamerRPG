@@ -12,9 +12,9 @@ enum Direction {UP, DOWN, LEFT, RIGHT}
 var facing_direction = Direction.DOWN
 
 # Constants
-const TILE_SIZE = 16
-const WALK_SPEED = 5.0
-const TURN_DURATION = 0.05
+const TILE_SIZE := 16.0
+const WALK_SPEED := 8.0
+const TURN_DURATION := 0.05
 
 # Movement tracking
 var tile_start_pos: Vector2 = Vector2.ZERO
@@ -170,7 +170,18 @@ func attempt_movement(input_dir: Vector2) -> bool:
 	ray2d.target_position = input_dir * TILE_SIZE / 2
 	ray2d.force_raycast_update()
 	
+			
 	if ray2d.is_colliding():
+		var collider = ray2d.get_collider()
+		if collider.is_in_group("ledge"):
+			print("ledge")
+			var facing = vector_from_direction(facing_direction)
+			var allowed = vector_from_direction(collider.allowed_direction)
+			if facing.dot(allowed) == -1:
+				print(facing)
+				print("allowed ledge")
+				animate_ledge()
+				
 		return false
 	
 	tile_start_pos = position
@@ -266,3 +277,16 @@ func respawn():
 			monster.heal(0, true)
 			monster.revive()
 	print("healed party")
+	
+# =
+# Ledges
+# =
+
+func animate_ledge():
+	var facing = vector_from_direction(facing_direction)
+	var move_target = facing * TILE_SIZE * 2
+	var tween = get_tree().create_tween()
+	processing = false
+	tween.tween_property(self, "position", position + move_target, 0.25)
+	await tween.finished
+	processing = true

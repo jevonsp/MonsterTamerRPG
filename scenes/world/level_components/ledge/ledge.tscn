@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://cs1pgc7b8e4j8"]
+
+[ext_resource type="Script" uid="uid://cojos783yd7ad" path="res://scenes/world/level_components/ledge/ledge.gd" id="1_33ga1"]
+
+[node name="Ledge" type="Area2D"]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_33ga1")

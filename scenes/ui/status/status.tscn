@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://b1221c6k2wflm"]
 
 [ext_resource type="Texture2D" uid="uid://dd57mrksrk4fl" path="res://scenes/ui/status/burn.png" id="1_4bd6w"]
-[ext_resource type="Script" uid="uid://elk8mb4dsls3" path="res://status_rect.gd" id="1_elho3"]
+[ext_resource type="Script" uid="uid://elk8mb4dsls3" path="res://scenes/battle/status_rect.gd" id="1_elho3"]
 [ext_resource type="Texture2D" uid="uid://1w4dhj7mauyt" path="res://scenes/ui/status/paralyze.png" id="3_pofnp"]
 [ext_resource type="Texture2D" uid="uid://nnw6w04tps65" path="res://scenes/ui/status/poison.png" id="4_fgxyk"]
 [ext_resource type="Texture2D" uid="uid://dl22aeddhstiy" path="res://scenes/ui/status/freeze.png" id="5_3x8bk"]
