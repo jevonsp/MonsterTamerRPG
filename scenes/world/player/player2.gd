@@ -3,6 +3,8 @@ extends CharacterBody2D
 @export var anim_tree: AnimationTree
 @export var ray2d: RayCast2D
 
+@export var sprite: Sprite2D
+
 # State machine
 enum State {IDLE, TURNING, WALKING}
 var current_state = State.IDLE
@@ -283,10 +285,16 @@ func respawn():
 # =
 
 func animate_ledge():
+	processing = false
 	var facing = vector_from_direction(facing_direction)
 	var move_target = facing * TILE_SIZE * 2
-	var tween = get_tree().create_tween()
-	processing = false
-	tween.tween_property(self, "position", position + move_target, 0.25)
-	await tween.finished
+	var pos_tween = get_tree().create_tween()
+	pos_tween.tween_property(self, "position", position + move_target, Settings.game_speed / 2)
+	var up_tween = get_tree().create_tween()
+	up_tween.tween_property(sprite, "position", Vector2(0, -8), Settings.game_speed / 4)
+	await up_tween.finished
+	var down_tween = get_tree().create_tween()
+	down_tween.tween_property(sprite, "position", Vector2.ZERO, Settings.game_speed / 4)
+	
+	await pos_tween.finished
 	processing = true

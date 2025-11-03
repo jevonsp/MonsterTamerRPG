@@ -88,7 +88,7 @@ tile_map_data = PackedByteArray("AADx/wYAAAAEAAQAAADx/wcAAAAEAAUAAADy/wYAAAAFAAQ
 tile_set = ExtResource("1_hinva")
 
 [node name="Player" parent="." instance=ExtResource("2_73bwi")]
-position = Vector2(160, 8)
+position = Vector2(192, -40)
 
 [node name="Ledge" parent="." instance=ExtResource("6_dccvp")]
 position = Vector2(160, -24)
