@@ -53,4 +53,6 @@ signal move_removed
 
 signal toggle_labels
 
+signal behavior_completed
+
 @warning_ignore_restore("unused_signal")

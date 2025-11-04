@@ -61,7 +61,6 @@ func _ready() -> void:
 	pass
 	
 func push_ui(scene: PackedScene):
-	print("tried to push scene: ", scene)
 	if scene == null:
 		push_error("PackedScene is null! Scene not loaded correctly.")
 		return null
@@ -81,17 +80,12 @@ func pop_ui(target: Node = null):
 	return ui
 	
 func push_ui_by_name(scene_name: String):
-	print("push_ui_by_name context: ", context)
 	if scenes.has(scene_name):
-		print("pushing: ", scene_name)
 		var ui = push_ui(scenes[scene_name])
 		return ui
 	push_error("scene not found: ", scene_name)
 	return null
 	
 func clear_ui():
-	print("clear_ui called")
 	while ui_stack.size() > 0:
 		pop_ui()
-		print("ui_stack:", ui_stack)
-	print("final ui_stack:", ui_stack)

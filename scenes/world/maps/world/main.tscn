@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=4 uid="uid://rf1jm007es70"]
+[gd_scene load_steps=23 format=4 uid="uid://rf1jm007es70"]
 
 [ext_resource type="TileSet" uid="uid://gaislo7kxb5w" path="res://scenes/world/maps/world/8x8new_tileset.tres" id="1_hinva"]
 [ext_resource type="PackedScene" uid="uid://bvky3u2b5xv0x" path="res://scenes/world/player/player.tscn" id="2_73bwi"]
@@ -9,6 +9,11 @@
 [ext_resource type="PackedScene" uid="uid://cs1pgc7b8e4j8" path="res://scenes/world/level_components/ledge/ledge.tscn" id="6_dccvp"]
 [ext_resource type="PackedScene" uid="uid://dx1h5hc75ct73" path="res://scenes/world/level_components/wild_zone/wild_zone.tscn" id="7_6ldpx"]
 [ext_resource type="PackedScene" uid="uid://dbfevft6l1w44" path="res://scenes/world/level_components/story_blocker/story_blocker.tscn" id="7_qvmiy"]
+[ext_resource type="PackedScene" uid="uid://dqs3upsifk31c" path="res://scenes/world/level_components/ball/ball.tscn" id="8_vwma2"]
+[ext_resource type="PackedScene" uid="uid://c0qkuaxuu2ry0" path="res://scenes/world/npcs/npc.tscn" id="9_5vmbw"]
+[ext_resource type="Script" uid="uid://cjdsve4icvrhe" path="res://classes/base/NPCBehavior.gd" id="9_unbrv"]
+[ext_resource type="Script" uid="uid://do6g86jc68dr" path="res://classes/NPCBehavior/MovementBehavior.gd" id="10_3l80d"]
+[ext_resource type="Script" uid="uid://bo84u3c0ssex0" path="res://classes/NPCBehavior/DialogueBehavior.gd" id="10_brsy2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dccvp"]
 size = Vector2(14, 14)
@@ -18,6 +23,15 @@ size = Vector2(14, 14)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_eqjt1"]
 size = Vector2(8, 8)
+
+[sub_resource type="Resource" id="Resource_exgtf"]
+script = ExtResource("10_3l80d")
+metadata/_custom_type_script = "uid://do6g86jc68dr"
+
+[sub_resource type="Resource" id="Resource_3l80d"]
+script = ExtResource("10_brsy2")
+dialogues = Array[String](["Test dialogue!"])
+metadata/_custom_type_script = "uid://bo84u3c0ssex0"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vwma2"]
 size = Vector2(48, 96)
@@ -45,10 +59,8 @@ z_index = 1
 tile_map_data = PackedByteArray("AADx/wYAAAAEAAQAAADx/wcAAAAEAAUAAADy/wYAAAAFAAQAAADy/wcAAAAFAAUAAADz/wYAAAAEAAQAAADz/wcAAAAEAAUAAAD0/wYAAAAFAAQAAAD0/wcAAAAFAAUAAAD1/wYAAAAEAAQAAAD1/wcAAAAEAAUAAAD2/wYAAAAFAAQAAAD2/wcAAAAFAAUAAAD3/wYAAAAEAAQAAAD3/wcAAAAEAAUAAAD4/wYAAAAFAAQAAAD4/wcAAAAFAAUAAAD5/wYAAAAEAAQAAAD5/wcAAAAEAAUAAAD6/wYAAAAFAAQAAAD6/wcAAAAFAAUAAAD7/wYAAAAEAAQAAAD7/wcAAAAEAAUAAAD8/wYAAAAFAAQAAAD8/wcAAAAFAAUAAAAJAAYAAAAEAAQAAAAJAAcAAAAEAAUAAAAKAAYAAAAFAAQAAAAKAAcAAAAFAAUAAAALAAYAAAAEAAQAAAALAAcAAAAEAAUAAAAMAAYAAAAFAAQAAAAMAAcAAAAFAAUAAAANAAYAAAAEAAQAAAANAAcAAAAEAAUAAAAOAAYAAAAFAAQAAAAOAAcAAAAFAAUAAAAPAAYAAAAEAAQAAAAPAAcAAAAEAAUAAAAQAAYAAAAFAAQAAAAQAAcAAAAFAAUAAAARAAYAAAAEAAQAAAARAAcAAAAEAAUAAAASAAYAAAAFAAQAAAASAAcAAAAFAAUAAAATAAYAAAAEAAQAAAATAAcAAAAEAAUAAAAUAAYAAAAFAAQAAAAUAAcAAAAFAAUAAADx//T/AAAEAAQAAADx//X/AAAEAAUAAADy//T/AAAFAAQAAADy//X/AAAFAAUAAADz//T/AAAEAAQAAADz//X/AAAEAAUAAAD0//T/AAAFAAQAAAD0//X/AAAFAAUAAAD1//T/AAAEAAQAAAD1//X/AAAEAAUAAAD2//T/AAAFAAQAAAD2//X/AAAFAAUAAAD3//T/AAAEAAQAAAD3//X/AAAEAAUAAAD4//T/AAAFAAQAAAD4//X/AAAFAAUAAAD5//T/AAAEAAQAAAD5//X/AAAEAAUAAAD6//T/AAAFAAQAAAD6//X/AAAFAAUAAAD7//T/AAAEAAQAAAD7//X/AAAEAAUAAAD8//T/AAAFAAQAAAD8//X/AAAFAAUAAAD9//T/AAAEAAQAAAD9//X/AAAEAAUAAAD+//T/AAAFAAQAAAD+//X/AAAFAAUAAAD///T/AAAEAAQAAAD///X/AAAEAAUAAAAAAPT/AAAFAAQAAAAAAPX/AAAFAAUAAAABAPT/AAAEAAQAAAABAPX/AAAEAAUAAAACAPT/AAAFAAQAAAACAPX/AAAFAAUAAADx//L/AAAEAAQAAADx//P/AAAEAAUAAADy//L/AAAFAAQAAADy//P/AAAFAAUAAADz//L/AAAEAAQAAADz//P/AAAEAAUAAAD0//L/AAAFAAQAAAD0//P/AAAFAAUAAAD1//L/AAAEAAQAAAD1//P/AAAEAAUAAAD2//L/AAAFAAQAAAD2//P/AAAFAAUAAAD3//L/AAAEAAQAAAD3//P/AAAEAAUAAAD4//L/AAAFAAQAAAD4//P/AAAFAAUAAAD5//L/AAAEAAQAAAD5//P/AAAEAAUAAAD6//L/AAAFAAQAAAD6//P/AAAFAAUAAAD7//L/AAAEAAQAAAD7//P/AAAEAAUAAAD8//L/AAAFAAQAAAD8//P/AAAFAAUAAAD9//L/AAAEAAQAAAD9//P/AAAEAAUAAAD+//L/AAAFAAQAAAD+//P/AAAFAAUAAAD///L/AAAEAAQAAAD///P/AAAEAAUAAAAAAPL/AAAFAAQAAAAAAPP/AAAFAAUAAAABAPL/AAAEAAQAAAABAPP/AAAEAAUAAAACAPL/AAAFAAQAAAACAPP/AAAFAAUAAAA=")
 tile_set = ExtResource("1_hinva")
 
-[node name="Player" parent="." instance=ExtResource("2_73bwi")]
-position = Vector2(-840, -56)
-
 [node name="Objects" type="Node2D" parent="."]
+y_sort_enabled = true
 
 [node name="Town0" type="Node2D" parent="Objects"]
 
@@ -185,6 +197,13 @@ shape = SubResource("RectangleShape2D_eqjt1")
 position = Vector2(-16, 16)
 shape = SubResource("RectangleShape2D_eqjt1")
 
+[node name="Ball" parent="Objects/Town0/StoryBlocker" instance=ExtResource("8_vwma2")]
+position = Vector2(-48, 16)
+
+[node name="NPC" parent="Objects/Town0" instance=ExtResource("9_5vmbw")]
+position = Vector2(232, -8)
+behaviors = Array[ExtResource("9_unbrv")]([SubResource("Resource_exgtf"), SubResource("Resource_3l80d")])
+
 [node name="Route0" type="Node2D" parent="Objects"]
 
 [node name="WildZone" parent="Objects/Route0" instance=ExtResource("7_6ldpx")]
@@ -207,3 +226,6 @@ allowed_direction = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Objects/Route0/Ledge"]
 shape = SubResource("RectangleShape2D_mrqht")
+
+[node name="Player" parent="Objects" instance=ExtResource("2_73bwi")]
+position = Vector2(-840, -56)

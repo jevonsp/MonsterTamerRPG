@@ -1,6 +1,5 @@
 class_name Trainer extends EncounterZone
 
-
 @export_range(0, 1) var encounter_chance: float = 1.0
 @export var trainer_name: String = "Trainer"
 @export var ai_profile: AiProfile

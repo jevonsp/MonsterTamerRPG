@@ -5,7 +5,6 @@ extends Area2D
 func _ready() -> void:
 	add_to_group("can_save")
 	
-	
 func on_save_game(saved_data: Array[SavedData]):
 	var my_data = SavedData.new()
 	my_data.node_path = get_path()
@@ -20,4 +19,7 @@ func on_load_game(saved_data_array: Array[SavedData]):
 		 
 func _on_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player"):
-		print("player entered")
+		trigger()
+		
+func trigger():
+	print("story blocker")

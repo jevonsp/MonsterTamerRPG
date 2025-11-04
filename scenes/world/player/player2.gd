@@ -40,7 +40,6 @@ var respawn_point: Vector2
 
 func _ready() -> void:
 	add_to_group("player")
-	print(collision_layer)
 	tile_start_pos = position
 	tile_target_pos = position
 	

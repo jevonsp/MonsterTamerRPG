@@ -12,7 +12,6 @@ func setup():
 	sprite.frame = frame
 
 func interact(_interactor = null):
-	print("interact")
 	if frame == 0:
 		PartyManager.make_monster(pyro_badger, level)
 		dialogue()
@@ -47,6 +46,5 @@ func on_load_game(saved_data_array: Array[SavedData]):
 		if data.node_path == get_path():
 			print("matching node path")
 			obtained = data.obtained
-	print("obtained: ", obtained)
 	if obtained:
 		obtain()

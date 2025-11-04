@@ -14,7 +14,6 @@ func _ready() -> void:
 		if child is CollisionPolygon2D:
 			shape = child
 			break
-	print("shape: ", shape)
 	setup()
 	
 func on_save_game(_saved_data: Array[SavedData]):
