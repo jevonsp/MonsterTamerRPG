@@ -40,6 +40,7 @@ var respawn_point: Vector2
 
 func _ready() -> void:
 	add_to_group("player")
+	print(collision_layer)
 	tile_start_pos = position
 	tile_target_pos = position
 	
@@ -144,9 +145,6 @@ func process_walking_state(delta: float) -> void:
 	else:
 		# Interpolate position
 		position = tile_start_pos.lerp(tile_target_pos, move_progress)
-		
-func process_jumping_state(delta: float) -> void:
-	pass
 	
 # ============================================================================
 # STATE TRANSITIONS
@@ -181,6 +179,7 @@ func attempt_movement(input_dir: Vector2) -> bool:
 			
 	if ray2d.is_colliding():
 		var collider = ray2d.get_collider()
+		
 		if collider.is_in_group("ledge"):
 			var facing = vector_from_direction(facing_direction)
 			var allowed = vector_from_direction(collider.allowed_direction)
@@ -189,7 +188,6 @@ func attempt_movement(input_dir: Vector2) -> bool:
 				return true
 	
 		return false
-	#sprite.flip_h = vector_from_direction(facing_direction).x > 0
 	tile_start_pos = position
 	tile_target_pos = position + (input_dir * TILE_SIZE)
 	move_progress = 0.0
