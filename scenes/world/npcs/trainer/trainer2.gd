@@ -22,6 +22,7 @@ var sight_distance: float = sight_tile_distance * TILE_SIZE
 
 func _ready() -> void:
 	super()
+	add_to_group("can_save")
 	add_to_group("trainers")
 	EventBus.step_completed.connect(_on_player_step)
 	
@@ -32,7 +33,6 @@ func _on_player_step(player_pos: Vector2):
 		var player = get_tree().get_first_node_in_group("player")
 		player.clear_inputs()
 		player.processing = false
-		print("got player in sight")
 		await walk_towards(player)
 		say_dialogue(fight_text)
 		await DialogueManager.dialogue_closed
@@ -40,15 +40,11 @@ func _on_player_step(player_pos: Vector2):
 		
 func is_player_in_sight(player_pos: Vector2) -> bool:
 	var distance = global_position.distance_to(player_pos)
-	print("distance:", distance)
 	if distance > sight_distance:
 		return false
 	var to_player = (player_pos - global_position).normalized()
-	print("to_player:", to_player)
 	var forward = vector_from_direction(facing_direction).normalized()
-	print("forward: ", forward)
 	if to_player.dot(forward) != 1:
-		print("to_player.dot(forward):", to_player.dot(forward))
 		return false
 	return check_ray_cast2d(player_pos)
 	
@@ -60,7 +56,6 @@ func check_ray_cast2d(pos: Vector2) -> bool:
 	ray_params.collision_mask = 3 
 	ray_params.exclude = [self]
 	var ray_result = space_state.intersect_ray(ray_params)
-	print("ray_result.is_empty(): ", ray_result.is_empty())
 	return ray_result.is_empty()
 	
 func build_encounter():
@@ -68,3 +63,15 @@ func build_encounter():
 	BattleManager.add_enemies(team, levels)
 	BattleManager.is_wild = false
 	BattleManager.start_battle()
+	
+func on_save_game(saved_data: Array[SavedData]):
+	var my_data = SavedData.new()
+	my_data.node_path = get_path()
+	my_data.defeated = defeated
+	saved_data.append(my_data)
+	
+func on_load_game(saved_data_array: Array[SavedData]):
+	for data in saved_data_array:
+		if data.node_path == get_path():
+			defeated = data.defeated
+			dialogue = post_fight_text

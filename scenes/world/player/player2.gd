@@ -125,8 +125,6 @@ func process_walking_state(delta: float) -> void:
 		position = tile_target_pos
 		move_progress = 0.0
 		EventBus.step_completed.emit(global_position)
-		print("global_position: ", global_position)
-		# Check for continued movement
 		var input_dir = get_input_direction()
 		if input_dir != Vector2.ZERO:
 			var new_facing = direction_from_vector(input_dir)
@@ -143,37 +141,26 @@ func process_walking_state(delta: float) -> void:
 			current_state = State.IDLE
 			anim_state.travel("Idle")
 	else:
-		# Interpolate position
 		position = tile_start_pos.lerp(tile_target_pos, move_progress)
-	
-# ============================================================================
-# STATE TRANSITIONS
-# ============================================================================
 
 func start_turning(new_facing: Direction) -> void:
 	var blend_dir = vector_from_direction(new_facing)
 	
-	# Update blend positions FIRST before changing anything
 	anim_tree.set("parameters/Turn/blend_position", blend_dir)
 	anim_tree.set("parameters/Idle/blend_position", blend_dir)
 	anim_tree.set("parameters/Walk/blend_position", blend_dir)
 	
-	# Update facing direction
 	facing_direction = new_facing
 	
-	# Update raycast to face new direction
 	var ray_dir = vector_from_direction(new_facing)
 	ray2d.target_position = ray_dir * TILE_SIZE / 2
 	
-	# Now change state and start animation
 	current_state = State.TURNING
 	turn_timer = 0.0
 	
-	# Travel to Turn animation
 	anim_state.travel("Turn")
 
 func attempt_movement(input_dir: Vector2) -> bool:
-	# Check collision - raycast should be from current position
 	ray2d.target_position = input_dir * TILE_SIZE / 2
 	ray2d.force_raycast_update()
 			
@@ -198,10 +185,6 @@ func attempt_movement(input_dir: Vector2) -> bool:
 	anim_state.travel("Walk")
 	return true
 
-# ============================================================================
-# INPUT HANDLING
-# ============================================================================
-
 func update_held_keys(delta: float) -> void:
 	var directions = ["up", "down", "right", "left"]
 	
@@ -213,7 +196,6 @@ func update_held_keys(delta: float) -> void:
 			held_keys.erase(dir)
 			key_hold_times.erase(dir)
 		elif Input.is_action_pressed(dir) and dir in key_hold_times:
-			# Increment hold time for keys currently being held
 			key_hold_times[dir] += delta
 
 func get_input_direction() -> Vector2:
@@ -229,18 +211,14 @@ func get_input_direction() -> Vector2:
 	
 	var key = held_keys.back()
 	return direction_map.get(key, Vector2.ZERO)
-
+	
 func clear_inputs() -> void:
 	held_keys.clear()
 	key_hold_times.clear()
 	current_state = State.IDLE
 	move_progress = 0.0
 	anim_state.travel("Idle")
-
-# ============================================================================
-# DIRECTION HELPERS
-# ============================================================================
-
+	
 func direction_from_vector(vec: Vector2) -> Direction:
 	if vec.x < 0:
 		return Direction.LEFT
@@ -250,7 +228,7 @@ func direction_from_vector(vec: Vector2) -> Direction:
 		return Direction.UP
 	else:
 		return Direction.DOWN
-
+		
 func vector_from_direction(dir: Direction) -> Vector2:
 	match dir:
 		Direction.UP: return Vector2(0, -1)
@@ -258,11 +236,7 @@ func vector_from_direction(dir: Direction) -> Vector2:
 		Direction.LEFT: return Vector2(-1, 0)
 		Direction.RIGHT: return Vector2(1, 0)
 	return Vector2.ZERO
-
-# ============================================================================
-# INTERACTION
-# ============================================================================
-
+	
 func attempt_interaction() -> void:
 	if ray2d.is_colliding():
 		var collider = ray2d.get_collider()
@@ -271,21 +245,14 @@ func attempt_interaction() -> void:
 			
 func save_position():
 	respawn_point = global_position
-	print("respawn_point: ", respawn_point)
 			
 func respawn():
 	position = respawn_point
-	print("respawned")
 	for monster in PartyManager.party:
 		if monster:
 			monster.heal(0, true)
 			monster.revive()
-	print("healed party")
-	
-# =
-# Ledges
-# =
-
+			
 func animate_ledge():
 	processing = false
 	current_state = State.JUMPING

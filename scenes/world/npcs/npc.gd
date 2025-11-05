@@ -37,6 +37,10 @@ func turn_towards(interactor: CharacterBody2D) -> void:
 func walk_towards(interactor: CharacterBody2D) -> void:
 	var stop_offset = vector_from_direction(facing_direction) * TILE_SIZE
 	var grid_target: Vector2 = snap_to_grid(interactor.global_position) - stop_offset
+	
+	if global_position.distance_to(grid_target) < 1.0:
+		return
+	
 	await walk_to_tile(grid_target)
 	
 func walk_to_tile(target_tile: Vector2) -> void:
