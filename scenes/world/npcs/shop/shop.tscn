@@ -1,89 +1,106 @@
-[gd_scene load_steps=27 format=3 uid="uid://b1fqg4ixfrt6e"]
+[gd_scene load_steps=31 format=3 uid="uid://dr151563pospl"]
 
-[ext_resource type="Script" uid="uid://ckmrnhclaujyv" path="res://scenes/world/npcs/trainer/trainer2.gd" id="1_ebbu0"]
-[ext_resource type="Script" uid="uid://cf7d81q2bjlj0" path="res://objects/monsters/MonsterData.gd" id="2_5nn4y"]
-[ext_resource type="Resource" uid="uid://bhyoxfmpc7pbd" path="res://scenes/world/npcs/trainer/TrainerProfile1.tres" id="2_dpjwd"]
-[ext_resource type="Texture2D" uid="uid://ocbi1huhgdh8" path="res://scenes/world/player/player_sprite_sheet.png" id="2_vg0l2"]
-[ext_resource type="Resource" uid="uid://bkcc35o5n7kil" path="res://objects/monsters/pistol_shrimp/Pistol_Shrimp.tres" id="3_dpjwd"]
-[ext_resource type="Shape2D" uid="uid://dqxkvbrbyo4hc" path="res://assets/16x16_collshape_rect.tres" id="3_ofl6i"]
+[ext_resource type="Script" uid="uid://dilk2xrp5ifie" path="res://scenes/world/npcs/shop/shop.gd" id="1_hhj6a"]
+[ext_resource type="Texture2D" uid="uid://ocbi1huhgdh8" path="res://scenes/world/player/player_sprite_sheet.png" id="2_7beno"]
+[ext_resource type="Script" uid="uid://qakhergjmylf" path="res://scenes/world/npcs/shop/ItemSlot.gd" id="2_krjcr"]
+[ext_resource type="Resource" uid="uid://pep8g7geka17" path="res://objects/items/ball/Ball.tres" id="3_dgg4i"]
+[ext_resource type="Shape2D" uid="uid://dqxkvbrbyo4hc" path="res://assets/16x16_collshape_rect.tres" id="3_n4hu3"]
+[ext_resource type="Resource" uid="uid://dtmg71j7e8iq8" path="res://objects/items/potion/Potion.tres" id="4_s3wwo"]
+[ext_resource type="Resource" uid="uid://c7euximlbu2c7" path="res://objects/items/water_gun/WaterGun.tres" id="5_katle"]
+
+[sub_resource type="Resource" id="Resource_wc3xh"]
+script = ExtResource("2_krjcr")
+item = ExtResource("3_dgg4i")
+metadata/_custom_type_script = "uid://qakhergjmylf"
+
+[sub_resource type="Resource" id="Resource_qfgva"]
+script = ExtResource("2_krjcr")
+item = ExtResource("4_s3wwo")
+metadata/_custom_type_script = "uid://qakhergjmylf"
+
+[sub_resource type="Resource" id="Resource_4kojh"]
+script = ExtResource("2_krjcr")
+item = ExtResource("5_katle")
+quantity = 1
+metadata/_custom_type_script = "uid://qakhergjmylf"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_b8hu4"]
-atlas = ExtResource("2_vg0l2")
+atlas = ExtResource("2_7beno")
 region = Rect2(0, 0, 14, 22)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3smji"]
-atlas = ExtResource("2_vg0l2")
+atlas = ExtResource("2_7beno")
 region = Rect2(28, 0, 14, 22)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_p863n"]
-atlas = ExtResource("2_vg0l2")
+atlas = ExtResource("2_7beno")
 region = Rect2(14, 0, 14, 22)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1wyuf"]
-atlas = ExtResource("2_vg0l2")
+atlas = ExtResource("2_7beno")
 region = Rect2(0, 44, 14, 22)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0v6jf"]
-atlas = ExtResource("2_vg0l2")
+atlas = ExtResource("2_7beno")
 region = Rect2(0, 0, 14, 22)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_febtv"]
-atlas = ExtResource("2_vg0l2")
+atlas = ExtResource("2_7beno")
 region = Rect2(28, 22, 14, 22)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qem6w"]
-atlas = ExtResource("2_vg0l2")
+atlas = ExtResource("2_7beno")
 region = Rect2(28, 0, 14, 22)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tq7ag"]
-atlas = ExtResource("2_vg0l2")
+atlas = ExtResource("2_7beno")
 region = Rect2(14, 22, 14, 22)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xudak"]
-atlas = ExtResource("2_vg0l2")
+atlas = ExtResource("2_7beno")
 region = Rect2(14, 0, 14, 22)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5nn4y"]
-atlas = ExtResource("2_vg0l2")
+atlas = ExtResource("2_7beno")
 region = Rect2(0, 22, 14, 22)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dpjwd"]
-atlas = ExtResource("2_vg0l2")
+atlas = ExtResource("2_7beno")
 region = Rect2(0, 0, 14, 22)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7buuf"]
-atlas = ExtResource("2_vg0l2")
+atlas = ExtResource("2_7beno")
 region = Rect2(0, 44, 14, 22)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mk6ei"]
-atlas = ExtResource("2_vg0l2")
+atlas = ExtResource("2_7beno")
 region = Rect2(28, 22, 14, 22)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_j558w"]
-atlas = ExtResource("2_vg0l2")
+atlas = ExtResource("2_7beno")
 region = Rect2(28, 0, 14, 22)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5gwym"]
-atlas = ExtResource("2_vg0l2")
+atlas = ExtResource("2_7beno")
 region = Rect2(28, 44, 14, 22)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_en3tc"]
-atlas = ExtResource("2_vg0l2")
+atlas = ExtResource("2_7beno")
 region = Rect2(14, 44, 14, 22)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bh3ax"]
-atlas = ExtResource("2_vg0l2")
+atlas = ExtResource("2_7beno")
 region = Rect2(14, 0, 14, 22)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_o6xf7"]
-atlas = ExtResource("2_vg0l2")
+atlas = ExtResource("2_7beno")
 region = Rect2(14, 22, 14, 22)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_iqseu"]
-atlas = ExtResource("2_vg0l2")
+atlas = ExtResource("2_7beno")
 region = Rect2(0, 0, 14, 22)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_5nn4y"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_kp2sc"]
 animations = [{
 "frames": [{
 "duration": 1.0,
@@ -202,26 +219,22 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Trainer2" type="Area2D" node_paths=PackedStringArray("sprite", "ray2d") groups=["interactable"]]
-script = ExtResource("1_ebbu0")
-ai_profile = ExtResource("2_dpjwd")
-team = Array[ExtResource("2_5nn4y")]([ExtResource("3_dpjwd")])
-levels = Array[int]([3])
-fight_text = "Lets battle!"
-defeat_text = "How could I lose?"
-post_fight_text = "Lets fight again sometime"
-npc_name = "Trainer"
+[node name="Shop" type="Area2D" node_paths=PackedStringArray("sprite", "ray2d") groups=["interactable"]]
+script = ExtResource("1_hhj6a")
+inventory = Array[ExtResource("2_krjcr")]([SubResource("Resource_wc3xh"), SubResource("Resource_qfgva"), SubResource("Resource_4kojh")])
+npc_name = "Shop"
+dialogue = "Welcome to my shop!"
 sprite = NodePath("AnimatedSprite2D")
 ray2d = NodePath("RayCast2D")
 metadata/_custom_type_script = "uid://dbtepqfh2p3bl"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-sprite_frames = SubResource("SpriteFrames_5nn4y")
-animation = &"IdleUp"
+sprite_frames = SubResource("SpriteFrames_kp2sc")
+animation = &"IdleDown"
 offset = Vector2(0, -4)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = ExtResource("3_ofl6i")
+shape = ExtResource("3_n4hu3")
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
 target_position = Vector2(0, 16)
