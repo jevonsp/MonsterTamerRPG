@@ -125,6 +125,7 @@ func process_walking_state(delta: float) -> void:
 		position = tile_target_pos
 		move_progress = 0.0
 		EventBus.step_completed.emit(global_position)
+		print("global_position: ", global_position)
 		# Check for continued movement
 		var input_dir = get_input_direction()
 		if input_dir != Vector2.ZERO:

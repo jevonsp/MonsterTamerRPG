@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://b1221c6k2wflm" path="res://scenes/ui/status/status.tscn" id="10_6vlie"]
 
 [node name="SingleVisuals3" type="CanvasLayer" node_paths=PackedStringArray("player_portrait", "enemy_portrait", "player_hp_bar", "enemy_hp_bar", "player_exp_bar", "player_name", "enemy_name", "player_level", "enemy_level", "player_status", "enemy_status", "center_marker", "player_marker", "enemy_marker")]
+layer = 3
 script = ExtResource("1_8jynd")
 player_portrait = NodePath("Player/Portrait")
 enemy_portrait = NodePath("Enemy/Portrait")

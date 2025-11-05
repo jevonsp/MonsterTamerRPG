@@ -1,8 +1,6 @@
-class_name Trainer2 extends NPC
+class_name Trainer extends NPC
 
 #region Variables
-const TILE_SIZE: int = 16
-
 @export var ai_profile: AiProfile
 
 @export_subgroup("Team")
@@ -27,21 +25,18 @@ func _ready() -> void:
 	add_to_group("trainers")
 	EventBus.step_completed.connect(_on_player_step)
 	
-	behaviors = [
-		create_movement_behavior(),
-		create_dialogue_behavior(),
-		create_trainer_behavior(),
-		create_post_fight_behavior()
-	]
-	
-	print(behaviors)
-	
 func _on_player_step(player_pos: Vector2):
 	if defeated or not vision_enabled:
 		return
 	if is_player_in_sight(player_pos):
 		var player = get_tree().get_first_node_in_group("player")
+		player.clear_inputs()
+		player.processing = false
 		print("got player in sight")
+		await walk_towards(player)
+		say_dialogue(fight_text)
+		await DialogueManager.dialogue_closed
+		build_encounter()
 		
 func is_player_in_sight(player_pos: Vector2) -> bool:
 	var distance = global_position.distance_to(player_pos)
@@ -68,14 +63,8 @@ func check_ray_cast2d(pos: Vector2) -> bool:
 	print("ray_result.is_empty(): ", ray_result.is_empty())
 	return ray_result.is_empty()
 	
-func create_movement_behavior(): # Movement 
-	var movement = MovementBehavior.new()
-	return movement
-func create_dialogue_behavior(): # Dialogue
-	var dialogue = DialogueBehavior.new()
-	dialogue.dialogues.append(fight_text)
-	return dialogue
-func create_trainer_behavior(): # What actually starts the fight
-	pass
-func create_post_fight_behavior(): # Dialogue 
-	pass
+func build_encounter():
+	AiManager.set_ai(ai_profile, self)
+	BattleManager.add_enemies(team, levels)
+	BattleManager.is_wild = false
+	BattleManager.start_battle()

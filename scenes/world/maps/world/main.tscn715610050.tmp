@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=4 uid="uid://rf1jm007es70"]
+[gd_scene load_steps=19 format=4 uid="uid://rf1jm007es70"]
 
 [ext_resource type="TileSet" uid="uid://gaislo7kxb5w" path="res://scenes/world/maps/world/8x8new_tileset.tres" id="1_hinva"]
 [ext_resource type="PackedScene" uid="uid://bvky3u2b5xv0x" path="res://scenes/world/player/player.tscn" id="2_73bwi"]
@@ -11,7 +11,6 @@
 [ext_resource type="PackedScene" uid="uid://dbfevft6l1w44" path="res://scenes/world/level_components/story_blocker/story_blocker.tscn" id="7_qvmiy"]
 [ext_resource type="PackedScene" uid="uid://dqs3upsifk31c" path="res://scenes/world/level_components/ball/ball.tscn" id="8_vwma2"]
 [ext_resource type="PackedScene" uid="uid://c0qkuaxuu2ry0" path="res://scenes/world/npcs/npc.tscn" id="9_5vmbw"]
-[ext_resource type="Resource" uid="uid://tavtommh30dv" path="res://scenes/world/level_components/trainer/profiles/TrainerProfile1.tres" id="9_unbrv"]
 [ext_resource type="PackedScene" uid="uid://b1fqg4ixfrt6e" path="res://scenes/world/npcs/trainer/trainer2.tscn" id="11_3l80d"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dccvp"]
@@ -193,12 +192,9 @@ y_sort_enabled = true
 
 [node name="NPC" parent="Objects/Town0/NPCs" instance=ExtResource("9_5vmbw")]
 position = Vector2(232, -8)
-npc_name = "NPC"
-dialogue = "Test Dialogue"
 
 [node name="Trainer2" parent="Objects/Town0/NPCs" instance=ExtResource("11_3l80d")]
 position = Vector2(232, -24)
-ai_profile = ExtResource("9_unbrv")
 facing_direction = 2
 
 [node name="Items" type="Node2D" parent="Objects/Town0"]

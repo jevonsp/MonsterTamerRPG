@@ -254,7 +254,8 @@ func win():
 	if not is_wild:
 		var trainer = AiManager.trainer
 		trainer.defeated = true
-		DialogueManager.show_dialogue("%s: %s" % [trainer.trainer_name ,trainer.defeat_text])
+		trainer.say_dialogue(trainer.defeat_text)
+		trainer.dialogue = trainer.post_fight_text
 		await DialogueManager.dialogue_closed
 		await AiManager.prize_money()
 		end_battle()
