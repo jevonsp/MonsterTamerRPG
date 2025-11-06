@@ -217,7 +217,6 @@ metadata/_custom_type_script = "uid://dbtepqfh2p3bl"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_5nn4y")
-animation = &"IdleUp"
 offset = Vector2(0, -4)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

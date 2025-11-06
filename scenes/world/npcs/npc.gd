@@ -8,6 +8,7 @@ const WALK_SPEED: float = 3.0
 
 @export_subgroup("Dialogue")
 @export var dialogue: String = ""
+@export var dialogues: Array[String] = []
 
 @export_subgroup("Nodes")
 @export var sprite: AnimatedSprite2D
@@ -25,8 +26,12 @@ func setup_sprite():
 func interact(interactor = null) -> void:
 	turn_towards(interactor)
 	await get_tree().create_timer(0.1).timeout
-	say_dialogue()
-	
+	if dialogues.is_empty():
+		say_dialogue()
+	else:
+		for line in dialogues:
+			await say_dialogue(line)
+			
 func turn_towards(interactor: CharacterBody2D) -> void:
 	var dir = (interactor.global_position - global_position).normalized()
 	if dir == vector_from_direction(facing_direction):
@@ -34,7 +39,8 @@ func turn_towards(interactor: CharacterBody2D) -> void:
 	facing_direction = direction_from_vector(dir)
 	update_turning_animation()
 	
-func walk_towards(interactor: CharacterBody2D) -> void:
+## Walks to the player. Takes a CharacterBody2D
+func walk_to(interactor: CharacterBody2D) -> void:
 	var stop_offset = vector_from_direction(facing_direction) * TILE_SIZE
 	var grid_target: Vector2 = snap_to_grid(interactor.global_position) - stop_offset
 	
@@ -42,6 +48,12 @@ func walk_towards(interactor: CharacterBody2D) -> void:
 		return
 	
 	await walk_to_tile(grid_target)
+	
+## Walks a path of relative movements, (0, 1) -> (1, 0) etc
+func walk_path(path: Array[Vector2]) -> void:
+	for move in path:
+		var target_tile: Vector2 = global_position + (move * TILE_SIZE)
+		await walk_to_tile(target_tile)
 	
 func walk_to_tile(target_tile: Vector2) -> void:
 	var start_tile: Vector2 = global_position

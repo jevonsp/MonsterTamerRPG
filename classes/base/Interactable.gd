@@ -2,6 +2,9 @@ class_name Interactable extends Area2D
 
 @export var obtained: bool = false
 
+@export_subgroup("Linked Nodes")
+@export var linked_nodes: Array[Interactable]
+
 var shape: Node2D
 
 func _ready() -> void:

@@ -206,7 +206,6 @@ ray2d = NodePath("RayCast2D")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_iqseu")
-animation = &"IdleUp"
 offset = Vector2(0, -4)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

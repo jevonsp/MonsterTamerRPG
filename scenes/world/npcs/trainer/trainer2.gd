@@ -33,7 +33,7 @@ func _on_player_step(player_pos: Vector2):
 		var player = get_tree().get_first_node_in_group("player")
 		player.clear_inputs()
 		player.processing = false
-		await walk_towards(player)
+		await walk_to(player)
 		say_dialogue(fight_text)
 		await DialogueManager.dialogue_closed
 		build_encounter()

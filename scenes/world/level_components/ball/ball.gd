@@ -22,6 +22,8 @@ func interact(_interactor = null):
 		PartyManager.make_monster(fox_mcleaf, level)
 		dialogue()
 	obtain()
+	for node in linked_nodes:
+		node.obtain()
 	
 func dialogue():
 	var monster
