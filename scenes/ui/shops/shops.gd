@@ -12,6 +12,10 @@ var opt_hovered: OptSlot = OptSlot.SLOT0
 enum State {OPTIONS, BUYING, SELLING}
 var state: State = State.OPTIONS
 
+@export_subgroup("Nodes")
+@export var options: VBoxContainer
+@export var money_label: Label
+
 var deciding: bool:
 	set(value):
 		deciding = value
@@ -22,8 +26,6 @@ var deciding: bool:
 			set_active_opt_slot()
 		else:
 			options.visible = true
-
-@export var options: VBoxContainer
 
 var viewport_start: int = 0
 var items: Array[ItemSlot] = []
@@ -300,6 +302,8 @@ func update_display():
 			update_slot(item_slot, slot_enum)
 		else:
 			clear_slot(slot_enum)
+	var money = InventoryManager.money
+	money_label.text = "$ " + str(money)
 
 func update_slot(item_slot: ItemSlot, slot_enum: Slot) -> void:
 	var slot_node = slot[slot_enum]

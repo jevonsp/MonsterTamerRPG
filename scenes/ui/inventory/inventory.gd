@@ -3,6 +3,8 @@ extends CanvasLayer
 const VISIBLE_SLOTS: int = 6
 const TILE_WIDTH: int = 160
 
+@export var money_label: Label
+
 var processing: bool = false
 var reordering: bool = false
 var swap_index: int = -1
@@ -155,6 +157,9 @@ func update_display():
 			update_slot(item, quant, slot_enum)
 		else:
 			clear_slot_ui(slot_enum)
+	
+	var money = InventoryManager.money
+	money_label.text = "$ " + str(money)
 	
 func update_slot(item: Item, quant: int, slot_enum: int) -> void:
 	var slot_node = slot[slot_enum]

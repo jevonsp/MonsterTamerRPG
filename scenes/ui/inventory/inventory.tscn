@@ -1,12 +1,14 @@
-[gd_scene load_steps=4 format=3 uid="uid://d2i6k8nsp0ms0"]
+[gd_scene load_steps=5 format=3 uid="uid://d2i6k8nsp0ms0"]
 
 [ext_resource type="Script" uid="uid://d1gvocg7numtb" path="res://scenes/ui/inventory/inventory.gd" id="1_msrby"]
 [ext_resource type="Texture2D" uid="uid://dujoyv2fb471r" path="res://assets/ui/button_mockup.png" id="2_lobmi"]
 [ext_resource type="Texture2D" uid="uid://k4g86uqyycw0" path="res://objects/items/ball/ball2.png" id="3_el5y6"]
+[ext_resource type="FontFile" uid="uid://dnq6mej4gi63b" path="res://assets/m3x6.ttf" id="4_lobmi"]
 
-[node name="Inventory" type="CanvasLayer"]
+[node name="Inventory" type="CanvasLayer" node_paths=PackedStringArray("money_label")]
 layer = 2
 script = ExtResource("1_msrby")
+money_label = NodePath("Money/Label")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 offset_left = -12.0
@@ -357,13 +359,13 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -33.0
+offset_left = -49.5
 offset_top = -22.0
-offset_right = 33.0
-offset_bottom = 18.0
+offset_right = 49.5
+offset_bottom = 16.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_fonts/font = ExtResource("4_lobmi")
 theme_override_font_sizes/font_size = 48
 text = "$ 999999"
-horizontal_alignment = 1
 vertical_alignment = 1

@@ -1,9 +1,10 @@
 extends CharacterBody2D
 
-@export var anim_tree: AnimationTree
-@export var ray2d: RayCast2D
-
+@export_subgroup("Nodes")
 @export var sprite: Sprite2D
+@export var ray2d: RayCast2D
+@export var anim_tree: AnimationTree
+@export var camera: Camera2D
 @export var shadow: AnimatedSprite2D
 
 # State machine
@@ -173,7 +174,6 @@ func attempt_movement(input_dir: Vector2) -> bool:
 			if facing.dot(allowed) == -1:
 				animate_ledge()
 				return true
-	
 		return false
 	tile_start_pos = position
 	tile_target_pos = position + (input_dir * TILE_SIZE)

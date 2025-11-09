@@ -7,7 +7,7 @@ var selected_slot: Slot = Slot.SLOT0
 
 var choices_limited: bool = false
 
-var game := preload("res://scenes/world/maps/world/main.tscn")
+var game := preload("res://scenes/world/maps/world/map_test_v_1_0.tscn")
 
 @onready var slot: Dictionary = {
 	Slot.SLOT0: $Slot0,

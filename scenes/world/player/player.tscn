@@ -622,13 +622,13 @@ states/Walk/position = Vector2(610, 45)
 transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_dovo2"), "Idle", "Turn", SubResource("AnimationNodeStateMachineTransition_gmlin"), "Turn", "Idle", SubResource("AnimationNodeStateMachineTransition_lvxji"), "Idle", "Walk", SubResource("AnimationNodeStateMachineTransition_p47bc"), "Walk", "Idle", SubResource("AnimationNodeStateMachineTransition_75vfm"), "Walk", "Turn", SubResource("AnimationNodeStateMachineTransition_0owmy"), "Turn", "Walk", SubResource("AnimationNodeStateMachineTransition_qek5x"), "Walk", "Jump", SubResource("AnimationNodeStateMachineTransition_kpit1"), "Idle", "Jump", SubResource("AnimationNodeStateMachineTransition_ru3rs"), "Turn", "Jump", SubResource("AnimationNodeStateMachineTransition_emxes"), "Jump", "Idle", SubResource("AnimationNodeStateMachineTransition_th0cw")]
 graph_offset = Vector2(-26, -20)
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("anim_tree", "ray2d", "sprite", "shadow")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("sprite", "ray2d", "anim_tree", "shadow")]
 collision_layer = 2
 collision_mask = 5
 script = ExtResource("1_dovo2")
-anim_tree = NodePath("AnimationTree")
-ray2d = NodePath("RayCast2D")
 sprite = NodePath("Sprite2D")
+ray2d = NodePath("RayCast2D")
+anim_tree = NodePath("AnimationTree")
 shadow = NodePath("Shadow")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -639,16 +639,13 @@ hframes = 3
 vframes = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 shape = SubResource("RectangleShape2D_dovo2")
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
 target_position = Vector2(0, 16)
 collision_mask = 5
 collide_with_areas = true
-
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(0.08427048, -0.0010213852)
-zoom = Vector2(2, 2)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -666,3 +663,6 @@ parameters/Walk/blend_position = Vector2(0.39294922, 0.121076226)
 [node name="Shadow" parent="." instance=ExtResource("3_emxes")]
 visible = false
 position = Vector2(0, 5)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(2, 2)
