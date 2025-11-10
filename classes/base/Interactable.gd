@@ -6,6 +6,15 @@ class_name Interactable extends Area2D
 @export_subgroup("Linked Nodes")
 @export var linked_nodes: Array[Interactable]
 
+@export var is_hidden: bool:
+	set(value):
+		if value == is_hidden:
+			return
+		print("setting is_hidden value to: ", value)
+		is_hidden = value
+		shape.disabled = value
+		visible = not value
+
 var shape: Node2D
 
 func _ready() -> void:
@@ -41,7 +50,4 @@ func dialogue():
 func obtain():
 	print("obtain called")
 	obtained = true
-	visible = false
-	shape.disabled = true
-	monitoring = false
-	EventBus.obstacle_removed.emit(global_position)
+	is_hidden = true
