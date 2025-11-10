@@ -51,6 +51,7 @@ folder_colors={
 
 overworld=""
 interactable=""
+can_save=""
 
 [gui]
 

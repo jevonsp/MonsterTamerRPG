@@ -8,7 +8,8 @@ class_name SavedData extends Resource
 @export var obtained: bool
 #endregion
 
-#region Trainers
+#region NPCs/Trainers
+@export var is_hidden: bool
 @export var defeated: bool
 #endregion
 

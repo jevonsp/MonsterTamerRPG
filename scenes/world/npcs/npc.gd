@@ -28,6 +28,7 @@ const WALK_SPEED: float = 3.0
 func _ready() -> void:
 	setup_sprite()
 	add_to_group(npc_group)
+	add_to_group("can_save")
 	is_hidden = false
 	print("%s added to %s" % [npc_name, npc_group])
 	EventBus.npc_command.connect(_on_npc_command)
@@ -43,6 +44,7 @@ func interact(interactor = null) -> void:
 	await get_tree().create_timer(0.1).timeout
 	await say_dialogues()
 			
+#region Commands
 func turn_towards(interactor: CharacterBody2D) -> void:
 	var dir = (interactor.global_position - global_position).normalized()
 	if dir == vector_from_direction(facing_direction):
@@ -145,8 +147,8 @@ func say_dialogues(lines: Array[String] = []) -> void:
 		lines = dialogues
 	for line in lines:
 		await say_dialogue(line)
+#endregion
 
-	
 #region Vector/Direction enum translation
 func direction_from_vector(vec: Vector2) -> Direction:
 	if vec.x < 0:
@@ -192,3 +194,15 @@ func _on_npc_command(command: String, target: NPC, data: Dictionary) -> void:
 			is_hidden = true
 		"SHOW":
 			is_hidden = false
+
+func on_save_game(saved_data: Array[SavedData]):
+	var my_data = SavedData.new()
+	my_data.node_path = get_path()
+	my_data.is_hidden = is_hidden
+	saved_data.append(my_data)
+	
+func on_load_game(saved_data_array: Array[SavedData]):
+	for data in saved_data_array:
+		if data.node_path == get_path():
+			print("matching node path")
+			is_hidden = data.is_hidden
