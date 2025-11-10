@@ -12,6 +12,7 @@ const WALK_SPEED: float = 3.0
 
 @export_subgroup("Nodes")
 @export var sprite: AnimatedSprite2D
+@export var shape: CollisionShape2D
 @export var ray2d: RayCast2D
 
 @export_subgroup("State")
@@ -19,8 +20,9 @@ const WALK_SPEED: float = 3.0
 	set(value):
 		if value == is_hidden:
 			return
+		print("setting is_hidden value to: ", value)
 		is_hidden = value
-		monitoring = not value
+		shape.disabled = value
 		visible = not value
 
 func _ready() -> void:

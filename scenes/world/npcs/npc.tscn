@@ -199,9 +199,10 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="NPC" type="Area2D" node_paths=PackedStringArray("sprite", "ray2d") groups=["interactable"]]
+[node name="NPC" type="Area2D" node_paths=PackedStringArray("sprite", "shape", "ray2d") groups=["interactable"]]
 script = ExtResource("1_hgs1y")
 sprite = NodePath("AnimatedSprite2D")
+shape = NodePath("CollisionShape2D")
 ray2d = NodePath("RayCast2D")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

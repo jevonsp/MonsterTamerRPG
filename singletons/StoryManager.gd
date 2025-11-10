@@ -22,6 +22,7 @@ func _on_event_triggered(event: String) -> void:
 		
 func collected_first_monster():
 	print("collected first monster")
-	var npc := get_tree().get_first_node_in_group("")
-	if npc:
-		EventBus.npc_command.emit()
+	var npcs := get_tree().get_nodes_in_group("TUTORIAL_BLOCKER")
+	if npcs:
+		for npc in npcs:
+			EventBus.npc_command.emit("HIDE", npc, {})

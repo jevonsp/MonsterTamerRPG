@@ -259,14 +259,14 @@ position = Vector2(360, 48)
 [node name="NPC" parent="Objects/Route0" instance=ExtResource("5_aace2")]
 position = Vector2(-104, 8)
 npc_name = "Story Guy"
+npc_group = "TUTORIAL_BLOCKER"
 facing_direction = 2
-dialogue = "Cant get past me without a monster!"
 
 [node name="NPC2" parent="Objects/Route0" instance=ExtResource("5_aace2")]
 position = Vector2(-104, -8)
 npc_name = "Story Guy"
+npc_group = "TUTORIAL_BLOCKER"
 facing_direction = 2
-dialogue = "Cant get past me without a monster!"
 
 [node name="WildZone" parent="Objects/Route0" instance=ExtResource("6_kx1qy")]
 encounters = Array[ExtResource("7_g0oim")]([ExtResource("8_33mkn"), ExtResource("9_o4wp4"), ExtResource("10_ehgkb")])
