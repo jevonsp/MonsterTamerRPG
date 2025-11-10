@@ -5,6 +5,7 @@ const TILE_SIZE: int = 16
 const WALK_SPEED: float = 3.0
 @export var npc_name: String = ""
 @export var facing_direction: Direction = Direction.DOWN
+@export var npc_group: String = ""
 
 @export_subgroup("Dialogue")
 @export var dialogue: String = ""
@@ -16,6 +17,9 @@ const WALK_SPEED: float = 3.0
 
 func _ready() -> void:
 	setup_sprite()
+	add_to_group(npc_group)
+	print("%s added to %s" % [npc_name, npc_group])
+	EventBus.npc_command.connect(_on_npc_command)
 	
 func setup_sprite():
 	if not sprite:
@@ -36,6 +40,11 @@ func turn_towards(interactor: CharacterBody2D) -> void:
 	var dir = (interactor.global_position - global_position).normalized()
 	if dir == vector_from_direction(facing_direction):
 		return
+	facing_direction = direction_from_vector(dir)
+	update_turning_animation()
+	
+func turn_to(dir: Vector2) -> void:
+	print("got turn_to")
 	facing_direction = direction_from_vector(dir)
 	update_turning_animation()
 	
@@ -152,12 +161,16 @@ func snap_to_grid(pos: Vector2) -> Vector2:
 	)
 #endregion
 
-func _on_npc_command(command: String, target: NPC, _data: Dictionary) -> void:
+func _on_npc_command(command: String, target: NPC, data: Dictionary) -> void:
 	if target != self:
 		return
 	match command:
-		"TURN": pass
-		"MOVE": pass
+		"TURN_TO":
+			var dir: Vector2 = data.get("dir", Vector2.DOWN)
+			turn_to(dir)
+		"MOVE_TO":
+			var path: Array[Vector2] = data.get("path", [])
+			walk_path(path)
 		"SAY": pass
 		"HIDE": pass
 		

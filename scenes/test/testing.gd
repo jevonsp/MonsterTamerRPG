@@ -3,9 +3,36 @@ extends Node2D
 @export var monster_data: MonsterData
 @export var move: Move
 
-func make_test_monster():
-	PartyManager.make_monster(monster_data, 5)
+var npc
 
+func _ready() -> void:
+	npc = get_tree().get_first_node_in_group("TESTING_NPC")
+	if npc:
+		print("got NPC")
+	
+func _on_button_0_pressed() -> void:
+	print("trying to turn NPC")
+	EventBus.npc_command.emit("TURN_TO", npc, {"dir": Vector2.LEFT})
+func _on_button_1_pressed() -> void:
+	print("trying to turn NPC")
+	EventBus.npc_command.emit("TURN_TO", npc, {"dir": Vector2.UP})
 func _on_button_2_pressed() -> void:
-	var monster = PartyManager.party[0]
-	monster.add_move(move)
+	print("trying to turn NPC")
+	EventBus.npc_command.emit("TURN_TO", npc, {"dir": Vector2.RIGHT})
+func _on_button_3_pressed() -> void:
+	print("trying to turn NPC")
+	EventBus.npc_command.emit("TURN_TO", npc, {"dir": Vector2.DOWN})
+
+
+func _on_walk_button_0_pressed() -> void:
+	var array: Array[Vector2] = [Vector2.LEFT]
+	EventBus.npc_command.emit("MOVE_TO", npc, {"path": array})
+func _on_walk_button_1_pressed() -> void:
+	var array: Array[Vector2] = [Vector2.UP]
+	EventBus.npc_command.emit("MOVE_TO", npc, {"path": array})
+func _on_walk_button_2_pressed() -> void:
+	var array: Array[Vector2] = [Vector2.RIGHT]
+	EventBus.npc_command.emit("MOVE_TO", npc, {"path": array})
+func _on_walk_button_3_pressed() -> void:
+	var array: Array[Vector2] = [Vector2.DOWN]
+	EventBus.npc_command.emit("MOVE_TO", npc, {"path": array})

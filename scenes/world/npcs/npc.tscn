@@ -107,10 +107,10 @@ animations = [{
 "speed": 5.0
 }, {
 "frames": [{
-"duration": 0.1,
+"duration": 0.2,
 "texture": SubResource("AtlasTexture_1wyuf")
 }, {
-"duration": 0.1,
+"duration": 0.2,
 "texture": SubResource("AtlasTexture_0v6jf")
 }],
 "loop": false,
@@ -118,10 +118,10 @@ animations = [{
 "speed": 5.0
 }, {
 "frames": [{
-"duration": 0.1,
+"duration": 0.2,
 "texture": SubResource("AtlasTexture_febtv")
 }, {
-"duration": 0.1,
+"duration": 0.2,
 "texture": SubResource("AtlasTexture_qem6w")
 }],
 "loop": false,
@@ -129,10 +129,10 @@ animations = [{
 "speed": 5.0
 }, {
 "frames": [{
-"duration": 0.1,
+"duration": 0.2,
 "texture": SubResource("AtlasTexture_tq7ag")
 }, {
-"duration": 0.1,
+"duration": 0.2,
 "texture": SubResource("AtlasTexture_xudak")
 }],
 "loop": false,
@@ -206,6 +206,7 @@ ray2d = NodePath("RayCast2D")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_iqseu")
+animation = &"TurnUp"
 offset = Vector2(0, -4)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

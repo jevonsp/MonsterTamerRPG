@@ -10,27 +10,53 @@ script = ExtResource("1_67d31")
 monster_data = ExtResource("2_ox2bv")
 move = ExtResource("3_vjh3y")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
-offset_left = 3.0
-offset_top = -1.0
-offset_right = 43.0
-offset_bottom = 7.0
+[node name="TURNING" type="HBoxContainer" parent="."]
+offset_right = 44.0
+offset_bottom = 8.0
 
-[node name="Button0" type="Button" parent="HBoxContainer"]
+[node name="Button0" type="Button" parent="TURNING"]
 layout_mode = 2
 size_flags_horizontal = 6
 
-[node name="Button1" type="Button" parent="HBoxContainer"]
+[node name="Button1" type="Button" parent="TURNING"]
 layout_mode = 2
 size_flags_horizontal = 6
 
-[node name="Button2" type="Button" parent="HBoxContainer"]
+[node name="Button2" type="Button" parent="TURNING"]
 layout_mode = 2
 size_flags_horizontal = 6
 
-[node name="Button3" type="Button" parent="HBoxContainer"]
+[node name="Button3" type="Button" parent="TURNING"]
 layout_mode = 2
 size_flags_horizontal = 6
+
+[node name="WALKING" type="HBoxContainer" parent="."]
+offset_top = 8.0
+offset_right = 44.0
+offset_bottom = 16.0
+
+[node name="WalkButton0" type="Button" parent="WALKING"]
+layout_mode = 2
+
+[node name="WalkButton1" type="Button" parent="WALKING"]
+layout_mode = 2
+
+[node name="WalkButton2" type="Button" parent="WALKING"]
+layout_mode = 2
+
+[node name="WalkButton3" type="Button" parent="WALKING"]
+layout_mode = 2
 
 [node name="NPC" parent="." instance=ExtResource("4_vjh3y")]
 position = Vector2(72, 56)
+npc_name = "Testing NPC"
+npc_group = "TESTING_NPC"
+
+[connection signal="pressed" from="TURNING/Button0" to="." method="_on_button_0_pressed"]
+[connection signal="pressed" from="TURNING/Button1" to="." method="_on_button_1_pressed"]
+[connection signal="pressed" from="TURNING/Button2" to="." method="_on_button_2_pressed"]
+[connection signal="pressed" from="TURNING/Button3" to="." method="_on_button_3_pressed"]
+[connection signal="pressed" from="WALKING/WalkButton0" to="." method="_on_walk_button_0_pressed"]
+[connection signal="pressed" from="WALKING/WalkButton1" to="." method="_on_walk_button_1_pressed"]
+[connection signal="pressed" from="WALKING/WalkButton2" to="." method="_on_walk_button_2_pressed"]
+[connection signal="pressed" from="WALKING/WalkButton3" to="." method="_on_walk_button_3_pressed"]
