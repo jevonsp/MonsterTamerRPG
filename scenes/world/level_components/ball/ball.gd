@@ -14,16 +14,18 @@ func setup():
 func interact(_interactor = null):
 	if frame == 0:
 		PartyManager.make_monster(pyro_badger, level)
-		dialogue()
+		await dialogue()
 	if frame == 1:
 		PartyManager.make_monster(pistol_shrimp, level)
-		dialogue()
+		await dialogue()
 	if frame == 2:
 		PartyManager.make_monster(fox_mcleaf, level)
-		dialogue()
+		await dialogue()
 	obtain()
 	for node in linked_nodes:
 		node.obtain()
+	if event_component:
+		event_component.trigger()
 	
 func dialogue():
 	var monster

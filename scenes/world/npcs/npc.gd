@@ -151,3 +151,13 @@ func snap_to_grid(pos: Vector2) -> Vector2:
 		floor(pos.y / TILE_SIZE) * TILE_SIZE + TILE_SIZE / 2.0
 	)
 #endregion
+
+func _on_npc_command(command: String, target: NPC, _data: Dictionary) -> void:
+	if target != self:
+		return
+	match command:
+		"TURN": pass
+		"MOVE": pass
+		"SAY": pass
+		"HIDE": pass
+		

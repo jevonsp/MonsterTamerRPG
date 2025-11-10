@@ -10,6 +10,9 @@ signal battle_manager_ready
 signal step_completed(position: Vector2)
 signal obstacle_removed(position: Vector2)
 
+signal event_triggered(event: String)
+signal npc_command(command: String, target: NPC, data: Dictionary)
+
 signal request_battle_actors
 signal player_battle_actor_sent(monster: Monster)
 signal enemy_battle_actor_sent(monster: Monster)

@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://dbk1ycrlfxc72"]
+[gd_scene load_steps=5 format=3 uid="uid://dbk1ycrlfxc72"]
 
 [ext_resource type="Script" uid="uid://bsaxpscwig5a" path="res://scenes/test/testing.gd" id="1_67d31"]
 [ext_resource type="Resource" uid="uid://pxtac13xygko" path="res://objects/monsters/fox_mcleaf/Fox_McLeaf.tres" id="2_ox2bv"]
 [ext_resource type="Resource" uid="uid://cnlxnj1ieg8qa" path="res://objects/moves/super_slam/SuperSlam.tres" id="3_vjh3y"]
+[ext_resource type="PackedScene" uid="uid://c0qkuaxuu2ry0" path="res://scenes/world/npcs/npc.tscn" id="4_vjh3y"]
 
 [node name="Testing" type="Node2D"]
 script = ExtResource("1_67d31")
@@ -15,7 +16,11 @@ offset_top = -1.0
 offset_right = 43.0
 offset_bottom = 7.0
 
-[node name="Button" type="Button" parent="HBoxContainer"]
+[node name="Button0" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="Button1" type="Button" parent="HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 6
 
@@ -23,5 +28,9 @@ size_flags_horizontal = 6
 layout_mode = 2
 size_flags_horizontal = 6
 
-[connection signal="pressed" from="HBoxContainer/Button" to="." method="make_test_monster"]
-[connection signal="pressed" from="HBoxContainer/Button2" to="." method="_on_button_2_pressed"]
+[node name="Button3" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="NPC" parent="." instance=ExtResource("4_vjh3y")]
+position = Vector2(72, 56)

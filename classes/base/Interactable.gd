@@ -1,5 +1,6 @@
 class_name Interactable extends Area2D
 
+@export var event_component: EventComponent
 @export var obtained: bool = false
 
 @export_subgroup("Linked Nodes")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=4 uid="uid://cg1vdvnkfuc43"]
+[gd_scene load_steps=23 format=4 uid="uid://cg1vdvnkfuc43"]
 
 [ext_resource type="TileSet" uid="uid://c21syj70nx4da" path="res://scenes/world/maps/world/tilesv1_0.tres" id="1_qd0ay"]
 [ext_resource type="PackedScene" uid="uid://b20c0yrwy8ly5" path="res://scenes/world/level_components/readable/sign.tscn" id="2_a0wvf"]
@@ -17,6 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://dqs3upsifk31c" path="res://scenes/world/level_components/ball/ball.tscn" id="9_btfmh"]
 [ext_resource type="Resource" uid="uid://drqip02v341yq" path="res://objects/monsters/pyro_badger/Pyro_Badger.tres" id="9_o4wp4"]
 [ext_resource type="Resource" uid="uid://bkcc35o5n7kil" path="res://objects/monsters/pistol_shrimp/Pistol_Shrimp.tres" id="10_ehgkb"]
+[ext_resource type="PackedScene" uid="uid://cnjyfdklgxa3v" path="res://scenes/components/event_component/event_component.tscn" id="10_jkst1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_aace2"]
 size = Vector2(16, 96)
@@ -194,19 +195,31 @@ position = Vector2(760, 1184)
 script = ExtResource("8_dabrf")
 metadata/_custom_type_script = "uid://bniq1m1pk1pda"
 
-[node name="Ball" parent="Objects/Town0/ProfessorLab" node_paths=PackedStringArray("linked_nodes") instance=ExtResource("9_btfmh")]
+[node name="Ball" parent="Objects/Town0/ProfessorLab" node_paths=PackedStringArray("event_component", "linked_nodes") instance=ExtResource("9_btfmh")]
 position = Vector2(-648, -1176)
+event_component = NodePath("EventComponent")
 linked_nodes = [NodePath("../Ball2"), NodePath("../Ball3")]
 
-[node name="Ball2" parent="Objects/Town0/ProfessorLab" node_paths=PackedStringArray("linked_nodes") instance=ExtResource("9_btfmh")]
+[node name="EventComponent" parent="Objects/Town0/ProfessorLab/Ball" instance=ExtResource("10_jkst1")]
+event = "MONSTER_COLLECTED"
+
+[node name="Ball2" parent="Objects/Town0/ProfessorLab" node_paths=PackedStringArray("event_component", "linked_nodes") instance=ExtResource("9_btfmh")]
 position = Vector2(-632, -1176)
 frame = 1
+event_component = NodePath("EventComponent")
 linked_nodes = [NodePath("../Ball"), NodePath("../Ball3")]
 
-[node name="Ball3" parent="Objects/Town0/ProfessorLab" node_paths=PackedStringArray("linked_nodes") instance=ExtResource("9_btfmh")]
+[node name="EventComponent" parent="Objects/Town0/ProfessorLab/Ball2" instance=ExtResource("10_jkst1")]
+event = "MONSTER_COLLECTED"
+
+[node name="Ball3" parent="Objects/Town0/ProfessorLab" node_paths=PackedStringArray("event_component", "linked_nodes") instance=ExtResource("9_btfmh")]
 position = Vector2(-616, -1176)
 frame = 2
+event_component = NodePath("EventComponent")
 linked_nodes = [NodePath("../Ball"), NodePath("../Ball2")]
+
+[node name="EventComponent" parent="Objects/Town0/ProfessorLab/Ball3" instance=ExtResource("10_jkst1")]
+event = "MONSTER_COLLECTED"
 
 [node name="Interior" type="Marker2D" parent="Objects/Town0"]
 position = Vector2(-512, -1088)
