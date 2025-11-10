@@ -4,20 +4,29 @@ enum Direction {UP, DOWN, LEFT, RIGHT}
 const TILE_SIZE: int = 16
 const WALK_SPEED: float = 3.0
 @export var npc_name: String = ""
-@export var facing_direction: Direction = Direction.DOWN
 @export var npc_group: String = ""
+@export var facing_direction: Direction = Direction.DOWN
 
 @export_subgroup("Dialogue")
-@export var dialogue: String = ""
 @export var dialogues: Array[String] = []
 
 @export_subgroup("Nodes")
 @export var sprite: AnimatedSprite2D
 @export var ray2d: RayCast2D
 
+@export_subgroup("State")
+@export var is_hidden: bool:
+	set(value):
+		if value == is_hidden:
+			return
+		is_hidden = value
+		monitoring = not value
+		visible = not value
+
 func _ready() -> void:
 	setup_sprite()
 	add_to_group(npc_group)
+	is_hidden = false
 	print("%s added to %s" % [npc_name, npc_group])
 	EventBus.npc_command.connect(_on_npc_command)
 	
@@ -30,11 +39,7 @@ func setup_sprite():
 func interact(interactor = null) -> void:
 	turn_towards(interactor)
 	await get_tree().create_timer(0.1).timeout
-	if dialogues.is_empty():
-		say_dialogue()
-	else:
-		for line in dialogues:
-			await say_dialogue(line)
+	await say_dialogues()
 			
 func turn_towards(interactor: CharacterBody2D) -> void:
 	var dir = (interactor.global_position - global_position).normalized()
@@ -129,11 +134,16 @@ func update_turning_animation():
 	ray2d.force_raycast_update()
 	
 func say_dialogue(text: String = "") -> void:
-	if text.is_empty():
-		text = dialogue
 	var string = npc_name + ": " + text
 	DialogueManager.show_dialogue(string)
 	await DialogueManager.dialogue_closed
+	
+func say_dialogues(lines: Array[String] = []) -> void:
+	if lines.is_empty():
+		lines = dialogues
+	for line in lines:
+		await say_dialogue(line)
+
 	
 #region Vector/Direction enum translation
 func direction_from_vector(vec: Vector2) -> Direction:
@@ -171,6 +181,12 @@ func _on_npc_command(command: String, target: NPC, data: Dictionary) -> void:
 		"MOVE_TO":
 			var path: Array[Vector2] = data.get("path", [])
 			walk_path(path)
-		"SAY": pass
-		"HIDE": pass
-		
+		"SAY": 
+			var lines = data.get("lines", dialogues)
+			if lines.is_empty():
+				lines = [data.get("line", "")]
+			say_dialogues(lines)
+		"HIDE":
+			is_hidden = true
+		"SHOW":
+			is_hidden = false

@@ -74,4 +74,4 @@ func on_load_game(saved_data_array: Array[SavedData]):
 	for data in saved_data_array:
 		if data.node_path == get_path():
 			defeated = data.defeated
-			dialogue = post_fight_text
+			dialogues[0] = post_fight_text

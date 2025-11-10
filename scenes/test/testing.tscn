@@ -7,6 +7,7 @@
 
 [node name="Testing" type="Node2D"]
 script = ExtResource("1_67d31")
+text = "Testing single"
 monster_data = ExtResource("2_ox2bv")
 move = ExtResource("3_vjh3y")
 
@@ -47,10 +48,33 @@ layout_mode = 2
 [node name="WalkButton3" type="Button" parent="WALKING"]
 layout_mode = 2
 
+[node name="SAY" type="Button" parent="."]
+offset_top = 16.0
+offset_right = 8.0
+offset_bottom = 24.0
+
+[node name="SAY_NPC_DIAL" type="Button" parent="."]
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 24.0
+offset_bottom = 24.0
+
+[node name="HIDE" type="Button" parent="."]
+offset_top = 24.0
+offset_right = 8.0
+offset_bottom = 32.0
+
+[node name="SHOW" type="Button" parent="."]
+offset_left = 16.0
+offset_top = 24.0
+offset_right = 24.0
+offset_bottom = 32.0
+
 [node name="NPC" parent="." instance=ExtResource("4_vjh3y")]
 position = Vector2(72, 56)
 npc_name = "Testing NPC"
 npc_group = "TESTING_NPC"
+dialogues = Array[String](["Testing one", "... and two!"])
 
 [connection signal="pressed" from="TURNING/Button0" to="." method="_on_button_0_pressed"]
 [connection signal="pressed" from="TURNING/Button1" to="." method="_on_button_1_pressed"]
@@ -60,3 +84,7 @@ npc_group = "TESTING_NPC"
 [connection signal="pressed" from="WALKING/WalkButton1" to="." method="_on_walk_button_1_pressed"]
 [connection signal="pressed" from="WALKING/WalkButton2" to="." method="_on_walk_button_2_pressed"]
 [connection signal="pressed" from="WALKING/WalkButton3" to="." method="_on_walk_button_3_pressed"]
+[connection signal="pressed" from="SAY" to="." method="_on_say_pressed"]
+[connection signal="pressed" from="SAY_NPC_DIAL" to="." method="_on_say_npc_dial_pressed"]
+[connection signal="pressed" from="HIDE" to="." method="_on_hide_pressed"]
+[connection signal="pressed" from="SHOW" to="." method="_on_show_pressed"]
