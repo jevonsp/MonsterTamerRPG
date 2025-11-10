@@ -1,4 +1,4 @@
-extends Interactable
+class_name MonsterBall extends Interactable
 
 @export var frame: int = 0
 @export var sprite: Sprite2D
