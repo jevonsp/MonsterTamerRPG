@@ -1,7 +1,55 @@
-[gd_scene format=3 uid="uid://cvyvkxbeblmw7"]
+[gd_scene load_steps=8 format=3 uid="uid://cvyvkxbeblmw7"]
+
+[ext_resource type="Texture2D" uid="uid://kwswha2e3pyi" path="res://objects/moves/pocket_sand/pocket_sand-Sheet.png" id="1_ifqfk"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lrxvq"]
+atlas = ExtResource("1_ifqfk")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xan0e"]
+atlas = ExtResource("1_ifqfk")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s33ki"]
+atlas = ExtResource("1_ifqfk")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y3tdl"]
+atlas = ExtResource("1_ifqfk")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k5qs7"]
+atlas = ExtResource("1_ifqfk")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0kbv2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lrxvq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xan0e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s33ki")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y3tdl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k5qs7")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="PocketSandScene" type="Node2D"]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_0kbv2")
+frame = 3
+frame_progress = 0.69148517
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]

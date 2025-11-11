@@ -261,6 +261,7 @@ func map_name(monster: Monster, slot_enum: int):
 		name_node.text = monster.name
 		name_map[monster] = name_node
 func map_exp(monster: Monster, slot_enum: int):
+	print("exp")
 	var exp_node = slot[slot_enum].get_node_or_null("PlayerEXP")
 	if exp_node:
 		var next_level_req = monster.experience_to_level(monster.level + 1)

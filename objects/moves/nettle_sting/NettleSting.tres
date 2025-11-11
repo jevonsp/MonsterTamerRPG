@@ -1,15 +1,17 @@
-[gd_resource type="Resource" script_class="Move" load_steps=7 format=3 uid="uid://bgnlmll76xe20"]
+[gd_resource type="Resource" script_class="Move" load_steps=8 format=3 uid="uid://bgnlmll76xe20"]
 
 [ext_resource type="Script" uid="uid://dwops4cp56fq3" path="res://classes/base/BattleEffect.gd" id="1_73jwn"]
 [ext_resource type="Script" uid="uid://cg2gwmc5eufqa" path="res://objects/effects/Damage.gd" id="2_2fq2u"]
+[ext_resource type="PackedScene" uid="uid://dxldgsdysnud7" path="res://objects/moves/nettle_sting/nettle_sting.tscn" id="2_rimex"]
 [ext_resource type="Script" uid="uid://d1w7r1vpiua3o" path="res://objects/effects/PoisonEffect.gd" id="3_73jwn"]
 [ext_resource type="Script" uid="uid://coff2nnisn6g2" path="res://objects/moves/Move.gd" id="4_8ekmb"]
 
 [sub_resource type="Resource" id="Resource_becob"]
 script = ExtResource("2_2fq2u")
-base_power = 50
+base_power = 70
 damage_category = "SPECIAL"
 animation_type = "THROWN"
+animation = ExtResource("2_rimex")
 metadata/_custom_type_script = "uid://cg2gwmc5eufqa"
 
 [sub_resource type="Resource" id="Resource_2fq2u"]

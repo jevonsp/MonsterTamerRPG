@@ -2,7 +2,7 @@ class_name Move extends Resource
 
 @export var name: String = ""
 @export var icon: Texture2D
-@export var description: String = ""
+@export_multiline var description: String = ""
 @export var accuracy: int = 100
 @export var max_pp: int = 10
 

@@ -1,8 +1,36 @@
-[gd_resource type="Resource" script_class="Move" load_steps=3 format=3 uid="uid://ch6ioebj1p3fu"]
+[gd_resource type="Resource" script_class="Move" load_steps=10 format=3 uid="uid://ch6ioebj1p3fu"]
 
 [ext_resource type="Script" uid="uid://dwops4cp56fq3" path="res://classes/base/BattleEffect.gd" id="1_v7omq"]
 [ext_resource type="Script" uid="uid://coff2nnisn6g2" path="res://objects/moves/Move.gd" id="2_6g3bd"]
+[ext_resource type="PackedScene" uid="uid://dyhj1wxf33j86" path="res://objects/moves/sludge/sludge_scene.tscn" id="2_w8s5t"]
+[ext_resource type="Script" uid="uid://cg2gwmc5eufqa" path="res://objects/effects/Damage.gd" id="3_lc6it"]
+[ext_resource type="Script" uid="uid://d1w7r1vpiua3o" path="res://objects/effects/PoisonEffect.gd" id="4_i8cph"]
+[ext_resource type="Script" uid="uid://dtp6jr4jhas0k" path="res://objects/effects/StatChange.gd" id="5_82td5"]
+
+[sub_resource type="Resource" id="Resource_7gvqh"]
+script = ExtResource("3_lc6it")
+base_power = 75
+damage_category = "SPECIAL"
+animation_type = "THROWN"
+animation = ExtResource("2_w8s5t")
+metadata/_custom_type_script = "uid://cg2gwmc5eufqa"
+
+[sub_resource type="Resource" id="Resource_b00mn"]
+script = ExtResource("4_i8cph")
+metadata/_custom_type_script = "uid://d1w7r1vpiua3o"
+
+[sub_resource type="Resource" id="Resource_3uwwg"]
+script = ExtResource("5_82td5")
+change_chance = 0.5
+stat = 1
+role_special_effect = "MELEE"
+metadata/_custom_type_script = "uid://dtp6jr4jhas0k"
 
 [resource]
 script = ExtResource("2_6g3bd")
+name = "Sludge"
+description = "A slow ball of dark  energy. Chance to poison. Melts melee weapons."
+type = "DARK"
+priority = -1
+effects = Array[ExtResource("1_v7omq")]([SubResource("Resource_7gvqh"), SubResource("Resource_b00mn"), SubResource("Resource_3uwwg")])
 metadata/_custom_type_script = "uid://coff2nnisn6g2"

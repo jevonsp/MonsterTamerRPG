@@ -23,6 +23,7 @@ signal party_effect_ended
 
 signal health_changed(monster: Monster, old: int, new: int)
 signal health_done_animating
+signal monster_hit(monster: Monster)
 
 signal status_changed(monster: Monster)
 

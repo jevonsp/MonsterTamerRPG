@@ -8,7 +8,7 @@ const WALK_SPEED: float = 3.0
 @export var facing_direction: Direction = Direction.DOWN
 
 @export_subgroup("Dialogue")
-@export var dialogues: Array[String] = []
+@export_multiline var dialogues: Array[String] = []
 
 @export_subgroup("Nodes")
 @export var sprite: AnimatedSprite2D

@@ -15,5 +15,6 @@ metadata/_custom_type_script = "uid://cg2gwmc5eufqa"
 script = ExtResource("4_ln4eh")
 name = "Slap"
 description = "A basic attack."
+max_pp = 40
 effects = Array[ExtResource("1_nvm1u")]([SubResource("Resource_sxrhn")])
 metadata/_custom_type_script = "uid://coff2nnisn6g2"

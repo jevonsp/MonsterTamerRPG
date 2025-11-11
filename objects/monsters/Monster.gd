@@ -288,6 +288,7 @@ func take_damage(amount: int):
 		return
 	hitpoints -= amount
 	EventBus.health_changed.emit(self, starting, hitpoints)
+	EventBus.monster_hit.emit(self)
 	await EventBus.health_done_animating
 	await Engine.get_main_loop().process_frame
 	if hitpoints <= 0:

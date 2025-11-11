@@ -52,6 +52,9 @@ func connect_signals():
 		EventBus.capture_shake.connect(_on_capture_shake)
 	if not EventBus.capture_animation.is_connected(_on_capture_animation):
 		EventBus.capture_animation.connect(_on_capture_animation)
+	if not EventBus.monster_hit.is_connected(_on_monster_hit):
+		EventBus.monster_hit.connect(_on_monster_hit)
+		
 	print("connected signals")
 	
 func _on_player_battle_actor_sent(monster: Monster):
@@ -191,6 +194,9 @@ func _on_health_changed(monster: Monster, _old: int, new: int) -> void:
 	tween.tween_property(hp_map[monster], "value", new * HP_SCALE, Settings.game_speed)
 	await tween.finished
 	EventBus.health_done_animating.emit()
+	
+func _on_monster_hit(monster: Monster) -> void:
+	print("would play %s getting hit" % monster.name)
 	
 func _on_status_changed(monster: Monster) -> void:
 	var status_label = status_map.get(monster)
