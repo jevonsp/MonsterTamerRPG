@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://ncl1qs2tu4w6"]
+[gd_scene load_steps=13 format=3 uid="uid://ncl1qs2tu4w6"]
 
 [ext_resource type="Script" uid="uid://b7u087evgklgb" path="res://scenes/battle/single/single_visuals_3.gd" id="1_8jynd"]
 [ext_resource type="Texture2D" uid="uid://dbxs3k3s3shrd" path="res://assets/ui/hp_back_mockup.png" id="1_d6cbt"]
@@ -11,11 +11,23 @@
 [ext_resource type="FontFile" uid="uid://jbbx5lupeleb" path="res://assets/m5x7.ttf" id="8_6vlie"]
 [ext_resource type="PackedScene" uid="uid://b1221c6k2wflm" path="res://scenes/ui/status/status.tscn" id="10_6vlie"]
 
-[node name="SingleVisuals3" type="CanvasLayer" node_paths=PackedStringArray("player_portrait", "enemy_portrait", "player_hp_bar", "enemy_hp_bar", "player_exp_bar", "player_name", "enemy_name", "player_level", "enemy_level", "player_status", "enemy_status", "center_marker", "player_marker", "enemy_marker")]
+[sub_resource type="Curve2D" id="Curve2D_6vlie"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -25, 15)
+}
+point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_bg2pr"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 25, 15)
+}
+point_count = 2
+
+[node name="SingleVisuals3" type="CanvasLayer" node_paths=PackedStringArray("player_portrait", "enemy_portrait", "player_hp_bar", "enemy_hp_bar", "player_exp_bar", "player_name", "enemy_name", "player_level", "enemy_level", "player_status", "enemy_status", "center_marker", "player_marker", "enemy_marker", "player_path_follow", "enemy_path_follow")]
 layer = 3
 script = ExtResource("1_8jynd")
-player_portrait = NodePath("Player/Portrait")
-enemy_portrait = NodePath("Enemy/Portrait")
+player_portrait = NodePath("Player/PlayerMarker/Path2D/PathFollow2D/Portrait")
+enemy_portrait = NodePath("Enemy/EnemyMarker/Path2D/PathFollow2D/Portrait")
 player_hp_bar = NodePath("Player/HP")
 enemy_hp_bar = NodePath("Enemy/HP")
 player_exp_bar = NodePath("Player/EXP")
@@ -26,8 +38,10 @@ enemy_level = NodePath("Enemy/Level")
 player_status = NodePath("Player/Control/Status")
 enemy_status = NodePath("Enemy/Control/Status")
 center_marker = NodePath("CenterMarker")
-player_marker = NodePath("PlayerMarker")
-enemy_marker = NodePath("EnemyMarker")
+player_marker = NodePath("Player/PlayerMarker")
+enemy_marker = NodePath("Enemy/EnemyMarker")
+player_path_follow = NodePath("Player/PlayerMarker/Path2D/PathFollow2D")
+enemy_path_follow = NodePath("Enemy/EnemyMarker/Path2D/PathFollow2D")
 
 [node name="Player" type="Control" parent="."]
 layout_mode = 3
@@ -58,13 +72,22 @@ texture_under = ExtResource("4_8jynd")
 texture_over = ExtResource("5_6vlie")
 texture_progress = ExtResource("6_bg2pr")
 
-[node name="Portrait" type="TextureRect" parent="Player"]
+[node name="PlayerMarker" type="Marker2D" parent="Player"]
+position = Vector2(164, 125)
+
+[node name="Path2D" type="Path2D" parent="Player/PlayerMarker"]
+curve = SubResource("Curve2D_6vlie")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Player/PlayerMarker/Path2D"]
+rotates = false
+loop = false
+
+[node name="Portrait" type="TextureRect" parent="Player/PlayerMarker/Path2D/PathFollow2D"]
 z_index = -2
-layout_mode = 0
-offset_left = 91.0
-offset_top = 73.0
-offset_right = 131.0
-offset_bottom = 113.0
+offset_left = -64.0
+offset_top = -56.0
+offset_right = -24.0
+offset_bottom = -16.0
 scale = Vector2(3, 3)
 texture = ExtResource("7_8jynd")
 flip_h = true
@@ -126,13 +149,21 @@ texture_under = ExtResource("1_d6cbt")
 texture_over = ExtResource("2_5lfn7")
 texture_progress = ExtResource("3_p6u1v")
 
-[node name="Portrait" type="TextureRect" parent="Enemy"]
+[node name="EnemyMarker" type="Marker2D" parent="Enemy"]
+position = Vector2(487, 128)
+
+[node name="Path2D" type="Path2D" parent="Enemy/EnemyMarker"]
+curve = SubResource("Curve2D_bg2pr")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Enemy/EnemyMarker/Path2D"]
+rotates = false
+
+[node name="Portrait" type="TextureRect" parent="Enemy/EnemyMarker/Path2D/PathFollow2D"]
 z_index = -2
-layout_mode = 0
-offset_left = 445.0
-offset_top = 73.0
-offset_right = 485.0
-offset_bottom = 113.0
+offset_left = -64.0
+offset_top = -64.0
+offset_right = -24.0
+offset_bottom = -24.0
 scale = Vector2(3, 3)
 texture = ExtResource("7_8jynd")
 
@@ -178,8 +209,12 @@ pivot_offset = Vector2(17, 12)
 [node name="CenterMarker" type="Marker2D" parent="."]
 position = Vector2(320, 120)
 
-[node name="PlayerMarker" type="Marker2D" parent="."]
-position = Vector2(110, 120)
+[node name="Button" type="Button" parent="."]
+offset_left = 210.0
+offset_top = 24.0
+offset_right = 330.0
+offset_bottom = 58.0
+theme_override_font_sizes/font_size = 32
+text = "Test Hit Curve"
 
-[node name="EnemyMarker" type="Marker2D" parent="."]
-position = Vector2(530, 120)
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

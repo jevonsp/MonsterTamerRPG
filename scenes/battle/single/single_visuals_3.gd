@@ -16,6 +16,8 @@ const HP_SCALE: float = 10.0
 @export var center_marker: Marker2D
 @export var player_marker: Marker2D
 @export var enemy_marker: Marker2D
+@export var player_path_follow: PathFollow2D
+@export var enemy_path_follow: PathFollow2D
 
 var hp_map: Dictionary = {}
 var exp_map: Dictionary = {}
@@ -23,6 +25,7 @@ var portrait_map: Dictionary = {}
 var name_map: Dictionary = {}
 var level_map: Dictionary = {}
 var status_map: Dictionary = {}
+var path_map: Dictionary = {}
 
 func _ready() -> void:
 	EventBus.player_battle_actor_sent.connect(_on_player_battle_actor_sent)
@@ -97,6 +100,9 @@ func map_actor(monster: Monster) -> void:
 	if monster.status != null:
 		status_label.status = monster.status.name
 		status_map[monster] = status_label
+		
+	var path_follow = player_path_follow if is_player else enemy_path_follow
+	path_map[monster] = path_follow
 	
 func update_maps(old_monster: Monster, new_monster: Monster) -> void:
 	var hp_bar = hp_map.get(old_monster)
@@ -134,6 +140,10 @@ func update_maps(old_monster: Monster, new_monster: Monster) -> void:
 			status_label.status = new_monster.status.name
 		status_map.erase(old_monster)
 		status_map[new_monster] = status_label
+	var path_follow = path_map.get(old_monster)
+	if path_follow:
+		path_map.erase(old_monster)
+		path_map[new_monster] = path_follow
 	
 func clear_maps():
 	portrait_map.clear()
@@ -197,6 +207,11 @@ func _on_health_changed(monster: Monster, _old: int, new: int) -> void:
 	
 func _on_monster_hit(monster: Monster) -> void:
 	print("would play %s getting hit" % monster.name)
+	var path_follow = path_map.get(monster)
+	var tween = get_tree().create_tween()
+	tween.tween_property(path_follow, "progress_ratio", 1.0, Settings.game_speed / 4)
+	await tween.finished
+	path_follow.progress_ratio = 0.0
 	
 func _on_status_changed(monster: Monster) -> void:
 	var status_label = status_map.get(monster)
@@ -288,4 +303,7 @@ func _on_capture_animation(_monster: Monster):
 	EventBus.capture_done_animating.emit()
 
 func _on_button_pressed() -> void:
-	pass # Test button for animations
+	var tween = get_tree().create_tween()
+	tween.tween_property(player_path_follow, "progress_ratio", 1.0, Settings.game_speed / 4)
+	await tween.finished
+	player_path_follow.progress_ratio = 0.0
