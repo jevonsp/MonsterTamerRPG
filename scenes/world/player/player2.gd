@@ -17,7 +17,7 @@ var facing_direction = Direction.DOWN
 
 # Constants
 const TILE_SIZE := 16.0
-const WALK_SPEED := 6.0
+const WALK_SPEED := 5.0
 const TURN_DURATION := 0.05
 
 # Movement tracking

@@ -1,8 +1,13 @@
-[gd_resource type="Resource" script_class="MonsterData" load_steps=3 format=3 uid="uid://bra2yle7d6vkp"]
+[gd_resource type="Resource" script_class="MonsterData" load_steps=4 format=3 uid="uid://bra2yle7d6vkp"]
 
 [ext_resource type="Script" uid="uid://coff2nnisn6g2" path="res://objects/moves/Move.gd" id="1_ydd4u"]
 [ext_resource type="Script" uid="uid://cf7d81q2bjlj0" path="res://objects/monsters/MonsterData.gd" id="2_uiwsh"]
+[ext_resource type="Texture2D" uid="uid://smnwhexc5kkq" path="res://objects/monsters/savvy_squirrel/savvy_squirrel.png" id="3_uiwsh"]
 
 [resource]
 script = ExtResource("2_uiwsh")
+name = "Savvy Squirrel"
+sprite = ExtResource("3_uiwsh")
+type = "NONE"
+capture_rate = 255
 metadata/_custom_type_script = "uid://cf7d81q2bjlj0"

@@ -27,7 +27,8 @@ const WALK_SPEED: float = 3.0
 
 func _ready() -> void:
 	setup_sprite()
-	add_to_group(npc_group)
+	if not npc_group.is_empty():
+		add_to_group(npc_group)
 	add_to_group("can_save")
 	is_hidden = false
 	print("%s added to %s" % [npc_name, npc_group])

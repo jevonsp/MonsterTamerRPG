@@ -96,8 +96,13 @@ func calculate_damage() -> int:
 					item_bonus = effect.type_modifier
 					break
 	print("item bonus: ", item_bonus)
-	
-	var mods: float = type_bonus * item_bonus
+	var stab_bonus: float = 1.0
+	if data.type == "NONE":
+		pass
+	else:
+		if actor.type == data.type:
+			stab_bonus = 1.5
+	var mods: float = type_bonus * item_bonus * stab_bonus
 	var damage = int((((((2 * actor.level) / 5.0) + 2) * base_power * atk / float(def)) / 50.0) * mods)
 	print("final damage: ", damage)
 	return max(damage, 1)

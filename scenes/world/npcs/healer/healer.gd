@@ -5,7 +5,7 @@ class_name Healer extends NPC
 
 func interact(interactor = null) -> void:
 	turn_towards(interactor)
-	var confirm = await DialogueManager.show_choice(dialogue)
+	var confirm = await DialogueManager.show_choice(dialogues[0])
 	if confirm:
 		heal()
 	await get_tree().create_timer(Settings.game_speed).timeout

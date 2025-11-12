@@ -1,8 +1,13 @@
-[gd_resource type="Resource" script_class="MonsterData" load_steps=3 format=3 uid="uid://da3q06pqj5t3y"]
+[gd_resource type="Resource" script_class="MonsterData" load_steps=4 format=3 uid="uid://da3q06pqj5t3y"]
 
 [ext_resource type="Script" uid="uid://coff2nnisn6g2" path="res://objects/moves/Move.gd" id="1_h24t8"]
 [ext_resource type="Script" uid="uid://cf7d81q2bjlj0" path="res://objects/monsters/MonsterData.gd" id="2_2jwva"]
+[ext_resource type="Texture2D" uid="uid://rlmq4c3d6jcm" path="res://objects/monsters/covetous_raven/covetous_raven.png" id="3_2jwva"]
 
 [resource]
 script = ExtResource("2_2jwva")
+name = "Covetous Raven"
+sprite = ExtResource("3_2jwva")
+type = "DARK"
+role = "RANGED"
 metadata/_custom_type_script = "uid://cf7d81q2bjlj0"
