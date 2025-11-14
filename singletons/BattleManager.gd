@@ -346,6 +346,8 @@ func end_battle():
 	turn_actions.clear()
 	var player = get_tree().get_first_node_in_group("player")
 	if lost:
-		player.respawn()
+		if player:
+			player.respawn()
 	lost = false
-	player.processing = true
+	if player:
+		player.processing = true

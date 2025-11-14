@@ -1,0 +1,33 @@
+[gd_resource type="Resource" script_class="Move" load_steps=8 format=3 uid="uid://ibbpg48syiss"]
+
+[ext_resource type="Script" uid="uid://dwops4cp56fq3" path="res://classes/base/BattleEffect.gd" id="1_l6n0i"]
+[ext_resource type="Script" uid="uid://coff2nnisn6g2" path="res://objects/moves/Move.gd" id="2_6hbm5"]
+[ext_resource type="Script" uid="uid://cg2gwmc5eufqa" path="res://objects/effects/Damage.gd" id="2_41n4l"]
+[ext_resource type="Script" uid="uid://dtp6jr4jhas0k" path="res://objects/effects/StatChange.gd" id="3_jv3md"]
+
+[sub_resource type="Resource" id="Resource_2vpwv"]
+script = ExtResource("2_41n4l")
+base_power = 50
+damage_category = "SPECIAL"
+metadata/_custom_type_script = "uid://cg2gwmc5eufqa"
+
+[sub_resource type="Resource" id="Resource_fwaq1"]
+script = ExtResource("3_jv3md")
+stat = 2
+role_special_effect = "TANK"
+metadata/_custom_type_script = "uid://dtp6jr4jhas0k"
+
+[sub_resource type="Resource" id="Resource_83yj4"]
+script = ExtResource("3_jv3md")
+stat = 4
+role_special_effect = "TANK"
+metadata/_custom_type_script = "uid://dtp6jr4jhas0k"
+
+[resource]
+script = ExtResource("2_6hbm5")
+name = "Aqua Acid"
+description = "A watery blast that melts foes physical and special defenses. Extra effect against tanks."
+accuracy = 90
+type = "WATER"
+effects = Array[ExtResource("1_l6n0i")]([SubResource("Resource_2vpwv"), SubResource("Resource_fwaq1"), SubResource("Resource_83yj4")])
+metadata/_custom_type_script = "uid://coff2nnisn6g2"
