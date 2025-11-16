@@ -35,9 +35,12 @@ func get_enemy_action(monster: Monster):
 				enemy_target_index = 0
 			elif not BattleManager.single_battle:
 				enemy_target_index = [0, 2].pick_random()
-			var enemy_action = MoveAction.new(monster, [enemy_target_index], enemy_move)
-			print("enemy action: ", enemy_action)
-			return enemy_action
+			#var enemy_action = MoveAction.new(monster, [enemy_target_index], enemy_move)
+			#print("enemy action: ", enemy_action)
+			#return enemy_action
+			var enemy_action2 = MoveAction2.new(monster, [enemy_target_index], enemy_move)
+			print("enemy action: ", enemy_action2)
+			return enemy_action2
 		ai_profile.BattleType.TRAINER:
 			var enemy_action = get_trainer_action(monster)
 			return enemy_action

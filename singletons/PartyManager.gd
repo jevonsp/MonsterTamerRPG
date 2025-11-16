@@ -7,7 +7,7 @@ func _ready():
 	for i in range(0, 300):
 		storage.append(null)
 
-func make_monster(monster_data: MonsterData, lvl: int) -> void:
+func make_monster(monster_data: MonsterData, lvl: int) -> Monster:
 	var monster = Monster.new()
 	monster.setup_monster(monster_data, lvl)
 	if not party.size() < 6:
@@ -18,6 +18,7 @@ func make_monster(monster_data: MonsterData, lvl: int) -> void:
 				return
 	party.append(monster)
 	print("party: ", party)
+	return monster
 	
 func add_monster(monster: Monster) -> void:
 	if not party.size() < 6:

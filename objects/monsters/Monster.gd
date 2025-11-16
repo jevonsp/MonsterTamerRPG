@@ -98,10 +98,12 @@ var stat_stages: Dictionary = {
 }
 #endregion
 
-@export var moves: Array[Move]
+#@export var moves: Array[Move]
+@export var moves: Array[Move2]
 @export var move_pp: Dictionary = {}
 
-@export var status: StatusEffect = null
+@export var status: GenericStatusContainer = null
+var stacking_statuses: Array[GenericStatusContainer] = []
 
 @export var held_item: Item = null
 
@@ -190,7 +192,7 @@ func _get_stage_multi(stage: int) -> float:
 func get_item_bonus():
 	pass
 	
-func set_status(new_status: StatusEffect):
+func set_status(new_status: GenericStatusContainer):
 	status = new_status
 	EventBus.status_changed.emit(self)
 	
@@ -242,7 +244,7 @@ func set_moves():
 		move_pp[move.name] = move.max_pp
 	print("move_pp:", move_pp)
 	
-func can_use_move(move: Move) -> bool:
+func can_use_move(move: Move2) -> bool:
 	if move_pp[move.name] > 0:
 		move_pp[move.name] -= 1
 		print("pp left:", move_pp[move.name])
@@ -250,10 +252,10 @@ func can_use_move(move: Move) -> bool:
 	print("pp left:", move_pp[move.name])
 	return false
 	
-func restore_pp(move: Move):
+func restore_pp(move: Move2):
 	move_pp[move.name] = move.max_pp
 	
-func add_move(move: Move):
+func add_move(move: Move2):
 	if move in moves:
 		DialogueManager.show_dialogue("%s already knows %s" % [name, move.name])
 		return
@@ -272,7 +274,7 @@ func add_move(move: Move):
 	moves.append(move)
 	move_pp[move.name] = move.max_pp
 	
-func decide_move(move: Move):
+func decide_move(move: Move2):
 	print("pick a move to replace with: ", move.name)
 	var summary = UiManager.push_ui(UiManager.summary_scene)
 	print("open summary screen here")

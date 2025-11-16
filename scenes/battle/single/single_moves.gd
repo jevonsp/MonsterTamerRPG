@@ -120,8 +120,10 @@ func _input_move():
 		return
 	
 	print("Selected move: ", move.name)
-	var action = MoveAction.new(monster, [BattleManager.enemy_actor], move)
-	BattleManager.on_action_selected(action)
+	#var action = MoveAction.new(monster, [BattleManager.enemy_actor], move)
+	var action2 = MoveAction2.new(monster, [BattleManager.enemy_actor], move)
+	#BattleManager.on_action_selected(action)
+	BattleManager.on_action_selected(action2)
 	
 func get_curr_slot():
 	return v2_to_slot[selected_slot]
@@ -171,6 +173,7 @@ func display_move_labels():
 	var monster = PartyManager.party[0]
 	print("monster: ", monster)
 	var moves = monster.moves
+	print("moves: ", moves)
 	var move = moves[v2_to_slot[selected_slot]]
 	print("move: ", move.name)
 	var description = move.description
@@ -183,5 +186,7 @@ func display_move_labels():
 	category_label.text = move_category_label
 	
 func toggle_description():
+	print("toggling description")
+	display_move_labels()
 	for label in [description_label, power_label, pp_label, type_label, category_label]:
 		label.visible = !label.visible

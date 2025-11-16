@@ -109,6 +109,5 @@ func calculate_damage() -> int:
 	
 func get_type_effectiveness(attacking_type: String, defending_type: String) -> float:
 	attacking_type = attacking_type.to_upper()
-	defending_type = defending_type.to_upper() 
-	print("type_effectiveness: ", TYPE_CHART.get(attacking_type, {}).get(defending_type, 1.0))
+	defending_type = defending_type.to_upper()
 	return TYPE_CHART.get(attacking_type, {}).get(defending_type, 1.0)

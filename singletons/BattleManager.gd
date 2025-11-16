@@ -24,7 +24,7 @@ func _ready() -> void:
 	EventBus.battle_reference.connect(_on_battle_reference)
 	EventBus.request_battle_actors.connect(_on_battle_actors_requested)
 	
-func add_enemies(monster_datas: Array[MonsterData], lvls: Array[int]) -> void:
+func add_enemies(monster_datas: Array[MonsterData], lvls: Array[int]) -> Monster:
 	if monster_datas.size() != lvls.size():
 		print("add_enemies: arrays must be the same size")
 		return
@@ -40,6 +40,8 @@ func add_enemies(monster_datas: Array[MonsterData], lvls: Array[int]) -> void:
 		
 	enemy_actor = enemy_party[0]
 	print("enemy_actor: ", enemy_actor)
+	
+	return enemy_actor
 	
 func start_battle():
 	in_battle = true
@@ -95,12 +97,12 @@ func resolve_targets(target_type: String, actor: Monster) -> Array[Monster]:
 	
 func get_opposing_actor(actor: Monster) -> Monster:
 	print("trying to get opposing actor")
-	var opponents = []
-	print("opponents: ", opponents)
+	var opponents: Array[Monster]
 	if actor in [player_actor, player_actor2]:
 		opponents = [enemy_actor, enemy_actor2]
 	elif actor in [enemy_actor, enemy_actor2]:
 		opponents = [player_actor, player_actor2]
+	print(opponents)
 	return opponents[0] if single_battle else opponents.pick_random()
 	
 func get_ally_actor(actor: Monster) -> Monster:
@@ -133,56 +135,80 @@ func execute_turn():
 	
 	EventBus.toggle_labels.emit()
 	
+	# Sort actions by priority, then speed
 	turn_actions.sort_custom(func(a, b):
 		if a.priority != b.priority:
 			return a.priority > b.priority
 		return a.actor.get_stat("speed") > b.actor.get_stat("speed")
-		)
+	)
 	
+	# PROCESS TURN-START STATUS EFFECTS
 	for monster in [player_actor, enemy_actor]:
 		if monster and monster.status:
-			monster.status.apply_on_turn_start(monster)
+			await monster.status.apply_on_turn_start(monster)
+			# Status might have ended during turn_start
+			if not monster.status:
+				continue
 			
+	# PROCESS STACKING STATUSES TURN-START
+	for monster in [player_actor, enemy_actor]:
+		if monster:
+			var expired_stacking = []
+			for i in range(monster.stacking_statuses.size()):
+				var stacking_status = monster.stacking_statuses[i]
+				var status_should_continue = await stacking_status.apply_stacking_on_turn_start(monster)
+				if not status_should_continue or not stacking_status.should_continue():
+					expired_stacking.append(i)
+			
+			# Remove expired stacking statuses (reverse to avoid index issues)
+			expired_stacking.reverse()
+			for index in expired_stacking:
+				if index < monster.stacking_statuses.size():
+					var status_name = monster.stacking_statuses[index].name
+					monster.stacking_statuses.remove_at(index)
+					DialogueManager.show_dialogue("%s's %s wore off!" % [monster.name, status_name])
+					await DialogueManager.dialogue_closed
+	
+	# EXECUTE ACTIONS IN ORDER
 	for action in turn_actions:
 		if not in_battle:
 			return
+			
 		var actor = action.actor
-		if actor.status and not actor.status.can_act(actor):
-			match actor.status:
-				"SLEEP": 
-					DialogueManager.show_dialogue("%s is fast asleep!" % actor.name)
-					await DialogueManager.dialogue_closed
-				"FREEZE": 
-					DialogueManager.show_dialogue("%s is frozen!" % actor.name)
-					await DialogueManager.dialogue_closed
-				"PARALYZE": 
-					DialogueManager.show_dialogue("%s is unable to move!" % actor.name)
-					await DialogueManager.dialogue_closed
-				"CONFUSION":
-					var effect = Damage.new()
-					effect.base_power = 40
-					effect.damage_category = "PHYSICAL"
-					effect.actor = actor
-					effect.target = actor
-					var damage = effect.calculate_damage()
-					await actor.take_damage(damage)
-					DialogueManager.show_dialogue("%s hurt itself due to confusion" % actor.name)
-					await DialogueManager.dialogue_closed
+		
+		# Check if primary status prevents action
+		if actor.status and not await actor.status.can_act(actor):
+			continue
+			
+		# Check stacking statuses for action prevention
+		var can_act_from_stacking = true
+		for stacking_status in actor.stacking_statuses:
+			if not await stacking_status.can_act(actor):
+				can_act_from_stacking = false
+				break
+				
+		if not can_act_from_stacking:
 			continue
 		
+		# EXECUTE THE ACTION
 		print("executing action: ", action.type)
 		await action.execute()
+		
 		if not in_battle:
 			return
+			
 		await get_tree().create_timer(Settings.game_speed).timeout
 		
+		# CHECK FOR FAINTS AND EXPERIENCE
 		if enemy_actor and enemy_actor.is_fainted:
 			await give_exp()
 		if enemy_actor2 and enemy_actor2.is_fainted:
 			await give_exp()
+			
 		if await check_victory(): 
 			return
 			
+		# HANDLE PLAYER FAINT
 		if player_actor.is_fainted:
 			UiManager.pop_ui()
 			if await check_loss(): 
@@ -192,17 +218,35 @@ func execute_turn():
 			processing_turn = false
 			EventBus.toggle_labels.emit()
 			return
-		
-			
+	
+	# PROCESS TURN-END STATUS EFFECTS
 	for monster in [player_actor, enemy_actor]:
 		if monster and monster.status:
-			monster.status.apply_on_turn_end(monster)
+			await monster.status.apply_on_turn_end(monster)
+			# Status might have ended during turn_end
+			if not monster.status:
+				continue
+	
+	# PROCESS STACKING STATUSES TURN-END
+	for monster in [player_actor, enemy_actor]:
+		if monster:
+			var expired_stacking = []
+			for i in range(monster.stacking_statuses.size()):
+				var stacking_status = monster.stacking_statuses[i]
+				var status_should_continue = await stacking_status.apply_stacking_on_turn_end(monster)
+				if not status_should_continue or not stacking_status.should_continue():
+					expired_stacking.append(i)
 			
-			if monster.status.tick():
-				DialogueManager.show_dialogue("%s's %s wore off" % [monster.name, monster.status.name])
-				await DialogueManager.dialogue_closed
-				monster.status = null
-				
+			# Remove expired stacking statuses (reverse to avoid index issues)
+			expired_stacking.reverse()
+			for index in expired_stacking:
+				if index < monster.stacking_statuses.size():
+					var status_name = monster.stacking_statuses[index].name
+					monster.stacking_statuses.remove_at(index)
+					DialogueManager.show_dialogue("%s's %s wore off!" % [monster.name, status_name])
+					await DialogueManager.dialogue_closed
+	
+	# CLEAN UP
 	turn_actions.clear()
 	processing_turn = false
 	EventBus.toggle_labels.emit()
@@ -213,7 +257,6 @@ func give_exp():
 	for monster in PartyManager.party:
 		if monster.getting_exp:
 			await monster.gain_exp(exp_to_give)
-
 	
 func check_victory():
 	var alive: int = 0

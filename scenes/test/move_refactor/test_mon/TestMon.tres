@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="MonsterData" load_steps=7 format=3 uid="uid://5e83glwdh7ty"]
+
+[ext_resource type="Script" uid="uid://dsbfpa1jpbk8k" path="res://scenes/test/move_refactor/Move2.gd" id="1_6uuap"]
+[ext_resource type="Script" uid="uid://cf7d81q2bjlj0" path="res://objects/monsters/MonsterData.gd" id="2_nq1um"]
+[ext_resource type="Resource" uid="uid://dnve63rhg0k6h" path="res://scenes/test/move_refactor/move_resources/Poison.tres" id="2_yaby0"]
+[ext_resource type="Resource" uid="uid://bcptrieqjhoyo" path="res://scenes/test/move_refactor/move_resources/Paralyze.tres" id="3_88eug"]
+[ext_resource type="Resource" uid="uid://3ssgix1u4k6y" path="res://scenes/test/move_refactor/move_resources/Confusion.tres" id="3_kvs8e"]
+[ext_resource type="Resource" uid="uid://w0pes820gixn" path="res://scenes/test/move_refactor/move_resources/Sleep.tres" id="5_8elaa"]
+
+[resource]
+script = ExtResource("2_nq1um")
+name = "Test Mon"
+base_hitpoints = 200
+moves = Array[ExtResource("1_6uuap")]([ExtResource("2_yaby0"), ExtResource("3_88eug"), ExtResource("5_8elaa"), ExtResource("3_kvs8e")])
+levels = Array[int]([1, 1, 1, 1])
+metadata/_custom_type_script = "uid://cf7d81q2bjlj0"

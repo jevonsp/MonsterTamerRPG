@@ -1,13 +1,15 @@
 extends Node2D
 
+@export var testing: bool = false
+
 @export_custom(PROPERTY_HINT_ENUM, 
-"PistolShrimp, PyroBadger, FoxMcLeaf"
+"1, 2, 3"
 ) var player_selection: int
 
 @export_range(1.0, 100.0, 1.0) var player_level: float = 1.0
 
 @export_custom(PROPERTY_HINT_ENUM, 
-"PistolShrimp, PyroBadger, FoxMcLeaf"
+"1, 2, 3"
 ) var enemy_selection: int
 
 @export_range(1.0, 100.0, 1.0) var enemy_level: float = 1.0
@@ -17,9 +19,11 @@ extends Node2D
 ) var ai_selection: int
 
 var monster = [
-	preload("res://objects/monsters/pistol_shrimp/Pistol_Shrimp.tres"),
-	preload("res://objects/monsters/pyro_badger/Pyro_Badger.tres"),
-	preload("res://objects/monsters/fox_mcleaf/Fox_McLeaf.tres")
+	preload("res://scenes/test/move_refactor/test_mon/TestMon.tres")
+]
+
+var test_monster = [
+	preload("res://scenes/test/move_refactor/test_mon/TestMon.tres")
 ]
 
 var ai_profiles = [
@@ -31,10 +35,15 @@ func _ready() -> void:
 	create_battle()
 	
 func create_battle():
-	var player_monster = monster[player_selection]
+	var player_monster = monster[player_selection] if not testing else test_monster[player_selection]
 	var enemy_monster = monster[enemy_selection]
+	
 	var profile = ai_profiles[ai_selection]
 	AiManager.set_ai(profile, null)
-	PartyManager.make_monster(player_monster, int(player_level))
-	BattleManager.add_enemies([enemy_monster], [int(enemy_level)])
+	
+	var player_instance = PartyManager.make_monster(player_monster, int(player_level))
+	player_instance.name = "Player"
+	var enemy_instance = BattleManager.add_enemies([enemy_monster], [int(enemy_level)])
+	enemy_instance.name = "Enemy"
+	
 	BattleManager.start_battle()

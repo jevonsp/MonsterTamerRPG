@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="MonsterData" load_steps=3 format=3 uid="uid://cybmweptck1eh"]
+
+[ext_resource type="Script" uid="uid://coff2nnisn6g2" path="res://objects/moves/Move.gd" id="1_1e2rs"]
+[ext_resource type="Script" uid="uid://cf7d81q2bjlj0" path="res://objects/monsters/MonsterData.gd" id="7_ucy1k"]
+
+[resource]
+script = ExtResource("7_ucy1k")
+name = "Test Mon 2"
+base_hitpoints = 200
+metadata/_custom_type_script = "uid://cf7d81q2bjlj0"

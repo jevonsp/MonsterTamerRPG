@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="Move2" load_steps=10 format=3 uid="uid://w0pes820gixn"]
+
+[ext_resource type="Script" uid="uid://ct8d6qppshnwx" path="res://scenes/test/move_refactor/effect/EffectComponent.gd" id="1_53b3q"]
+[ext_resource type="Script" uid="uid://suqqqwjooklf" path="res://scenes/test/move_refactor/effect/VisualComponent.gd" id="2_6orx6"]
+[ext_resource type="Script" uid="uid://hitshvhtc7hm" path="res://scenes/test/move_refactor/effect/ChanceComponent.gd" id="3_y3bvx"]
+[ext_resource type="Script" uid="uid://btxy4ajt2kyyx" path="res://scenes/test/move_refactor/effect/StatusApplicationComponent.gd" id="4_rmqli"]
+[ext_resource type="Script" uid="uid://dsbfpa1jpbk8k" path="res://scenes/test/move_refactor/Move2.gd" id="5_3i27m"]
+[ext_resource type="Resource" uid="uid://dn6ytq88677cn" path="res://scenes/test/move_refactor/status_resources/Sleep.tres" id="5_6orx6"]
+
+[sub_resource type="Resource" id="Resource_nd22p"]
+script = ExtResource("2_6orx6")
+metadata/_custom_type_script = "uid://suqqqwjooklf"
+
+[sub_resource type="Resource" id="Resource_fckd4"]
+script = ExtResource("3_y3bvx")
+metadata/_custom_type_script = "uid://hitshvhtc7hm"
+
+[sub_resource type="Resource" id="Resource_5qenw"]
+script = ExtResource("4_rmqli")
+status_effect = ExtResource("5_6orx6")
+metadata/_custom_type_script = "uid://btxy4ajt2kyyx"
+
+[resource]
+script = ExtResource("5_3i27m")
+name = "Sleep"
+components = Array[ExtResource("1_53b3q")]([SubResource("Resource_nd22p"), SubResource("Resource_fckd4"), SubResource("Resource_5qenw")])
+metadata/_custom_type_script = "uid://dsbfpa1jpbk8k"

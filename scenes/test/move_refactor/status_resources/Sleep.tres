@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="GenericStatusContainer" load_steps=7 format=3 uid="uid://dn6ytq88677cn"]
+
+[ext_resource type="Script" uid="uid://cfx0cjtrk52jg" path="res://scenes/test/move_refactor/status/StatusComponent.gd" id="1_rd6dm"]
+[ext_resource type="Script" uid="uid://5vl5mcxlmn6r" path="res://scenes/test/move_refactor/status/ActionPreventionComponent.gd" id="2_th7he"]
+[ext_resource type="Script" uid="uid://dt2088qvyk4s2" path="res://scenes/test/move_refactor/effect/DurationComponent.gd" id="3_3w6lq"]
+[ext_resource type="Script" uid="uid://bneyxjcund6hf" path="res://scenes/test/move_refactor/status/GenericStatusContainer.gd" id="4_s38rs"]
+
+[sub_resource type="Resource" id="Resource_emms3"]
+script = ExtResource("2_th7he")
+prevention_type = "ALWAYS"
+prevention_message = "{monster} is fast asleep."
+trigger = "CAN_ACT"
+metadata/_custom_type_script = "uid://5vl5mcxlmn6r"
+
+[sub_resource type="Resource" id="Resource_il1om"]
+script = ExtResource("3_3w6lq")
+max_duration = 4
+breakout_chance = 0.3
+on_breakout_failed = SubResource("Resource_emms3")
+metadata/_custom_type_script = "uid://dt2088qvyk4s2"
+
+[resource]
+script = ExtResource("4_s38rs")
+name = "Sleep"
+components = Array[ExtResource("1_rd6dm")]([SubResource("Resource_il1om"), SubResource("Resource_emms3")])
+metadata/_custom_type_script = "uid://bneyxjcund6hf"
