@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="MonsterData" load_steps=4 format=3 uid="uid://ds13fgd0pd3qu"]
 
-[ext_resource type="Script" uid="uid://coff2nnisn6g2" path="res://objects/moves/Move.gd" id="1_esj8g"]
+[ext_resource type="Script" uid="uid://coff2nnisn6g2" path="res://classes/deprecated/moves(deprecated)/Move.gd" id="1_esj8g"]
 [ext_resource type="Script" uid="uid://cf7d81q2bjlj0" path="res://objects/monsters/MonsterData.gd" id="2_esj8g"]
 [ext_resource type="Texture2D" uid="uid://clj8bugsx6781" path="res://objects/monsters/mr_sun/mr_sun.png" id="3_tb313"]
 

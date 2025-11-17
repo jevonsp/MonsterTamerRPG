@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="Item" load_steps=5 format=3 uid="uid://c7euximlbu2c7"]
 
-[ext_resource type="Script" uid="uid://dwops4cp56fq3" path="res://classes/base/BattleEffect.gd" id="1_2gqjk"]
+[ext_resource type="Script" uid="uid://dwops4cp56fq3" path="res://classes/deprecated/BattleEffect.gd" id="1_2gqjk"]
 [ext_resource type="Script" uid="uid://dphyevi8s22fb" path="res://objects/items/HoldEffect.gd" id="2_ya2vf"]
 [ext_resource type="Script" uid="uid://br2gl0bftv06o" path="res://objects/items/Item.gd" id="3_qcl0u"]
 

@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="Move" load_steps=8 format=3 uid="uid://cs6ym0bmr6ufq"]
+
+[ext_resource type="Script" uid="uid://dwops4cp56fq3" path="res://classes/deprecated/BattleEffect.gd" id="1_pisvl"]
+[ext_resource type="PackedScene" uid="uid://delhlp5ae4w6p" path="res://classes/deprecated/moves(deprecated)/scream/scream.tscn" id="2_557gl"]
+[ext_resource type="Script" uid="uid://cg2gwmc5eufqa" path="res://classes/deprecated/effects(deprecated)/Damage.gd" id="3_8kbd8"]
+[ext_resource type="Script" uid="uid://coff2nnisn6g2" path="res://classes/deprecated/moves(deprecated)/Move.gd" id="4_gr7bc"]
+[ext_resource type="Script" uid="uid://dapvlo7j686rg" path="res://classes/deprecated/effects(deprecated)/ConfusionEffect.gd" id="4_uqi1o"]
+
+[sub_resource type="Resource" id="Resource_sxrhn"]
+script = ExtResource("3_8kbd8")
+base_power = 50
+damage_category = "SPECIAL"
+animation = ExtResource("2_557gl")
+metadata/_custom_type_script = "uid://cg2gwmc5eufqa"
+
+[sub_resource type="Resource" id="Resource_gilmy"]
+script = ExtResource("4_uqi1o")
+metadata/_custom_type_script = "uid://dapvlo7j686rg"
+
+[resource]
+script = ExtResource("4_gr7bc")
+name = "Scream"
+description = "A basic attack."
+accuracy = 90
+effects = Array[ExtResource("1_pisvl")]([SubResource("Resource_sxrhn"), SubResource("Resource_gilmy")])
+metadata/_custom_type_script = "uid://coff2nnisn6g2"

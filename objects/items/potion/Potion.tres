@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="Item" load_steps=7 format=3 uid="uid://dtmg71j7e8iq8"]
 
-[ext_resource type="Script" uid="uid://dwops4cp56fq3" path="res://classes/base/BattleEffect.gd" id="1_4x735"]
-[ext_resource type="Script" uid="uid://brejhr2k5t01w" path="res://objects/effects/Heal.gd" id="2_jjdmk"]
+[ext_resource type="Script" uid="uid://dwops4cp56fq3" path="res://classes/deprecated/BattleEffect.gd" id="1_4x735"]
+[ext_resource type="Script" uid="uid://brejhr2k5t01w" path="res://classes/deprecated/effects(deprecated)/Heal.gd" id="2_jjdmk"]
 [ext_resource type="Script" uid="uid://dphyevi8s22fb" path="res://objects/items/HoldEffect.gd" id="3_jjdmk"]
 [ext_resource type="Texture2D" uid="uid://km2jsnl7drg0" path="res://objects/items/potion/potion.png" id="3_m0lbu"]
 [ext_resource type="Script" uid="uid://br2gl0bftv06o" path="res://objects/items/Item.gd" id="4_gmvjb"]

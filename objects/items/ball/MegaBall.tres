@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="Item" load_steps=6 format=3 uid="uid://csb2yxrimixlk"]
 
-[ext_resource type="Script" uid="uid://dwops4cp56fq3" path="res://classes/base/BattleEffect.gd" id="1_lggb8"]
-[ext_resource type="Script" uid="uid://cas6w68aevhdq" path="res://objects/effects/Capture.gd" id="2_h44eo"]
+[ext_resource type="Script" uid="uid://dwops4cp56fq3" path="res://classes/deprecated/BattleEffect.gd" id="1_lggb8"]
+[ext_resource type="Script" uid="uid://cas6w68aevhdq" path="res://classes/deprecated/effects(deprecated)/Capture.gd" id="2_h44eo"]
 [ext_resource type="Texture2D" uid="uid://cdtkpxq6irgu8" path="res://objects/items/ball/mega_ball.png" id="2_lggb8"]
 [ext_resource type="Script" uid="uid://br2gl0bftv06o" path="res://objects/items/Item.gd" id="3_rr2sb"]
 

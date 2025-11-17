@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="Move" load_steps=8 format=3 uid="uid://bgnlmll76xe20"]
+
+[ext_resource type="Script" uid="uid://dwops4cp56fq3" path="res://classes/deprecated/BattleEffect.gd" id="1_73jwn"]
+[ext_resource type="Script" uid="uid://cg2gwmc5eufqa" path="res://classes/deprecated/effects(deprecated)/Damage.gd" id="2_2fq2u"]
+[ext_resource type="PackedScene" uid="uid://dxldgsdysnud7" path="res://classes/deprecated/moves(deprecated)/nettle_sting/nettle_sting.tscn" id="2_rimex"]
+[ext_resource type="Script" uid="uid://d1w7r1vpiua3o" path="res://classes/deprecated/effects(deprecated)/PoisonEffect.gd" id="3_73jwn"]
+[ext_resource type="Script" uid="uid://coff2nnisn6g2" path="res://classes/deprecated/moves(deprecated)/Move.gd" id="4_8ekmb"]
+
+[sub_resource type="Resource" id="Resource_becob"]
+script = ExtResource("2_2fq2u")
+base_power = 70
+damage_category = "SPECIAL"
+animation_type = "THROWN"
+animation = ExtResource("2_rimex")
+metadata/_custom_type_script = "uid://cg2gwmc5eufqa"
+
+[sub_resource type="Resource" id="Resource_2fq2u"]
+script = ExtResource("3_73jwn")
+animation_type = "TARGET"
+metadata/_custom_type_script = "uid://d1w7r1vpiua3o"
+
+[resource]
+script = ExtResource("4_8ekmb")
+name = "Nettle Sting"
+description = "Slices the enemy with poisonous leaves. Small chance to poison."
+type = "GRASS"
+effects = Array[ExtResource("1_73jwn")]([SubResource("Resource_becob"), SubResource("Resource_2fq2u")])
+metadata/_custom_type_script = "uid://coff2nnisn6g2"

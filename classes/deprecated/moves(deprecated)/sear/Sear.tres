@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="Move" load_steps=7 format=3 uid="uid://bsgv4qf854oew"]
+
+[ext_resource type="Script" uid="uid://dwops4cp56fq3" path="res://classes/deprecated/BattleEffect.gd" id="1_3bc41"]
+[ext_resource type="Script" uid="uid://cg2gwmc5eufqa" path="res://classes/deprecated/effects(deprecated)/Damage.gd" id="2_7hufp"]
+[ext_resource type="Script" uid="uid://stiruukt82pu" path="res://classes/deprecated/effects(deprecated)/BurnEffect.gd" id="3_r4hjl"]
+[ext_resource type="Script" uid="uid://coff2nnisn6g2" path="res://classes/deprecated/moves(deprecated)/Move.gd" id="4_0uhyg"]
+
+[sub_resource type="Resource" id="Resource_0fl50"]
+script = ExtResource("2_7hufp")
+base_power = 75
+damage_category = "SPECIAL"
+metadata/_custom_type_script = "uid://cg2gwmc5eufqa"
+
+[sub_resource type="Resource" id="Resource_bo6xd"]
+script = ExtResource("3_r4hjl")
+burn_chance = 0.4
+metadata/_custom_type_script = "uid://stiruukt82pu"
+
+[resource]
+script = ExtResource("4_0uhyg")
+name = "Sear"
+description = "A medium strength fire attack with 40% chance to burn."
+type = "FIRE"
+effects = Array[ExtResource("1_3bc41")]([SubResource("Resource_0fl50"), SubResource("Resource_bo6xd")])
+metadata/_custom_type_script = "uid://coff2nnisn6g2"
