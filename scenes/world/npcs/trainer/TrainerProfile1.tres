@@ -1,10 +1,10 @@
-[gd_resource type="Resource" script_class="AiProfile" load_steps=3 format=3 uid="uid://bhyoxfmpc7pbd"]
+[gd_resource type="Resource" script_class="AiProfile" load_steps=3 format=3 uid="uid://c4u7p8501mcyb"]
 
-[ext_resource type="Script" uid="uid://br2gl0bftv06o" path="res://classes/deprecated/items/Item.gd" id="1_idhxn"]
-[ext_resource type="Script" uid="uid://dqg8httx2eean" path="res://classes/base/AiProfile.gd" id="2_5jb1h"]
+[ext_resource type="Script" uid="uid://bbqcltkmsucjd" path="res://objects/move_refactor/item2/Item2.gd" id="1_3si5q"]
+[ext_resource type="Script" uid="uid://dqg8httx2eean" path="res://classes/base/AiProfile.gd" id="2_bjfok"]
 
 [resource]
-script = ExtResource("2_5jb1h")
+script = ExtResource("2_bjfok")
 battle_type = 1
 payout = 100
 metadata/_custom_type_script = "uid://dqg8httx2eean"

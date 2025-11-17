@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://d1gvocg7numtb" path="res://scenes/ui/inventory/inventory.gd" id="1_msrby"]
 [ext_resource type="Texture2D" uid="uid://dujoyv2fb471r" path="res://assets/ui/button_mockup.png" id="2_lobmi"]
-[ext_resource type="Texture2D" uid="uid://k4g86uqyycw0" path="res://classes/deprecated/items/ball/ball2.png" id="3_el5y6"]
+[ext_resource type="Texture2D" uid="uid://cngiakdfubr1u" path="res://objects/monsters/pistol_shrimp/pistol_shrimp_remake.png" id="3_lobmi"]
 [ext_resource type="FontFile" uid="uid://dnq6mej4gi63b" path="res://assets/m3x6.ttf" id="4_lobmi"]
 
 [node name="Inventory" type="CanvasLayer" node_paths=PackedStringArray("money_label")]
@@ -42,7 +42,7 @@ offset_top = -19.795921
 offset_right = 46.0
 offset_bottom = 20.204079
 grow_vertical = 2
-texture = ExtResource("3_el5y6")
+texture = ExtResource("3_lobmi")
 
 [node name="NameLabel" type="Label" parent="Slot0/Background"]
 layout_mode = 0
@@ -96,7 +96,7 @@ offset_top = -19.795921
 offset_right = 46.0
 offset_bottom = 20.204079
 grow_vertical = 2
-texture = ExtResource("3_el5y6")
+texture = ExtResource("3_lobmi")
 
 [node name="NameLabel" type="Label" parent="Slot1/Background"]
 layout_mode = 0
@@ -150,7 +150,7 @@ offset_top = -19.795921
 offset_right = 46.0
 offset_bottom = 20.204079
 grow_vertical = 2
-texture = ExtResource("3_el5y6")
+texture = ExtResource("3_lobmi")
 
 [node name="NameLabel" type="Label" parent="Slot2/Background"]
 layout_mode = 0
@@ -204,7 +204,7 @@ offset_top = -19.795921
 offset_right = 46.0
 offset_bottom = 20.204079
 grow_vertical = 2
-texture = ExtResource("3_el5y6")
+texture = ExtResource("3_lobmi")
 
 [node name="NameLabel" type="Label" parent="Slot3/Background"]
 layout_mode = 0
@@ -258,7 +258,7 @@ offset_top = -19.795921
 offset_right = 46.0
 offset_bottom = 20.204079
 grow_vertical = 2
-texture = ExtResource("3_el5y6")
+texture = ExtResource("3_lobmi")
 
 [node name="NameLabel" type="Label" parent="Slot4/Background"]
 layout_mode = 0
@@ -312,7 +312,7 @@ offset_top = -19.795921
 offset_right = 46.0
 offset_bottom = 20.204079
 grow_vertical = 2
-texture = ExtResource("3_el5y6")
+texture = ExtResource("3_lobmi")
 
 [node name="NameLabel" type="Label" parent="Slot5/Background"]
 layout_mode = 0

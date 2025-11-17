@@ -57,7 +57,7 @@ func get_trainer_action(monster):
 							enemy_target_index = 1
 						elif not BattleManager.single_battle:
 							enemy_target_index = [1, 3].pick_random()
-						enemy_action = ItemAction.new(monster, [enemy_target_index], item)
+						enemy_action = ItemAction2.new(monster, [enemy_target_index], item)
 						return enemy_action
 	print("more complex trainer logic here")
 	print("getting random move (for now)")
@@ -67,6 +67,6 @@ func get_trainer_action(monster):
 		enemy_target_index = 0
 	elif not BattleManager.single_battle:
 		enemy_target_index = [0, 2].pick_random()
-	enemy_action = MoveAction.new(monster, [enemy_target_index], enemy_move)
+	enemy_action = MoveAction2.new(monster, [enemy_target_index], enemy_move)
 	print("enemy action: ", enemy_action)
 	return enemy_action

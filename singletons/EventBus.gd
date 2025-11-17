@@ -49,9 +49,9 @@ signal switch_done_animating
 
 signal advance_dialogue
 
-signal using_item(item: Item)
-signal giving_item(item: Item)
-signal item_chosen(item: Item)
+signal using_item(item: Item2)
+signal giving_item(item: Item2)
+signal item_chosen(item: Item2)
 
 signal move_removed
 

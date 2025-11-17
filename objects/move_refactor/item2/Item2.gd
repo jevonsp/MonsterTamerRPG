@@ -3,6 +3,7 @@ class_name Item2 extends Resource
 @export var name: String = ""
 @export var icon: Texture2D
 @export var value: int = 100
+@export_range(-7, 7) var priority: int = 0
 
 @export_subgroup("Flags")
 @export var in_battle_only: bool = true
@@ -21,10 +22,6 @@ class_name Item2 extends Resource
 
 @export_subgroup("Effects")
 @export var components: Array[EffectComponent] = []
-
-@export_subgroup("Hold Effects")
-@export_range(-7, 7) var priority: int = 0
-@export var hold_effects: Array[HoldEffect] = []
 
 @export_subgroup("Descriptions")
 @export_multiline var short_description: String = ""

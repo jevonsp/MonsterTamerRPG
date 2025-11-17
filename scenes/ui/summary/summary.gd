@@ -26,7 +26,7 @@ var state: State = State.DEFAULT
 var moving_index: int = -1
 
 var deciding: bool = false
-var move_deciding: Move = null
+var move_deciding: Move2 = null
 
 var selected_monster: int = 0
 
@@ -229,7 +229,7 @@ func display_moves():
 			slot_node.get_node("Category").text = ""
 			slot_node.get_node("PP").text = ""
 	
-func get_move_damage_category(move: Move) -> String:
+func get_move_damage_category(move: Move2) -> String:
 	for effect in move.effects:
 		if effect.name == "DAMAGE":
 			return effect.damage_category

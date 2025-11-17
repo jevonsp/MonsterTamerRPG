@@ -366,7 +366,7 @@ func update_display_selling():
 		else:
 			clear_slot_selling(slot_enum)
 	
-func update_slot_selling(item: Item, quant: int, slot_enum: int) -> void:
+func update_slot_selling(item: Item2, quant: int, slot_enum: int) -> void:
 	var slot_node = slot[slot_enum]
 	slot_node.modulate = Color(1, 1, 1, 1)
 	var icon = slot_node.get_node_or_null("Icon")
