@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://d1gvocg7numtb" path="res://scenes/ui/inventory/inventory.gd" id="1_msrby"]
 [ext_resource type="Texture2D" uid="uid://dujoyv2fb471r" path="res://assets/ui/button_mockup.png" id="2_lobmi"]
-[ext_resource type="Texture2D" uid="uid://k4g86uqyycw0" path="res://objects/items/ball/ball2.png" id="3_el5y6"]
+[ext_resource type="Texture2D" uid="uid://k4g86uqyycw0" path="res://classes/deprecated/items/ball/ball2.png" id="3_el5y6"]
 [ext_resource type="FontFile" uid="uid://dnq6mej4gi63b" path="res://assets/m3x6.ttf" id="4_lobmi"]
 
 [node name="Inventory" type="CanvasLayer" node_paths=PackedStringArray("money_label")]

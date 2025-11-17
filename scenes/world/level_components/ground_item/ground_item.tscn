@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://c53i0nmmfx7q0"]
 
 [ext_resource type="Script" uid="uid://bb6gtc0jnfdw6" path="res://scenes/world/level_components/ground_item/ground_item.gd" id="1_l0mf2"]
-[ext_resource type="Texture2D" uid="uid://k4g86uqyycw0" path="res://objects/items/ball/ball2.png" id="2_o7wxs"]
+[ext_resource type="Texture2D" uid="uid://k4g86uqyycw0" path="res://classes/deprecated/items/ball/ball2.png" id="2_o7wxs"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_o7wxs"]
 size = Vector2(16, 16)

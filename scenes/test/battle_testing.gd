@@ -31,6 +31,10 @@ var ai_profiles = [
 	preload("res://scenes/world/npcs/trainer/TrainerProfile1.tres")
 ]
 
+var items = [
+	preload("res://objects/move_refactor/item2/item_resources/Ball2.tres")
+]
+
 func _ready() -> void:
 	create_battle()
 	
@@ -47,5 +51,7 @@ func create_battle():
 	player_instance2.name = "Player2"
 	var enemy_instance = BattleManager.add_enemies([enemy_monster], [int(enemy_level)])
 	enemy_instance.name = "Enemy"
+	
+	InventoryManager.add_items(items[0], 5)
 	
 	BattleManager.start_battle()

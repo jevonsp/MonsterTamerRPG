@@ -66,6 +66,8 @@ func _input_selection():
 			UiManager.push_ui(UiManager.party_scene)
 		MoveSlot.ITEM: 
 			print("ITEM")
+			UiManager.context = "battle"
+			print("UiManager.context: ", UiManager.context)
 			UiManager.push_ui(UiManager.inventory_scene)
 		MoveSlot.RUN: 
 			var action = RunAction.new(BattleManager.player_actor, [BattleManager.enemy_actor])

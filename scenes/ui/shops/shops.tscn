@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://dujoyv2fb471r" path="res://assets/ui/button_mockup.png" id="1_ihqoc"]
 [ext_resource type="Script" uid="uid://b0d1t06cdxrn1" path="res://scenes/ui/shops/shops.gd" id="1_v65ak"]
-[ext_resource type="Texture2D" uid="uid://k4g86uqyycw0" path="res://objects/items/ball/ball2.png" id="2_v65ak"]
+[ext_resource type="Texture2D" uid="uid://k4g86uqyycw0" path="res://classes/deprecated/items/ball/ball2.png" id="2_v65ak"]
 [ext_resource type="FontFile" uid="uid://dnq6mej4gi63b" path="res://assets/m3x6.ttf" id="4_tj1la"]
 
 [node name="Shops" type="CanvasLayer" node_paths=PackedStringArray("options", "money_label")]

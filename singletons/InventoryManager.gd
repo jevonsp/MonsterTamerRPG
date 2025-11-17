@@ -6,7 +6,7 @@ var money: int = 0
 func _ready() -> void:
 	pass
 	
-func add_items(item: Item, quantity: int = 1) -> void:
+func add_items(item: Item2, quantity: int = 1) -> void:
 	for i in inventory.size():
 		if inventory[i]["item"] == item:
 			inventory[i]["quantity"] += quantity
@@ -15,7 +15,7 @@ func add_items(item: Item, quantity: int = 1) -> void:
 	inventory.append({"item": item, "quantity": quantity})
 	print("Added %d x %s (new item)" % [quantity, item.name])
 	
-func remove_items(item: Item, quantity: int = 1) -> void:
+func remove_items(item: Item2, quantity: int = 1) -> void:
 	for i in inventory.size():
 		if inventory[i]["item"] == item:
 			inventory[i]["quantity"] -= quantity

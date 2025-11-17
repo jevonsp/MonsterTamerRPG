@@ -105,7 +105,7 @@ var stat_stages: Dictionary = {
 @export var status: GenericStatusContainer = null
 var stacking_statuses: Array[GenericStatusContainer] = []
 
-@export var held_item: Item = null
+@export var held_item: Item2 = null
 
 func setup_monster(md: MonsterData, lvl: int) -> void:
 	species = md

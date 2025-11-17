@@ -126,6 +126,7 @@ func set_moving_slot():
 	slot[get_ui_slot()].region_rect.position.x = TILE_WIDTH * 2
 	
 func close():
+	print("inventory close called")
 	UiManager.pop_ui(self)
 	UiManager.context = ""
 	
@@ -161,7 +162,7 @@ func update_display():
 	var money = InventoryManager.money
 	money_label.text = "$ " + str(money)
 	
-func update_slot(item: Item, quant: int, slot_enum: int) -> void:
+func update_slot(item: Item2, quant: int, slot_enum: int) -> void:
 	var slot_node = slot[slot_enum]
 	slot_node.modulate = Color(1, 1, 1, 1)
 	var icon = slot_node.get_node_or_null("Icon")
@@ -213,7 +214,7 @@ func _on_option_chosen(slot_enum: int):
 				DialogueManager.show_dialogue("You arent in battle right now")
 				await DialogueManager.dialogue_closed
 				return
-			if item.effects.is_empty():
+			if item.components.is_empty():
 				DialogueManager.show_dialogue("This item has no use!")
 				await DialogueManager.dialogue_closed
 				return
@@ -250,5 +251,14 @@ func _on_option_chosen(slot_enum: int):
 			update_display()
 			close()
 			return
+		"battle":
+			print("battle item test")
+			var actor = BattleManager.player_actor
+			var target = BattleManager.enemy_actor
+			var item_action = ItemAction2.new(actor, [target], item)
+			BattleManager.on_action_selected(item_action)
+			close()
+			return
 		_:
 			print("wrong ui context")
+			return

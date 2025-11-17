@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="AiProfile" load_steps=3 format=3 uid="uid://bhyoxfmpc7pbd"]
 
-[ext_resource type="Script" uid="uid://br2gl0bftv06o" path="res://objects/items/Item.gd" id="1_idhxn"]
+[ext_resource type="Script" uid="uid://br2gl0bftv06o" path="res://classes/deprecated/items/Item.gd" id="1_idhxn"]
 [ext_resource type="Script" uid="uid://dqg8httx2eean" path="res://classes/base/AiProfile.gd" id="2_5jb1h"]
 
 [resource]

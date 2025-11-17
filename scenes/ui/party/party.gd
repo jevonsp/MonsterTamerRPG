@@ -10,7 +10,7 @@ var processing: bool = true
 var swap_index: int = -1
 var free_switch: bool = false
 
-var chosen_item: Item = null
+var chosen_item: Item2 = null
 
 #region Slot
 enum PartySlot {SLOT0, SLOT1, SLOT2, SLOT3, SLOT4, SLOT5}
@@ -271,7 +271,7 @@ func map_name(monster: Monster, slot_enum: int):
 		name_node.text = monster.name
 		name_map[monster] = name_node
 func map_exp(monster: Monster, slot_enum: int):
-	print("exp")
+	# print("exp")
 	var exp_node = slot[slot_enum].get_node_or_null("PlayerEXP")
 	if exp_node:
 		var next_level_req = monster.experience_to_level(monster.level + 1)
@@ -345,7 +345,7 @@ func open_inventory():
 	UiManager.context = "from_party"
 	UiManager.push_ui_by_name(UiManager.SCENE_INVENTORY)
 	
-func use_item(item: Item) -> void:
+func use_item(item: Item2) -> void:
 	print("party got UiManager.context: ", UiManager.context)
 	var slot_enum = v2_to_slot[selected_slot]
 	print("would use item on: ", slot_enum)
@@ -359,7 +359,7 @@ func use_item(item: Item) -> void:
 	processing = true
 	print("processing: ", processing)
 	
-func give_item(item) -> void:
+func give_item(item: Item2) -> void:
 	var slot_enum = v2_to_slot[selected_slot]
 	print("would give %s to at slot %s" % [item.name, slot_enum])
 	PartyManager.party[slot_enum].held_item = item
@@ -368,7 +368,7 @@ func give_item(item) -> void:
 	DialogueManager.show_dialogue("Gave %s to %s to hold" % [item.name, PartyManager.party[slot_enum].name])
 	await DialogueManager.dialogue_closed
 	
-func _on_item_chosen(item: Item) -> void:
+func _on_item_chosen(item: Item2) -> void:
 	chosen_item = item
 	
 func _on_health_changed(monster: Monster, _old: int, new: int) -> void:
