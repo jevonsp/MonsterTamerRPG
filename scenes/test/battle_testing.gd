@@ -19,11 +19,11 @@ extends Node2D
 ) var ai_selection: int
 
 var monster = [
-	preload("res://scenes/test/move_refactor/test_mon/TestMon.tres")
+	preload("res://objects/move_refactor/test_mon/TestMon.tres")
 ]
 
 var test_monster = [
-	preload("res://scenes/test/move_refactor/test_mon/TestMon.tres")
+	preload("res://objects/move_refactor/test_mon/TestMon.tres")
 ]
 
 var ai_profiles = [

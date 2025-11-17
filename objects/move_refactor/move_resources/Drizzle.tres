@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="Move2" load_steps=8 format=3 uid="uid://u4svhcyig4c6"]
+
+[ext_resource type="Script" uid="uid://ct8d6qppshnwx" path="res://objects/move_refactor/effect/EffectComponent.gd" id="1_ecwei"]
+[ext_resource type="Script" uid="uid://dsbfpa1jpbk8k" path="res://objects/move_refactor/Move2.gd" id="2_8qs0b"]
+[ext_resource type="PackedScene" uid="uid://t480ldufcpu2" path="res://classes/deprecated/moves(deprecated)/water_pistol/water_pistol.tscn" id="2_gix6v"]
+[ext_resource type="Script" uid="uid://suqqqwjooklf" path="res://objects/move_refactor/effect/VisualComponent.gd" id="3_ypqjn"]
+[ext_resource type="Script" uid="uid://dxp575pvrsynm" path="res://objects/move_refactor/effect/DamageComponent.gd" id="4_0fovq"]
+
+[sub_resource type="Resource" id="Resource_1f46m"]
+script = ExtResource("3_ypqjn")
+animation = ExtResource("2_gix6v")
+metadata/_custom_type_script = "uid://suqqqwjooklf"
+
+[sub_resource type="Resource" id="Resource_q5tbf"]
+script = ExtResource("4_0fovq")
+base_power = 50
+metadata/_custom_type_script = "uid://dxp575pvrsynm"
+
+[resource]
+script = ExtResource("2_8qs0b")
+name = "Drizzle"
+type = "WATER"
+components = Array[ExtResource("1_ecwei")]([SubResource("Resource_1f46m"), SubResource("Resource_q5tbf")])
+accuracy = 95
+description = "Basic water attack. Loses a bit of accuracy in exchange for extra power."
+metadata/_custom_type_script = "uid://dsbfpa1jpbk8k"

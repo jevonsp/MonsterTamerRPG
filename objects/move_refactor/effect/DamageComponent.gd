@@ -2,6 +2,7 @@ class_name DamageComponent extends EffectComponent
 
 @export var base_power: int = 40
 @export_enum("PHYSICAL", "SPECIAL") var damage_category: String = "PHYSICAL"
+@export_subgroup("Recoil")
 @export var damage_self: bool = false
 @export_range(0.0, 1.0) var self_damage_percentage: float = 0.0 # Percent based for recoil
 @export var recoil_message: String = "{actor} was hurt by recoil."
@@ -51,12 +52,6 @@ const TYPE_CHART = {
 func apply(actor: Monster, target: Monster, context: Dictionary) -> bool:
 	var actual_target = actor if damage_self else target
 	
-	#print("==Damage.execute():==")
-	#print("Actor Name: ", actor.name)
-	#print("Actor: ", actor)
-	#print("Actual Target Name: ", actual_target.name)
-	#print("Actual Target: ", actual_target)
-	
 	var damage = calculate_damage(actor, actual_target, context)
 	
 	if damage_self and self_damage_percentage > 0:
@@ -78,7 +73,7 @@ func apply(actor: Monster, target: Monster, context: Dictionary) -> bool:
 		message = "Super effective!" + message
 	
 	if randf() <= 0.0625:
-		damage = damage * 2
+		damage *= 2
 		message = "Critical hit! " + message
 	
 	await actual_target.take_damage(damage)
@@ -112,7 +107,8 @@ func calculate_damage(actor, target, context) -> int:
 					item_bonus = effect.type_modifier
 					break
 	
-	var stab_bonus: float = 1.5 if move and actor.type == move.type else 1.0
+	var stab_bonus: float = 1.5 if move and actor.type == move.type and actor.type != "NONE" else 1.0
+	print("stab_bonus: ", stab_bonus)
 	
 	var mods: float = type_bonus * item_bonus * stab_bonus
 	var damage = int((((((2 * actor.level) / 5.0) + 2) * base_power * atk / float(def)) / 50.0) * mods)

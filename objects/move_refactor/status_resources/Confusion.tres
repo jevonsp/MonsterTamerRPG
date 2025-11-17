@@ -1,11 +1,11 @@
 [gd_resource type="Resource" script_class="GenericStatusContainer" load_steps=10 format=3 uid="uid://b8c6htk3ensbp"]
 
-[ext_resource type="Script" uid="uid://cfx0cjtrk52jg" path="res://scenes/test/move_refactor/status/StatusComponent.gd" id="1_3kb3t"]
-[ext_resource type="Script" uid="uid://ct8d6qppshnwx" path="res://scenes/test/move_refactor/effect/EffectComponent.gd" id="2_1gdvd"]
-[ext_resource type="Script" uid="uid://dxp575pvrsynm" path="res://scenes/test/move_refactor/effect/DamageComponent.gd" id="3_8g6vt"]
-[ext_resource type="Script" uid="uid://rd6ntxu82lw3" path="res://scenes/test/move_refactor/status/ActionReplacementComponent.gd" id="4_j7i7m"]
-[ext_resource type="Script" uid="uid://dt2088qvyk4s2" path="res://scenes/test/move_refactor/effect/DurationComponent.gd" id="5_vayd6"]
-[ext_resource type="Script" uid="uid://bneyxjcund6hf" path="res://scenes/test/move_refactor/status/GenericStatusContainer.gd" id="6_bf1qg"]
+[ext_resource type="Script" uid="uid://cfx0cjtrk52jg" path="res://objects/move_refactor/status/StatusComponent.gd" id="1_3kb3t"]
+[ext_resource type="Script" uid="uid://ct8d6qppshnwx" path="res://objects/move_refactor/effect/EffectComponent.gd" id="2_1gdvd"]
+[ext_resource type="Script" uid="uid://dxp575pvrsynm" path="res://objects/move_refactor/effect/DamageComponent.gd" id="3_8g6vt"]
+[ext_resource type="Script" uid="uid://rd6ntxu82lw3" path="res://objects/move_refactor/status/ActionReplacementComponent.gd" id="4_j7i7m"]
+[ext_resource type="Script" uid="uid://dt2088qvyk4s2" path="res://objects/move_refactor/effect/DurationComponent.gd" id="5_vayd6"]
+[ext_resource type="Script" uid="uid://bneyxjcund6hf" path="res://objects/move_refactor/status/GenericStatusContainer.gd" id="6_bf1qg"]
 
 [sub_resource type="Resource" id="Resource_7j8lk"]
 script = ExtResource("3_8g6vt")
