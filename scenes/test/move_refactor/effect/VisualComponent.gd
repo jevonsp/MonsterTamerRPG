@@ -3,7 +3,6 @@ class_name VisualComponent extends EffectComponent
 @export_enum("ACTOR", "TARGET", "THROWN", "CENTER") var animation_type = "TARGET"
 @export var animation: PackedScene
 @export var success_message: String = "{actor} used {move} on {target}!"
-@export var failure_message: String = "But it failed"
 
 func apply(actor: Monster, target: Monster, context: Dictionary) -> bool:
 	#print("==VisualComponent.execute():==")

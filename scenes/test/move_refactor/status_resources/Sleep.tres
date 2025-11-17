@@ -17,6 +17,7 @@ script = ExtResource("3_3w6lq")
 max_duration = 4
 breakout_chance = 0.3
 on_breakout_failed = SubResource("Resource_emms3")
+trigger = "TURN_START"
 metadata/_custom_type_script = "uid://dt2088qvyk4s2"
 
 [resource]

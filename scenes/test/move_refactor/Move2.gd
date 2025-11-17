@@ -51,7 +51,8 @@ func execute(actor: Monster, target: Monster) -> void:
 			skip_next = false
 			continue
 			
-		if component.can_apply(actor, target, context):
+		@warning_ignore("redundant_await")
+		if await component.can_apply(actor, target, context):
 			@warning_ignore("redundant_await")
 			await component.apply(actor, target, context)
 			if component is ChanceComponent and component.should_skip_next:

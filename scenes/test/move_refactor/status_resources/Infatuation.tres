@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="GenericStatusContainer" load_steps=7 format=3 uid="uid://belyk1g2u80p5"]
+
+[ext_resource type="Script" uid="uid://cfx0cjtrk52jg" path="res://scenes/test/move_refactor/status/StatusComponent.gd" id="1_kdyom"]
+[ext_resource type="Script" uid="uid://bneyxjcund6hf" path="res://scenes/test/move_refactor/status/GenericStatusContainer.gd" id="2_12civ"]
+[ext_resource type="Script" uid="uid://5vl5mcxlmn6r" path="res://scenes/test/move_refactor/status/ActionPreventionComponent.gd" id="2_b57k3"]
+[ext_resource type="Script" uid="uid://dt2088qvyk4s2" path="res://scenes/test/move_refactor/effect/DurationComponent.gd" id="3_p8jhu"]
+
+[sub_resource type="Resource" id="Resource_yhgg3"]
+script = ExtResource("2_b57k3")
+prevention_type = "ALWAYS"
+prevention_chance = 0.5
+prevention_message = "{monster} is too in love!"
+trigger = "CAN_ACT"
+metadata/_custom_type_script = "uid://5vl5mcxlmn6r"
+
+[sub_resource type="Resource" id="Resource_6hl6x"]
+script = ExtResource("3_p8jhu")
+max_duration = 4
+breakout_chance = 0.5
+on_breakout_failed = SubResource("Resource_yhgg3")
+metadata/_custom_type_script = "uid://dt2088qvyk4s2"
+
+[resource]
+script = ExtResource("2_12civ")
+name = "Infatuation"
+components = Array[ExtResource("1_kdyom")]([SubResource("Resource_6hl6x"), SubResource("Resource_yhgg3")])
+metadata/_custom_type_script = "uid://bneyxjcund6hf"

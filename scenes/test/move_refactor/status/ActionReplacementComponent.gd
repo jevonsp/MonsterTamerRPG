@@ -5,12 +5,12 @@ class_name ActionReplacementComponent extends StatusComponent
 @export_multiline var message: String = ""
 
 func can_act(monster: Monster, context: Dictionary) -> bool:
-	if randf() > replacement_chance:
-		return true
-	
 	if message:
 		DialogueManager.show_dialogue(message.format({"monster": monster.name}))
 		await DialogueManager.dialogue_closed
+	
+	if randf() > replacement_chance:
+		return true
 		
 	for effect in replacement_effects:
 		if effect.can_apply(monster, monster, context):
