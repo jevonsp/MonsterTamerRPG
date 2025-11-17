@@ -343,8 +343,17 @@ func force_switch():
 	await EventBus.free_switch_chosen
 	await get_tree().create_timer(Settings.game_speed).timeout
 	print("free switch complete")
+	
+	
 	player_actor = PartyManager.party[0]
+	
+	DialogueManager.show_dialogue("Thats enough, %s" % old_actor.name, true)
+	
 	EventBus.switch_animation.emit(old_actor, player_actor)
+	await EventBus.switch_done_animating
+	
+	DialogueManager.show_dialogue("Go! %s!" % player_actor.name)
+	await DialogueManager.dialogue_closed
 	
 	UiManager.context = ""
 	

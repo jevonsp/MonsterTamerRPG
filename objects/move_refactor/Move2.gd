@@ -6,6 +6,8 @@ class_name Move2 extends Resource
 @export var accuracy: int = 100
 @export var max_pp: int = 10
 @export_range(-7, 7) var priority: int = 0
+
+@export_subgroup("Description")
 @export_multiline var description: String = ""
 
 @export_subgroup("Target Type")

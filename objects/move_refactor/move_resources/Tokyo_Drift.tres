@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="Move2" load_steps=9 format=3 uid="uid://ddauadp1mw5ei"]
+
+[ext_resource type="Script" uid="uid://ct8d6qppshnwx" path="res://objects/move_refactor/effect/EffectComponent.gd" id="1_icxm8"]
+[ext_resource type="Script" uid="uid://suqqqwjooklf" path="res://objects/move_refactor/effect/VisualComponent.gd" id="2_r1wbo"]
+[ext_resource type="Script" uid="uid://dsbfpa1jpbk8k" path="res://objects/move_refactor/Move2.gd" id="2_uili7"]
+[ext_resource type="Script" uid="uid://cryg4x2h2q4gv" path="res://objects/move_refactor/effect/SwitchComponent.gd" id="3_g4qdm"]
+[ext_resource type="Script" uid="uid://dxp575pvrsynm" path="res://objects/move_refactor/effect/DamageComponent.gd" id="3_iimva"]
+
+[sub_resource type="Resource" id="Resource_iimva"]
+script = ExtResource("2_r1wbo")
+metadata/_custom_type_script = "uid://suqqqwjooklf"
+
+[sub_resource type="Resource" id="Resource_7peug"]
+script = ExtResource("3_iimva")
+base_power = 65
+metadata/_custom_type_script = "uid://dxp575pvrsynm"
+
+[sub_resource type="Resource" id="Resource_g6d0d"]
+script = ExtResource("3_g4qdm")
+switch_mode = "FORCE_CHOICE"
+metadata/_custom_type_script = "uid://cryg4x2h2q4gv"
+
+[resource]
+script = ExtResource("2_uili7")
+name = "Tokyo Drift"
+components = Array[ExtResource("1_icxm8")]([SubResource("Resource_iimva"), SubResource("Resource_7peug"), SubResource("Resource_g6d0d")])
+description = "Hits the enemy and then switches out for another party monster."
+metadata/_custom_type_script = "uid://dsbfpa1jpbk8k"

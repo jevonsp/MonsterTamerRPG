@@ -1,15 +1,16 @@
-[gd_resource type="Resource" script_class="MonsterData" load_steps=5 format=3 uid="uid://5e83glwdh7ty"]
+[gd_resource type="Resource" script_class="MonsterData" load_steps=6 format=3 uid="uid://5e83glwdh7ty"]
 
 [ext_resource type="Script" uid="uid://dsbfpa1jpbk8k" path="res://objects/move_refactor/Move2.gd" id="1_01hfg"]
 [ext_resource type="Resource" uid="uid://dfhmeq3ic3jcp" path="res://objects/move_refactor/move_resources/Punch.tres" id="2_hxlpc"]
 [ext_resource type="Script" uid="uid://cf7d81q2bjlj0" path="res://objects/monsters/MonsterData.gd" id="2_n5tsj"]
 [ext_resource type="Resource" uid="uid://boq6oirufgd87" path="res://objects/move_refactor/move_resources/Trap.tres" id="3_k5jit"]
+[ext_resource type="Resource" uid="uid://ddauadp1mw5ei" path="res://objects/move_refactor/move_resources/Tokyo_Drift.tres" id="4_243ys"]
 
 [resource]
 script = ExtResource("2_n5tsj")
 name = "Test Mon"
 base_hitpoints = 200
 base_attack = 250
-moves = Array[ExtResource("1_01hfg")]([ExtResource("2_hxlpc"), ExtResource("3_k5jit")])
-levels = Array[int]([1, 1])
+moves = Array[ExtResource("1_01hfg")]([ExtResource("2_hxlpc"), ExtResource("3_k5jit"), ExtResource("4_243ys")])
+levels = Array[int]([1, 1, 1])
 metadata/_custom_type_script = "uid://cf7d81q2bjlj0"
