@@ -20,6 +20,12 @@ func execute() -> void:
 		party = BattleManager.enemy_party
 		is_player_switch = false
 	
+	for stacking_status in actor.stacking_statuses:
+		if not await stacking_status.can_switch(actor):
+			#DialogueManager.show_dialogue("Cannot switch %s" % actor.name)
+			#await DialogueManager.dialogue_closed
+			return
+	
 	# Validation
 	if party.size() == 0:
 		push_error("Cannot switch: party is empty")
@@ -54,13 +60,17 @@ func execute() -> void:
 		
 	EventBus.switch_animation.emit(temp, party[_out])
 	if is_player_switch:
-		DialogueManager.show_dialogue("Thats enough, %s" % old_monster_name)
+		DialogueManager.show_dialogue("Thats enough, %s." % old_monster_name)
 		await EventBus.switch_done_animating
 	else:
-		DialogueManager.show_dialogue("Your opponent called back %s" % old_monster_name)
+		DialogueManager.show_dialogue("Your opponent called back %s." % old_monster_name)
 		await EventBus.switch_done_animating
 	print("got switch_done_animating")
 	if is_player_switch:
-		DialogueManager.show_dialogue("The enemy sent out %s" % new_monster_name, false)
+		DialogueManager.show_dialogue("Your turn %s!" % new_monster_name, false)
 		await DialogueManager.dialogue_closed
+	else:
+		DialogueManager.show_dialogue("The enemy sent out %s." % new_monster_name, false)
+		await DialogueManager.dialogue_closed
+		
 	print("got dialogue_closed")

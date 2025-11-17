@@ -67,7 +67,20 @@ func _input(event: InputEvent) -> void:
 		
 	if self != UiManager.ui_stack.back():
 		return
-	
+		
+	if event.is_action_pressed("no"):
+		if reordering:
+			set_active_slot()
+			reordering = false
+			return
+		elif not reordering:
+			match UiManager.context:
+				"":
+					close()
+				"force_switch":
+					DialogueManager.show_dialogue("You must switch in a battle-ready monster!", true)
+					await DialogueManager.dialogue_closed
+			
 	if event.is_action_pressed("yes"):
 		if reordering:
 			swap_monsters(swap_index, v2_to_slot[selected_slot])
@@ -85,6 +98,9 @@ func _input(event: InputEvent) -> void:
 				chosen_item = null
 				UiManager.context = ""
 				close()
+			"force_switch":
+				if v2_to_slot[selected_slot] < PartyManager.party.size():
+					_open_options()
 			"using":
 				print("context: using")
 				return
@@ -95,13 +111,7 @@ func _input(event: InputEvent) -> void:
 				if v2_to_slot[selected_slot] < PartyManager.party.size():
 					_open_options()
 				
-	if event.is_action_pressed("no"):
-		if reordering:
-			set_active_slot()
-			reordering = false
-			return
-		elif not reordering:
-			close()
+	
 	if event.is_action_pressed("up"):
 		_move(Vector2.UP)
 	if event.is_action_pressed("down"):

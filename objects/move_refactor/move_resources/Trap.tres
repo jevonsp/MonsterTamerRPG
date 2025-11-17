@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="Move2" load_steps=10 format=3 uid="uid://boq6oirufgd87"]
+
+[ext_resource type="Script" uid="uid://ct8d6qppshnwx" path="res://objects/move_refactor/effect/EffectComponent.gd" id="1_cgfd8"]
+[ext_resource type="Script" uid="uid://suqqqwjooklf" path="res://objects/move_refactor/effect/VisualComponent.gd" id="2_e11nw"]
+[ext_resource type="Script" uid="uid://dsbfpa1jpbk8k" path="res://objects/move_refactor/Move2.gd" id="2_p6d20"]
+[ext_resource type="Script" uid="uid://hitshvhtc7hm" path="res://objects/move_refactor/effect/ChanceComponent.gd" id="3_vyg74"]
+[ext_resource type="Script" uid="uid://btxy4ajt2kyyx" path="res://objects/move_refactor/effect/StatusApplicationComponent.gd" id="4_6ewi2"]
+[ext_resource type="Resource" uid="uid://bh51ojdwpl7v" path="res://objects/move_refactor/status_resources/Trapped.tres" id="5_oqu52"]
+
+[sub_resource type="Resource" id="Resource_ddc4f"]
+script = ExtResource("2_e11nw")
+metadata/_custom_type_script = "uid://suqqqwjooklf"
+
+[sub_resource type="Resource" id="Resource_f4r7o"]
+script = ExtResource("3_vyg74")
+metadata/_custom_type_script = "uid://hitshvhtc7hm"
+
+[sub_resource type="Resource" id="Resource_lhung"]
+script = ExtResource("4_6ewi2")
+status_effect = ExtResource("5_oqu52")
+is_primary = false
+metadata/_custom_type_script = "uid://btxy4ajt2kyyx"
+
+[resource]
+script = ExtResource("2_p6d20")
+name = "Trap"
+components = Array[ExtResource("1_cgfd8")]([SubResource("Resource_ddc4f"), SubResource("Resource_f4r7o"), SubResource("Resource_lhung")])
+metadata/_custom_type_script = "uid://dsbfpa1jpbk8k"

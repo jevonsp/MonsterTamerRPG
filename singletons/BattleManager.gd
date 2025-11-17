@@ -335,6 +335,9 @@ func force_switch():
 		return
 	print("force_switch here")
 	var old_actor = player_actor
+	
+	UiManager.context = "force_switch"
+	
 	UiManager.push_ui_by_name(UiManager.SCENE_PARTY)
 	EventBus.free_switch.emit()
 	await EventBus.free_switch_chosen
@@ -342,6 +345,8 @@ func force_switch():
 	print("free switch complete")
 	player_actor = PartyManager.party[0]
 	EventBus.switch_animation.emit(old_actor, player_actor)
+	
+	UiManager.context = ""
 	
 func force_enemy_switch():
 	var next = get_next_enemy_monster()

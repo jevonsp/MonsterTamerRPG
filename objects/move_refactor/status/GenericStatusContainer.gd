@@ -16,8 +16,7 @@ func apply_on_turn_end(monster: Monster) -> void:
 	var status_should_continue = await _apply_components(monster, "TURN_END", context)
 	if not status_should_continue:
 		_end_status(monster)
-
-# For stacking statuses (monster.stacking_statuses)
+		
 func apply_stacking_on_turn_start(monster: Monster) -> bool:
 	var context = {"name": name, "trigger": "turn_start"}
 	return await _apply_components(monster, "TURN_START", context)
@@ -46,6 +45,15 @@ func can_act(monster: Monster) -> bool:
 			can_act_result = can_act_result and await component.can_act(monster, context)
 	
 	return can_act_result
+	
+func can_switch(monster: Monster) -> bool:
+	var can_switch_result = true
+	var context = {"name": name, "monster": monster}
+	for component in components:
+		if component.trigger == "CAN_SWITCH":
+			@warning_ignore("redundant_await")
+			can_switch_result = can_switch_result and await component.can_switch(monster, context)
+	return can_switch_result
 	
 func _apply_components(monster: Monster, trigger_type: String, context: Dictionary) -> bool:
 	var status_should_continue = true

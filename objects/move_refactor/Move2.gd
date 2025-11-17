@@ -15,11 +15,6 @@ class_name Move2 extends Resource
 var miss_message: String = "{actor} missed!"
 
 func execute(actor: Monster, target: Monster) -> void:
-	#print("==Move2.execute():==")
-	#print("Actor Name: ", actor.name)
-	#print("Actor: ", actor)
-	#print("Target Name: ", target.name)
-	#print("Target: ", target)
 	var actor_accuracy_multi = actor._get_stage_multi(actor.stat_stages["accuracy"])
 	var target_evasion_multi = target._get_stage_multi(target.stat_stages["evasion"])
 	var accuracy_chance = (accuracy * actor_accuracy_multi * target_evasion_multi) / 100.0

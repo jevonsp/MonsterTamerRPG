@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="GenericStatusContainer" load_steps=7 format=3 uid="uid://bh51ojdwpl7v"]
+
+[ext_resource type="Script" uid="uid://cfx0cjtrk52jg" path="res://objects/move_refactor/status/StatusComponent.gd" id="1_t6pwj"]
+[ext_resource type="Script" uid="uid://dt2088qvyk4s2" path="res://objects/move_refactor/effect/DurationComponent.gd" id="2_jnxak"]
+[ext_resource type="Script" uid="uid://dl0mmk1tsr7lx" path="res://objects/move_refactor/status/SwitchPreventionComponent.gd" id="3_oh5oq"]
+[ext_resource type="Script" uid="uid://bneyxjcund6hf" path="res://objects/move_refactor/status/GenericStatusContainer.gd" id="4_k20rn"]
+
+[sub_resource type="Resource" id="Resource_t1cox"]
+script = ExtResource("2_jnxak")
+metadata/_custom_type_script = "uid://dt2088qvyk4s2"
+
+[sub_resource type="Resource" id="Resource_m7drp"]
+script = ExtResource("3_oh5oq")
+trigger = "CAN_SWITCH"
+metadata/_custom_type_script = "uid://dl0mmk1tsr7lx"
+
+[resource]
+script = ExtResource("4_k20rn")
+name = "Trapped"
+components = Array[ExtResource("1_t6pwj")]([SubResource("Resource_t1cox"), SubResource("Resource_m7drp")])
+metadata/_custom_type_script = "uid://bneyxjcund6hf"

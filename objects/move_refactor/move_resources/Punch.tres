@@ -13,6 +13,7 @@ metadata/_custom_type_script = "uid://suqqqwjooklf"
 
 [sub_resource type="Resource" id="Resource_rcn5k"]
 script = ExtResource("3_3818c")
+base_power = 200
 metadata/_custom_type_script = "uid://dxp575pvrsynm"
 
 [resource]

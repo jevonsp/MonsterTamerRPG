@@ -43,6 +43,8 @@ func create_battle():
 	
 	var player_instance = PartyManager.make_monster(player_monster, int(player_level))
 	player_instance.name = "Player"
+	var player_instance2 = PartyManager.make_monster(player_monster, int(player_level))
+	player_instance2.name = "Player2"
 	var enemy_instance = BattleManager.add_enemies([enemy_monster], [int(enemy_level)])
 	enemy_instance.name = "Enemy"
 	
