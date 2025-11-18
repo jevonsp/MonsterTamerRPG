@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="MonsterData" load_steps=8 format=3 uid="uid://y371h0dccdu2"]
+
+[ext_resource type="Script" uid="uid://dsbfpa1jpbk8k" path="res://objects/move_refactor/Move2.gd" id="1_lwfv3"]
+[ext_resource type="Resource" uid="uid://sijfvoewqhx4" path="res://objects/moves/Scurry.tres" id="2_8gopx"]
+[ext_resource type="Script" uid="uid://cf7d81q2bjlj0" path="res://objects/monsters/MonsterData.gd" id="2_ocls5"]
+[ext_resource type="Resource" uid="uid://lcmiu1r40cot" path="res://objects/moves/Nettles.tres" id="3_03s0v"]
+[ext_resource type="Resource" uid="uid://cksqitx1vsfnm" path="res://objects/moves/Rabid_Bite.tres" id="4_b8nhl"]
+[ext_resource type="Resource" uid="uid://cbli0rw6p8mhv" path="res://objects/moves/Charm.tres" id="5_hs43y"]
+[ext_resource type="Texture2D" uid="uid://dkwp8vc5n5xcc" path="res://objects/monsters/corn_snake/corn_snake.png" id="7_d82qj"]
+
+[resource]
+script = ExtResource("2_ocls5")
+name = "Corn Snake"
+sprite = ExtResource("7_d82qj")
+type = "GRASS"
+moves = Array[ExtResource("1_lwfv3")]([ExtResource("2_8gopx"), ExtResource("3_03s0v"), ExtResource("4_b8nhl"), null, ExtResource("5_hs43y")])
+levels = Array[int]([1, 8, 14, 20, 26])
+metadata/_custom_type_script = "uid://cf7d81q2bjlj0"

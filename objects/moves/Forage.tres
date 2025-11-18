@@ -1,0 +1,35 @@
+[gd_resource type="Resource" script_class="Move2" load_steps=11 format=3 uid="uid://csklbyfpfdjcc"]
+
+[ext_resource type="Script" uid="uid://ct8d6qppshnwx" path="res://objects/move_refactor/effect/EffectComponent.gd" id="1_44juv"]
+[ext_resource type="Script" uid="uid://suqqqwjooklf" path="res://objects/move_refactor/effect/VisualComponent.gd" id="2_ayavv"]
+[ext_resource type="Script" uid="uid://dxp575pvrsynm" path="res://objects/move_refactor/effect/DamageComponent.gd" id="3_qggkq"]
+[ext_resource type="Script" uid="uid://hitshvhtc7hm" path="res://objects/move_refactor/effect/ChanceComponent.gd" id="4_2y7w4"]
+[ext_resource type="Script" uid="uid://3rutj1kc7lyr" path="res://objects/move_refactor/effect/HealComponent.gd" id="5_1enaa"]
+[ext_resource type="Script" uid="uid://dsbfpa1jpbk8k" path="res://objects/move_refactor/Move2.gd" id="6_43nx7"]
+
+[sub_resource type="Resource" id="Resource_xcpuv"]
+script = ExtResource("2_ayavv")
+metadata/_custom_type_script = "uid://suqqqwjooklf"
+
+[sub_resource type="Resource" id="Resource_a8ear"]
+script = ExtResource("3_qggkq")
+base_power = 50
+metadata/_custom_type_script = "uid://dxp575pvrsynm"
+
+[sub_resource type="Resource" id="Resource_wq383"]
+script = ExtResource("4_2y7w4")
+success_chance = 0.5
+metadata/_custom_type_script = "uid://hitshvhtc7hm"
+
+[sub_resource type="Resource" id="Resource_517yu"]
+script = ExtResource("5_1enaa")
+is_percentage = true
+heal_percentage_amount = 0.2
+metadata/_custom_type_script = "uid://3rutj1kc7lyr"
+
+[resource]
+script = ExtResource("6_43nx7")
+name = "Forage"
+components = Array[ExtResource("1_44juv")]([SubResource("Resource_xcpuv"), SubResource("Resource_a8ear"), SubResource("Resource_wq383"), SubResource("Resource_517yu")])
+description = "A medium strength attack with a 50% chance to heal after striking."
+metadata/_custom_type_script = "uid://dsbfpa1jpbk8k"

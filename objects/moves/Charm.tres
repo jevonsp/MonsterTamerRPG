@@ -1,0 +1,35 @@
+[gd_resource type="Resource" script_class="Move2" load_steps=11 format=3 uid="uid://cbli0rw6p8mhv"]
+
+[ext_resource type="Script" uid="uid://ct8d6qppshnwx" path="res://objects/move_refactor/effect/EffectComponent.gd" id="1_dv2pu"]
+[ext_resource type="Script" uid="uid://suqqqwjooklf" path="res://objects/move_refactor/effect/VisualComponent.gd" id="2_gmqx6"]
+[ext_resource type="Script" uid="uid://dxp575pvrsynm" path="res://objects/move_refactor/effect/DamageComponent.gd" id="3_qodce"]
+[ext_resource type="Script" uid="uid://hitshvhtc7hm" path="res://objects/move_refactor/effect/ChanceComponent.gd" id="4_e7ynk"]
+[ext_resource type="Script" uid="uid://btxy4ajt2kyyx" path="res://objects/move_refactor/effect/StatusApplicationComponent.gd" id="5_aygby"]
+[ext_resource type="Script" uid="uid://dsbfpa1jpbk8k" path="res://objects/move_refactor/Move2.gd" id="6_uj4os"]
+
+[sub_resource type="Resource" id="Resource_jm468"]
+script = ExtResource("2_gmqx6")
+metadata/_custom_type_script = "uid://suqqqwjooklf"
+
+[sub_resource type="Resource" id="Resource_jq04j"]
+script = ExtResource("3_qodce")
+base_power = 80
+metadata/_custom_type_script = "uid://dxp575pvrsynm"
+
+[sub_resource type="Resource" id="Resource_8pvy3"]
+script = ExtResource("4_e7ynk")
+success_chance = 0.5
+metadata/_custom_type_script = "uid://hitshvhtc7hm"
+
+[sub_resource type="Resource" id="Resource_l4t8k"]
+script = ExtResource("5_aygby")
+metadata/_custom_type_script = "uid://btxy4ajt2kyyx"
+
+[resource]
+script = ExtResource("6_uj4os")
+name = "Charm"
+components = Array[ExtResource("1_dv2pu")]([SubResource("Resource_jm468"), SubResource("Resource_jq04j"), SubResource("Resource_8pvy3"), SubResource("Resource_l4t8k")])
+accuracy = 90
+max_pp = 5
+description = "A medium strength attack that leave the enemy with a 50% chance to cause codependence."
+metadata/_custom_type_script = "uid://dsbfpa1jpbk8k"

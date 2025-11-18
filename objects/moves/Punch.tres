@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="Move2" load_steps=8 format=3 uid="uid://dfhmeq3ic3jcp"]
+
+[ext_resource type="Script" uid="uid://ct8d6qppshnwx" path="res://objects/move_refactor/effect/EffectComponent.gd" id="1_ai72l"]
+[ext_resource type="Script" uid="uid://suqqqwjooklf" path="res://objects/move_refactor/effect/VisualComponent.gd" id="2_un7xk"]
+[ext_resource type="Script" uid="uid://dxp575pvrsynm" path="res://objects/move_refactor/effect/DamageComponent.gd" id="3_hlggf"]
+[ext_resource type="Script" uid="uid://dsbfpa1jpbk8k" path="res://objects/move_refactor/Move2.gd" id="4_sb88o"]
+
+[sub_resource type="Resource" id="Resource_l622i"]
+metadata/__load_path__ = "res://classes/deprecated/moves(deprecated)/slap/slap.tscn"
+
+[sub_resource type="Resource" id="Resource_1oh03"]
+script = ExtResource("2_un7xk")
+animation = SubResource("Resource_l622i")
+metadata/_custom_type_script = "uid://suqqqwjooklf"
+
+[sub_resource type="Resource" id="Resource_rcn5k"]
+script = ExtResource("3_hlggf")
+base_power = 200
+metadata/_custom_type_script = "uid://dxp575pvrsynm"
+
+[resource]
+script = ExtResource("4_sb88o")
+name = "Punch"
+components = Array[ExtResource("1_ai72l")]([SubResource("Resource_1oh03"), SubResource("Resource_rcn5k")])
+max_pp = 40
+description = "A typeless attack used by many creatures."
+metadata/_custom_type_script = "uid://dsbfpa1jpbk8k"

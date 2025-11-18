@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="Move2" load_steps=7 format=3 uid="uid://bgpmeenseax4t"]
+
+[ext_resource type="Script" uid="uid://ct8d6qppshnwx" path="res://objects/move_refactor/effect/EffectComponent.gd" id="1_qqb2q"]
+[ext_resource type="Script" uid="uid://suqqqwjooklf" path="res://objects/move_refactor/effect/VisualComponent.gd" id="2_ogacw"]
+[ext_resource type="Script" uid="uid://dxp575pvrsynm" path="res://objects/move_refactor/effect/DamageComponent.gd" id="3_s77wk"]
+[ext_resource type="Script" uid="uid://dsbfpa1jpbk8k" path="res://objects/move_refactor/Move2.gd" id="4_n6v1o"]
+
+[sub_resource type="Resource" id="Resource_iem01"]
+script = ExtResource("2_ogacw")
+metadata/_custom_type_script = "uid://suqqqwjooklf"
+
+[sub_resource type="Resource" id="Resource_wdrwk"]
+script = ExtResource("3_s77wk")
+base_power = 70
+metadata/_custom_type_script = "uid://dxp575pvrsynm"
+
+[resource]
+script = ExtResource("4_n6v1o")
+name = "Gnaw"
+components = Array[ExtResource("1_qqb2q")]([SubResource("Resource_iem01"), SubResource("Resource_wdrwk")])
+description = "A medium strength attack."
+metadata/_custom_type_script = "uid://dsbfpa1jpbk8k"

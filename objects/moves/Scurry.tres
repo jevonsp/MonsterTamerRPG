@@ -1,0 +1,35 @@
+[gd_resource type="Resource" script_class="Move2" load_steps=11 format=3 uid="uid://sijfvoewqhx4"]
+
+[ext_resource type="Script" uid="uid://ct8d6qppshnwx" path="res://objects/move_refactor/effect/EffectComponent.gd" id="1_ii0lp"]
+[ext_resource type="Script" uid="uid://suqqqwjooklf" path="res://objects/move_refactor/effect/VisualComponent.gd" id="2_5u7ee"]
+[ext_resource type="Script" uid="uid://dxp575pvrsynm" path="res://objects/move_refactor/effect/DamageComponent.gd" id="3_xtbi6"]
+[ext_resource type="Script" uid="uid://hitshvhtc7hm" path="res://objects/move_refactor/effect/ChanceComponent.gd" id="4_5u7ee"]
+[ext_resource type="Script" uid="uid://c5ajq0532xd52" path="res://objects/move_refactor/effect/StatChangeComponent.gd" id="4_d1wnw"]
+[ext_resource type="Script" uid="uid://dsbfpa1jpbk8k" path="res://objects/move_refactor/Move2.gd" id="5_aafc4"]
+
+[sub_resource type="Resource" id="Resource_qkr7k"]
+script = ExtResource("2_5u7ee")
+metadata/_custom_type_script = "uid://suqqqwjooklf"
+
+[sub_resource type="Resource" id="Resource_tnrla"]
+script = ExtResource("3_xtbi6")
+metadata/_custom_type_script = "uid://dxp575pvrsynm"
+
+[sub_resource type="Resource" id="Resource_xtbi6"]
+script = ExtResource("4_5u7ee")
+success_chance = 0.5
+metadata/_custom_type_script = "uid://hitshvhtc7hm"
+
+[sub_resource type="Resource" id="Resource_6y2et"]
+script = ExtResource("4_d1wnw")
+stat = 0
+targets_self = true
+metadata/_custom_type_script = "uid://c5ajq0532xd52"
+
+[resource]
+script = ExtResource("5_aafc4")
+name = "Scurry"
+components = Array[ExtResource("1_ii0lp")]([SubResource("Resource_qkr7k"), SubResource("Resource_tnrla"), SubResource("Resource_xtbi6"), SubResource("Resource_6y2et")])
+max_pp = 20
+description = "Strikes first. Has a chance to raise speed"
+metadata/_custom_type_script = "uid://dsbfpa1jpbk8k"

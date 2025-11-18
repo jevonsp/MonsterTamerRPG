@@ -1,7 +1,6 @@
 [gd_resource type="Resource" script_class="Move2" load_steps=13 format=3 uid="uid://lcmiu1r40cot"]
 
 [ext_resource type="Script" uid="uid://ct8d6qppshnwx" path="res://objects/move_refactor/effect/EffectComponent.gd" id="1_huh0k"]
-[ext_resource type="PackedScene" uid="uid://dxldgsdysnud7" path="res://classes/deprecated/moves(deprecated)/nettle_sting/nettle_sting.tscn" id="2_aoxvk"]
 [ext_resource type="Script" uid="uid://dsbfpa1jpbk8k" path="res://objects/move_refactor/Move2.gd" id="2_wx2g6"]
 [ext_resource type="Script" uid="uid://suqqqwjooklf" path="res://objects/move_refactor/effect/VisualComponent.gd" id="3_evygd"]
 [ext_resource type="Script" uid="uid://dxp575pvrsynm" path="res://objects/move_refactor/effect/DamageComponent.gd" id="4_eerub"]
@@ -9,9 +8,12 @@
 [ext_resource type="Script" uid="uid://btxy4ajt2kyyx" path="res://objects/move_refactor/effect/StatusApplicationComponent.gd" id="6_w2h6p"]
 [ext_resource type="Resource" uid="uid://fwfkwdeox43i" path="res://objects/move_refactor/status_resources/Poison.tres" id="7_xvbj5"]
 
+[sub_resource type="Resource" id="Resource_ru8ry"]
+metadata/__load_path__ = "res://classes/deprecated/moves(deprecated)/nettle_sting/nettle_sting.tscn"
+
 [sub_resource type="Resource" id="Resource_epfdv"]
 script = ExtResource("3_evygd")
-animation = ExtResource("2_aoxvk")
+animation = SubResource("Resource_ru8ry")
 metadata/_custom_type_script = "uid://suqqqwjooklf"
 
 [sub_resource type="Resource" id="Resource_sd557"]

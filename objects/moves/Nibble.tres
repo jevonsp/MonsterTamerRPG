@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="Move2" load_steps=7 format=3 uid="uid://cvpy3obudflw1"]
+
+[ext_resource type="Script" uid="uid://ct8d6qppshnwx" path="res://objects/move_refactor/effect/EffectComponent.gd" id="1_415jo"]
+[ext_resource type="Script" uid="uid://suqqqwjooklf" path="res://objects/move_refactor/effect/VisualComponent.gd" id="2_3plge"]
+[ext_resource type="Script" uid="uid://dsbfpa1jpbk8k" path="res://objects/move_refactor/Move2.gd" id="2_7ful8"]
+[ext_resource type="Script" uid="uid://dxp575pvrsynm" path="res://objects/move_refactor/effect/DamageComponent.gd" id="3_2dy0n"]
+
+[sub_resource type="Resource" id="Resource_iuahc"]
+script = ExtResource("2_3plge")
+metadata/_custom_type_script = "uid://suqqqwjooklf"
+
+[sub_resource type="Resource" id="Resource_ilwnq"]
+script = ExtResource("3_2dy0n")
+base_power = 30
+metadata/_custom_type_script = "uid://dxp575pvrsynm"
+
+[resource]
+script = ExtResource("2_7ful8")
+name = "Nibble"
+components = Array[ExtResource("1_415jo")]([SubResource("Resource_iuahc"), SubResource("Resource_ilwnq")])
+max_pp = 30
+description = "A weak attack found on low level creatures."
+metadata/_custom_type_script = "uid://dsbfpa1jpbk8k"

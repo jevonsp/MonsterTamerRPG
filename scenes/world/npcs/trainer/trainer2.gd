@@ -52,8 +52,8 @@ func check_ray_cast2d(pos: Vector2) -> bool:
 	var space_state = get_world_2d().direct_space_state
 	var ray_params = PhysicsRayQueryParameters2D.create(global_position, pos)
 	ray_params.collide_with_areas = true
-	ray_params.collide_with_bodies = false
-	ray_params.collision_mask = 3 
+	ray_params.collide_with_bodies = true
+	ray_params.collision_mask = 1 | 3 
 	ray_params.exclude = [self]
 	var ray_result = space_state.intersect_ray(ray_params)
 	return ray_result.is_empty()

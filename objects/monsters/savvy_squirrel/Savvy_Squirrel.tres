@@ -1,12 +1,19 @@
-[gd_resource type="Resource" script_class="MonsterData" load_steps=4 format=3 uid="uid://bra2yle7d6vkp"]
+[gd_resource type="Resource" script_class="MonsterData" load_steps=9 format=3 uid="uid://bra2yle7d6vkp"]
 
 [ext_resource type="Script" uid="uid://dsbfpa1jpbk8k" path="res://objects/move_refactor/Move2.gd" id="1_uiwsh"]
 [ext_resource type="Script" uid="uid://cf7d81q2bjlj0" path="res://objects/monsters/MonsterData.gd" id="2_uiwsh"]
+[ext_resource type="Resource" uid="uid://cvpy3obudflw1" path="res://objects/moves/Nibble.tres" id="2_wycyd"]
+[ext_resource type="Resource" uid="uid://sijfvoewqhx4" path="res://objects/moves/Scurry.tres" id="3_pyuhf"]
 [ext_resource type="Texture2D" uid="uid://smnwhexc5kkq" path="res://objects/monsters/savvy_squirrel/savvy_squirrel.png" id="3_uiwsh"]
+[ext_resource type="Resource" uid="uid://csklbyfpfdjcc" path="res://objects/moves/Forage.tres" id="4_evoe7"]
+[ext_resource type="Resource" uid="uid://cksqitx1vsfnm" path="res://objects/moves/Rabid_Bite.tres" id="5_cpewv"]
+[ext_resource type="Resource" uid="uid://bgpmeenseax4t" path="res://objects/moves/Gnaw.tres" id="6_gq55d"]
 
 [resource]
 script = ExtResource("2_uiwsh")
 name = "Savvy Squirrel"
 sprite = ExtResource("3_uiwsh")
 capture_rate = 255
+moves = Array[ExtResource("1_uiwsh")]([ExtResource("2_wycyd"), ExtResource("3_pyuhf"), ExtResource("4_evoe7"), ExtResource("5_cpewv"), ExtResource("6_gq55d")])
+levels = Array[int]([1, 8, 14, 20, 26])
 metadata/_custom_type_script = "uid://cf7d81q2bjlj0"

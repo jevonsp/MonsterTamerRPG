@@ -20,7 +20,6 @@ const WALK_SPEED: float = 3.0
 	set(value):
 		if value == is_hidden:
 			return
-		print("setting is_hidden value to: ", value)
 		is_hidden = value
 		shape.disabled = value
 		visible = not value
@@ -31,7 +30,6 @@ func _ready() -> void:
 		add_to_group(npc_group)
 	add_to_group("can_save")
 	is_hidden = false
-	print("%s added to %s" % [npc_name, npc_group])
 	EventBus.npc_command.connect(_on_npc_command)
 	
 func setup_sprite():
@@ -54,7 +52,6 @@ func turn_towards(interactor: CharacterBody2D) -> void:
 	update_turning_animation()
 	
 func turn_to(dir: Vector2) -> void:
-	print("got turn_to")
 	facing_direction = direction_from_vector(dir)
 	update_turning_animation()
 	
@@ -92,6 +89,7 @@ func walk_to_tile(target_tile: Vector2) -> void:
 		await get_tree().process_frame
 	
 	update_idle_animation()
+
 	
 func update_idle_animation():
 	var dir = vector_from_direction(facing_direction)
@@ -148,6 +146,7 @@ func say_dialogues(lines: Array[String] = []) -> void:
 		lines = dialogues
 	for line in lines:
 		await say_dialogue(line)
+	
 #endregion
 
 #region Vector/Direction enum translation
@@ -183,27 +182,34 @@ func _on_npc_command(command: String, target: NPC, data: Dictionary) -> void:
 		"TURN_TO":
 			var dir: Vector2 = data.get("dir", Vector2.DOWN)
 			turn_to(dir)
+			await get_tree().process_frame
+			EventBus.npc_command_completed.emit()
 		"MOVE_TO":
 			var path: Array[Vector2] = data.get("path", [])
-			walk_path(path)
+			await walk_path(path)
+			EventBus.npc_command_completed.emit()
 		"SAY": 
 			var lines = data.get("lines", dialogues)
 			if lines.is_empty():
 				lines = [data.get("line", "")]
-			say_dialogues(lines)
+			await say_dialogues(lines)
+			EventBus.npc_command_completed.emit()
 		"HIDE":
 			is_hidden = true
+			EventBus.npc_command_completed.emit()
 		"SHOW":
 			is_hidden = false
+			EventBus.npc_command_completed.emit()
 
 func on_save_game(saved_data: Array[SavedData]):
 	var my_data = SavedData.new()
 	my_data.node_path = get_path()
 	my_data.is_hidden = is_hidden
+	my_data.dialogues = dialogues
 	saved_data.append(my_data)
 	
 func on_load_game(saved_data_array: Array[SavedData]):
 	for data in saved_data_array:
 		if data.node_path == get_path():
-			print("matching node path")
 			is_hidden = data.is_hidden
+			dialogues = data.dialogues

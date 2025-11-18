@@ -1,0 +1,30 @@
+[gd_resource type="Resource" script_class="Move2" load_steps=9 format=3 uid="uid://dybsvggst6tgf"]
+
+[ext_resource type="Script" uid="uid://ct8d6qppshnwx" path="res://objects/move_refactor/effect/EffectComponent.gd" id="1_ipsx7"]
+[ext_resource type="Script" uid="uid://suqqqwjooklf" path="res://objects/move_refactor/effect/VisualComponent.gd" id="2_7xldi"]
+[ext_resource type="Script" uid="uid://c5ajq0532xd52" path="res://objects/move_refactor/effect/StatChangeComponent.gd" id="3_3frfi"]
+[ext_resource type="Script" uid="uid://dxp575pvrsynm" path="res://objects/move_refactor/effect/DamageComponent.gd" id="4_i4wdd"]
+[ext_resource type="Script" uid="uid://dsbfpa1jpbk8k" path="res://objects/move_refactor/Move2.gd" id="5_33eua"]
+
+[sub_resource type="Resource" id="Resource_ebbb2"]
+script = ExtResource("2_7xldi")
+metadata/_custom_type_script = "uid://suqqqwjooklf"
+
+[sub_resource type="Resource" id="Resource_gor11"]
+script = ExtResource("3_3frfi")
+stat = 1
+targets_self = true
+metadata/_custom_type_script = "uid://c5ajq0532xd52"
+
+[sub_resource type="Resource" id="Resource_fli86"]
+script = ExtResource("4_i4wdd")
+base_power = 60
+metadata/_custom_type_script = "uid://dxp575pvrsynm"
+
+[resource]
+script = ExtResource("5_33eua")
+name = "Get Mad"
+components = Array[ExtResource("1_ipsx7")]([SubResource("Resource_ebbb2"), SubResource("Resource_gor11"), SubResource("Resource_fli86")])
+priority = -1
+description = "A stronger attack that lets the enemy strike first. Raises Attack by 1 stage before striking."
+metadata/_custom_type_script = "uid://dsbfpa1jpbk8k"

@@ -1,0 +1,34 @@
+[gd_resource type="Resource" script_class="Move2" load_steps=9 format=3 uid="uid://dd3s6rqjffugw"]
+
+[ext_resource type="Script" uid="uid://ct8d6qppshnwx" path="res://objects/move_refactor/effect/EffectComponent.gd" id="1_51eu4"]
+[ext_resource type="Script" uid="uid://suqqqwjooklf" path="res://objects/move_refactor/effect/VisualComponent.gd" id="2_yiqdw"]
+[ext_resource type="Script" uid="uid://dxp575pvrsynm" path="res://objects/move_refactor/effect/DamageComponent.gd" id="3_mqw5a"]
+[ext_resource type="Script" uid="uid://dsbfpa1jpbk8k" path="res://objects/move_refactor/Move2.gd" id="4_4thtb"]
+
+[sub_resource type="Resource" id="Resource_7nmpr"]
+script = ExtResource("2_yiqdw")
+metadata/_custom_type_script = "uid://suqqqwjooklf"
+
+[sub_resource type="Resource" id="Resource_ot8ms"]
+script = ExtResource("3_mqw5a")
+base_power = 60
+metadata/_custom_type_script = "uid://dxp575pvrsynm"
+
+[sub_resource type="Resource" id="Resource_4tmii"]
+script = ExtResource("2_yiqdw")
+success_message = "{actor} strikes twice!"
+metadata/_custom_type_script = "uid://suqqqwjooklf"
+
+[sub_resource type="Resource" id="Resource_bjm20"]
+script = ExtResource("3_mqw5a")
+base_power = 50
+metadata/_custom_type_script = "uid://dxp575pvrsynm"
+
+[resource]
+script = ExtResource("4_4thtb")
+name = "Chicken's Revenge"
+components = Array[ExtResource("1_51eu4")]([SubResource("Resource_7nmpr"), SubResource("Resource_ot8ms"), SubResource("Resource_4tmii"), SubResource("Resource_bjm20")])
+max_pp = 5
+priority = 1
+description = "Signature move of bird monsters. Gets revenge for something linked to the past. Strikes twice quickly."
+metadata/_custom_type_script = "uid://dsbfpa1jpbk8k"

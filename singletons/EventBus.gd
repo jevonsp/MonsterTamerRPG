@@ -12,6 +12,7 @@ signal obstacle_removed(position: Vector2)
 
 signal event_triggered(event: String)
 signal npc_command(command: String, target: NPC, data: Dictionary)
+signal npc_command_completed
 
 signal request_battle_actors
 signal player_battle_actor_sent(monster: Monster)

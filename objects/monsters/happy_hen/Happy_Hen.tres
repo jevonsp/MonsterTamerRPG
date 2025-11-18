@@ -1,14 +1,20 @@
-[gd_resource type="Resource" script_class="MonsterData" load_steps=4 format=3 uid="uid://byg1bq565n12i"]
+[gd_resource type="Resource" script_class="MonsterData" load_steps=9 format=3 uid="uid://byg1bq565n12i"]
 
-[ext_resource type="Script" uid="uid://coff2nnisn6g2" path="res://classes/deprecated/moves(deprecated)/Move.gd" id="1_dqv7a"]
+[ext_resource type="Script" uid="uid://dsbfpa1jpbk8k" path="res://objects/move_refactor/Move2.gd" id="1_dqv7a"]
+[ext_resource type="Resource" uid="uid://cvpy3obudflw1" path="res://objects/moves/Nibble.tres" id="2_4f76s"]
 [ext_resource type="Script" uid="uid://cf7d81q2bjlj0" path="res://objects/monsters/MonsterData.gd" id="2_huf53"]
 [ext_resource type="Texture2D" uid="uid://ck61f54hmqpyp" path="res://objects/monsters/happy_hen/happy_hen.png" id="3_17pi0"]
+[ext_resource type="Resource" uid="uid://ladcaidd2nep" path="res://objects/moves/Claw.tres" id="3_jsyvh"]
+[ext_resource type="Resource" uid="uid://csklbyfpfdjcc" path="res://objects/moves/Forage.tres" id="4_j7nsy"]
+[ext_resource type="Resource" uid="uid://dybsvggst6tgf" path="res://objects/moves/Get_Mad.tres" id="5_yjq27"]
+[ext_resource type="Resource" uid="uid://dd3s6rqjffugw" path="res://objects/moves/Chicken's_Revenge.tres" id="6_dt01q"]
 
 [resource]
 script = ExtResource("2_huf53")
 name = "Happy Hen"
 sprite = ExtResource("3_17pi0")
-type = "NONE"
 capture_rate = 255
 allowed_genders = "FEMALE"
+moves = Array[ExtResource("1_dqv7a")]([ExtResource("2_4f76s"), ExtResource("3_jsyvh"), ExtResource("4_j7nsy"), ExtResource("5_yjq27"), ExtResource("6_dt01q")])
+levels = Array[int]([1, 8, 14, 20, 26])
 metadata/_custom_type_script = "uid://cf7d81q2bjlj0"

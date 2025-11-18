@@ -11,6 +11,7 @@ class_name SavedData extends Resource
 #region NPCs/Trainers
 @export var is_hidden: bool
 @export var defeated: bool
+@export var dialogues: Array[String]
 #endregion
 
 #region Shops
