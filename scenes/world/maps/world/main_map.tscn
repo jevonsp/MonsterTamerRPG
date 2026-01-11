@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=4 uid="uid://cg1vdvnkfuc43"]
+[gd_scene load_steps=29 format=4 uid="uid://cg1vdvnkfuc43"]
 
 [ext_resource type="TileSet" uid="uid://c21syj70nx4da" path="res://scenes/world/maps/world/tilesv1_0.tres" id="1_pjt3s"]
 [ext_resource type="Script" uid="uid://bisv1pttk73tc" path="res://scenes/world/maps/world/invisible.gd" id="2_8gdal"]
@@ -17,7 +17,11 @@
 [ext_resource type="Resource" uid="uid://drqip02v341yq" path="res://objects/monsters/pyro_badger/Pyro_Badger.tres" id="16_5w6ov"]
 [ext_resource type="Resource" uid="uid://bkcc35o5n7kil" path="res://objects/monsters/pistol_shrimp/Pistol_Shrimp.tres" id="17_1mf2q"]
 [ext_resource type="PackedScene" uid="uid://bvky3u2b5xv0x" path="res://scenes/world/player/player.tscn" id="18_2ke6g"]
+[ext_resource type="PackedScene" uid="uid://dr151563pospl" path="res://scenes/world/npcs/shop/shop.tscn" id="18_8gdal"]
+[ext_resource type="Script" uid="uid://qakhergjmylf" path="res://scenes/world/npcs/shop/ItemSlot.gd" id="19_6nkjb"]
 [ext_resource type="PackedScene" uid="uid://b1fqg4ixfrt6e" path="res://scenes/world/npcs/trainer/trainer2.tscn" id="19_ae107"]
+[ext_resource type="Script" uid="uid://ct8d6qppshnwx" path="res://objects/move_refactor/effect/EffectComponent.gd" id="20_iqmgb"]
+[ext_resource type="Script" uid="uid://bbqcltkmsucjd" path="res://objects/move_refactor/item2/Item2.gd" id="21_6jiej"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_aace2"]
 size = Vector2(16, 96)
@@ -30,6 +34,16 @@ size = Vector2(96, 16)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dabrf"]
 size = Vector2(64, 32)
+
+[sub_resource type="Resource" id="Resource_y7b3a"]
+script = ExtResource("21_6jiej")
+name = "Test Item"
+metadata/_custom_type_script = "uid://bbqcltkmsucjd"
+
+[sub_resource type="Resource" id="Resource_4p4l0"]
+script = ExtResource("19_6nkjb")
+item = SubResource("Resource_y7b3a")
+metadata/_custom_type_script = "uid://qakhergjmylf"
 
 [node name="MainMap" type="Node2D"]
 
@@ -259,6 +273,10 @@ shape = SubResource("RectangleShape2D_dabrf")
 
 [node name="Trainer2" parent="Route0" instance=ExtResource("19_ae107")]
 position = Vector2(40, -24)
+
+[node name="Shop" parent="Route0" instance=ExtResource("18_8gdal")]
+position = Vector2(-136, -24)
+inventory = Array[ExtResource("19_6nkjb")]([SubResource("Resource_4p4l0")])
 
 [node name="Forest" type="Node2D" parent="."]
 position = Vector2(-32, -1744)

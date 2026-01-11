@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="MonsterData" load_steps=4 format=3 uid="uid://bkcc35o5n7kil"]
+[gd_resource type="Resource" script_class="MonsterData" load_steps=5 format=3 uid="uid://bkcc35o5n7kil"]
 
 [ext_resource type="Script" uid="uid://dsbfpa1jpbk8k" path="res://objects/move_refactor/Move2.gd" id="1_0ibgu"]
+[ext_resource type="Resource" uid="uid://u4svhcyig4c6" path="res://objects/moves/Drizzle.tres" id="2_73l3n"]
 [ext_resource type="Script" uid="uid://cf7d81q2bjlj0" path="res://objects/monsters/MonsterData.gd" id="2_s4koy"]
 [ext_resource type="Texture2D" uid="uid://cngiakdfubr1u" path="res://objects/monsters/pistol_shrimp/pistol_shrimp_remake.png" id="6_mbecd"]
 
@@ -12,4 +13,6 @@ type = "WATER"
 role = "RANGED"
 base_speed = 100
 base_attack = 150
+moves = Array[ExtResource("1_0ibgu")]([ExtResource("2_73l3n")])
+levels = Array[int]([1])
 metadata/_custom_type_script = "uid://cf7d81q2bjlj0"

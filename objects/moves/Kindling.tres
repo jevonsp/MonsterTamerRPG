@@ -1,7 +1,6 @@
 [gd_resource type="Resource" script_class="Move2" load_steps=13 format=3 uid="uid://cytoaw3oelieo"]
 
 [ext_resource type="Script" uid="uid://ct8d6qppshnwx" path="res://objects/move_refactor/effect/EffectComponent.gd" id="1_v15iy"]
-[ext_resource type="PackedScene" uid="uid://bjj3ic0bi4oco" path="res://classes/deprecated/moves(deprecated)/fire_spark/fire_spark.tscn" id="2_upttw"]
 [ext_resource type="Script" uid="uid://suqqqwjooklf" path="res://objects/move_refactor/effect/VisualComponent.gd" id="3_3i67m"]
 [ext_resource type="Script" uid="uid://dxp575pvrsynm" path="res://objects/move_refactor/effect/DamageComponent.gd" id="4_p5h0q"]
 [ext_resource type="Script" uid="uid://hitshvhtc7hm" path="res://objects/move_refactor/effect/ChanceComponent.gd" id="5_avb1s"]
@@ -9,9 +8,12 @@
 [ext_resource type="Resource" uid="uid://d3ageoyjdgev0" path="res://objects/move_refactor/status_resources/Burn.tres" id="7_km288"]
 [ext_resource type="Script" uid="uid://dsbfpa1jpbk8k" path="res://objects/move_refactor/Move2.gd" id="8_fhrhj"]
 
+[sub_resource type="Resource" id="Resource_bp3og"]
+metadata/__load_path__ = "res://classes/deprecated/moves(deprecated)/fire_spark/fire_spark.tscn"
+
 [sub_resource type="Resource" id="Resource_18m7e"]
 script = ExtResource("3_3i67m")
-animation = ExtResource("2_upttw")
+animation = SubResource("Resource_bp3og")
 metadata/_custom_type_script = "uid://suqqqwjooklf"
 
 [sub_resource type="Resource" id="Resource_q6fug"]
