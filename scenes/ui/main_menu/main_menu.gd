@@ -8,6 +8,7 @@ var selected_slot: Slot = Slot.SLOT0
 var choices_limited: bool = false
 
 var game := preload("res://scenes/world/maps/world/main_map.tscn")
+var test_game := preload("res://scenes/world/maps/world/test_map.tscn")
 
 @onready var slot: Dictionary = {
 	Slot.SLOT0: $Slot0,
@@ -53,12 +54,12 @@ func _move(direction: int):
 func _input_selection():
 	match selected_slot:
 		0: 
-			var loaded_game = game.instantiate()
+			var loaded_game = test_game.instantiate()
 			get_tree().root.add_child(loaded_game)
 			SaverLoader.load_game()
 			queue_free()
 		1: 
-			get_tree().change_scene_to_packed(game)
+			get_tree().change_scene_to_packed(test_game)
 		2: 
 			var choice = await DialogueManager.show_choice("Do you really want to delete your save?")
 			if choice:

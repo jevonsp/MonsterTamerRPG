@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=4 uid="uid://bmy67wer0o8od"]
+[gd_scene load_steps=15 format=4 uid="uid://bmy67wer0o8od"]
 
 [ext_resource type="TileSet" uid="uid://c21syj70nx4da" path="res://scenes/world/maps/world/tilesv1_0.tres" id="1_hhhx2"]
 [ext_resource type="Script" uid="uid://bisv1pttk73tc" path="res://scenes/world/maps/world/invisible.gd" id="2_am33i"]
@@ -9,8 +9,10 @@
 [ext_resource type="PackedScene" uid="uid://b1fqg4ixfrt6e" path="res://scenes/world/npcs/trainer/trainer2.tscn" id="6_w0mul"]
 [ext_resource type="PackedScene" uid="uid://dx1h5hc75ct73" path="res://scenes/world/level_components/wild_zone/wild_zone.tscn" id="7_4l544"]
 [ext_resource type="PackedScene" uid="uid://oo2h4frr6mi5" path="res://scenes/world/npcs/healer/healer.tscn" id="7_ej3jb"]
+[ext_resource type="Resource" uid="uid://bra2yle7d6vkp" path="res://objects/monsters/savvy_squirrel/Savvy_Squirrel.tres" id="8_m2mn3"]
 [ext_resource type="Script" uid="uid://cf7d81q2bjlj0" path="res://objects/monsters/MonsterData.gd" id="9_83en3"]
 [ext_resource type="Resource" uid="uid://byg1bq565n12i" path="res://objects/monsters/happy_hen/Happy_Hen.tres" id="10_m2mn3"]
+[ext_resource type="Resource" uid="uid://y371h0dccdu2" path="res://objects/monsters/corn_snake/Corn_Snake.tres" id="10_udd8s"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8yypm"]
 size = Vector2(32, 48)
@@ -91,14 +93,17 @@ position = Vector2(208, 224)
 
 [node name="Trainer0" parent="Route0/NPCs" instance=ExtResource("6_w0mul")]
 position = Vector2(40, -32)
+team = Array[ExtResource("9_83en3")]([ExtResource("8_m2mn3")])
 facing_direction = 2
 
 [node name="Trainer1" parent="Route0/NPCs" instance=ExtResource("6_w0mul")]
 position = Vector2(40, -16)
+team = Array[ExtResource("9_83en3")]([ExtResource("10_m2mn3")])
 facing_direction = 2
 
 [node name="Trainer2" parent="Route0/NPCs" instance=ExtResource("6_w0mul")]
 position = Vector2(40, 0)
+team = Array[ExtResource("9_83en3")]([ExtResource("10_udd8s")])
 facing_direction = 2
 
 [node name="Healer" parent="Route0/NPCs" instance=ExtResource("7_ej3jb")]
@@ -114,6 +119,7 @@ max_levels = Array[int]([3])
 probabilities = Array[float]([1.0])
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Route0/WildZone"]
+visible = false
 shape = SubResource("RectangleShape2D_8yypm")
 
 [node name="Player" parent="." instance=ExtResource("3_am33i")]

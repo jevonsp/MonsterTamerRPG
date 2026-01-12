@@ -30,6 +30,7 @@ func _on_player_step(player_pos: Vector2):
 	if defeated or not vision_enabled:
 		return
 	if is_player_in_sight(player_pos):
+		print("player in trainer sight")
 		var player = get_tree().get_first_node_in_group("player")
 		player.clear_inputs()
 		player.processing = false
@@ -74,4 +75,5 @@ func on_load_game(saved_data_array: Array[SavedData]):
 	for data in saved_data_array:
 		if data.node_path == get_path():
 			defeated = data.defeated
-			dialogues[0] = post_fight_text
+			if dialogues:
+				dialogues[0] = post_fight_text
